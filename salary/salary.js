@@ -1,7 +1,5 @@
 "use strict";
 
-// TODO: hash-link parameters
-
 import SGModel from "./../res/sg-model/sg-model.js";
 
 class Salary extends SGModel {
@@ -97,10 +95,21 @@ class Salary extends SGModel {
 			document.querySelector("#hours_in_day_desc").innerText = hours + " " + this.getHoursMeas(hours)+"/день";
 		});
 		
-		this.setOnAllCallback(this.calc, SGModel.FLAG_IMMEDIATELY);
-		
 		document.querySelector("#rate_hour_min").innerHTML = this.getNumThinsp(Salary.HOUR_RATE_MIN);
 		document.querySelector("#relocation_month_min").innerHTML = this.getNumThinsp(Salary.RELOCATION_MONTH_MIN);
+		//document.querySelector("#send_offer").addEventListener("click", this.sendOffer);
+		
+		// Hash parser
+		
+		let parameters = location.hash.replace("#", "").split("&");
+		for (var i = 0; i < parameters.length; i++) {
+			parameters[i] = parameters[i].split("=");
+			if (this.properties.hasOwnProperty(parameters[i][0])) {
+				// this.set(parameters[i][0], parameters[i][1]); // TODO: сейчас форма не обновляется визуально!
+			}
+		}
+		
+		this.setOnAllCallback(this.calc, SGModel.FLAG_IMMEDIATELY);
 	}
 	
 	dropdownItemClick() {
@@ -156,6 +165,19 @@ class Salary extends SGModel {
 	getNumThinsp(value) {
 		return (''+value.toLocaleString()).replace(/\s/, "&thinsp;");
 	}
+	
+	/*sendOffer() {
+		debugger;
+		Email.send({
+			SecureToken: "todo",
+			To: "_@_.ru",
+			From: "_@sg2d.ru",
+			Subject: "Offer from the salary constructor form",
+			Body: "TODO..."
+		}).then(
+			message => console.log(message)
+		);
+	}*/
 }
 
 addEventListener("load", ()=>{ window.salaryApp = new Salary(); });
