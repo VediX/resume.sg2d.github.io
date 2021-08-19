@@ -42,11 +42,10 @@ class Salary extends SGHTMLModel {
 	
 	static HOUR_RATE_BASE = 500;
 	static HOUR_RATE_MIN = 500;
-	static RELOCATION_MONTH_MIN = 350000;
+	static RELOCATION_MONTH_MIN = 500000;
 	
 	static CONTRACT_KOEF = [1, 1.36, 1.5, 1.75, 2];
 	static LEVEL_KOEF = [0.5, 0.75, 0.9, 1, 1.25, 1.5];
-	//static DAYS_IN_WEEK_KOEF = [0.9, 0.925, 0.95, 0.975, 1, 1.25, 2];
 	static DAYS_IN_WEEK_KOEF = [0.5, 0.6, 0.7, 0.8, 1, 1.25, 2];
 	static RELOCATION_KOEF = 2;
 	static CODE_SUPPORTED_KOEF = 1.25;
@@ -84,6 +83,7 @@ class Salary extends SGHTMLModel {
 		document.querySelector("#relocation_month_min").innerHTML = this.getNumThinsp(Salary.RELOCATION_MONTH_MIN);
 		//document.querySelector("#send_offer").addEventListener("click", this.sendOffer.bind(this));
 		document.querySelector("#save_link").addEventListener("click", this.saveLink.bind(this));
+		document.querySelector("#link_copy").onclick = this.linkCopy.bind(this);
 		
 		this.bindHTML("body");
 		
@@ -168,9 +168,21 @@ class Salary extends SGHTMLModel {
 			if (value === true) value = 1;
 			hash.push(name + "=" + value);
 		}
-		console.log(hash);
-		location.hash = hash.join("&");
-		document.querySelector("#link").setAttribute("href", location);
+		let href = location.href.replace(/#.*/, "") + "#" + hash.join("&");
+		let link_input = document.querySelector("#link_link");
+		link_input.value = href;
+	}
+	
+	linkCopy() {
+		let link_input = document.querySelector("#link_link");
+		link_input.select();
+		try {
+			let bSuccess = document.execCommand('copy');
+			console.log('Copying link command was ' + (bSuccess ? 'successful' : 'unsuccessful'));
+		} catch (err) {
+			console.log('Oops, unable to copy');
+		}
+		return false;
 	}
 }
 

@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Рассчитайте ожидаемую месячную зарплату, указав параметры">
 	<title>Конструктор зарплаты</title>
-	<link href="/../res/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<link href="/../res/bootstrap/bootstrap.min.css" rel="stylesheet"><!-- https://bootstrap-4.ru/docs/5.0/getting-started/introduction/ -->
 	<meta name="theme-color" content="#7952b3">
 
 <style>
@@ -24,7 +24,8 @@
 </style>
 
 	<link href="salary.css" rel="stylesheet">
-	<script type="module" src="salary-0001.js"></script>
+	<script type="module" src="salary-0002.js"></script>
+	<script src="/../res/clipboard.min.js"></script>
   </head>
 
   <body class="bg-light">
@@ -32,8 +33,8 @@
 	<div class="container">
 		<main>
 			<div class="py-4 text-center">
-				<h2>Форма расчёта зарплаты/стоимости услуг</h2>
-				<p class="lead fs-6">Уважаемые работодатели/партнёры! В целях экономии Вашего и моего времени прошу воспользоваться данной формой для расчёта и понимания ожидаемого уровня зарплаты/стоимости моих услуг в зависимости от условий сотрудничества и технологий используемых в проектах!</p>
+				<h2></h2>
+				<p class="lead fs-6">Уважаемые работодатели/партнёры! Вы можете рассчитать ожидаемый уровень зарплаты/стоимость моих услуг в зависимости от условий сотрудничества и технологий используемых в проектах!</p>
 				<p><a href="/" class="link-success">Перейти в резюме...</a></p>
 			</div>
 
@@ -44,8 +45,7 @@
 					<div class="d-grid gap-2">
 						<div class="btn-group">
 							<button sg-property="contract" sg-type="dropdown" class="btn btn-primary dropdown-toggle btn-warning bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Форма сотрудничества: Трудовой договор
-							</button>
+								Трудовой договор</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="contract">
 								<li class="dropdown-item" sg-value="1" sg-dropdown="contract">Трудовой договор</li>
 								<li class="dropdown-item" sg-value="2" sg-dropdown="contract">Самозанятость <span class="text-danger">(+36%)</span></li>
@@ -57,8 +57,7 @@
 						
 						<div class="btn-group">
 							<button sg-property="level" sg-type="dropdown" class="btn btn-secondary dropdown-toggle btn-success bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Уровень навыков: Senior
-							</button>
+								Уровень навыков: Middle <span class="text-success">(-10%)</span></button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="level">
 								<li class="dropdown-item" sg-value="1" sg-dropdown="level">Уровень навыков: Стажер <span class="text-success">(-50%)</span></li>
 								<li class="dropdown-item" sg-value="2" sg-dropdown="level">Уровень навыков: Junior <span class="text-success">(-25%)</span></li>
@@ -71,8 +70,7 @@
 					
 						<div class="btn-group">
 							<button sg-property="days_in_week" sg-type="dropdown" class="btn btn-primary dropdown-toggle btn-info bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Занятость: 5 дней в неделю
-							</button>
+								Занятость: 5 дней в неделю</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="days_in_week">
 								<li class="dropdown-item" sg-value="1" sg-dropdown="days_in_week">Занятость: 1 день в неделю <span class="text-success">(-50%)</span></li>
 								<li class="dropdown-item" sg-value="2" sg-dropdown="days_in_week">Занятость: 2 дня в неделю <span class="text-success">(-40%)</span></li>
@@ -160,7 +158,7 @@
 
 					<hr class="my-3"/>
 					
-					<p class="text-center fw-bold lh-1">Итого: <span id="salary_month">100&thinsp;000</span>&thinsp;руб.<sup>2</sup> <span class="text-nowrap">(<span id="salary_hour">500</span>&thinsp;руб./час)<sup>3</sup></span></p>
+					<p class="text-center fw-bold lh-1">Итого: <span id="salary_month">56&thinsp;300</span>&thinsp;руб.<sup>2</sup> <span class="text-nowrap">(<span id="salary_hour">700</span>&thinsp;руб./час)<sup>3</sup></span></p>
 					<p class="text-center fw-bold lh-1"><span id="hours">80</span>&thinsp;<span id="hours_meas">часов</span>/месяц</p>
 					
 					<!--<hr class="my-3"/>
@@ -178,7 +176,7 @@
 					
 					<hr class="my-3"/>
 					
-					<p class="text-danger" style="font-size: 0.8rem;"><sup>1</sup> &mdash; При релокации в мегаполис или другой город минимальная месячная зарпалата составляет <span id="relocation_month_min">350&thinsp;000</span>&thinsp;руб.</p>
+					<p class="text-danger" style="font-size: 0.8rem;"><sup>1</sup> &mdash; При релокации в мегаполис минимальная месячная зарпалата составляет <span id="relocation_month_min">500&thinsp;000</span>&thinsp;руб.</p>
 					<p class="text-dark" style="font-size: 0.8rem;"><sup>2</sup> &mdash; Уровень зарплаты рассчитывается чистыми (на руки)!</p>
 					<p class="text-secondary" style="font-size: 0.8rem;"><sup>3</sup> &mdash; минимальная почасовая ставка <span id="rate_hour_min">500</span>&thinsp;руб.</p>
 				</div>
@@ -200,10 +198,22 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					Ссылка скопирована в буфер обмена: <a id="link" href="#">Ссылка</a>
+					<div class="container">
+						<div class="row">
+							<div class="col pb-1">Ссылка с выбранными параметрами:</div>
+						</div>
+						<div class="row">
+							<div class="col-11 pe-0"><input class="form-control selectable" type="text" id="link_link" style="width: 100%; font-size: 0.9rem;"/></div>
+							<div class="col-1 ps-0">
+								<a id="link_copy" class="input-group-text" href="#" title="Copy to clipboard" style="padding: 0.58rem; width: 2.0rem;">
+									<img src="../res/imgs/clippy.svg" style="width: 13px" alt="Copy to clipboard"/>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+					<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
 				</div>
 			</div>
 		</div>
@@ -212,7 +222,7 @@
 	<script src="/../res/bootstrap/bootstrap.bundle.min.js"></script>
 	
 <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
+<script type="text/javascript" >
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
@@ -220,7 +230,8 @@
    ym(84097300, "init", {
         clickmap:true,
         trackLinks:true,
-        accurateTrackBounce:true
+        accurateTrackBounce:true,
+        webvisor:true
    });
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/84097300" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
