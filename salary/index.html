@@ -24,7 +24,7 @@
 </style>
 
 	<link href="salary.css" rel="stylesheet">
-	<script type="module" src="salary.js"></script>
+	<script type="module" src="salary-0001.js"></script>
   </head>
 
   <body class="bg-light">
@@ -33,7 +33,7 @@
 		<main>
 			<div class="py-4 text-center">
 				<h2>Форма расчёта зарплаты/стоимости услуг</h2>
-				<p class="lead fs-6">Уважаемые работодатели/партнёры! В целях экономии Вашего и моего времени прошу воспользоваться данной формой для расчёта и понимания ожидаемого уровня зарплаты/стоимости моих услуг!</p>
+				<p class="lead fs-6">Уважаемые работодатели/партнёры! В целях экономии Вашего и моего времени прошу воспользоваться данной формой для расчёта и понимания ожидаемого уровня зарплаты/стоимости моих услуг в зависимости от условий сотрудничества и технологий используемых в проектах!</p>
 				<p><a href="/" class="link-success">Перейти в резюме...</a></p>
 			</div>
 
@@ -43,49 +43,49 @@
 					
 					<div class="d-grid gap-2">
 						<div class="btn-group">
-							<button class="btn btn-primary dropdown-toggle btn-warning bg-gradient" type="button" id="contract" data-bs-toggle="dropdown" aria-expanded="false">
+							<button sg-property="contract" sg-type="dropdown" class="btn btn-primary dropdown-toggle btn-warning bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Форма сотрудничества: Трудовой договор
 							</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="contract">
-								<li class="dropdown-item" data-value="1">Трудовой договор</li>
-								<li class="dropdown-item" data-value="2">Самозанятость <span class="text-danger">(+50%)</span></li>
-								<li class="dropdown-item" data-value="4">Фриланс & Безопасная сделка <span class="text-danger">(+75%)</span></li>
-								<li class="dropdown-item" data-value="3">Договор ГПХ <span class="text-danger">(+100%)</span></li>
-								<li class="dropdown-item" data-value="5">ИП <span class="text-danger">(+125%)</span></li>
+								<li class="dropdown-item" sg-value="1" sg-dropdown="contract">Трудовой договор</li>
+								<li class="dropdown-item" sg-value="2" sg-dropdown="contract">Самозанятость <span class="text-danger">(+36%)</span></li>
+								<li class="dropdown-item" sg-value="3" sg-dropdown="contract">Фриланс & Безопасная сделка <span class="text-danger">(+50%)</span></li>
+								<li class="dropdown-item" sg-value="4" sg-dropdown="contract">Договор ГПХ <span class="text-danger">(+75%)</span></li>
+								<li class="dropdown-item" sg-value="5" sg-dropdown="contract">ИП <span class="text-danger">(+100%)</span></li>
 							</ul>
 						</div>
 						
 						<div class="btn-group">
-							<button class="btn btn-secondary dropdown-toggle btn-success bg-gradient" type="button" id="level" data-bs-toggle="dropdown" aria-expanded="false">
+							<button sg-property="level" sg-type="dropdown" class="btn btn-secondary dropdown-toggle btn-success bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Уровень навыков: Senior
 							</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="level">
-								<li class="dropdown-item" data-value="1">Уровень навыков: Стажер <span class="text-success">(-50%)</span></li>
-								<li class="dropdown-item" data-value="2">Уровень навыков: Junior <span class="text-success">(-25%)</span></li>
-								<li class="dropdown-item" data-value="3">Уровень навыков: Middle <span class="text-success">(-10%)</span></li>
-								<li class="dropdown-item" data-value="4">Уровень навыков: Senior</li>
-								<li class="dropdown-item" data-value="5">Уровень навыков: Team Lead <span class="text-danger">(+25%)</span></li>
-								<li class="dropdown-item" data-value="6">Уровень навыков: Architect <span class="text-danger">(+50%)</span></li>
+								<li class="dropdown-item" sg-value="1" sg-dropdown="level">Уровень навыков: Стажер <span class="text-success">(-50%)</span></li>
+								<li class="dropdown-item" sg-value="2" sg-dropdown="level">Уровень навыков: Junior <span class="text-success">(-25%)</span></li>
+								<li class="dropdown-item" sg-value="3" sg-dropdown="level">Уровень навыков: Middle <span class="text-success">(-10%)</span></li>
+								<li class="dropdown-item" sg-value="4" sg-dropdown="level">Уровень навыков: Senior</li>
+								<li class="dropdown-item" sg-value="5" sg-dropdown="level">Уровень навыков: Team Lead <span class="text-danger">(+25%)</span></li>
+								<li class="dropdown-item" sg-value="6" sg-dropdown="level">Уровень навыков: Architect <span class="text-danger">(+50%)</span></li>
 							</ul>
 						</div>
 					
 						<div class="btn-group">
-							<button class="btn btn-primary dropdown-toggle btn-info bg-gradient" type="button" id="days_in_week" data-bs-toggle="dropdown" aria-expanded="false">
+							<button sg-property="days_in_week" sg-type="dropdown" class="btn btn-primary dropdown-toggle btn-info bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Занятость: 5 дней в неделю
 							</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="days_in_week">
-								<li class="dropdown-item" data-value="1">Занятость: 1 день в неделю <span class="text-success">(-10%)</span></li>
-								<li class="dropdown-item" data-value="2">Занятость: 2 дня в неделю <span class="text-success">(-7.5%)</span></li>
-								<li class="dropdown-item" data-value="3">Занятость: 3 дня в неделю <span class="text-success">(-5%)</span></li>
-								<li class="dropdown-item" data-value="4">Занятость: 4 дня в неделю <span class="text-success">(-2.5%)</span></li>
-								<li class="dropdown-item" data-value="5">Занятость: 5 дней в неделю</li>
+								<li class="dropdown-item" sg-value="1" sg-dropdown="days_in_week">Занятость: 1 день в неделю <span class="text-success">(-50%)</span></li>
+								<li class="dropdown-item" sg-value="2" sg-dropdown="days_in_week">Занятость: 2 дня в неделю <span class="text-success">(-40%)</span></li>
+								<li class="dropdown-item" sg-value="3" sg-dropdown="days_in_week">Занятость: 3 дня в неделю <span class="text-success">(-30%)</span></li>
+								<li class="dropdown-item" sg-value="4" sg-dropdown="days_in_week">Занятость: 4 дня в неделю <span class="text-success">(-20%)</span></li>
+								<li class="dropdown-item" sg-value="5" sg-dropdown="days_in_week">Занятость: 5 дней в неделю</li>
 							</ul>
 						</div>
 					
 						<div class="container p-0">
 							<div class="row m-0">
 								<div class="col-md-8 p-0 pt-3 pe-1 position-relative" style="font-size: 10pt">
-									<input id="hours_in_day" type="range" class="form-range" min="1" max="8" aria-describedby="hours_in_day_desc" value="4">
+									<input sg-property="hours_in_day" type="range" class="form-range" min="1" max="8" aria-describedby="hours_in_day_desc" value="4">
 									<div class="position-absolute top-0 translate-middle-y label-hour lhour-1">1h</div>
 									<div class="position-absolute top-0 translate-middle-y label-hour lhour-2">2h</div>
 									<div class="position-absolute top-0 translate-middle-y label-hour lhour-3">3h</div>
@@ -102,7 +102,7 @@
 						</div>
 						
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" id="relocation">
+							<input class="form-check-input" type="checkbox" sg-property="relocation">
 							<label class="form-check-label text-danger" for="relocation">Релокация в мегаполис<sup>1</sup></label>
 						</div>
 						
@@ -110,49 +110,49 @@
 							<legend class="col-form-label col-sm-1 pt-0">Код:</legend>
 							<div class="col-sm-11 ps-3">
 								<div class="form-check ps-5 c-pointer" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
-									<input class="form-check-input" type="radio" name="code" id="code_startup">
-									<label class="form-check-label" for="code_startup">Не требуется разбираться в коде</label>
+									<input class="form-check-input" type="radio" name="code" sg-property="code_startup" id="cb_code_startup">
+									<label class="form-check-label" for="cb_code_startup">Код пишется с нуля или его очень мало</label>
 								</div>
 
 								<div class="form-check ps-5  c-pointer selected" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
-									<input class="form-check-input" type="radio" name="code" id="code_supported" checked>
-									<label class="form-check-label" for="code_supported">Требуется понять существующий код, который поддерживается текущим штатом разработчиков <span class="text-danger">(+10%)</span></label>
+									<input class="form-check-input" type="radio" name="code" sg-property="code_supported" id="cb_code_supported" checked>
+									<label class="form-check-label" for="cb_code_supported">Требуется понять существующий код, который поддерживается текущим штатом разработчиков <span class="text-danger">(+25%)</span></label>
 								</div>
 
 								<div class="form-check ps-5 c-pointer" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
-									<input class="form-check-input" type="radio" name="code" id="code_legacy">
-									<label class="form-check-label" for="code_legacy">Требуется разобраться с legacy-кодом, который никто не поддерживает <span class="text-danger">(+100%)</span></label>
+									<input class="form-check-input" type="radio" name="code" sg-property="code_legacy" id="cb_code_legacy">
+									<label class="form-check-label" for="cb_code_legacy">Требуется разобраться с legacy-кодом, который никто не поддерживает <span class="text-danger">(+100%)</span></label>
 								</div>
 							</div>
 						</fieldset>
 					
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" id="es5_nodejs" checked>
-							<label class="form-check-label" for="es5_nodejs">Разработка на ES5+/NodeJS <span class="text-success">(-5%)</span></label>
+							<input class="form-check-input" type="checkbox" sg-property="es5_nodejs">
+							<label class="form-check-label" for="es5_nodejs">Разработка на ES5+ и/или NodeJS <span class="text-success">(-5%)</span></label>
 						</div>
 						
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" id="vue">
-							<label class="form-check-label" for="vue">Используем Vue 2+ <span class="text-success">(-5%)</span></label>
-						</div>
-						
-						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" id="react">
-							<label class="form-check-label" for="react">Используем React <span class="text-danger">(+5%)</span></label>
-						</div>
-						
-						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" id="php">
+							<input class="form-check-input" type="checkbox" sg-property="php">
 							<label class="form-check-label" for="php">Разработка на PHP <span class="text-danger">(+10%)</span></label>
 						</div>
 						
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" id="pixijs">
+							<input class="form-check-input" type="checkbox" sg-property="vue">
+							<label class="form-check-label" for="vue">Используем Vue 2+ <span class="text-success">(-5%)</span></label>
+						</div>
+						
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" sg-property="react">
+							<label class="form-check-label" for="react">Используем React <span class="text-danger">(+5%)</span></label>
+						</div>
+						
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" sg-property="pixijs">
 							<label class="form-check-label" for="pixijs">Разработка приложений на PixiJS <span class="text-success">(-10%)</span></label>
 						</div>
 						
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" id="super_interesting">
+							<input class="form-check-input" type="checkbox" sg-property="super_interesting">
 							<label class="form-check-label" for="super_interesting">Супер интересный проект, в т.ч. на <a href="https://sg2d.ru" target="_blank" class="link-success">SG2D</a> <span class="text-success">(-25%)</span></label>
 						</div>
 						
@@ -174,6 +174,10 @@
 					
 					<hr class="my-3"/>
 					
+					<button id="save_link" class="w-100 btn btn-primary btn-lg bg-gradient" data-bs-toggle="modal" data-bs-target="#modalLink">Поделиться</button>
+					
+					<hr class="my-3"/>
+					
 					<p class="text-danger" style="font-size: 0.8rem;"><sup>1</sup> &mdash; При релокации в мегаполис или другой город минимальная месячная зарпалата составляет <span id="relocation_month_min">350&thinsp;000</span>&thinsp;руб.</p>
 					<p class="text-dark" style="font-size: 0.8rem;"><sup>2</sup> &mdash; Уровень зарплаты рассчитывается чистыми (на руки)!</p>
 					<p class="text-secondary" style="font-size: 0.8rem;"><sup>3</sup> &mdash; минимальная почасовая ставка <span id="rate_hour_min">500</span>&thinsp;руб.</p>
@@ -185,6 +189,24 @@
 		<footer class="my-1 pt-1 text-muted text-center text-small">
 			<p class="mb-1">&copy; 2021 Kalashnikov Ilya</p>
 		</footer>
+	</div>
+	  
+	<!-- Modal -->
+	<div class="modal fade" id="modalLink" tabindex="-1" aria-labelledby="modalLinkLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalLinkLabel">Поделиться результатом расчёта</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					Ссылка скопирована в буфер обмена: <a id="link" href="#">Ссылка</a>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<script src="/../res/bootstrap/bootstrap.bundle.min.js"></script>

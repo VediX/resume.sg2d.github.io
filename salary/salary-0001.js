@@ -1,12 +1,14 @@
 "use strict";
 
-import SGModel from "./../res/sg-model/sg-model.js";
+import SGHTMLModel from "./../res/sg-model/sg-html-model.js";
 
-class Salary extends SGModel {
+class Salary extends SGHTMLModel {
+	
+	static singleInstance = true;
 	
 	static defaultProperties = {
 		contract: 1,
-		level: 4,
+		level: 3,
 		days_in_week: 5,
 		hours_in_day: 4,
 		relocation: false,
@@ -38,32 +40,16 @@ class Salary extends SGModel {
 		super_interesting: SGModel.TYPE_BOOLEAN
 	};
 	
-	static bindPropertiesToDOM = {
-		contract: "#contract",
-		level,
-		days_in_week,
-		hours_in_day,
-		relocation,
-		code_startup,
-		code_supported,
-		code_legacy,
-		es5_nodejs,
-		vue,
-		react,
-		php,
-		pixijs,
-		super_interesting
-	};
-	
 	static HOUR_RATE_BASE = 500;
 	static HOUR_RATE_MIN = 500;
 	static RELOCATION_MONTH_MIN = 350000;
 	
-	static CONTRACT_KOEF = [1, 1.5, 1.75, 2, 2.25];
+	static CONTRACT_KOEF = [1, 1.36, 1.5, 1.75, 2];
 	static LEVEL_KOEF = [0.5, 0.75, 0.9, 1, 1.25, 1.5];
-	static DAYS_IN_WEEK_KOEF = [0.9, 0.925, 0.95, 0.975, 1, 1.25, 2];
+	//static DAYS_IN_WEEK_KOEF = [0.9, 0.925, 0.95, 0.975, 1, 1.25, 2];
+	static DAYS_IN_WEEK_KOEF = [0.5, 0.6, 0.7, 0.8, 1, 1.25, 2];
 	static RELOCATION_KOEF = 2;
-	static CODE_SUPPORTED_KOEF = 1.1;
+	static CODE_SUPPORTED_KOEF = 1.25;
 	static CODE_LEGACY_KOEF = 2;
 	static ES5_NODEJS_KOEF = 0.95;
 	static REACT_KOEF = 1.05;
@@ -75,15 +61,14 @@ class Salary extends SGModel {
 	
 	initialize() {
 		
-		document.querySelectorAll("li.dropdown-item").forEach((item)=>{
-			item.onclick = this.dropdownItemClick;
-		});
-		
 		let codeTypes = ["code_startup", "code_supported", "code_legacy"];
-		this.on(codeTypes, ()=>{
+		this.on(codeTypes, (value, valuePrev, name)=>{
 			codeTypes.forEach(_name=>{
-				var elem = document.querySelector("#"+_name);
-				if (elem.checked) {
+				var elem = document.querySelector("[sg-property="+_name+"]");
+				if (name !== _name) {
+					this.set(_name, false, void 0, SGHTMLModel.FLAG_NO_CALLBACKS);
+				}
+				if (this.get(_name)) {
 					elem.parentNode.classList.add("selected");
 				} else {
 					elem.parentNode.classList.remove("selected");
@@ -92,31 +77,26 @@ class Salary extends SGModel {
 		});
 		
 		this.on("hours_in_day", (hours)=>{
-			document.querySelector("#hours_in_day_desc").innerText = hours + " " + this.getHoursMeas(hours)+"/день";
+			document.querySelector("#hours_in_day_desc").innerText = (hours == 8 ? "Фуллтайм" : hours + " " + this.getHoursMeas(hours)+"/день");
 		});
 		
 		document.querySelector("#rate_hour_min").innerHTML = this.getNumThinsp(Salary.HOUR_RATE_MIN);
 		document.querySelector("#relocation_month_min").innerHTML = this.getNumThinsp(Salary.RELOCATION_MONTH_MIN);
-		//document.querySelector("#send_offer").addEventListener("click", this.sendOffer);
+		//document.querySelector("#send_offer").addEventListener("click", this.sendOffer.bind(this));
+		document.querySelector("#save_link").addEventListener("click", this.saveLink.bind(this));
+		
+		this.bindHTML("body");
 		
 		// Hash parser
-		
 		let parameters = location.hash.replace("#", "").split("&");
 		for (var i = 0; i < parameters.length; i++) {
 			parameters[i] = parameters[i].split("=");
-			if (this.properties.hasOwnProperty(parameters[i][0])) {
-				// this.set(parameters[i][0], parameters[i][1]); // TODO: сейчас форма не обновляется визуально!
+			if (this.has(parameters[i][0])) {
+				this.set(parameters[i][0], parameters[i][1]);
 			}
 		}
 		
 		this.setOnAllCallback(this.calc, SGModel.FLAG_IMMEDIATELY);
-	}
-	
-	dropdownItemClick() {
-		let button = this.parentNode.parentNode.querySelector("button");
-		button.value = this.dataset.value;
-		button.innerHTML = this.innerHTML;
-		button.dispatchEvent(new Event('change'));
 	}
 	
 	calc() {
@@ -178,6 +158,20 @@ class Salary extends SGModel {
 			message => console.log(message)
 		);
 	}*/
+	
+	saveLink() {
+		var hash = [];
+		for (var name in this.properties) {
+			if (name === "id") continue;
+			var value = this.properties[name];
+			if (value === false) continue;
+			if (value === true) value = 1;
+			hash.push(name + "=" + value);
+		}
+		console.log(hash);
+		location.hash = hash.join("&");
+		document.querySelector("#link").setAttribute("href", location);
+	}
 }
 
 addEventListener("load", ()=>{ window.salaryApp = new Salary(); });

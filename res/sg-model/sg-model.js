@@ -17,9 +17,9 @@ export default class SGModel {
 	
 	/**
 	 * SGModel constructor
-	 * @param {object} props Properties
-	 * @param {object} thisProps Properties and methods passed to the "this" context of the created instance
-	 * @param {object} options Custom settings
+	 * @param {object} [props={}] Properties
+	 * @param {object} [thisProps=void 0] Properties and methods passed to the "this" context of the created instance
+	 * @param {object} [options=void 0] Custom settings
 	 */
 	constructor(properties = {}, thisProps = void 0, options = void 0) {
 		
@@ -76,7 +76,7 @@ export default class SGModel {
 					break;
 				}
 				case SGModel.TYPE_STRING: properties[p] = ''+value; break;
-				case SGModel.TYPE_BOOLEAN: properties[p] = !! value; break;
+				case SGModel.TYPE_BOOLEAN: properties[p] = SGModel.toBoolean(value); break;
 				case SGModel.TYPE_OBJECT:
 					if (Array.isArray(value)) {
 						var valueDefault = defaults[p];
@@ -120,48 +120,9 @@ export default class SGModel {
 			}
 		}
 		
-		if (this.constructor.bindPropertiesToDOM) {
-			
-			if (typeof document === "undefined") throw "Error! document is undefined!";
-			
-			this._onChangeDOMElementValue = this._onChangeDOMElementValue.bind(this);
-			
-			for (var name in this.constructor.bindPropertiesToDOM) {
-				var elem = this.constructor.bindPropertiesToDOM[name];
-				if (typeof elem === "string") elem = document.querySelector(elem);
-				if (elem instanceof HTMLElement) {
-					elem._sgmodel_property_name = name;
-					switch (elem.type) {
-						case "radio": case "checkbox": elem.checked = this.properties[name]; break;
-						case "range": case "text": case "button": elem.value = this.properties[name]; break;
-					}
-					elem.addEventListener("change", this._onChangeDOMElementValue);
-				}
-			}
-		}
-		
 		this.changed = false; // reset manually!
 		
 		this.initialize.call(this, properties, thisProps, options);
-	}
-	
-	_onChangeDOMElementValue(event) {
-		let elem = event.currentTarget;
-		if (! elem._sgmodel_property_name) { debugger; return; }
-		switch (elem.type) {
-			case "checkbox": this.set(elem._sgmodel_property_name, elem.checked); break;
-			case "radio":
-				let radioButtons = document.querySelectorAll("input[name=" + elem.name+"]"); // TODO: limit the form tag if present
-				for (var i = 0; i < radioButtons.length; i++) {
-					var _elem = radioButtons[i];
-					if (_elem.id !== elem.id && _elem._sgmodel_property_name) {
-						this.set(_elem._sgmodel_property_name, _elem.checked);
-					}
-				}
-				this.set(elem._sgmodel_property_name, elem.checked);
-				break;
-			case "range": case "text": case "button": this.set(elem._sgmodel_property_name, elem.value); break;
-		}
 	}
 	
 	// Called when an instance is created. Override in your classes.
@@ -169,12 +130,12 @@ export default class SGModel {
 	
 	/**
 	* Set property value
-	* @param {string} name
-	* @param {mixed} val
+	* @param {string}	name
+	* @param {mixed}	 val
 	* @param {object}	[options=void 0]
 	* @param {number}		[options.precision] - Rounding precision
 	* @param {mixed}		[options.previous_value] - Use this value as the previous value
-	* @param {number} flags	- Valid flags: FLAG_OFF_MAY_BE | FLAG_PREV_VALUE_CLONE | FLAG_NO_CALLBACKS | FLAG_FORCE_CALLBACKS | FLAG_IGNORE_OWN_SETTER
+	* @param {number}	[flags=0] - Valid flags: FLAG_OFF_MAY_BE | FLAG_PREV_VALUE_CLONE | FLAG_NO_CALLBACKS | FLAG_FORCE_CALLBACKS | FLAG_IGNORE_OWN_SETTER
 	* @return {boolean} If the value was changed will return true
 	*/
 	set(name, value, options = void 0, flags = 0) {
@@ -202,7 +163,7 @@ export default class SGModel {
 				case SGModel.TYPE_ARRAY: case SGModel.TYPE_ARRAY_NUMBERS: return this._setArray.apply(this, arguments);
 				case SGModel.TYPE_OBJECT: case SGModel.TYPE_OBJECT_NUMBERS: return this._setObject.apply(this, arguments);
 				case SGModel.TYPE_STRING: value = ''+value; break;
-				case SGModel.TYPE_BOOLEAN: value = !! value; break;
+				case SGModel.TYPE_BOOLEAN: value = SGModel.toBoolean(value); break;
 			}
 		}
 		
@@ -482,6 +443,13 @@ export default class SGModel {
 	}
 	
 	/**
+	 * Check if there is a property in the model
+	 */
+	has(name) {
+		return this.properties.hasOwnProperty(name);
+	}
+	
+	/**
 	 * Set trigger to change any property
 	 * @param {function} func
 	 * @param {number} flags Valid flags:
@@ -582,7 +550,7 @@ export default class SGModel {
 SGModel.typeProperties = {};
 	
 SGModel.defaultsProperties = {}; // override
-	
+
 SGModel.TYPE_ANY = void 0;
 SGModel.TYPE_NUMBER = 1;
 SGModel.TYPE_STRING = 2;
@@ -715,6 +683,11 @@ SGModel.roundTo = function(value, precision = 0) {
 	return Math.round(value * m) / m;
 };
 
+/** @public */
+SGModel.toBoolean = function(value) {
+	return (typeof value === "string" ? (value === "1" || value.toUpperCase() === "TRUE" ? true : false) : !! value);
+};
+
 /** @private */
 SGModel._instance = null;
 
@@ -808,7 +781,7 @@ SGModel._prevValue = void 0;
 SGModel._xy = {x: 0, y: 0};
 
 if (typeof exports === 'object' && typeof module === 'object') module.exports = SGModel;
-else if (typeof define === 'function' && define.amd) define("SG2D", [], ()=>SGModel);
+else if (typeof define === 'function' && define.amd) define("SGModel", [], ()=>SGModel);
 else if (typeof exports === 'object') exports["SGModel"] = SGModel;
 else if (typeof window === 'object' && window.document) window["SGModel"] = SGModel;
 else this["SGModel"] = SGModel;
