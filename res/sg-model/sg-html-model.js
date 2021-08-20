@@ -35,6 +35,7 @@ export default class SGHTMLModel extends SGModel {
 		if (typeof root === "string") root = document.querySelector(root);
 		for (var name in this._elementsHTML) {
 			this._elementsHTML[name].removeEventListener("change", this._onChangeDOMElementValue);
+			this._elementsHTML[name].removeEventListener("input", this._onChangeDOMElementValue);
 			delete this._elementsHTML[name];
 		}
 		this._bindElements([root]);
@@ -62,7 +63,8 @@ export default class SGHTMLModel extends SGModel {
 						}
 						break;
 				}
-				element.addEventListener("change", this._onChangeDOMElementValue);
+				var sEvent = (element.type === "range" ? "input" : "change");
+				element.addEventListener(sEvent, this._onChangeDOMElementValue);
 				this._refreshElement(sgProperty);
 			}
 			this._bindElements(element.children);
