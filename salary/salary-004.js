@@ -26,7 +26,8 @@ class Salary extends SGMVVModel {
 		salary_month: 0,
 		hours: 0,
 		hours_meas: "",
-		salary_hour: 0
+		salary_hour: 0,
+		salary_year: 0
 	};
 	
 	static typeProperties = {
@@ -137,9 +138,9 @@ class Salary extends SGMVVModel {
 		salary = rate * hours;
 		
 		salary = SGModel.roundTo(salary, -2);
-		this.set("salary_month", salary);
 		this.set("salary_hour", SGModel.roundTo(rate, -1));
-		//document.querySelector("#salary_hour").innerHTML = this.getNumThinsp(SGModel.roundTo(rate, -1));
+		this.set("salary_month", salary);
+		this.set("salary_year", this.get("salary_month") * 12);
 	}
 	
 	getHoursMeas(h) {
