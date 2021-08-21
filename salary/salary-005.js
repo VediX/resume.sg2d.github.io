@@ -31,7 +31,6 @@ class Salary extends SGMVVModel {
 	};
 	
 	static typeProperties = {
-		select1: SGModel.TYPE_ANY,
 		contract: SGModel.TYPE_NUMBER,
 		level: SGModel.TYPE_NUMBER,
 		days_in_week: SGModel.TYPE_NUMBER,
@@ -95,6 +94,9 @@ class Salary extends SGMVVModel {
 		
 		this.set("rate_hour_min", Salary.HOUR_RATE_MIN);
 		this.set("relocation_month_min", Salary.RELOCATION_MONTH_MIN);
+		
+		let eRelocationLabel = document.querySelector("#relocation_label");
+		eRelocationLabel.title = eRelocationLabel.title.replace("%relocation_month_min%", Salary.RELOCATION_MONTH_MIN);
 		
 		//document.querySelector("#send_offer").addEventListener("click", this.sendOffer.bind(this));
 		document.querySelector("#save_link").addEventListener("click", this.saveLink.bind(this));

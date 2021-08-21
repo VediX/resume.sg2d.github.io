@@ -12,7 +12,10 @@ import SGModel from "./sg-model.js";
 
 export default class SGMVVModel extends SGModel {
 	
-	set(name, value, options = void 0, flags = 0) {
+	/**
+	 * Overriding the set method
+	 */
+	set(name, ...args) {
 		if (super.set.apply(this, arguments) && (this._binderInitialized)) {
 			this._refreshElement(name);
 		}
@@ -138,7 +141,8 @@ export default class SGMVVModel extends SGModel {
 		switch (elem.type) {
 			case "checkbox": this.set(elem._sg_property, elem.checked); break;
 			case "radio":
-				let radioButtons = document.querySelectorAll("input[name=" + elem.name+"]"); // TODO: limit the form tag if present
+				let form = this._findParentForm(elem);
+				let radioButtons = form.querySelectorAll("input[name=" + elem.name+"]");
 				for (var i = 0; i < radioButtons.length; i++) {
 					var _elem = radioButtons[i];
 					if (_elem.getAttribute("sg-property") !== elem.getAttribute("sg-property") && _elem._sg_property) {
@@ -158,11 +162,26 @@ export default class SGMVVModel extends SGModel {
 		}
 	}
 	
+	/** @private */
 	_dropdownItemClick() {
 		let button = this.parentNode.parentNode.querySelector("button");
 		button.value = this.getAttribute("sg-value");
 		button.innerHTML = this.innerHTML;
 		button.dispatchEvent(new Event('change'));
+	}
+	
+	/** @private */
+	_findParentForm(elem) {
+		let parent = elem.parentNode;
+		if (parent) {
+			if (parent.tagName === "FORM") {
+				return parent;
+			} else {
+				return this._findParentForm(parent);
+			}
+		} else {
+			return document.body;
+		}
 	}
 }
 
