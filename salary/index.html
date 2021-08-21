@@ -24,7 +24,7 @@
 </style>
 
 	<link href="salary.css" rel="stylesheet">
-	<script type="module" src="salary-0002.js"></script>
+	<script type="module" src="salary-004.js"></script>
   </head>
 
   <body class="bg-light">
@@ -49,8 +49,9 @@
 								<li class="dropdown-item" sg-value="1" sg-dropdown="contract">Трудовой договор, в т.ч. по совм.</li>
 								<li class="dropdown-item" sg-value="2" sg-dropdown="contract">Самозанятость <span class="text-danger">(+36%)</span></li>
 								<li class="dropdown-item" sg-value="3" sg-dropdown="contract">Фриланс + Безопасная сделка <span class="text-danger">(+50%)</span></li>
-								<li class="dropdown-item" sg-value="4" sg-dropdown="contract">Договор ГПХ <span class="text-danger">(+75%)</span></li>
-								<li class="dropdown-item" sg-value="5" sg-dropdown="contract">ИП <span class="text-danger">(+100%)</span></li>
+								<li class="dropdown-item" sg-value="4" sg-dropdown="contract">Договор услуг <span class="text-danger">(+75%)</span></li>
+								<li class="dropdown-item" sg-value="5" sg-dropdown="contract">Договор подряда <span class="text-danger">(+100%)</span></li>
+								<li class="dropdown-item" sg-value="6" sg-dropdown="contract">ИП <span class="text-danger">(+125%)</span></li>
 							</ul>
 						</div>
 						
@@ -99,8 +100,12 @@
 						</div>
 						
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" sg-property="relocation">
-							<label class="form-check-label text-danger" for="relocation">Релокация в мегаполис<sup>1</sup></label>
+							<input class="form-check-input" id="relocation" type="checkbox" sg-property="relocation">
+							<label
+								class="form-check-label text-danger"
+								for="relocation"
+								sg-attributes="{title: 'При релокации в мегаполис минимальная месячная зарплата составляет %relocation_month_min% руб.!'}"
+							>Релокация в мегаполис<sup>1</sup></label>
 						</div>
 						
 						<fieldset class="row mb-2 bg-white p-2 ms-1 me-1" style="border-radius: 10px;">
@@ -124,32 +129,32 @@
 						</fieldset>
 					
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" sg-property="es5_nodejs">
+							<input class="form-check-input" id="es5_nodejs" type="checkbox" sg-property="es5_nodejs">
 							<label class="form-check-label" for="es5_nodejs">Разработка на ES5+ и/или NodeJS <span class="text-success">(-5%)</span></label>
 						</div>
 						
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" sg-property="php">
+							<input class="form-check-input" id="php" type="checkbox" sg-property="php">
 							<label class="form-check-label" for="php">Разработка на PHP <span class="text-danger">(+10%)</span></label>
 						</div>
 						
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" sg-property="vue">
+							<input class="form-check-input" id="vue" type="checkbox" sg-property="vue">
 							<label class="form-check-label" for="vue">Используем Vue 2+ <span class="text-success">(-5%)</span></label>
 						</div>
 						
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" sg-property="react">
+							<input class="form-check-input" id="react" type="checkbox" sg-property="react">
 							<label class="form-check-label" for="react">Используем React <span class="text-danger">(+5%)</span></label>
 						</div>
 						
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" sg-property="pixijs">
+							<input class="form-check-input" id="pixijs" type="checkbox" sg-property="pixijs">
 							<label class="form-check-label" for="pixijs">Разработка приложений на PixiJS <span class="text-success">(-10%)</span></label>
 						</div>
 						
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" sg-property="super_interesting">
+							<input class="form-check-input" id="super_interesting" type="checkbox" sg-property="super_interesting">
 							<label class="form-check-label" for="super_interesting">Супер интересный проект, в т.ч. на <a href="https://sg2d.ru" target="_blank" class="link-success">SG2D</a> <span class="text-success">(-25%)</span></label>
 						</div>
 						
@@ -157,8 +162,8 @@
 
 					<hr class="my-3"/>
 					
-					<p class="text-center fw-bold lh-1">Итого: <span id="salary_month">56&thinsp;300</span>&thinsp;руб.<sup>2</sup> <span class="text-nowrap">(<span id="salary_hour">700</span>&thinsp;руб./час)<sup>3</sup></span></p>
-					<p class="text-center fw-bold lh-1"><span id="hours">80</span>&thinsp;<span id="hours_meas">часов</span>/месяц</p>
+					<p class="text-center fw-bold lh-1">Итого: <span sg-property="salary_month" sg-format="getNumThinsp">56&thinsp;300</span>&thinsp;руб.<sup>2</sup> <span class="text-nowrap">(<span sg-property="salary_hour" sg-format="getNumThinsp">700</span>&thinsp;руб./час)<sup>3</sup></span></p>
+					<p class="text-center fw-bold lh-1"><span sg-property="hours">80</span>&thinsp;<span sg-property="hours_meas">часов</span>/месяц</p>
 					
 					<!--<hr class="my-3"/>
 					
@@ -175,9 +180,9 @@
 					
 					<hr class="my-3"/>
 					
-					<p class="text-danger" style="font-size: 0.8rem;"><sup>1</sup> &mdash; При релокации в мегаполис минимальная месячная зарпалата составляет <span id="relocation_month_min">500&thinsp;000</span>&thinsp;руб.</p>
+					<p class="text-danger" style="font-size: 0.8rem;"><sup>1</sup> &mdash; При релокации в мегаполис минимальная месячная зарплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&thinsp;000</span>&thinsp;руб.</p>
 					<p class="text-dark" style="font-size: 0.8rem;"><sup>2</sup> &mdash; Уровень зарплаты рассчитывается чистыми (на руки)!</p>
-					<p class="text-secondary" style="font-size: 0.8rem;"><sup>3</sup> &mdash; минимальная почасовая ставка <span id="rate_hour_min">500</span>&thinsp;руб.</p>
+					<p class="text-secondary" style="font-size: 0.8rem;"><sup>3</sup> &mdash; минимальная почасовая ставка <span sg-property="rate_hour_min" sg-format="getNumThinsp">500</span>&thinsp;руб.</p>
 				</div>
 				<div class="col"></div>
 			</div>

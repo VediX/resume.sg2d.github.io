@@ -1,8 +1,8 @@
 "use strict";
 
-import SGHTMLModel from "./../res/sg-model/sg-html-model.js";
+import SGMVVModel from "./../res/sg-model/sg-mvvm.js";
 
-class Salary extends SGHTMLModel {
+class Salary extends SGMVVModel {
 	
 	static singleInstance = true;
 	
@@ -20,10 +20,17 @@ class Salary extends SGHTMLModel {
 		react: false,
 		php: false,
 		pixijs: false,
-		super_interesting: false
+		super_interesting: false,
+		
+		rate_hour_min: 0,
+		salary_month: 0,
+		hours: 0,
+		hours_meas: "",
+		salary_hour: 0
 	};
 	
 	static typeProperties = {
+		select1: SGModel.TYPE_ANY,
 		contract: SGModel.TYPE_NUMBER,
 		level: SGModel.TYPE_NUMBER,
 		days_in_week: SGModel.TYPE_NUMBER,
@@ -40,11 +47,13 @@ class Salary extends SGHTMLModel {
 		super_interesting: SGModel.TYPE_BOOLEAN
 	};
 	
+	static hashProperties = ["contract", "level", "days_in_week", "hours_in_day", "relocation", "code_startup", "code_supported", "code_legacy", "es5_nodejs", "vue", "react", "php", "pixijs", "super_interesting"];
+	
 	static HOUR_RATE_BASE = 500;
 	static HOUR_RATE_MIN = 500;
 	static RELOCATION_MONTH_MIN = 500000;
 	
-	static CONTRACT_KOEF = [1, 1.36, 1.5, 1.75, 2];
+	static CONTRACT_KOEF = [1, 1.36, 1.5, 1.75, 2, 2.25];
 	static LEVEL_KOEF = [0.5, 0.75, 0.9, 1, 1.25, 1.5];
 	static DAYS_IN_WEEK_KOEF = [0.5, 0.6, 0.7, 0.8, 1, 1.25, 2];
 	static RELOCATION_KOEF = 2;
@@ -65,7 +74,7 @@ class Salary extends SGHTMLModel {
 			codeTypes.forEach(_name=>{
 				var elem = document.querySelector("[sg-property="+_name+"]");
 				if (name !== _name) {
-					this.set(_name, false, void 0, SGHTMLModel.FLAG_NO_CALLBACKS);
+					this.set(_name, false, void 0, SGMVVModel.FLAG_NO_CALLBACKS);
 				}
 				if (this.get(_name)) {
 					elem.parentNode.classList.add("selected");
@@ -79,8 +88,13 @@ class Salary extends SGHTMLModel {
 			document.querySelector("#hours_in_day_desc").innerText = (hours == 8 ? "Фуллтайм" : hours + " " + this.getHoursMeas(hours)+"/день");
 		});
 		
-		document.querySelector("#rate_hour_min").innerHTML = this.getNumThinsp(Salary.HOUR_RATE_MIN);
-		document.querySelector("#relocation_month_min").innerHTML = this.getNumThinsp(Salary.RELOCATION_MONTH_MIN);
+		this.on("hours", (hours)=>{
+			this.set("hours_meas", this.getHoursMeas(hours));
+		});
+		
+		this.set("rate_hour_min", Salary.HOUR_RATE_MIN);
+		this.set("relocation_month_min", Salary.RELOCATION_MONTH_MIN);
+		
 		//document.querySelector("#send_offer").addEventListener("click", this.sendOffer.bind(this));
 		document.querySelector("#save_link").addEventListener("click", this.saveLink.bind(this));
 		document.querySelector("#link_copy").onclick = this.linkCopy.bind(this);
@@ -101,6 +115,7 @@ class Salary extends SGHTMLModel {
 	
 	calc() {
 		let hours = 4 * this.get("days_in_week") * this.get("hours_in_day");
+		this.set("hours", hours);
 		let salary = this.constructor.fibonacci[this.get("hours_in_day") - 1] / this.get("hours_in_day")  * Salary.HOUR_RATE_BASE * hours;
 		salary *= Salary.CONTRACT_KOEF[this.get("contract") - 1];
 		salary *= Salary.LEVEL_KOEF[this.get("level") - 1];
@@ -122,10 +137,9 @@ class Salary extends SGHTMLModel {
 		salary = rate * hours;
 		
 		salary = SGModel.roundTo(salary, -2);
-		document.querySelector("#salary_month").innerHTML = this.getNumThinsp(salary);
-		document.querySelector("#salary_hour").innerHTML = this.getNumThinsp(SGModel.roundTo(rate, -1));
-		document.querySelector("#hours").innerHTML = hours;
-		document.querySelector("#hours_meas").innerText = this.getHoursMeas(hours);
+		this.set("salary_month", salary);
+		this.set("salary_hour", SGModel.roundTo(rate, -1));
+		//document.querySelector("#salary_hour").innerHTML = this.getNumThinsp(SGModel.roundTo(rate, -1));
 	}
 	
 	getHoursMeas(h) {
@@ -161,13 +175,12 @@ class Salary extends SGHTMLModel {
 	
 	saveLink() {
 		var hash = [];
-		for (var name in this.properties) {
-			if (name === "id") continue;
+		Salary.hashProperties.forEach(name=>{
 			var value = this.properties[name];
-			if (value === false) continue;
+			if (value === false) return;
 			if (value === true) value = 1;
 			hash.push(name + "=" + value);
-		}
+		})
 		let href = location.href.replace(/#.*/, "") + "#" + hash.join("&");
 		let link_input = document.querySelector("#link_link");
 		link_input.value = href;

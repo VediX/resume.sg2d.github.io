@@ -1,16 +1,16 @@
 /**
- * SGHTMLModel 1.0.0
+ * SGMVVModel 1.0.0
  * Binder for SGModel (MVVM)
  * https://github.com/VediX/SGModel
  * (c) 2021 Kalashnikov Ilya
- * SGHTMLModel may be freely distributed under the MIT license
+ * SGMVVModel may be freely distributed under the MIT license
  */
 
 "use strict";
 
 import SGModel from "./sg-model.js";
 
-export default class SGHTMLModel extends SGModel {
+export default class SGMVVModel extends SGModel {
 	
 	set(name, value, options = void 0, flags = 0) {
 		if (super.set.apply(this, arguments) && (this._binderInitialized)) {
@@ -50,21 +50,35 @@ export default class SGHTMLModel extends SGModel {
 			
 			var sgProperty = element.getAttribute("sg-property");
 			var sgType = element.getAttribute("sg-type");
+			var sgFormat = element.getAttribute("sg-format");
+			var sgAttributes = element.getAttribute("sg-attributes"); // TODO
 			
 			if (this.has(sgProperty)) {
 				this._elementsHTML[sgProperty] = element;
 				element._sg_property = sgProperty;
 				element._sg_type = sgType;
+				element._sg_format = this[sgFormat] || (v=>v);
 				switch (sgType) {
 					case "dropdown":
 						var eItems = document.querySelectorAll("[sg-dropdown=" + sgProperty + "]");
 						for (var i = 0; i < eItems.length; i++) {
 							eItems[i].onclick = this._dropdownItemClick;
 						}
+						element.addEventListener("change", this._onChangeDOMElementValue);
 						break;
+					default: {
+						if (element.type) {
+							var sEvent = "";
+							switch (element.type) {
+								case "range": sEvent = "input"; break;
+								case "radio": case "checkbox": case "text": case "button": case "select-one": case "select-multiple": sEvent = "change"; break;
+							}
+							if (sEvent) {
+								element.addEventListener(sEvent, this._onChangeDOMElementValue);
+							}
+						}
+					}
 				}
-				var sEvent = (element.type === "range" ? "input" : "change");
-				element.addEventListener(sEvent, this._onChangeDOMElementValue);
 				this._refreshElement(sgProperty);
 			}
 			this._bindElements(element.children);
@@ -92,9 +106,27 @@ export default class SGHTMLModel extends SGModel {
 				}
 				break;
 			default: {
-				switch (element.type) {
-					case "radio": case "checkbox": element.checked = value; break;
-					case "range": case "text": case "button": element.value = value; break; // TODO case "select": 
+				if (element.type) {
+					switch (element.type) {
+						case "radio": case "checkbox": element.checked = value; break;
+						case "range": case "text": case "button": case "select-one": element.value = value; break;
+						case "select-multiple": {
+							if (! Array.isArray(value)) { debugger; break; }
+							for (var i = 0; i < element.options.length; i++) {
+								let selected = false;
+								for (var j = 0; j < value.length; j++) {
+									if (element.options[i].value == value[j]) {
+										selected = true;
+										break;
+									}
+								}
+								element.options[i].selected = selected;
+							}
+							break;
+						}
+					}
+				} else {
+					element.innerHTML = (element._sg_format ? element._sg_format(value) : value);
 				}
 			}
 		}
@@ -115,7 +147,14 @@ export default class SGHTMLModel extends SGModel {
 				}
 				this.set(elem._sg_property, elem.checked);
 				break;
-			case "range": case "text": case "button": this.set(elem._sg_property, elem.value); break;
+			case "range": case "text": case "button": case "select-one": this.set(elem._sg_property, elem.value); break;
+			case "select-multiple":
+				let result = [];
+				for (var i = 0; i < elem.selectedOptions.length; i++) {
+					result.push( elem.selectedOptions[i].value );
+				}
+				this.set(elem._sg_property, result);
+				break;
 		}
 	}
 	
@@ -127,8 +166,8 @@ export default class SGHTMLModel extends SGModel {
 	}
 }
 
-if (typeof exports === 'object' && typeof module === 'object') module.exports = SGHTMLModel;
-else if (typeof define === 'function' && define.amd) define("SGHTMLModel", [], ()=>SGHTMLModel);
-else if (typeof exports === 'object') exports["SGHTMLModel"] = SGHTMLModel;
-else if (typeof window === 'object' && window.document) window["SGHTMLModel"] = SGHTMLModel;
-else this["SGModel"] = SGHTMLModel;
+if (typeof exports === 'object' && typeof module === 'object') module.exports = SGMVVModel;
+else if (typeof define === 'function' && define.amd) define("SGMVVModel", [], ()=>SGMVVModel);
+else if (typeof exports === 'object') exports["SGMVVModel"] = SGMVVModel;
+else if (typeof window === 'object' && window.document) window["SGMVVModel"] = SGMVVModel;
+else this["SGMVVModel"] = SGMVVModel;

@@ -49,6 +49,7 @@ sup {
   background-color: #eee;
   border-radius: 10px;
 }
-.c-pointer * {
+.c-pointer *,
+.form-check-input {
   cursor: pointer;
 }
