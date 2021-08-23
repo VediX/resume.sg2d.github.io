@@ -1,7 +1,5 @@
 "use strict";
 
-import SGModelView from "./../res/sg-model/sg-model-view.js";
-
 class Salary extends SGModelView {
 	
 	static singleInstance = true;

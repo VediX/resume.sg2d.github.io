@@ -84,7 +84,7 @@ SG2D - игровой движок на PixiJS (WebGL) и MatterJS (физиче
 
 #### [https://model.sg2d.ru](https://model.sg2d.ru) (https://github.com/VediX/model.sg2d.github.io)
 * SGModel - более быстрый и упрощенный аналог Backbone.js для структурирования веб-приложения с помощью биндинг-моделей
-* SGModelView - надстройка над SGModel, позволяющая связать данные в JavaScript с визуальными элементами HTML-документа, используя MVVM-паттерн. Пример использования библиотеки: [https://resume.sg2d.ru/salary/](https://resume.sg2d.ru/salary/)
+* SGModelView - надстройка над SGModel, позволяющая связать данные в JavaScript с визуальными элементами HTML-документа, используя MVVM-паттерн. Пример использования библиотеки: [https://model.sg2d.ru/example/](https://model.sg2d.ru/example/)
 
 ### Портфолио
 
