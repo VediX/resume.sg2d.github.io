@@ -1,8 +1,8 @@
 "use strict";
 
-import SGMVVModel from "./../res/sg-model/sg-mvvm.js";
+import SGModelView from "./../res/sg-model/sg-model-view.js";
 
-class Salary extends SGMVVModel {
+class Salary extends SGModelView {
 	
 	static singleInstance = true;
 	
@@ -74,7 +74,7 @@ class Salary extends SGMVVModel {
 			codeTypes.forEach(_name=>{
 				var elem = document.querySelector("[sg-property="+_name+"]");
 				if (name !== _name) {
-					this.set(_name, false, void 0, SGMVVModel.FLAG_NO_CALLBACKS);
+					this.set(_name, false, void 0, SGModelView.FLAG_NO_CALLBACKS);
 				}
 				if (this.get(_name)) {
 					elem.parentNode.classList.add("selected");

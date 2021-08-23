@@ -564,7 +564,7 @@ SGModel.TYPE_NUMBER_OR_XY = 8;
 // The flag passed in the .on(...) call to execute the callback
 SGModel.FLAG_IMMEDIATELY = true;
 
-// Private property
+/** @private */
 SGModel.OBJECT_EMPTY = Object.preventExtensions({});
 
 SGModel.FLAG_OFF_MAY_BE = 0b00000001; // if set can be .off(), then you need to pass this flag
@@ -779,6 +779,8 @@ SGModel._prevValue = void 0;
 
 /** @private */
 SGModel._xy = {x: 0, y: 0};
+
+SGModel.version = typeof __SGMODEL_VERSION__ !== 'undefined' ? __SGMODEL_VERSION__ : '*';
 
 if (typeof exports === 'object' && typeof module === 'object') module.exports = SGModel;
 else if (typeof define === 'function' && define.amd) define("SGModel", [], ()=>SGModel);

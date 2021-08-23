@@ -1,16 +1,16 @@
 /**
- * SGMVVModel 1.0.0
- * Binder for SGModel (MVVM)
+ * SGModelView 1.0.0
+ * Binder for SGModelView (MVVM)
  * https://github.com/VediX/SGModel
  * (c) 2021 Kalashnikov Ilya
- * SGMVVModel may be freely distributed under the MIT license
+ * SGModelView may be freely distributed under the MIT license
  */
 
 "use strict";
 
 import SGModel from "./sg-model.js";
 
-export default class SGMVVModel extends SGModel {
+export default class SGModelView extends SGModel {
 	
 	/**
 	 * Overriding the set method
@@ -185,8 +185,8 @@ export default class SGMVVModel extends SGModel {
 	}
 }
 
-if (typeof exports === 'object' && typeof module === 'object') module.exports = SGMVVModel;
-else if (typeof define === 'function' && define.amd) define("SGMVVModel", [], ()=>SGMVVModel);
-else if (typeof exports === 'object') exports["SGMVVModel"] = SGMVVModel;
-else if (typeof window === 'object' && window.document) window["SGMVVModel"] = SGMVVModel;
-else this["SGMVVModel"] = SGMVVModel;
+if (typeof exports === 'object' && typeof module === 'object') module.exports = SGModelView;
+else if (typeof define === 'function' && define.amd) define("SGModelView", [], ()=>SGModelView);
+else if (typeof exports === 'object') exports["SGModelView"] = SGModelView;
+else if (typeof window === 'object' && window.document) window["SGModelView"] = SGModelView;
+else this["SGModelView"] = SGModelView;
