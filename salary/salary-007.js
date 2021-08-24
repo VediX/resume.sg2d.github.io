@@ -24,6 +24,8 @@ class Salary extends SGModelView {
 		salary_month: 0,
 		hours: 0,
 		hours_meas: "",
+		hours_in_day_desc: "",
+		hours_extra_charge: "",
 		salary_hour: 0,
 		salary_year: 0
 	};
@@ -63,9 +65,15 @@ class Salary extends SGModelView {
 	static PIXIJS_KOEF = 0.9;
 	static SUPER_INTERESTING_KOEF = 0.75;
 	
-	static fibonacci = [1,2,3,5,8,13,21,34];
+	static FIBONACCI = [1,2,3,5,8,13,21,34];
+	static HOURS_EXTRA_CHARGE = [];
 	
 	initialize() {
+		
+		// 4h -> 5 (0%)
+		for (var i = 0; i < Salary.FIBONACCI.length; i++) {
+			Salary.HOURS_EXTRA_CHARGE[i] = (100 * (Salary.FIBONACCI[i] / (5 * (i+1) / 4) - 1)).toFixed(0);
+		}
 		
 		let codeTypes = ["code_startup", "code_supported", "code_legacy"];
 		this.on(codeTypes, (value, valuePrev, name)=>{
@@ -83,12 +91,27 @@ class Salary extends SGModelView {
 		});
 		
 		this.on("hours_in_day", (hours)=>{
-			document.querySelector("#hours_in_day_desc").innerText = (hours == 8 ? "Фуллтайм" : hours + " " + this.getHoursMeas(hours)+"/день");
-		});
+			this.set("hours_in_day_desc", (hours == 8 ? "Фуллтайм" : hours + " " + this.getHoursMeas(hours)+"/день"));
+			let extra_charge = Salary.HOURS_EXTRA_CHARGE[hours - 1];
+			let classList = document.querySelector("[sg-property=hours_extra_charge]").classList;
+			if (extra_charge < 0) {
+				classList.add("text-success");
+				classList.remove("text-danger");
+				this.set("hours_extra_charge", "(" + extra_charge + "%)");
+			} else if (extra_charge > 0) {
+				classList.remove("text-success");
+				classList.add("text-danger");
+				this.set("hours_extra_charge", "(+" + extra_charge + "%)");
+			} else {
+				classList.remove("text-danger");
+				classList.remove("text-success");
+				this.set("hours_extra_charge", "");
+			}
+		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
 		this.on("hours", (hours)=>{
 			this.set("hours_meas", this.getHoursMeas(hours));
-		});
+		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
 		this.set("rate_hour_min", Salary.HOUR_RATE_MIN);
 		this.set("relocation_month_min", Salary.RELOCATION_MONTH_MIN);
@@ -117,7 +140,7 @@ class Salary extends SGModelView {
 	calc() {
 		let hours = 4 * this.get("days_in_week") * this.get("hours_in_day");
 		this.set("hours", hours);
-		let salary = this.constructor.fibonacci[this.get("hours_in_day") - 1] / this.get("hours_in_day")  * Salary.HOUR_RATE_BASE * hours;
+		let salary = this.constructor.FIBONACCI[this.get("hours_in_day") - 1] / this.get("hours_in_day")  * Salary.HOUR_RATE_BASE * hours;
 		salary *= Salary.CONTRACT_KOEF[this.get("contract") - 1];
 		salary *= Salary.LEVEL_KOEF[this.get("level") - 1];
 		salary *= Salary.DAYS_IN_WEEK_KOEF[this.get("days_in_week") - 1];
