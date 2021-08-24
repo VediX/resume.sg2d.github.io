@@ -25,7 +25,7 @@
 
 	<link href="salary.css" rel="stylesheet">
 	<script src="./../res/sg-model/sg-model-view.min.js" defer></script>
-	<script type="module" src="salary-007.js"></script>
+	<script type="module" src="salary-008.js"></script>
   </head>
 
   <body class="bg-light">
@@ -44,7 +44,7 @@
 					
 					<form class="d-grid gap-2">
 						<div class="btn-group">
-							<button sg-property="contract" sg-type="dropdown" class="btn btn-primary dropdown-toggle btn-warning bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<button sg-property="contract" sg-type="dropdown" id="contract" class="btn btn-primary dropdown-toggle btn-warning bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Трудовой договор, в т.ч. по совм.</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="contract">
 								<li class="dropdown-item" sg-value="1" sg-dropdown="contract">Трудовой договор, в т.ч. по совм.</li>
@@ -57,7 +57,7 @@
 						</div>
 						
 						<div class="btn-group">
-							<button sg-property="level" sg-type="dropdown" class="btn btn-secondary dropdown-toggle btn-success bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<button sg-property="level" sg-type="dropdown" id="level" class="btn btn-secondary dropdown-toggle btn-success bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Уровень навыков: Middle <span class="text-success">(-10%)</span></button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="level">
 								<li class="dropdown-item" sg-value="1" sg-dropdown="level">Уровень навыков: Trainee <span class="text-success">(-50%)</span></li>
@@ -70,7 +70,7 @@
 						</div>
 					
 						<div class="btn-group">
-							<button sg-property="days_in_week" sg-type="dropdown" class="btn btn-primary dropdown-toggle btn-info bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<button sg-property="days_in_week" sg-type="dropdown" id="days_in_week" class="btn btn-primary dropdown-toggle btn-info bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Занятость: 5 дней в неделю</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="days_in_week">
 								<li class="dropdown-item" sg-value="1" sg-dropdown="days_in_week">Занятость: 1 день в неделю <span class="text-success">(-50%)</span></li>
@@ -96,7 +96,8 @@
 								</div>
 								<div class="col-md-6 p-0">
 									<div class="input-group-text bg-gradient" style="justify-content: center">
-										<span sg-property="hours_in_day_desc">4 часа/день</span>&nbsp;<span sg-property="hours_extra_charge" class="text-danger">+25%</span></div>
+										<span sg-property="hours_in_day_desc">4 часа/день</span>&nbsp;<span sg-property="hours_extra_charge" sg-format="formatHoursExtraCharge" sg-css="hours_extra_charge > 0 ? 'text-danger' : 'text-success'">-20%</span>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -231,13 +232,7 @@
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-   ym(84097300, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true,
-        webvisor:true
-   });
+   ym(84097300, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/84097300" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
