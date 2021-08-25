@@ -49,7 +49,22 @@ class Salary extends SGModelView {
 		hours_extra_charge: SGModel.TYPE_NUMBER
 	};
 	
-	static hashProperties = ["contract", "level", "days_in_week", "hours_in_day", "relocation", "code_startup", "code_supported", "code_legacy", "es5_nodejs", "vue", "react", "php", "pixijs", "super_interesting"];
+	static hashProperties = {
+		c: "contract",
+		l: "level",
+		d: "days_in_week",
+		h: "hours_in_day",
+		r: "relocation",
+		x: "code_startup",
+		y: "code_supported",
+		z: "code_legacy",
+		e: "es5_nodejs",
+		v: "vue",
+		r: "react",
+		p: "php",
+		i: "pixijs",
+		s: "super_interesting"
+	};
 	
 	static HOUR_RATE_BASE = 500;
 	static HOUR_RATE_MIN = 500;
@@ -114,11 +129,15 @@ class Salary extends SGModelView {
 		this.bindHTML("body");
 		
 		// Hash parser
-		let parameters = location.hash.replace("#", "").split("&");
-		for (var i = 0; i < parameters.length; i++) {
-			parameters[i] = parameters[i].split("=");
-			if (this.has(parameters[i][0])) {
-				this.set(parameters[i][0], parameters[i][1]);
+		let param, parameters = location.hash.matchAll && location.hash.matchAll(/(\w)(\d)/g);
+		if (parameters) {
+			while (param = parameters.next(), ! param.done) {
+				var code = param.value[1].toLowerCase();
+				var value = param.value[2];
+				var name = Salary.hashProperties[code];
+				if (name) {
+					this.set(name, value);
+				}
 			}
 		}
 		
@@ -197,13 +216,14 @@ class Salary extends SGModelView {
 	
 	saveLink() {
 		var hash = [];
-		Salary.hashProperties.forEach(name=>{
+		for (var code in Salary.hashProperties) {
+			var name = Salary.hashProperties[code];
 			var value = this.properties[name];
-			if (value === false) return;
+			if (value === false) continue;
 			if (value === true) value = 1;
-			hash.push(name + "=" + value);
-		})
-		let href = location.href.replace(/#.*/, "") + "#" + hash.join("&");
+			hash.push(code.toUpperCase() + value);
+		}
+		let href = location.href.replace(/#.*/, "") + "#" + hash.join("");
 		let link_input = document.querySelector("#link_link");
 		link_input.value = href;
 	}
