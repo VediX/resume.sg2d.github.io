@@ -13,11 +13,16 @@ class Salary extends SGModelView {
 		code_startup: false,
 		code_supported: true,
 		code_legacy: false,
-		es5_nodejs: false,
-		vue: false,
+		es6: false,
+		nodejs: false,
+		vue3: false,
 		react: false,
+		angular: false,
+		sapui5: false,
 		php: false,
+		typescript: false,
 		pixijs: false,
+		matterjs: false,
 		super_interesting: false,
 		
 		rate_hour_min: 0,
@@ -39,11 +44,16 @@ class Salary extends SGModelView {
 		code_startup: SGModel.TYPE_BOOLEAN,
 		code_supported: SGModel.TYPE_BOOLEAN,
 		code_legacy: SGModel.TYPE_BOOLEAN,
-		es5_nodejs: SGModel.TYPE_BOOLEAN,
-		vue: SGModel.TYPE_BOOLEAN,
+		es6: SGModel.TYPE_BOOLEAN,
+		nodejs: SGModel.TYPE_BOOLEAN,
+		vue3: SGModel.TYPE_BOOLEAN,
 		react: SGModel.TYPE_BOOLEAN,
+		angular: SGModel.TYPE_BOOLEAN,
+		sapui5: SGModel.TYPE_BOOLEAN,
 		php: SGModel.TYPE_BOOLEAN,
+		typescript: SGModel.TYPE_BOOLEAN,
 		pixijs: SGModel.TYPE_BOOLEAN,
+		matterjs: SGModel.TYPE_BOOLEAN,
 		super_interesting: SGModel.TYPE_BOOLEAN,
 		
 		hours_extra_charge: SGModel.TYPE_NUMBER
@@ -54,15 +64,20 @@ class Salary extends SGModelView {
 		l: "level",
 		d: "days_in_week",
 		h: "hours_in_day",
-		r: "relocation",
+		q: "relocation",
 		x: "code_startup",
 		y: "code_supported",
 		z: "code_legacy",
-		e: "es5_nodejs",
-		v: "vue",
+		e: "es6",
+		n: "nodejs",
+		v: "vue3",
 		r: "react",
+		a: "angular",
+		u: "sapui5",
 		p: "php",
+		t: "typescript",
 		i: "pixijs",
+		m: "matterjs",
 		s: "super_interesting"
 	};
 	
@@ -70,26 +85,32 @@ class Salary extends SGModelView {
 	static HOUR_RATE_MIN = 500;
 	static RELOCATION_MONTH_MIN = 500000;
 	
-	static CONTRACT_KOEF = [1, 1.36, 1.5, 1.75, 2, 2.25];
+	static CONTRACT_KOEF = [1, 1.36, 1.4, 1.5, 1.75, 2];
 	static LEVEL_KOEF = [0.5, 0.75, 0.9, 1, 1.25, 1.5];
-	static DAYS_IN_WEEK_KOEF = [0.5, 0.6, 0.7, 0.8, 1, 1.25, 2];
+	static DAYS_IN_WEEK_KOEF = [0.5, 0.6, 0.7, 0.8, 1, 2, 4];
 	static RELOCATION_KOEF = 2;
 	static CODE_SUPPORTED_KOEF = 1.25;
 	static CODE_LEGACY_KOEF = 2;
-	static ES5_NODEJS_KOEF = 0.95;
+	static ES6_KOEF = 0.95;
+	static NODEJS_KOEF = 0.95;
+	static VUE3_KOEF = 0.95;
 	static REACT_KOEF = 1.05;
+	static ANGULAR_KOEF = 1.15;
+	static SAPUI5_KOEF = 0.95;
 	static PHP_KOEF = 1.1;
+	static TYPESCRIPT_KOEF = 1.05;
 	static PIXIJS_KOEF = 0.9;
+	static MATTERJS_KOEF = 0.95;
 	static SUPER_INTERESTING_KOEF = 0.75;
 	
-	static FIBONACCI = [1,2,3,5,8,13,21,34];
+	static HOURS_KOEF = [1,2.25,3.5625,5,7.8122,11.2497,17.5,30];
 	static HOURS_EXTRA_CHARGE = [];
 	
 	initialize() {
 		
 		// 4h -> 5 (0%)
-		for (var i = 0; i < Salary.FIBONACCI.length; i++) {
-			Salary.HOURS_EXTRA_CHARGE[i] = (100 * (Salary.FIBONACCI[i] / (5 * (i+1) / 4) - 1)).toFixed(0);
+		for (var i = 0; i < Salary.HOURS_KOEF.length; i++) {
+			Salary.HOURS_EXTRA_CHARGE[i] = (100 * (Salary.HOURS_KOEF[i] / (5 * (i+1) / 4) - 1)).toFixed(2);
 		}
 		
 		let codeTypes = ["code_startup", "code_supported", "code_legacy"];
@@ -147,18 +168,23 @@ class Salary extends SGModelView {
 	calc() {
 		let hours = 4 * this.get("days_in_week") * this.get("hours_in_day");
 		this.set("hours", hours);
-		let salary = this.constructor.FIBONACCI[this.get("hours_in_day") - 1] / this.get("hours_in_day")  * Salary.HOUR_RATE_BASE * hours;
+		let salary = this.constructor.HOURS_KOEF[this.get("hours_in_day") - 1] / this.get("hours_in_day")  * Salary.HOUR_RATE_BASE * hours;
 		salary *= Salary.CONTRACT_KOEF[this.get("contract") - 1];
 		salary *= Salary.LEVEL_KOEF[this.get("level") - 1];
 		salary *= Salary.DAYS_IN_WEEK_KOEF[this.get("days_in_week") - 1];
 		salary *= this.get("relocation") ? Salary.RELOCATION_KOEF : 1;
 		salary *= this.get("code_supported") ? Salary.CODE_SUPPORTED_KOEF : 1;
 		salary *= this.get("code_legacy") ? Salary.CODE_LEGACY_KOEF : 1;
-		salary *= this.get("es5_nodejs") ? Salary.ES5_NODEJS_KOEF : 1;
-		salary *= this.get("vue") ? Salary.ES5_NODEJS_KOEF : 1;
+		salary *= this.get("es6") ? Salary.ES6_KOEF : 1;
+		salary *= this.get("nodejs") ? Salary.NODEJS_KOEF : 1;
+		salary *= this.get("vue3") ? Salary.VUE3_KOEF : 1;
 		salary *= this.get("react") ? Salary.REACT_KOEF : 1;
+		salary *= this.get("angular") ? Salary.ANGULAR_KOEF : 1;
+		salary *= this.get("sapui5") ? Salary.SAPUI5_KOEF : 1;
 		salary *= this.get("php") ? Salary.PHP_KOEF : 1;
+		salary *= this.get("typescript") ? Salary.TYPESCRIPT_KOEF : 1;
 		salary *= this.get("pixijs") ? Salary.PIXIJS_KOEF : 1;
+		salary *= this.get("matterjs") ? Salary.MATTERJS_KOEF : 1;
 		salary *= this.get("super_interesting") ? Salary.SUPER_INTERESTING_KOEF : 1;
 		
 		if (this.get("relocation")) salary = Math.max(salary, Salary.RELOCATION_MONTH_MIN);
@@ -167,7 +193,7 @@ class Salary extends SGModelView {
 		
 		salary = rate * hours;
 		
-		salary = SGModel.roundTo(salary, -2);
+		salary = SGModel.roundTo(salary, -3);
 		this.set("salary_hour", SGModel.roundTo(rate, -1));
 		this.set("salary_month", salary);
 		this.set("salary_year", this.get("salary_month") * 12);

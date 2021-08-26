@@ -25,7 +25,7 @@
 
 	<link href="salary.css" rel="stylesheet">
 	<script src="./../res/sg-model/sg-model-view.min.js" defer></script>
-	<script type="module" src="salary-009.js"></script>
+	<script type="module" src="salary-010.js"></script>
   </head>
 
   <body class="bg-light">
@@ -49,10 +49,10 @@
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="contract">
 								<li class="dropdown-item" sg-value="1" sg-dropdown="contract">Трудовой договор, в т.ч. по совм.</li>
 								<li class="dropdown-item" sg-value="2" sg-dropdown="contract">Самозанятый <span class="text-danger">(+36%)</span></li>
-								<li class="dropdown-item" sg-value="3" sg-dropdown="contract">Фриланс + Безопасная сделка <span class="text-danger">(+50%)</span></li>
-								<li class="dropdown-item" sg-value="4" sg-dropdown="contract">Договор услуг <span class="text-danger">(+75%)</span></li>
-								<li class="dropdown-item" sg-value="5" sg-dropdown="contract">Договор подряда <span class="text-danger">(+100%)</span></li>
-								<li class="dropdown-item" sg-value="6" sg-dropdown="contract">ИП <span class="text-danger">(+125%)</span></li>
+								<li class="dropdown-item" sg-value="3" sg-dropdown="contract">Фриланс + Безопасная сделка <span class="text-danger">(+40%)</span></li>
+								<li class="dropdown-item" sg-value="4" sg-dropdown="contract">Договор услуг <span class="text-danger">(+50%)</span></li>
+								<li class="dropdown-item" sg-value="5" sg-dropdown="contract">Договор подряда <span class="text-danger">(+75%)</span></li>
+								<li class="dropdown-item" sg-value="6" sg-dropdown="contract">ИП <span class="text-danger">(+100%)</span></li>
 							</ul>
 						</div>
 						
@@ -78,6 +78,8 @@
 								<li class="dropdown-item" sg-value="3" sg-dropdown="days_in_week">Занятость: 3 дня в неделю <span class="text-success">(-30%)</span></li>
 								<li class="dropdown-item" sg-value="4" sg-dropdown="days_in_week">Занятость: 4 дня в неделю <span class="text-success">(-20%)</span></li>
 								<li class="dropdown-item" sg-value="5" sg-dropdown="days_in_week">Занятость: 5 дней в неделю</li>
+								<li class="dropdown-item" sg-value="6" sg-dropdown="days_in_week">Занятость: 6 дней в неделю <span class="text-danger">(+100%)</span></li>
+								<li class="dropdown-item" sg-value="7" sg-dropdown="days_in_week">Занятость: 7 дней в неделю <span class="text-danger">(+200%)</span></li>
 							</ul>
 						</div>
 					
@@ -86,13 +88,13 @@
 								<div class="col-md-6 p-0 pt-3 pe-1 position-relative" style="font-size: 10pt">
 									<input sg-property="hours_in_day" type="range" class="form-range" min="1" max="8" aria-describedby="hours_in_day_desc" value="4">
 									<div class="position-absolute top-0 translate-middle-y label-hour lhour-1 text-success" title="-20%">1h</div>
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-2 text-success" title="-20%">2h</div>
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-3 text-success" title="-20%">3h</div>
+									<div class="position-absolute top-0 translate-middle-y label-hour lhour-2 text-success" title="-10%">2h</div>
+									<div class="position-absolute top-0 translate-middle-y label-hour lhour-3 text-success" title="-5%">3h</div>
 									<div class="position-absolute top-0 translate-middle-y label-hour lhour-4">4h</div>
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-5 text-danger" title="+28%">5h</div>
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-6 text-danger" title="+73%">6h</div>
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-7 text-danger" title="+140%">7h</div>
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-8 text-danger" title="+240%">8h</div>
+									<div class="position-absolute top-0 translate-middle-y label-hour lhour-5 text-danger" title="+25%">5h</div>
+									<div class="position-absolute top-0 translate-middle-y label-hour lhour-6 text-danger" title="+50%">6h</div>
+									<div class="position-absolute top-0 translate-middle-y label-hour lhour-7 text-danger" title="+100%">7h</div>
+									<div class="position-absolute top-0 translate-middle-y label-hour lhour-8 text-danger" title="+200%">8h</div>
 								</div>
 								<div class="col-md-6 p-0">
 									<div class="input-group-text bg-gradient" style="justify-content: center">
@@ -126,30 +128,78 @@
 								</div>
 							</div>
 						</fieldset>
-					
-						<div class="form-check form-switch">
-							<input class="form-check-input" id="es5_nodejs" type="checkbox" sg-property="es5_nodejs">
-							<label class="form-check-label" for="es5_nodejs">Разработка на ES5+ и/или NodeJS <span class="text-success">(-5%)</span></label>
-						</div>
 						
-						<div class="form-check form-switch">
-							<input class="form-check-input" id="php" type="checkbox" sg-property="php">
-							<label class="form-check-label" for="php">Разработка на PHP <span class="text-danger">(+10%)</span></label>
-						</div>
-						
-						<div class="form-check form-switch">
-							<input class="form-check-input" id="vue" type="checkbox" sg-property="vue">
-							<label class="form-check-label" for="vue">Используем Vue 3 (vue-next) <span class="text-success">(-5%)</span></label>
-						</div>
-						
-						<div class="form-check form-switch">
-							<input class="form-check-input" id="react" type="checkbox" sg-property="react">
-							<label class="form-check-label" for="react">Используем React <span class="text-danger">(+5%)</span></label>
-						</div>
-						
-						<div class="form-check form-switch">
-							<input class="form-check-input" id="pixijs" type="checkbox" sg-property="pixijs">
-							<label class="form-check-label" for="pixijs">Разработка приложений на PixiJS <span class="text-success">(-10%)</span></label>
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="es6" type="checkbox" sg-property="es6">
+										<label class="form-check-label text-nowrap" for="es6">ES6+ <span class="text-success">(-5%)</span></label>
+									</div>
+								</div>
+								<div class="col">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="nodejs" type="checkbox" sg-property="nodejs">
+										<label class="form-check-label" for="nodejs">NodeJS <span class="text-success">(-5%)</span></label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="vue3" type="checkbox" sg-property="vue3">
+										<label class="form-check-label text-nowrap" for="vue3">Vue3 <span class="text-success">(-5%)</span></label>
+									</div>
+								</div>
+								<div class="col">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="typescript" type="checkbox" sg-property="typescript">
+										<label class="form-check-label" for="typescript">TypeScript <span class="text-danger">(+5%)</span></label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="sapui5" type="checkbox" sg-property="sapui5">
+										<label class="form-check-label text-nowrap" for="sapui5">SAPUI5 <span class="text-success">(-5%)</span></label>
+									</div>
+								</div>
+								<div class="col">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="react" type="checkbox" sg-property="react">
+										<label class="form-check-label text-nowrap" for="react">React <span class="text-danger">(+5%)</span></label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="pixijs" type="checkbox" sg-property="pixijs">
+										<label class="form-check-label" for="pixijs">PixiJS <span class="text-success">(-10%)</span></label>
+									</div>
+								</div>
+								<div class="col">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="php" type="checkbox" sg-property="php">
+										<label class="form-check-label text-nowrap" for="php">PHP <span class="text-danger">(+10%)</span></label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="matterjs" type="checkbox" sg-property="matterjs">
+										<label class="form-check-label" for="matterjs">MatterJS <span class="text-success">(-5%)</span></label>
+									</div>
+								</div>
+								<div class="col">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="angular" type="checkbox" sg-property="angular">
+										<label class="form-check-label text-nowrap" for="angular">Angular <span class="text-danger">(+15%)</span></label>
+									</div>
+								</div>
+							</div>
 						</div>
 						
 						<div class="form-check form-switch">
@@ -178,7 +228,7 @@
 					
 					<hr class="my-3"/>
 					
-					<button id="save_link" class="w-100 btn btn-primary btn-lg bg-gradient" data-bs-toggle="modal" data-bs-target="#modalLink">Поделиться</button>
+					<button id="save_link" class="w-100 btn btn-primary btn-lg bg-gradient" data-bs-toggle="modal" data-bs-target="#modalLink">Поделиться ссылкой</button>
 					
 					<hr class="my-3"/>
 					
