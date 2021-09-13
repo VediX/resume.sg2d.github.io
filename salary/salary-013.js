@@ -20,6 +20,7 @@ class Salary extends SGModelView {
 		angular: false,
 		sapui5: false,
 		php: false,
+		cpp: false,
 		typescript: false,
 		pixijs: false,
 		matterjs: false,
@@ -51,6 +52,7 @@ class Salary extends SGModelView {
 		angular: SGModel.TYPE_BOOLEAN,
 		sapui5: SGModel.TYPE_BOOLEAN,
 		php: SGModel.TYPE_BOOLEAN,
+		cpp: SGModel.TYPE_BOOLEAN,
 		typescript: SGModel.TYPE_BOOLEAN,
 		pixijs: SGModel.TYPE_BOOLEAN,
 		matterjs: SGModel.TYPE_BOOLEAN,
@@ -75,6 +77,7 @@ class Salary extends SGModelView {
 		a: "angular",
 		u: "sapui5",
 		p: "php",
+		o: "cpp",
 		t: "typescript",
 		i: "pixijs",
 		m: "matterjs",
@@ -98,6 +101,7 @@ class Salary extends SGModelView {
 	static ANGULAR_KOEF = 1.15;
 	static SAPUI5_KOEF = 0.95;
 	static PHP_KOEF = 1.1;
+	static CPP_KOEF = 1.2;
 	static TYPESCRIPT_KOEF = 1.05;
 	static PIXIJS_KOEF = 0.9;
 	static MATTERJS_KOEF = 0.95;
@@ -183,6 +187,7 @@ class Salary extends SGModelView {
 		salary *= this.get("angular") ? Salary.ANGULAR_KOEF : 1;
 		salary *= this.get("sapui5") ? Salary.SAPUI5_KOEF : 1;
 		salary *= this.get("php") ? Salary.PHP_KOEF : 1;
+		salary *= this.get("cpp") ? Salary.CPP_KOEF : 1;
 		salary *= this.get("typescript") ? Salary.TYPESCRIPT_KOEF : 1;
 		salary *= this.get("pixijs") ? Salary.PIXIJS_KOEF : 1;
 		salary *= this.get("matterjs") ? Salary.MATTERJS_KOEF : 1;

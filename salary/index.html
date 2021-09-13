@@ -25,7 +25,7 @@
 
 	<link href="salary.css" rel="stylesheet">
 	<script src="./../res/sg-model/sg-model-view.min.js" defer></script>
-	<script type="module" src="salary-012.js"></script>
+	<script type="module" src="salary-013.js"></script>
   </head>
 
   <body class="bg-light">
@@ -56,7 +56,7 @@
 							</ul>
 						</div>
 						
-						<div class="btn-group">
+						<div class="btn-group" title="Если при устройстве на работу будет уровень Стажер или Junior, то в течение нескольких месяцев, но не более 1 года, ожидаю роста как минимум до Middle уровня, что также означает рост зарплатных ожиданий согласно форме расчета!">
 							<button sg-property="level" sg-type="dropdown" id="level" class="btn btn-secondary dropdown-toggle btn-success bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Уровень навыков: Middle <span class="text-success">(-10%)</span></button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="level">
@@ -154,7 +154,7 @@
 								<div class="col ps-0">
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="typescript" type="checkbox" sg-property="typescript">
-										<label class="form-check-label" for="typescript">TypeScript <span class="text-danger">(+5%)</span></label>
+										<label class="form-check-label" for="typescript">Typescript <span class="text-danger">(+5%)</span></label>
 									</div>
 								</div>
 							</div>
@@ -176,13 +176,13 @@
 								<div class="col pe-0">
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="pixijs" type="checkbox" sg-property="pixijs">
-										<label class="form-check-label" for="pixijs">PixiJS/three.js <span class="text-success">(-10%)</span></label>
+										<label class="form-check-label" for="pixijs">PixiJS/threejs <span class="text-success">(-10%)</span></label>
 									</div>
 								</div>
 								<div class="col ps-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="php" type="checkbox" sg-property="php">
-										<label class="form-check-label text-nowrap" for="php">PHP <span class="text-danger">(+10%)</span></label>
+										<input class="form-check-input" id="angular" type="checkbox" sg-property="angular">
+										<label class="form-check-label text-nowrap" for="angular">Angular <span class="text-danger">(+15%)</span></label>
 									</div>
 								</div>
 							</div>
@@ -195,16 +195,25 @@
 								</div>
 								<div class="col ps-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="angular" type="checkbox" sg-property="angular">
-										<label class="form-check-label text-nowrap" for="angular">Angular <span class="text-danger">(+15%)</span></label>
+										<input class="form-check-input" id="php" type="checkbox" sg-property="php">
+										<label class="form-check-label text-nowrap" for="php">PHP <span class="text-danger">(+10%)</span></label>
 									</div>
 								</div>
 							</div>
-						</div>
-						
-						<div class="form-check form-switch">
-							<input class="form-check-input" id="super_interesting" type="checkbox" sg-property="super_interesting">
-							<label class="form-check-label" for="super_interesting">Супер интересный проект, в т.ч. на <a href="https://sg2d.ru" target="_blank" class="link-success">SG2D</a> <span class="text-success">(-25%)</span></label>
+							<div class="row">
+								<div class="col pe-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="super_interesting" type="checkbox" sg-property="super_interesting">
+										<label class="form-check-label" for="super_interesting"><a href="https://sg2d.ru" target="_blank" class="link-success">SG2D</a> <span class="text-success">(-25%)</span></label>
+									</div>
+								</div>
+								<div class="col ps-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="cpp" type="checkbox" sg-property="cpp">
+										<label class="form-check-label text-nowrap" for="cpp">C#/C++ <span class="text-danger">(+20%)</span></label>
+									</div>
+								</div>
+							</div>
 						</div>
 						
 					</form>
