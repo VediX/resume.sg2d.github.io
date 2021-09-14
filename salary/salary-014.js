@@ -97,18 +97,19 @@ class Salary extends SGModelView {
 	static ES6_KOEF = 0.95;
 	static NODEJS_KOEF = 0.95;
 	static VUE3_KOEF = 0.95;
-	static REACT_KOEF = 1.05;
-	static ANGULAR_KOEF = 1.15;
+	static REACT_KOEF = 1.15;
+	static ANGULAR_KOEF = 1.25;
 	static SAPUI5_KOEF = 0.95;
-	static PHP_KOEF = 1.1;
+	static PHP_KOEF = 1.2;
 	static CPP_KOEF = 1.2;
-	static TYPESCRIPT_KOEF = 1.05;
+	static TYPESCRIPT_KOEF = 1.1;
 	static PIXIJS_KOEF = 0.9;
 	static MATTERJS_KOEF = 0.95;
 	static SUPER_INTERESTING_KOEF = 0.75;
 	
 	//static HOURS_KOEF = [1,2.25,3.5625,5,7.8122,11.2497,17.5,30]; // -20%, -10%, -5%, 0%, +25%, +50%, +100%, +200%
-	static HOURS_KOEF = [1.0625,2.25,3.5625,5,6.875,9.375,13.125,20]; // -15%, -10%, -5%, 0%, +10%, +25%, +50%, +100%
+	//static HOURS_KOEF = [1.0625,2.25,3.5625,5,6.875,9.375,13.125,20]; // -15%, -10%, -5%, 0%, +10%, +25%, +50%, +100%
+	static HOURS_KOEF = [1.0625,2.25,3.5625,5,7.8125,11.25,15.3125,20]; // -15%, -10%, -5%, 0%, +25%, +50%, +75%, +100%
 	static HOURS_EXTRA_CHARGE = [];
 	
 	initialize() {
