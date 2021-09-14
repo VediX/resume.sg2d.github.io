@@ -40,10 +40,36 @@ sup {
   left: 66.3% !important;
 }
 .lhour-7 {
-  left: 80% !important;
+  left: 79% !important;
 }
 .lhour-8 {
-  left: 93% !important;
+  left: 91% !important;
+}
+@media screen and (min-width: 300px) and (max-width: 768px) {
+  .lhour-1 {
+    left: 0% !important;
+  }
+  .lhour-2 {
+    left: 14% !important;
+  }
+  .lhour-3 {
+    left: 27.6% !important;
+  }
+  .lhour-4 {
+    left: 41.5% !important;
+  }
+  .lhour-5 {
+    left: 54.6% !important;
+  }
+  .lhour-6 {
+    left: 68% !important;
+  }
+  .lhour-7 {
+    left: 81.7% !important;
+  }
+  .lhour-8 {
+    left: 95% !important;
+  }
 }
 .form-check.selected {
   background-color: #eee;

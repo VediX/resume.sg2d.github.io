@@ -44,7 +44,7 @@
 - PHP5 / PHP7+: middle / junior
 - PixiJS / PixiJS-Sound: middle / +
 - PhaserJS, Cocos2d-HTML5: junior
-- BackboneJS, KnockoutJS, Bootstrap: junior
+- BackboneJS, KnockoutJS, Bootstrap, jQuery: junior
 - VueJS, React: trainee
 - Lodash, Underscore.js: +
 - HTML / LESS / CSS2 / CSS3: +

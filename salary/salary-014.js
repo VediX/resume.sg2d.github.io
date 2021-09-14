@@ -84,7 +84,7 @@ class Salary extends SGModelView {
 		s: "super_interesting"
 	};
 	
-	static HOUR_RATE_BASE = 500;
+	static HOUR_RATE_BASE = 800;
 	static HOUR_RATE_MIN = 500;
 	static RELOCATION_MONTH_MIN = 500000;
 	
@@ -109,14 +109,15 @@ class Salary extends SGModelView {
 	
 	//static HOURS_KOEF = [1,2.25,3.5625,5,7.8122,11.2497,17.5,30]; // -20%, -10%, -5%, 0%, +25%, +50%, +100%, +200%
 	//static HOURS_KOEF = [1.0625,2.25,3.5625,5,6.875,9.375,13.125,20]; // -15%, -10%, -5%, 0%, +10%, +25%, +50%, +100%
-	static HOURS_KOEF = [1.0625,2.25,3.5625,5,7.8125,11.25,15.3125,20]; // -15%, -10%, -5%, 0%, +25%, +50%, +75%, +100%
+	//static HOURS_KOEF = [1.0625,2.25,3.5625,5,7.8125,11.25,15.3125,20]; // -15%, -10%, -5%, 0%, +25%, +50%, +75%, +100%
+	static HOURS_KOEF = [0.85,1.8,2.85,4,6.25,9,12.25,16]; // -15%, -10%, -5%, 0%, +25%, +50%, +75%, +100%
 	static HOURS_EXTRA_CHARGE = [];
 	
 	initialize() {
 		
 		// 4h -> 5 (0%)
 		for (var i = 0; i < Salary.HOURS_KOEF.length; i++) {
-			Salary.HOURS_EXTRA_CHARGE[i] = (100 * (Salary.HOURS_KOEF[i] / (5 * (i+1) / 4) - 1)).toFixed(2);
+			Salary.HOURS_EXTRA_CHARGE[i] = (100 * (Salary.HOURS_KOEF[i] / (5 * (i+1) / 5) - 1)).toFixed(2);
 		}
 		
 		let codeTypes = ["code_startup", "code_supported", "code_legacy"];
@@ -168,7 +169,7 @@ class Salary extends SGModelView {
 			}
 		}
 		
-		this.setOnAllCallback(this.calc, SGModel.FLAG_IMMEDIATELY);
+		this.on(Object.values(Salary.hashProperties), this.calc, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 	}
 	
 	calc() {
