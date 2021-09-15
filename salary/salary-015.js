@@ -262,6 +262,11 @@ class Salary extends SGModelView {
 		link_input.value = href;
 	}
 	
+	sendEmail(event) {
+		let link_input = document.querySelector("#link_link");
+		window.open("mailto:offer@sg2d.ru?subject=Отклик на резюме&body=Занятость "+this.get("hours_in_day")+" ч/день, ставка "+this.get("salary_hour")+" руб/час. Подробнее: "+link_input.value);
+	}
+	
 	linkCopy() {
 		let link_input = document.querySelector("#link_link");
 		link_input.select();

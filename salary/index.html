@@ -24,8 +24,10 @@
 </style>
 
 	<link href="salary.css" rel="stylesheet">
-	<script src="./../res/sg-model/sg-model-view.min.js" defer></script>
-	<script type="module" src="salary-014.js"></script>
+	<!--<script src="./../res/sg-model/sg-model-view.min.js" defer></script>-->
+	<script type="module" src="./../res/sg-model/sg-model.js" defer></script>
+	<script type="module" src="./../res/sg-model/sg-model-view.js" defer></script>
+	<script type="module" src="salary-015.js"></script>
   </head>
 
   <body class="bg-light">
@@ -279,6 +281,11 @@
 								<a id="link_copy" class="input-group-text" href="#" title="Copy to clipboard" style="padding: 0.58rem; width: 2.0rem;">
 									<img src="../res/imgs/clippy.svg" style="width: 13px" alt="Copy to clipboard"/>
 								</a>
+							</div>
+						</div>
+						<div class="row mt-3">
+							<div class="col-12 pb-1 text-center">
+								<button class="btn btn-primary btn-warning bg-gradient btn-lg" type="button" sg-click="sendEmail">Отправить ссылку по e-mail...</button>
 							</div>
 						</div>
 					</div>
