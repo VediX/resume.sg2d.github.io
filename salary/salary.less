@@ -2,6 +2,14 @@
 	max-width: 960px;
 }
 
+.loading-hide {
+	display: none;
+}
+
+.calc-show {
+	display: flex!important;
+}
+
 sup {
 	font-weight: bold;
 }
@@ -55,19 +63,13 @@ sup {
 	cursor: pointer;
 }
 
-/*@media screen and (max-width: 799px) {
-	input[type=range] {
-		pointer-events: none;
-	}
-	input[type=range]::-webkit-slider-thumb {
-	  pointer-events: auto;
-	}
+footer.my-fixed {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
 
-	input[type=range]::-moz-range-thumb {
-	  pointer-events: auto;
-	}
-
-	input[type=range]::-ms-thumb {
-	  pointer-events: auto;
-	}
-}*/
+footer.my-static {
+	position: static;
+}

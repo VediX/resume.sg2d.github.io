@@ -3,8 +3,8 @@
   <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Рассчитайте ожидаемую стоимость услуг (зарплату), указав параметры">
-	<title>Форма расчёта зарплаты/стоимости услуг</title>
+	<meta name="description" content="Javascript/Node.js Разработчик - Рассчитайте ожидаемую стоимость услуг (зарплату), указав параметры сотрудничества и технологии">
+	<title>Javascript/Node.js Разработчик - Форма расчёта зарплаты/стоимости услуг</title>
 	<link href="/../res/bootstrap/bootstrap.min.css" rel="stylesheet"><!-- https://bootstrap-4.ru/docs/5.0/getting-started/introduction/ -->
 	<meta name="theme-color" content="#7952b3">
 
@@ -25,22 +25,23 @@
 
 	<link href="salary.css" rel="stylesheet">
 	<!--<script src="./../res/sg-model/sg-model-view.min.js" defer></script>-->
-	<script type="module" src="./../res/sg-model/sg-model.js" defer></script>
 	<script type="module" src="./../res/sg-model/sg-model-view.js" defer></script>
-	<script type="module" src="salary-015.js"></script>
+	<script type="module" src="salary-016.js"></script>
   </head>
 
   <body class="bg-light">
     
 	<div class="container">
-		<main>
+		<main class="pb-5">
 			<div class="py-4 text-center">
 				<h2></h2>
-				<p class="lead fs-6">Уважаемые работодатели/партнёры! Вы можете рассчитать ожидаемый уровень зарплаты/стоимость моих услуг в зависимости от условий сотрудничества и технологий используемых в проектах!</p>
+				<p class="lead fs-6">Уважаемые работодатели/партнёры! Вы можете рассчитать примерный ожидаемый уровень зарплаты/стоимость моих услуг в зависимости от условий сотрудничества и технологий используемых в проектах!</p>
 				<p><a href="/" class="link-success">Перейти в резюме...</a></p>
 			</div>
+			
+			<h5 class="text-center" sg-css="initialized ? 'loading-hide' : ''">Загрузка формы...</h5>
 
-			<div class="row">
+			<div class="row" style="display: none" sg-css="initialized ? 'calc-show' : ''">
 				<div class="col"></div>
 				<div class="col-md-6">
 					
@@ -114,19 +115,19 @@
 						<fieldset class="row mb-2 bg-white p-2 ms-1 me-1" style="border-radius: 10px;">
 							<legend class="col-form-label col-sm-1 pt-0">Код:</legend>
 							<div class="col-sm-11 ps-3">
-								<div class="form-check ps-5 c-pointer" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
-									<input class="form-check-input" type="radio" name="code" sg-property="code_startup" id="cb_code_startup">
-									<label class="form-check-label" for="cb_code_startup">Код пишется с нуля или его очень мало</label>
+								<div class="form-check ps-5 c-pointer selected" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
+									<input class="form-check-input" type="radio" name="code" sg-property="code_startup" id="cb_code_startup" checked>
+									<label class="form-check-label" for="cb_code_startup">Пишется с нуля или его очень мало</label>
 								</div>
 
-								<div class="form-check ps-5  c-pointer selected" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
-									<input class="form-check-input" type="radio" name="code" sg-property="code_supported" id="cb_code_supported" checked>
-									<label class="form-check-label" for="cb_code_supported">Требуется понять существующий код, который поддерживается текущим штатом разработчиков <span class="text-danger">(+25%)</span></label>
+								<div class="form-check ps-5  c-pointer" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
+									<input class="form-check-input" type="radio" name="code" sg-property="code_supported" id="cb_code_supported">
+									<label class="form-check-label" for="cb_code_supported">Требуется разбираться с существующим, который поддерживается текущим штатом разработчиков <span sg-property="code_supported_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+25%)</span></label>
 								</div>
 
 								<div class="form-check ps-5 c-pointer" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
 									<input class="form-check-input" type="radio" name="code" sg-property="code_legacy" id="cb_code_legacy">
-									<label class="form-check-label" for="cb_code_legacy">Требуется разобраться с legacy-кодом, который никто не поддерживает <span class="text-danger">(+100%)</span></label>
+									<label class="form-check-label" for="cb_code_legacy">Требуется разобраться с legacy, который никто не поддерживает <span sg-property="code_legacy_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+100%)</span></label>
 								</div>
 							</div>
 						</fieldset>
@@ -136,13 +137,13 @@
 								<div class="col pe-0">
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="es6" type="checkbox" sg-property="es6">
-										<label class="form-check-label text-nowrap" for="es6">ES6+ <span class="text-success">(-5%)</span></label>
+										<label class="form-check-label text-nowrap" for="es6">ES6+ <span sg-property="es6_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
 									</div>
 								</div>
 								<div class="col ps-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="nodejs" type="checkbox" sg-property="nodejs">
-										<label class="form-check-label" for="nodejs">NodeJS <span class="text-success">(-5%)</span></label>
+										<input class="form-check-input" id="sapui5" type="checkbox" sg-property="sapui5">
+										<label class="form-check-label text-nowrap" for="sapui5" title="В том числе OpenUI5">SAPUI5 <span sg-property="sapui5_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
 									</div>
 								</div>
 							</div>
@@ -150,41 +151,27 @@
 								<div class="col pe-0">
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="vue3" type="checkbox" sg-property="vue3">
-										<label class="form-check-label text-nowrap" for="vue3">Vue3 <span class="text-success">(-5%)</span></label>
+										<label class="form-check-label text-nowrap" for="vue3">Vue3 <span sg-property="vue3_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
 									</div>
 								</div>
 								<div class="col ps-0">
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="typescript" type="checkbox" sg-property="typescript">
-										<label class="form-check-label" for="typescript">Typescript <span class="text-danger">(+10%)</span></label>
+										<label class="form-check-label" for="typescript">Typescript <span sg-property="typescript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+10%)</span></label>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="sapui5" type="checkbox" sg-property="sapui5">
-										<label class="form-check-label text-nowrap" for="sapui5">SAPUI5 <span class="text-success">(-5%)</span></label>
+										<input class="form-check-input" id="nodejs" type="checkbox" sg-property="nodejs">
+										<label class="form-check-label" for="nodejs">NodeJS <span sg-property="nodejs_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
 									</div>
 								</div>
 								<div class="col ps-0">
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="react" type="checkbox" sg-property="react">
-										<label class="form-check-label text-nowrap" for="react">React <span class="text-danger">(+15%)</span></label>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col pe-0">
-									<div class="form-check form-switch">
-										<input class="form-check-input" id="pixijs" type="checkbox" sg-property="pixijs">
-										<label class="form-check-label" for="pixijs">PixiJS/threejs <span class="text-success">(-10%)</span></label>
-									</div>
-								</div>
-								<div class="col ps-0">
-									<div class="form-check form-switch">
-										<input class="form-check-input" id="angular" type="checkbox" sg-property="angular">
-										<label class="form-check-label text-nowrap" for="angular">Angular <span class="text-danger">(+25%)</span></label>
+										<label class="form-check-label text-nowrap" for="react">React <span sg-property="react_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+15%)</span></label>
 									</div>
 								</div>
 							</div>
@@ -192,27 +179,41 @@
 								<div class="col pe-0">
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="matterjs" type="checkbox" sg-property="matterjs">
-										<label class="form-check-label" for="matterjs">MatterJS <span class="text-success">(-5%)</span></label>
+										<label class="form-check-label" for="matterjs">MatterJS <span sg-property="matterjs_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
 									</div>
 								</div>
 								<div class="col ps-0">
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="php" type="checkbox" sg-property="php">
-										<label class="form-check-label text-nowrap" for="php">PHP <span class="text-danger">(+20%)</span></label>
+										<label class="form-check-label text-nowrap" for="php">PHP <span sg-property="php_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+20%)</span></label>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="super_interesting" type="checkbox" sg-property="super_interesting">
-										<label class="form-check-label" for="super_interesting"><a href="https://sg2d.ru" target="_blank" class="link-success">SG2D</a> <span class="text-success">(-25%)</span></label>
+										<input class="form-check-input" id="pixijs" type="checkbox" sg-property="pixijs">
+										<label class="form-check-label" for="pixijs">PixiJS <span sg-property="pixijs_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
 									</div>
 								</div>
 								<div class="col ps-0">
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="cpp" type="checkbox" sg-property="cpp">
-										<label class="form-check-label text-nowrap" for="cpp">C#/C++ <span class="text-danger">(+20%)</span></label>
+										<label class="form-check-label text-nowrap" for="cpp">C#/C++ <span sg-property="cpp_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">+20%</span></label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col pe-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="sg2d" type="checkbox" sg-property="sg2d">
+										<label class="form-check-label" for="sg2d"><a href="https://sg2d.ru" target="_blank" class="link-success">SG2D</a> <span sg-property="sg2d_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">-50%</span></label>
+									</div>
+								</div>
+								<div class="col ps-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="angular" type="checkbox" sg-property="angular">
+										<label class="form-check-label text-nowrap" for="angular">Angular <span sg-property="angular_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+25%)</span></label>
 									</div>
 								</div>
 							</div>
@@ -251,7 +252,7 @@
 			</div>
 		</main>
 
-		<footer class="my-1 pt-1 text-muted text-center text-small">
+		<footer class="my-1 pt-1 text-muted text-center text-small my-fixed" sg-css="initialized ? 'my-static' : ''">
 			<div class="container">
 				<div class="row">
 					<div class="col text-start text-nowrap">Power By <a href="https://model.sg2d.ru">SGModel</a></div>
@@ -285,7 +286,13 @@
 						</div>
 						<div class="row mt-3">
 							<div class="col-12 pb-1 text-center">
-								<button class="btn btn-primary btn-warning bg-gradient btn-lg" type="button" sg-click="sendEmail">Отправить ссылку по e-mail...</button>
+								<button
+									class="btn btn-primary btn-warning bg-gradient btn-lg"
+									type="button"
+									sg-click="sendEmail"
+									data-subject="Отклик на резюме"
+									data-body="Занятость %hours_in_day% ч/день, ставка %salary_hour% руб/час. Подробнее: %link%"
+								>Отправить ссылку по e-mail...</button>
 							</div>
 						</div>
 					</div>

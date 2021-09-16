@@ -5,13 +5,15 @@ class Salary extends SGModelView {
 	static singleInstance = true;
 	
 	static defaultProperties = {
+		initialized: false,
+		
 		contract: 1,
 		level: 3,
 		days_in_week: 5,
 		hours_in_day: 4,
 		relocation: false,
-		code_startup: false,
-		code_supported: true,
+		code_startup: true,
+		code_supported: false,
 		code_legacy: false,
 		es6: false,
 		nodejs: false,
@@ -24,7 +26,24 @@ class Salary extends SGModelView {
 		typescript: false,
 		pixijs: false,
 		matterjs: false,
-		super_interesting: false,
+		sg2d: false,
+		
+		// скидки/наценки в %
+		//contract_koef: [0,38,40,50,75,100], // TODO: ?
+		code_supported_koef: 25,
+		code_legacy_koef: 100,
+		es6_koef: -5,
+		nodejs_koef: -5,
+		vue3_koef: -5,
+		react_koef: 15,
+		angular_koef: 25,
+		sapui5_koef: 5,
+		php_koef: 20,
+		cpp_koef: 20,
+		typescript_koef: 10,
+		pixijs_koef: -5,
+		matterjs_koef: -5,
+		sg2d_koef: -50,
 		
 		rate_hour_min: 0,
 		salary_month: 0,
@@ -56,7 +75,7 @@ class Salary extends SGModelView {
 		typescript: SGModel.TYPE_BOOLEAN,
 		pixijs: SGModel.TYPE_BOOLEAN,
 		matterjs: SGModel.TYPE_BOOLEAN,
-		super_interesting: SGModel.TYPE_BOOLEAN,
+		sg2d: SGModel.TYPE_BOOLEAN,
 		
 		hours_extra_charge: SGModel.TYPE_NUMBER
 	};
@@ -81,7 +100,7 @@ class Salary extends SGModelView {
 		t: "typescript",
 		i: "pixijs",
 		m: "matterjs",
-		s: "super_interesting"
+		s: "sg2d"
 	};
 	
 	static HOUR_RATE_BASE = 800;
@@ -92,20 +111,6 @@ class Salary extends SGModelView {
 	static LEVEL_KOEF = [0.5, 0.75, 0.9, 1, 1.25, 1.5];
 	static DAYS_IN_WEEK_KOEF = [0.5, 0.6, 0.7, 0.8, 1, 2, 4];
 	static RELOCATION_KOEF = 2;
-	static CODE_SUPPORTED_KOEF = 1.25;
-	static CODE_LEGACY_KOEF = 2;
-	static ES6_KOEF = 0.95;
-	static NODEJS_KOEF = 0.95;
-	static VUE3_KOEF = 0.95;
-	static REACT_KOEF = 1.15;
-	static ANGULAR_KOEF = 1.25;
-	static SAPUI5_KOEF = 0.95;
-	static PHP_KOEF = 1.2;
-	static CPP_KOEF = 1.2;
-	static TYPESCRIPT_KOEF = 1.1;
-	static PIXIJS_KOEF = 0.9;
-	static MATTERJS_KOEF = 0.95;
-	static SUPER_INTERESTING_KOEF = 0.75;
 	
 	//static HOURS_KOEF = [1,2.25,3.5625,5,7.8122,11.2497,17.5,30]; // -20%, -10%, -5%, 0%, +25%, +50%, +100%, +200%
 	//static HOURS_KOEF = [1.0625,2.25,3.5625,5,6.875,9.375,13.125,20]; // -15%, -10%, -5%, 0%, +10%, +25%, +50%, +100%
@@ -115,7 +120,6 @@ class Salary extends SGModelView {
 	
 	initialize() {
 		
-		// 4h -> 5 (0%)
 		for (var i = 0; i < Salary.HOURS_KOEF.length; i++) {
 			Salary.HOURS_EXTRA_CHARGE[i] = (100 * (Salary.HOURS_KOEF[i] / (5 * (i+1) / 5) - 1)).toFixed(2);
 		}
@@ -136,7 +140,7 @@ class Salary extends SGModelView {
 		});
 		
 		this.on("hours_in_day", (hours)=>{
-			this.set("hours_in_day_desc", (hours == 8 ? "Фуллтайм" : hours + " " + this.getHoursMeas(hours)+"/день"));
+			this.set("hours_in_day_desc", (hours == 8 ? "Фуллтайм" : hours + " " + this.getHoursMeas(hours)+"/день")); // TODO: надписи вытащить в шаблон?
 			this.set("hours_extra_charge", Salary.HOURS_EXTRA_CHARGE[hours - 1]);
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
@@ -170,7 +174,11 @@ class Salary extends SGModelView {
 		}
 		
 		this.on(Object.values(Salary.hashProperties), this.calc, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
+		
+		this.set("initialized", true);
 	}
+	
+	static _fields_koef = ["code_supported","code_legacy","es6","nodejs","vue3","react","angular","sapui5","php","cpp","typescript","pixijs","matterjs","sg2d"];
 	
 	calc() {
 		let hours = 4 * this.get("days_in_week") * this.get("hours_in_day");
@@ -180,20 +188,10 @@ class Salary extends SGModelView {
 		salary *= Salary.LEVEL_KOEF[this.get("level") - 1];
 		salary *= Salary.DAYS_IN_WEEK_KOEF[this.get("days_in_week") - 1];
 		salary *= this.get("relocation") ? Salary.RELOCATION_KOEF : 1;
-		salary *= this.get("code_supported") ? Salary.CODE_SUPPORTED_KOEF : 1;
-		salary *= this.get("code_legacy") ? Salary.CODE_LEGACY_KOEF : 1;
-		salary *= this.get("es6") ? Salary.ES6_KOEF : 1;
-		salary *= this.get("nodejs") ? Salary.NODEJS_KOEF : 1;
-		salary *= this.get("vue3") ? Salary.VUE3_KOEF : 1;
-		salary *= this.get("react") ? Salary.REACT_KOEF : 1;
-		salary *= this.get("angular") ? Salary.ANGULAR_KOEF : 1;
-		salary *= this.get("sapui5") ? Salary.SAPUI5_KOEF : 1;
-		salary *= this.get("php") ? Salary.PHP_KOEF : 1;
-		salary *= this.get("cpp") ? Salary.CPP_KOEF : 1;
-		salary *= this.get("typescript") ? Salary.TYPESCRIPT_KOEF : 1;
-		salary *= this.get("pixijs") ? Salary.PIXIJS_KOEF : 1;
-		salary *= this.get("matterjs") ? Salary.MATTERJS_KOEF : 1;
-		salary *= this.get("super_interesting") ? Salary.SUPER_INTERESTING_KOEF : 1;
+		for (var i = 0; i < Salary._fields_koef.length; i++) {
+			var name = Salary._fields_koef[i];
+			salary *= this.get(name) ? this.perToNormal(this.get(name+"_koef")) : 1;
+		}
 		
 		if (this.get("relocation")) salary = Math.max(salary, Salary.RELOCATION_MONTH_MIN);
 		
@@ -205,6 +203,10 @@ class Salary extends SGModelView {
 		this.set("salary_hour", SGModel.roundTo(rate, -1));
 		this.set("salary_month", salary);
 		this.set("salary_year", this.get("salary_month") * 12);
+	}
+	
+	perToNormal(value) {
+		return (value/100 + 1);
 	}
 	
 	getHoursMeas(h) {
@@ -225,14 +227,28 @@ class Salary extends SGModelView {
 		return (''+value.toLocaleString()).replace(/\s/, "&thinsp;");
 	}
 	
-	formatHoursExtraCharge(hours_extra_charge) {
-		if (hours_extra_charge < 0) {
-			return "(" + hours_extra_charge + "%)";
-		} else if (hours_extra_charge > 0) {
-			return "(+" + hours_extra_charge + "%)";
+	formatHoursExtraCharge(value) {
+		if (value < 0) {
+			return "(" + value + "%)";
+		} else if (value > 0) {
+			return "(+" + value + "%)";
 		} else {
 			return "";
 		}
+	}
+	
+	formatDiscount(value) {
+		if (value) {
+			return "(" + (value>0?"+":"")+value + "%)";
+		} else {
+			return "";
+		}
+	}
+	
+	cssDangerOrSuccess(propertyOrValue) {
+		// TODO: property с []
+		let value = (typeof propertyOrValue === "string" ? this.get(propertyOrValue) : propertyOrValue);
+		if (value == 0) return ""; else return value < 0 ? "text-success" : "text-danger";
 	}
 	
 	/*sendOffer() {
@@ -263,8 +279,11 @@ class Salary extends SGModelView {
 	}
 	
 	sendEmail(event) {
-		let link_input = document.querySelector("#link_link");
-		window.open("mailto:offer@sg2d.ru?subject=Отклик на резюме&body=Занятость "+this.get("hours_in_day")+" ч/день, ставка "+this.get("salary_hour")+" руб/час. Подробнее: "+link_input.value);
+		window.open("mailto:offer@sg2d.ru?subject="+event.currentTarget.dataset.subject+
+			"&body="+event.currentTarget.dataset.body
+				.replace("%hours_in_day%", this.get("hours_in_day"))
+				.replace("%salary_hour%", this.get("salary_hour"))
+				.replace("%link%", document.querySelector("#link_link").value));
 	}
 	
 	linkCopy() {
