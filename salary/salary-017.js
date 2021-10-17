@@ -31,7 +31,7 @@ class Salary extends SGModelView {
 		// скидки/наценки в %
 		//contract_koef: [0,38,40,50,75,100], // TODO: ?
 		code_supported_koef: 25,
-		code_legacy_koef: 100,
+		code_legacy_koef: 200,
 		es6_koef: -5,
 		nodejs_koef: -5,
 		vue3_koef: -5,
@@ -103,11 +103,11 @@ class Salary extends SGModelView {
 		s: "sg2d"
 	};
 	
-	static HOUR_RATE_BASE = 800;
+	static HOUR_RATE_BASE = 667;
 	static HOUR_RATE_MIN = 500;
 	static RELOCATION_MONTH_MIN = 500000;
 	
-	static CONTRACT_KOEF = [1, 1.36, 1.4, 1.5, 1.75, 2];
+	static CONTRACT_KOEF = [1, 1.5, 1.75, 2];
 	static LEVEL_KOEF = [0.5, 0.75, 0.9, 1, 1.25, 1.5];
 	static DAYS_IN_WEEK_KOEF = [0.5, 0.6, 0.7, 0.8, 1, 2, 4];
 	static RELOCATION_KOEF = 2;
