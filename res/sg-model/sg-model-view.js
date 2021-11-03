@@ -181,8 +181,6 @@ class SGModelView extends SGModel {
 	/** @private */
 	_refreshElement(property) {
 		
-		//if (name === "initialized") debugger;
-		
 		if (! this._propertyElementLinks[property]) return false;
 		
 		for (var j = 0; j < this._propertyElementLinks[property].length; j++) {

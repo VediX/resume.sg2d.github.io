@@ -81,6 +81,12 @@ sup {
   background-color: #eee;
   border-radius: 10px;
 }
+span.options-visible {
+  display: inline !important;
+}
+span.options-hide {
+  display: none;
+}
 .c-pointer *,
 .form-check-input {
   cursor: pointer;

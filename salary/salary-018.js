@@ -7,13 +7,13 @@ class Salary extends SGModelView {
 	static defaultProperties = {
 		initialized: false,
 		
-		contract: 1,
+		contract: 2,
 		level: 3,
 		days_in_week: 5,
 		hours_in_day: 4,
 		relocation: false,
-		code_startup: true,
-		code_supported: false,
+		code_startup: false,
+		code_supported: true,
 		code_legacy: false,
 		es6: false,
 		nodejs: false,
@@ -52,7 +52,9 @@ class Salary extends SGModelView {
 		hours_in_day_desc: "",
 		hours_extra_charge: 0,
 		salary_hour: 0,
-		salary_year: 0
+		salary_year: 0,
+		
+		options_expand: false
 	};
 	
 	static typeProperties = {
@@ -77,7 +79,9 @@ class Salary extends SGModelView {
 		matterjs: SGModel.TYPE_BOOLEAN,
 		sg2d: SGModel.TYPE_BOOLEAN,
 		
-		hours_extra_charge: SGModel.TYPE_NUMBER
+		hours_extra_charge: SGModel.TYPE_NUMBER,
+		
+		options_expand: SGModel.TYPE_BOOLEAN
 	};
 	
 	static hashProperties = {
@@ -107,7 +111,12 @@ class Salary extends SGModelView {
 	static HOUR_RATE_MIN = 500;
 	static RELOCATION_MONTH_MIN = 500000;
 	
-	static CONTRACT_KOEF = [1, 1.5, 1.75, 2];
+	static CONTRACT_LABOR = 1;
+	static CONTRACT_SELF = 2;
+	static CONTRACT_FREELANCE = 3;
+	static CONTRACT_IP = 4;
+	
+	static CONTRACT_KOEF = [1.00, 1.50, 1.65, 2.00];
 	static LEVEL_KOEF = [0.5, 0.75, 0.9, 1, 1.25, 1.5];
 	static DAYS_IN_WEEK_KOEF = [0.5, 0.6, 0.7, 0.8, 1, 2, 4];
 	static RELOCATION_KOEF = 2;
@@ -154,10 +163,6 @@ class Salary extends SGModelView {
 		let eRelocationLabel = document.querySelector("#relocation_label");
 		eRelocationLabel.title = eRelocationLabel.title.replace("%relocation_month_min%", Salary.RELOCATION_MONTH_MIN);
 		
-		//document.querySelector("#send_offer").addEventListener("click", this.sendOffer.bind(this));
-		document.querySelector("#save_link").addEventListener("click", this.saveLink.bind(this));
-		document.querySelector("#link_copy").onclick = this.linkCopy.bind(this);
-		
 		this.bindHTML("body");
 		
 		// Hash parser
@@ -202,7 +207,7 @@ class Salary extends SGModelView {
 		salary = SGModel.roundTo(salary, -3);
 		this.set("salary_hour", SGModel.roundTo(rate, -1));
 		this.set("salary_month", salary);
-		this.set("salary_year", this.get("salary_month") * 12);
+		this.set("salary_year", this.get("salary_month") * (this.get("contract") === Salary.CONTRACT_LABOR ? 12 : 11));
 	}
 	
 	perToNormal(value) {
@@ -249,6 +254,10 @@ class Salary extends SGModelView {
 		// TODO: property с []
 		let value = (typeof propertyOrValue === "string" ? this.get(propertyOrValue) : propertyOrValue);
 		if (value == 0) return ""; else return value < 0 ? "text-success" : "text-danger";
+	}
+	
+	toggleOptions() {
+		this.set("options_expand", ! this.get("options_expand"));
 	}
 	
 	/*sendOffer() {
