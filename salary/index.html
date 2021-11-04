@@ -25,8 +25,8 @@
 
 	<link href="salary.css" rel="stylesheet">
 	<!--<script src="./../res/sg-model/sg-model-view.min.js" defer></script>-->
-	<script type="module" src="./../res/sg-model/sg-model-view.js" defer></script>
-	<script type="module" src="salary-018.js"></script>
+	<script type="module" src="./../res/sg-model/sg-model-view-19.js" defer></script>
+	<script type="module" src="salary-019.js"></script>
   </head>
 
   <body class="bg-light">
@@ -48,12 +48,12 @@
 					<form class="d-grid gap-2">
 						<div class="btn-group">
 							<button sg-property="contract" sg-type="dropdown" id="contract" class="btn btn-primary dropdown-toggle btn-warning bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Самозанятый (договор услуг) (+50%)</button>
+								Самозанятый (договор услуг)</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="contract">
-								<li class="dropdown-item" sg-value="1" sg-dropdown="contract">Трудовой договор, в т.ч. по совм.</li>
-								<li class="dropdown-item" sg-value="2" sg-dropdown="contract">Самозанятый (договор услуг) (+50%)</li>
-								<li class="dropdown-item" sg-value="3" sg-dropdown="contract">Индивидуальный предприниматель <span class="text-danger">(+65%)</span></li>
-								<li class="dropdown-item" sg-value="4" sg-dropdown="contract">Фриланс + Безопасная сделка <span class="text-danger">(+100%)</span></li>
+								<li class="dropdown-item" sg-value="2" sg-dropdown="contract">Самозанятый (договор услуг) <span class="text-danger">(+6%)</span></li>
+								<li class="dropdown-item" sg-value="3" sg-dropdown="contract">Индивидуальный предприниматель <span class="text-danger">(+10%)</span></li>
+								<li class="dropdown-item" sg-value="1" sg-dropdown="contract">Трудовой договор, в т.ч. по совм. <span class="text-danger">(+43%)</span></li>
+								<li class="dropdown-item" sg-value="4" sg-dropdown="contract">Фриланс + Безопасная сделка <span class="text-danger">(+50%)</span></li>
 							</ul>
 						</div>
 						
@@ -111,32 +111,12 @@
 						
 						<div class="btn-group">
 							<button type="button" sg-click="toggleOptions" class="btn btn-primary bg-gradient" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-								Показать дополнительные опции<span sg-css="options_expand ? 'options-hide' : 'options-visible'">...</span> <span sg-css="options_expand ? 'options-visible' : 'options-hide'" style="display: none">&#9660;</span>
+								Показать технологии и поддержку кода<span sg-property="options_expand_icon">...</span>
 							</button>
 						</div>
 						
 						<div class="collapse" id="collapseExample">
 						
-							<fieldset class="row mb-2 bg-white p-2 ms-1 me-1" style="border-radius: 10px;">
-								<legend class="col-form-label col-sm-1 pt-0">Код:</legend>
-								<div class="col-sm-11 ps-3">
-									<div class="form-check ps-5 c-pointer" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
-										<input class="form-check-input" type="radio" name="code" sg-property="code_startup" id="cb_code_startup">
-										<label class="form-check-label" for="cb_code_startup">Пишется с нуля или его очень мало</label>
-									</div>
-
-									<div class="form-check ps-5  c-pointer selected" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
-										<input class="form-check-input" type="radio" name="code" sg-property="code_supported" id="cb_code_supported" checked>
-										<label class="form-check-label" for="cb_code_supported">Требуется разбираться с существующим, который поддерживается текущим штатом разработчиков <span sg-property="code_supported_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+25%)</span></label>
-									</div>
-
-									<div class="form-check ps-5 c-pointer" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
-										<input class="form-check-input" type="radio" name="code" sg-property="code_legacy" id="cb_code_legacy">
-										<label class="form-check-label" for="cb_code_legacy">Требуется разобраться с legacy, который никто не поддерживает <span sg-property="code_legacy_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+100%)</span></label>
-									</div>
-								</div>
-							</fieldset>
-
 							<div class="container pe-0 ps-0">
 								<div class="row">
 									<div class="col pe-0">
@@ -223,16 +203,39 @@
 									</div>
 								</div>
 							</div>
+							
+							<fieldset class="row mb-2 bg-white p-2 ms-1 me-1" style="border-radius: 10px;">
+								<legend class="col-form-label col-sm-1 pt-0">Код:</legend>
+								<div class="col-sm-11 ps-3">
+									<div class="form-check ps-5 c-pointer" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
+										<input class="form-check-input" type="radio" name="code" sg-property="code_startup" id="cb_code_startup">
+										<label class="form-check-label" for="cb_code_startup">Пишется с нуля или его очень мало</label>
+									</div>
+
+									<div class="form-check ps-5  c-pointer selected" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
+										<input class="form-check-input" type="radio" name="code" sg-property="code_supported" id="cb_code_supported" checked>
+										<label class="form-check-label" for="cb_code_supported">Требуется разбираться с существующим, который поддерживается текущим штатом разработчиков <span sg-property="code_supported_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+25%)</span></label>
+									</div>
+
+									<div class="form-check ps-5 c-pointer" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
+										<input class="form-check-input" type="radio" name="code" sg-property="code_legacy" id="cb_code_legacy">
+										<label class="form-check-label" for="cb_code_legacy">Требуется разобраться с legacy, который никто не поддерживает <span sg-property="code_legacy_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+100%)</span></label>
+									</div>
+								</div>
+							</fieldset>
 						</div>
 						
 					</form>
 
 					<hr class="my-3"/>
 					
-					<p class="text-center fw-bold lh-1">Итого: <span sg-property="salary_month" sg-format="getNumThinsp">56&thinsp;300</span>&thinsp;руб.<sup>2</sup> <span class="text-nowrap">(<span sg-property="salary_hour" sg-format="getNumThinsp">700</span>&thinsp;руб./час)<sup>3</sup></span></p>
+					<p class="text-center fw-bold lh-1">Итого: <span sg-property="salary_month" sg-format="getNumThinsp">50&thinsp;000</span>&thinsp;руб.<sup>2</sup> <span class="text-nowrap">(<span sg-property="salary_hour" sg-format="getNumThinsp">700</span>&thinsp;руб./час)<sup>3</sup></span></p>
 					<p class="text-center fw-bold lh-1">
 						<span sg-property="hours">80</span>&thinsp;<span sg-property="hours_meas">часов</span>/месяц,
-						<span sg-property="salary_year" sg-format="getNumThinsp">1&thinsp;000&thinsp;000</span>&thinsp;руб./год<sup>4</sup>
+						<span sg-property="salary_year" sg-format="getNumThinsp" sg-css="contract === this.constructor.CONTRACT_SELF && salary_year > contract_self_limit ? 'text-danger' : ''">1&thinsp;000&thinsp;000</span>&thinsp;руб./год<sup>4</sup>
+					</p>
+					<p class="text-danger" style="font-size: 0.8rem; text-align: justify;" sg-css="contract === this.constructor.CONTRACT_SELF && salary_year > contract_self_limit ? 'visible-block' : 'no-visible'">
+						Для <b>самозанятого</b> максимальный уровень дохода за год составляет <span sg-property="contract_self_limit" sg-format="getNumThinsp">2&thinsp;400&thinsp;000</span>&thinsp;руб. На доход свыше этой суммы работодатель делает платежи: НДФЛ 13% + страховые взносы 30%! При достижении лимита можно перейти на ИП, либо учесть этот момент в договоре - снизить оплату на 30% и использовать второй счёт.
 					</p>
 					
 					<!--<hr class="my-3"/>
@@ -250,10 +253,10 @@
 					
 					<hr class="my-3"/>
 					
-					<p class="text-danger" style="font-size: 0.8rem;"><sup>1</sup> &mdash; При релокации в мегаполис минимальная месячная зарплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&thinsp;000</span>&thinsp;руб.</p>
-					<p class="text-dark" style="font-size: 0.8rem;"><sup>2</sup> &mdash; Уровень зарплаты рассчитывается чистыми (на руки)!</p>
+					<p class="text-danger" style="font-size: 0.8rem;"><sup>1</sup> &mdash; При релокации в мегаполис минимальная месячная оплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&thinsp;000</span>&thinsp;руб.</p>
+					<p class="text-dark" style="font-size: 0.8rem;"><sup>2</sup> &mdash; Уровень оплаты рассчитывается чистыми (на руки)!</p>
 					<p class="text-secondary" style="font-size: 0.8rem;"><sup>3</sup> &mdash; минимальная почасовая ставка <span sg-property="rate_hour_min" sg-format="getNumThinsp">500</span>&thinsp;руб.</p>
-					<p class="text-secondary" style="font-size: 0.8rem;"><sup>4</sup> &mdash; годовая оплата для трудового договора рассчитывается с учётом отпускных, а для других форм сотрудничества за 11 месяцев</p>
+					<p class="text-secondary" style="font-size: 0.8rem;"><sup>4</sup> &mdash; годовая оплата для трудового договора рассчитывается с учётом отпускных. Для других форм сотрудничества - за 11 месяцев.</p>
 				</div>
 				<div class="col"></div>
 			</div>

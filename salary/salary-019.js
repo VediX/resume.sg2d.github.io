@@ -54,7 +54,8 @@ class Salary extends SGModelView {
 		salary_hour: 0,
 		salary_year: 0,
 		
-		options_expand: false
+		options_expand: false,
+		options_expand_icon: ""
 	};
 	
 	static typeProperties = {
@@ -81,7 +82,9 @@ class Salary extends SGModelView {
 		
 		hours_extra_charge: SGModel.TYPE_NUMBER,
 		
-		options_expand: SGModel.TYPE_BOOLEAN
+		options_expand: SGModel.TYPE_BOOLEAN,
+		options_expand_icon: SGModel.TYPE_STRING,
+		contract_self_limit: 0
 	};
 	
 	static hashProperties = {
@@ -107,27 +110,27 @@ class Salary extends SGModelView {
 		s: "sg2d"
 	};
 	
-	static HOUR_RATE_BASE = 667;
+	static HOUR_RATE_BASE = 944;
 	static HOUR_RATE_MIN = 500;
 	static RELOCATION_MONTH_MIN = 500000;
+	static CONTRACT_SELF_LIMIT = 2400000;
 	
 	static CONTRACT_LABOR = 1;
 	static CONTRACT_SELF = 2;
 	static CONTRACT_FREELANCE = 3;
 	static CONTRACT_IP = 4;
 	
-	static CONTRACT_KOEF = [1.00, 1.50, 1.65, 2.00];
+	static CONTRACT_KOEF = [1.43, 1.06, 1.1, 1.50];
 	static LEVEL_KOEF = [0.5, 0.75, 0.9, 1, 1.25, 1.5];
 	static DAYS_IN_WEEK_KOEF = [0.5, 0.6, 0.7, 0.8, 1, 2, 4];
 	static RELOCATION_KOEF = 2;
 	
-	//static HOURS_KOEF = [1,2.25,3.5625,5,7.8122,11.2497,17.5,30]; // -20%, -10%, -5%, 0%, +25%, +50%, +100%, +200%
-	//static HOURS_KOEF = [1.0625,2.25,3.5625,5,6.875,9.375,13.125,20]; // -15%, -10%, -5%, 0%, +10%, +25%, +50%, +100%
-	//static HOURS_KOEF = [1.0625,2.25,3.5625,5,7.8125,11.25,15.3125,20]; // -15%, -10%, -5%, 0%, +25%, +50%, +75%, +100%
 	static HOURS_KOEF = [0.85,1.8,2.85,4,6.25,9,12.25,16]; // -15%, -10%, -5%, 0%, +25%, +50%, +75%, +100%
 	static HOURS_EXTRA_CHARGE = [];
 	
 	initialize() {
+		
+		this.set("contract_self_limit", Salary.CONTRACT_SELF_LIMIT);
 		
 		for (var i = 0; i < Salary.HOURS_KOEF.length; i++) {
 			Salary.HOURS_EXTRA_CHARGE[i] = (100 * (Salary.HOURS_KOEF[i] / (5 * (i+1) / 5) - 1)).toFixed(2);
@@ -155,6 +158,10 @@ class Salary extends SGModelView {
 		
 		this.on("hours", (hours)=>{
 			this.set("hours_meas", this.getHoursMeas(hours));
+		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
+		
+		this.on("options_expand", (options_expand)=>{
+			this.set("options_expand_icon", options_expand ? "&nbsp;&#9660;" : "...");
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
 		this.set("rate_hour_min", Salary.HOUR_RATE_MIN);
@@ -229,7 +236,7 @@ class Salary extends SGModelView {
 	}
 	
 	getNumThinsp(value) {
-		return (''+value.toLocaleString()).replace(/\s/, "&thinsp;");
+		return (''+value.toLocaleString()).replace(/\s/g, "&thinsp;");
 	}
 	
 	formatHoursExtraCharge(value) {

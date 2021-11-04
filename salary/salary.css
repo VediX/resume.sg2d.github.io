@@ -81,10 +81,13 @@ sup {
   background-color: #eee;
   border-radius: 10px;
 }
-span.options-visible {
+.visible-inline {
   display: inline !important;
 }
-span.options-hide {
+.visible-block {
+  display: block !important;
+}
+.no-visible {
   display: none;
 }
 .c-pointer *,
