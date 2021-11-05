@@ -82,6 +82,8 @@ class SGModelView extends SGModel {
 		}
 		
 		this._bindElements([root]);
+		
+		this._refreshAll();
 	}
 	
 	/** @private */
@@ -100,8 +102,6 @@ class SGModelView extends SGModel {
 			//var sgStyle = element.getAttribute("sg-style"); // TODO
 			var sgClick = element.getAttribute("sg-click");
 			//var sgEvents = element.getAttribute("sg-events"); // TODO
-			
-			var bRefresh = false;
 			
 			if (sgProperty && this.has(sgProperty)) {
 				this._regPropertyElementLink(sgProperty, element, SGModelView._LINKTYPE_VALUE);
@@ -129,7 +129,6 @@ class SGModelView extends SGModel {
 						}
 					}
 				}
-				bRefresh = true;
 			}
 			
 			if (sgCSS) {
@@ -139,7 +138,6 @@ class SGModelView extends SGModel {
 					sgCSS = sgCSS.replace(this._reProps[name].re, this._reProps[name].to);
 					if (l !== sgCSS.length) {
 						this._regPropertyElementLink(name, element, SGModelView._LINKTYPE_CSS);
-						bRefresh = true;
 					}
 				}
 				
@@ -182,11 +180,13 @@ class SGModelView extends SGModel {
 				}
 			}
 			
-			if (bRefresh) {
-				this._refreshElement(sgProperty);
-			}
-			
 			this._bindElements(element.children);
+		}
+	}
+	
+	_refreshAll() {
+		for (var property in this._propertyElementLinks) {
+			this._refreshElement(property);
 		}
 	}
 	

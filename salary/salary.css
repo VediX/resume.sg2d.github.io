@@ -90,6 +90,18 @@ sup {
 .no-visible {
   display: none;
 }
+.for-labor-contract p {
+  line-height: 1.2rem;
+  margin-bottom: 0.7rem !important;
+  text-align: center;
+}
+a.link-contract-self {
+  text-decoration: none !important;
+  color: red;
+}
+a.link-contract-self:hover {
+  text-decoration: underline !important;
+}
 .c-pointer *,
 .form-check-input {
   cursor: pointer;

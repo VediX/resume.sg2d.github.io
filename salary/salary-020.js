@@ -7,7 +7,7 @@ class Salary extends SGModelView {
 	static defaultProperties = {
 		initialized: false,
 		
-		contract: 2,
+		contract: 1,
 		level: 3,
 		days_in_week: 5,
 		hours_in_day: 4,
@@ -45,6 +45,10 @@ class Salary extends SGModelView {
 		matterjs_koef: -5,
 		sg2d_koef: -50,
 		
+		contract_labor_per: 0,
+		contract_freelance_per: 0,
+		contract_ip_per: 0,
+		
 		rate_hour_min: 0,
 		salary_month: 0,
 		hours: 0,
@@ -53,6 +57,14 @@ class Salary extends SGModelView {
 		hours_extra_charge: 0,
 		salary_hour: 0,
 		salary_year: 0,
+		
+		salary_labor_fot: 0,
+		salary_labor_ndfl: 0,
+		salary_labor_insurance: 0,
+		salary_labor_month: 0,
+		salary_labor_year: 0,
+		contract_self_limit: 0,
+		self_benefit_percent: 0.0,
 		
 		options_expand: false,
 		options_expand_icon: ""
@@ -80,11 +92,22 @@ class Salary extends SGModelView {
 		matterjs: SGModel.TYPE_BOOLEAN,
 		sg2d: SGModel.TYPE_BOOLEAN,
 		
+		contract_labor_per: SGModel.TYPE_NUMBER,
+		contract_freelance_per: SGModel.TYPE_NUMBER,
+		contract_ip_per: SGModel.TYPE_NUMBER,
+		
 		hours_extra_charge: SGModel.TYPE_NUMBER,
 		
+		salary_labor_fot: SGModel.TYPE_NUMBER,
+		salary_labor_ndfl: SGModel.TYPE_NUMBER,
+		salary_labor_insurance: SGModel.TYPE_NUMBER,
+		salary_labor_month: SGModel.TYPE_NUMBER,
+		salary_labor_year: SGModel.TYPE_NUMBER,
+		contract_self_limit: SGModel.TYPE_NUMBER,
+		self_benefit_percent: SGModel.TYPE_NUMBER,
+		
 		options_expand: SGModel.TYPE_BOOLEAN,
-		options_expand_icon: SGModel.TYPE_STRING,
-		contract_self_limit: 0
+		options_expand_icon: SGModel.TYPE_STRING
 	};
 	
 	static hashProperties = {
@@ -110,17 +133,20 @@ class Salary extends SGModelView {
 		s: "sg2d"
 	};
 	
-	static HOUR_RATE_BASE = 944;
+	static HOUR_RATE_BASE = 1000;
 	static HOUR_RATE_MIN = 500;
 	static RELOCATION_MONTH_MIN = 500000;
 	static CONTRACT_SELF_LIMIT = 2400000;
 	
-	static CONTRACT_LABOR = 1;
-	static CONTRACT_SELF = 2;
+	static CONTRACT_SELF = 1;
+	static CONTRACT_LABOR = 2;
 	static CONTRACT_FREELANCE = 3;
 	static CONTRACT_IP = 4;
 	
-	static CONTRACT_KOEF = [1.43, 1.06, 1.1, 1.50];
+	static NDFL = 0.13;
+	static INSURANCE = 0.22 + 0.051+0.029 + 0.002;
+	
+	static CONTRACT_KOEF = [1.00, 1.00, 1.4, 1.50]; // SELF, LABOR, FREELANCE, IP
 	static LEVEL_KOEF = [0.5, 0.75, 0.9, 1, 1.25, 1.5];
 	static DAYS_IN_WEEK_KOEF = [0.5, 0.6, 0.7, 0.8, 1, 2, 4];
 	static RELOCATION_KOEF = 2;
@@ -131,6 +157,12 @@ class Salary extends SGModelView {
 	initialize() {
 		
 		this.set("contract_self_limit", Salary.CONTRACT_SELF_LIMIT);
+		
+		let fContractPer = (index) => { return (100 * (Salary.CONTRACT_KOEF[index - 1] - 1)).toFixed(0); };
+		
+		this.set("contract_labor_per", fContractPer(Salary.CONTRACT_LABOR));
+		this.set("contract_freelance_per", fContractPer(Salary.CONTRACT_FREELANCE));
+		this.set("contract_ip_per", fContractPer(Salary.CONTRACT_IP ));
 		
 		for (var i = 0; i < Salary.HOURS_KOEF.length; i++) {
 			Salary.HOURS_EXTRA_CHARGE[i] = (100 * (Salary.HOURS_KOEF[i] / (5 * (i+1) / 5) - 1)).toFixed(2);
@@ -199,13 +231,16 @@ class Salary extends SGModelView {
 		salary *= Salary.CONTRACT_KOEF[this.get("contract") - 1];
 		salary *= Salary.LEVEL_KOEF[this.get("level") - 1];
 		salary *= Salary.DAYS_IN_WEEK_KOEF[this.get("days_in_week") - 1];
-		salary *= this.get("relocation") ? Salary.RELOCATION_KOEF : 1;
+		
 		for (var i = 0; i < Salary._fields_koef.length; i++) {
 			var name = Salary._fields_koef[i];
 			salary *= this.get(name) ? this.perToNormal(this.get(name+"_koef")) : 1;
 		}
 		
-		if (this.get("relocation")) salary = Math.max(salary, Salary.RELOCATION_MONTH_MIN);
+		if (this.get("relocation")) {
+			salary *= Salary.RELOCATION_KOEF;
+			salary = Math.max(salary, Salary.RELOCATION_MONTH_MIN);
+		}
 		
 		let rate = Math.max(salary / hours, Salary.HOUR_RATE_MIN);
 		
@@ -215,6 +250,21 @@ class Salary extends SGModelView {
 		this.set("salary_hour", SGModel.roundTo(rate, -1));
 		this.set("salary_month", salary);
 		this.set("salary_year", this.get("salary_month") * (this.get("contract") === Salary.CONTRACT_LABOR ? 12 : 11));
+		
+		if (this.get("contract") === Salary.CONTRACT_LABOR) {
+		
+			let sml_fot = salary + salary * this.constructor.NDFL;
+			let sml = sml_fot + sml_fot * this.constructor.INSURANCE;
+
+			this.set("salary_labor_fot", sml_fot);
+			this.set("salary_labor_ndfl", sml_fot * this.constructor.NDFL);
+			this.set("salary_labor_insurance", sml_fot * this.constructor.INSURANCE);
+			this.set("salary_labor_month", sml);
+			this.set("salary_labor_year", sml * 12);
+			
+			let salary_self = this.get("salary_month") / Salary.CONTRACT_KOEF[Salary.CONTRACT_LABOR - 1];
+			this.set("self_benefit_percent", ((this.get("salary_labor_year") - salary_self * 11) / this.get("salary_labor_year") * 100).toFixed(1));
+		}
 	}
 	
 	perToNormal(value) {
@@ -236,7 +286,7 @@ class Salary extends SGModelView {
 	}
 	
 	getNumThinsp(value) {
-		return (''+value.toLocaleString()).replace(/\s/g, "&thinsp;");
+		return (''+value.toLocaleString().replace(/,.*/, "")).replace(/\s/g, "&thinsp;");
 	}
 	
 	formatHoursExtraCharge(value) {
@@ -312,6 +362,10 @@ class Salary extends SGModelView {
 			console.log('Oops, unable to copy');
 		}
 		return false;
+	}
+	
+	setContractSelf() {
+		this.set("contract", Salary.CONTRACT_SELF);
 	}
 }
 

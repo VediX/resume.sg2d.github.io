@@ -594,6 +594,7 @@ SGModel.FLAG_NO_CALLBACKS = 0b00000100; // if given, no callbacks are executed
 SGModel.FLAG_FORCE_CALLBACKS = 0b00001000; // execute callbacks even if there is no change
 SGModel.FLAG_IGNORE_OWN_SETTER = 0b00010000; // ignore own setters
 
+SGModel.OPTIONS_PRECISION_1 = Object.preventExtensions({ precision: 1 });
 SGModel.OPTIONS_PRECISION_2 = Object.preventExtensions({ precision: 2 });
 SGModel.OPTIONS_PRECISION_3 = Object.preventExtensions({ precision: 3 });
 SGModel.OPTIONS_PRECISION_4 = Object.preventExtensions({ precision: 4 });
