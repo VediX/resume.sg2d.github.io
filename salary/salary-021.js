@@ -133,8 +133,8 @@ class Salary extends SGModelView {
 		s: "sg2d"
 	};
 	
-	static HOUR_RATE_BASE = 1000;
-	static HOUR_RATE_MIN = 500;
+	static HOUR_RATE_BASE = 1500;
+	static HOUR_RATE_MIN = 1000;
 	static RELOCATION_MONTH_MIN = 500000;
 	static CONTRACT_SELF_LIMIT = 2400000;
 	
@@ -146,7 +146,7 @@ class Salary extends SGModelView {
 	static NDFL = 0.13;
 	static INSURANCE = 0.22 + 0.051+0.029 + 0.002;
 	
-	static CONTRACT_KOEF = [1.00, 1.00, 1.4, 1.50]; // SELF, LABOR, FREELANCE, IP
+	static CONTRACT_KOEF = [1.00, 1.50, 1.4, 2.00]; // SELF, LABOR, FREELANCE, IP
 	static LEVEL_KOEF = [0.5, 0.75, 0.9, 1, 1.25, 1.5];
 	static DAYS_IN_WEEK_KOEF = [0.5, 0.6, 0.7, 0.8, 1, 2, 4];
 	static RELOCATION_KOEF = 2;

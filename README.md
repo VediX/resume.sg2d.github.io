@@ -1,5 +1,5 @@
 ------
-# Javascript-разработчик
+# Javascript/NodeJS-разработчик
 
 ------
 # Fullstack-разработчик
@@ -16,9 +16,9 @@
 * Разработка информационных систем и баз данных
 * Разработка мобильных приложений
 
-## Зарплата: ≈100 000 руб.
+## Зарплата: от 120 000 руб.
 
-- От 10 000 руб. в зависимости условий сотрудничества!
+- От 20 000 руб. в зависимости условий сотрудничества!
 - [См. форму расчёта зарплаты/стоимости услуг](https://resume.sg2d.ru/salary/)
 
 ## Занятость
@@ -40,7 +40,8 @@
 
 ### Мои знания и навыки:
 
-- Javascript / ES6: senior / middle
+- Javascript: senior
+- ES6-ES12: middle / junior
 - TypeScript / Google Traceur-compiler: junior
 - VueJS, React: trainee
 - NodeJS, Express.js: junior
@@ -51,7 +52,7 @@
 - HTML5: +
 - Bootstrap, CSS2 (LESS): +
 - Smarty, mustache: +
-- SQL, MySQL, SQLite: +
+- SQL, MySQL, SQLite, PostgreSQL: +
 - MS SQL, Firebird/Interbase: junior
 - websocket, Socket.io-client: +
 - SVN, Git, webpack, npm: +
@@ -61,7 +62,8 @@
 - Lua, Visual Basic (разработка 2D игр): junior
 - Roblox: trainee
 - QUIK, Lua, TSLab 2, C#: +
-- Linux Command Line (SSH/FTP, mc, console mysql, winSCP, ssh tunnel, putty): +
+- Docker: trainee
+- Linux (Ubuntu): +
 - Nginx, Apache (htaccess, mod rewrite, httpd.conf): +
 - Netbeans, WebStorm, Visual Studio, Eclipse: +
 - YouTrack/Jira: +
