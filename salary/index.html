@@ -26,7 +26,7 @@
 	<link href="salary.css" rel="stylesheet">
 	<!--<script src="./../res/sg-model/sg-model-view.min.js" defer></script>-->
 	<script type="module" src="./../res/sg-model/sg-model-view-20.js" defer></script>
-	<script type="module" src="salary-021.js"></script>
+	<script type="module" src="salary-022.js"></script>
   </head>
 
   <body class="bg-light">
@@ -209,17 +209,22 @@
 								<div class="col-sm-11 ps-3">
 									<div class="form-check ps-5 c-pointer" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
 										<input class="form-check-input" type="radio" name="code" sg-property="code_startup" id="cb_code_startup">
-										<label class="form-check-label" for="cb_code_startup">Пишется с нуля или его очень мало</label>
+										<label class="form-check-label" for="cb_code_startup">пишется с нуля или его очень мало</label>
 									</div>
 
-									<div class="form-check ps-5  c-pointer selected" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
+									<div class="form-check ps-5  c-pointer selected">
 										<input class="form-check-input" type="radio" name="code" sg-property="code_supported" id="cb_code_supported" checked>
-										<label class="form-check-label" for="cb_code_supported">Требуется разбираться с существующим, который поддерживается текущим штатом разработчиков <span sg-property="code_supported_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+25%)</span></label>
+										<label class="form-check-label" for="cb_code_supported">есть и полностью поддерживается текущим штатом разработчиков <span sg-property="code_supported_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+25%)</span></label>
+									</div>
+									
+									<div class="form-check ps-5 c-pointer">
+										<input class="form-check-input" type="radio" name="code" sg-property="code_supported_and_legacy" id="cb_code_supported_and_legacy">
+										<label class="form-check-label" for="cb_code_supported_and_legacy">есть как legacy, так и поддерживаемый текущим штатом разработчиков <span sg-property="code_supported_and_legacy_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+100%)</span></label>
 									</div>
 
-									<div class="form-check ps-5 c-pointer" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
+									<div class="form-check ps-5 c-pointer">
 										<input class="form-check-input" type="radio" name="code" sg-property="code_legacy" id="cb_code_legacy">
-										<label class="form-check-label" for="cb_code_legacy">Требуется разобраться с legacy, который никто не поддерживает <span sg-property="code_legacy_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+100%)</span></label>
+										<label class="form-check-label" for="cb_code_legacy">полностью legacy, который никто не поддерживает <span sg-property="code_legacy_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+200%)</span></label>
 									</div>
 								</div>
 							</fieldset>
@@ -237,8 +242,8 @@
 								<span sg-property="salary_year" sg-format="getNumThinsp" sg-css="contract === this.constructor.CONTRACT_SELF && salary_year > contract_self_limit ? 'text-danger' : ''">0</span>&nbsp;руб./год<sup sg-css="contract !== this.constructor.CONTRACT_LABOR ? 'visible-inline': 'no-visible'">3</sup>
 							</p>
 							<p class="text-danger" style="font-size: 0.8rem; text-align: justify;" sg-css="contract === this.constructor.CONTRACT_SELF && salary_year > contract_self_limit ? 'visible-block' : 'no-visible'">
-								Для <b>самозанятого</b> максимальный уровень дохода за год составляет <span sg-property="contract_self_limit" sg-format="getNumThinsp">0</span>&nbsp;руб.
-								На доход свыше этой суммы работодатель делает платежи: НДФЛ 13% + страховые взносы 30%! <span class="text-success">Можно учесть этот момент в договоре: при достижении лимита снизить оплату на сумму НДФЛ и страховых взносов до начала следующего года.</span>
+								Со дня, когда доходы контрагента-самозанятого (без статуса ИП) превысили <span sg-property="contract_self_limit" sg-format="getNumThinsp">0</span>&nbsp;руб.,
+								вы обязаны удерживать НДФЛ и перечислять страховые взносы с выплат в его пользу. Переоформлять договор с ним необязательно, <a href="http://www.consultant.ru/document/cons_doc_LAW_318780/57fe9d25246fad33498a9766e465c4c35c1113b6/#dst100069" target="_blank">разъясняет ФНС</a>. <span class="text-success">Также самозанятый может зарегистрироваться как ИП.</span>
 							</p>
 						</div>
 						<div class="for-labor-contract" sg-css="contract === this.constructor.CONTRACT_LABOR ? 'visible-block' : 'no-visible'">

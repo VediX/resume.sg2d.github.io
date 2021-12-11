@@ -14,6 +14,7 @@ class Salary extends SGModelView {
 		relocation: false,
 		code_startup: false,
 		code_supported: true,
+		code_supported_and_legacy: false,
 		code_legacy: false,
 		es6: false,
 		nodejs: false,
@@ -31,6 +32,7 @@ class Salary extends SGModelView {
 		// скидки/наценки в %
 		//contract_koef: [0,38,40,50,75,100], // TODO: ?
 		code_supported_koef: 25,
+		code_supported_and_legacy_koef: 100,
 		code_legacy_koef: 200,
 		es6_koef: -5,
 		nodejs_koef: -5,
@@ -78,6 +80,7 @@ class Salary extends SGModelView {
 		relocation: SGModel.TYPE_BOOLEAN,
 		code_startup: SGModel.TYPE_BOOLEAN,
 		code_supported: SGModel.TYPE_BOOLEAN,
+		code_supported_and_legacy: SGModel.TYPE_BOOLEAN,
 		code_legacy: SGModel.TYPE_BOOLEAN,
 		es6: SGModel.TYPE_BOOLEAN,
 		nodejs: SGModel.TYPE_BOOLEAN,
@@ -118,6 +121,7 @@ class Salary extends SGModelView {
 		q: "relocation",
 		x: "code_startup",
 		y: "code_supported",
+		g: "code_supported_and_legacy",
 		z: "code_legacy",
 		e: "es6",
 		n: "nodejs",
@@ -133,7 +137,7 @@ class Salary extends SGModelView {
 		s: "sg2d"
 	};
 	
-	static HOUR_RATE_BASE = 1500;
+	static HOUR_RATE_BASE = 2220;
 	static HOUR_RATE_MIN = 1000;
 	static RELOCATION_MONTH_MIN = 500000;
 	static CONTRACT_SELF_LIMIT = 2400000;
@@ -151,7 +155,8 @@ class Salary extends SGModelView {
 	static DAYS_IN_WEEK_KOEF = [0.5, 0.6, 0.7, 0.8, 1, 2, 4];
 	static RELOCATION_KOEF = 2;
 	
-	static HOURS_KOEF = [0.85,1.8,2.85,4,6.25,9,12.25,16]; // -15%, -10%, -5%, 0%, +25%, +50%, +75%, +100%
+	//static HOURS_KOEF = [0.85,1.8,2.85,4,6.25,9,12.25,16]; // -15%, -10%, -5%, 0%, +25%, +50%, +75%, +100%
+	static HOURS_KOEF = [0.85,1.8,2.85,4,5.5,7.2,9.1,11.20]; // -15%, -10%, -5%, 0%, +10%, +20%, +30%, +50%
 	static HOURS_EXTRA_CHARGE = [];
 	
 	initialize() {
@@ -168,7 +173,7 @@ class Salary extends SGModelView {
 			Salary.HOURS_EXTRA_CHARGE[i] = (100 * (Salary.HOURS_KOEF[i] / (5 * (i+1) / 5) - 1)).toFixed(2);
 		}
 		
-		let codeTypes = ["code_startup", "code_supported", "code_legacy"];
+		let codeTypes = ["code_startup", "code_supported", "code_supported_and_legacy", "code_legacy"];
 		this.on(codeTypes, (value, valuePrev, name)=>{
 			codeTypes.forEach(_name=>{
 				var elem = document.querySelector("[sg-property="+_name+"]");
@@ -222,7 +227,7 @@ class Salary extends SGModelView {
 		this.set("initialized", true);
 	}
 	
-	static _fields_koef = ["code_supported","code_legacy","es6","nodejs","vue3","react","angular","sapui5","php","cpp","typescript","pixijs","matterjs","sg2d"];
+	static _fields_koef = ["code_supported","code_supported_and_legacy", "code_legacy","es6","nodejs","vue3","react","angular","sapui5","php","cpp","typescript","pixijs","matterjs","sg2d"];
 	
 	calc() {
 		let hours = 4 * this.get("days_in_week") * this.get("hours_in_day");
