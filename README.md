@@ -55,6 +55,7 @@
 - MS SQL, Firebird/Interbase: junior
 - websocket, Socket.io-client: +
 - SVN, Git, webpack, npm: +
+- MobileID (SMS/Push-авторизация): +
 - SAPUI5 (Fiori Developer), SAP Cloud Platform: junior
 - Delphi/C++ (Embarcadero RAD Studio): junior
 - C# (Visual Studio): junior

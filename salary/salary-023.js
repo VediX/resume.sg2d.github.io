@@ -68,7 +68,7 @@ class Salary extends SGModelView {
 		contract_self_limit: 0,
 		self_benefit_percent: 0.0,
 		
-		options_expand: false,
+		options_expand: true,
 		options_expand_icon: ""
 	};
 	
@@ -137,7 +137,8 @@ class Salary extends SGModelView {
 		s: "sg2d"
 	};
 	
-	static HOUR_RATE_BASE = 2220;
+	//static HOUR_RATE_BASE = 2220;
+	static HOUR_RATE_BASE = 1110;
 	static HOUR_RATE_MIN = 1000;
 	static RELOCATION_MONTH_MIN = 500000;
 	static CONTRACT_SELF_LIMIT = 2400000;
