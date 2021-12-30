@@ -26,7 +26,7 @@
 	<link href="salary.css" rel="stylesheet">
 	<!--<script src="./../res/sg-model/sg-model-view.min.js" defer></script>-->
 	<script type="module" src="./../res/sg-model/sg-model-view-20.js" defer></script>
-	<script type="module" src="salary-023.js"></script>
+	<script type="module" src="salary-024.js"></script>
   </head>
 
   <body class="bg-light">
@@ -111,7 +111,7 @@
 						
 						<div class="btn-group">
 							<button type="button" sg-click="toggleOptions" class="btn btn-primary bg-gradient" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-								Показать технологии и поддержку кода<span sg-property="options_expand_icon">...</span>
+								Технологии и поддержка кода<span sg-property="options_expand_icon">...</span>
 							</button>
 						</div>
 						
@@ -121,36 +121,8 @@
 								<div class="row">
 									<div class="col pe-0">
 										<div class="form-check form-switch">
-											<input class="form-check-input" id="es6" type="checkbox" sg-property="es6">
-											<label class="form-check-label text-nowrap" for="es6">ES6+ <span sg-property="es6_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
-										</div>
-									</div>
-									<div class="col ps-0">
-										<div class="form-check form-switch">
-											<input class="form-check-input" id="sapui5" type="checkbox" sg-property="sapui5">
-											<label class="form-check-label text-nowrap" for="sapui5" title="В том числе OpenUI5">SAPUI5 <span sg-property="sapui5_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col pe-0">
-										<div class="form-check form-switch">
-											<input class="form-check-input" id="vue3" type="checkbox" sg-property="vue3">
-											<label class="form-check-label text-nowrap" for="vue3">Vue3 <span sg-property="vue3_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
-										</div>
-									</div>
-									<div class="col ps-0">
-										<div class="form-check form-switch">
-											<input class="form-check-input" id="typescript" type="checkbox" sg-property="typescript">
-											<label class="form-check-label" for="typescript">Typescript <span sg-property="typescript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+10%)</span></label>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col pe-0">
-										<div class="form-check form-switch">
-											<input class="form-check-input" id="nodejs" type="checkbox" sg-property="nodejs">
-											<label class="form-check-label" for="nodejs">NodeJS <span sg-property="nodejs_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
+											<input class="form-check-input" id="es8_node" type="checkbox" sg-property="es8_node">
+											<label class="form-check-label text-nowrap" for="es8_node">ES8+/NodeJS <span sg-property="es8_node_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
 										</div>
 									</div>
 									<div class="col ps-0">
@@ -163,8 +135,8 @@
 								<div class="row">
 									<div class="col pe-0">
 										<div class="form-check form-switch">
-											<input class="form-check-input" id="matterjs" type="checkbox" sg-property="matterjs">
-											<label class="form-check-label" for="matterjs">MatterJS <span sg-property="matterjs_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
+											<input class="form-check-input" id="sg2d" type="checkbox" sg-property="sg2d">
+											<label class="form-check-label" for="sg2d"><a href="https://sg2d.ru" target="_blank" class="link-success">SG2D</a> <span sg-property="sg2d_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">-50%</span></label>
 										</div>
 									</div>
 									<div class="col ps-0">
@@ -177,8 +149,8 @@
 								<div class="row">
 									<div class="col pe-0">
 										<div class="form-check form-switch">
-											<input class="form-check-input" id="pixijs" type="checkbox" sg-property="pixijs">
-											<label class="form-check-label" for="pixijs">PixiJS <span sg-property="pixijs_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
+											<input class="form-check-input" id="sapui5" type="checkbox" sg-property="sapui5">
+											<label class="form-check-label text-nowrap" for="sapui5" title="В том числе OpenUI5">SAPUI5 <span sg-property="sapui5_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
 										</div>
 									</div>
 									<div class="col ps-0">
@@ -191,8 +163,8 @@
 								<div class="row">
 									<div class="col pe-0">
 										<div class="form-check form-switch">
-											<input class="form-check-input" id="sg2d" type="checkbox" sg-property="sg2d">
-											<label class="form-check-label" for="sg2d"><a href="https://sg2d.ru" target="_blank" class="link-success">SG2D</a> <span sg-property="sg2d_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">-50%</span></label>
+											<input class="form-check-input" id="typescript" type="checkbox" sg-property="typescript">
+											<label class="form-check-label" for="typescript">Typescript <span sg-property="typescript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+10%)</span></label>
 										</div>
 									</div>
 									<div class="col ps-0">
@@ -209,12 +181,12 @@
 								<div class="col-sm-11 ps-3">
 									<div class="form-check ps-5 c-pointer" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
 										<input class="form-check-input" type="radio" name="code" sg-property="code_startup" id="cb_code_startup">
-										<label class="form-check-label" for="cb_code_startup">пишется с нуля или его очень мало</label>
+										<label class="form-check-label" for="cb_code_startup">пишется с нуля или его очень мало <span sg-property="code_startup_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-25%)</span></label>
 									</div>
 
 									<div class="form-check ps-5  c-pointer selected">
 										<input class="form-check-input" type="radio" name="code" sg-property="code_supported" id="cb_code_supported" checked>
-										<label class="form-check-label" for="cb_code_supported">есть и полностью поддерживается текущим штатом разработчиков <span sg-property="code_supported_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+25%)</span></label>
+										<label class="form-check-label" for="cb_code_supported">есть и полностью поддерживается текущим штатом разработчиков <span sg-property="code_supported_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(0%)</span></label>
 									</div>
 									
 									<div class="form-check ps-5 c-pointer">
