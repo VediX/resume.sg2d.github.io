@@ -165,8 +165,6 @@ class Salary extends SGModelView {
 	static HOURS_KOEF = [0.85,1.8,2.85,4,5.5,7.2,9.1,11.20]; // -15%, -10%, -5%, 0%, +10%, +20%, +30%, +50%
 	static HOURS_EXTRA_CHARGE = [];
 	
-	static currencyKeys = ['cf4c90f5fc825582de63498a3a8c0820', '1ec52dc4d676a2ad59725d8f5111bdbc'];
-	
 	initialize() {
 		
 		this.checkDollarInRubles();
@@ -387,58 +385,23 @@ class Salary extends SGModelView {
 		this.set("contract", Salary.CONTRACT_SELF);
 	}
 	
-	static currencyURL = 'https://www.cbr.ru/scripts/XML_daily.asp?date_req=%DATE%';
+	static currencyURL = 'https://www.cbr-xml-daily.ru/daily_json.js';
 	
 	checkDollarInRubles() {
 		
 		var xhr = new XMLHttpRequest();
 		xhr.onload = (evt)=>{
-			xhr.response;
 			debugger;
-			//let json = JSON.parse(xhr.response);
+			this.set('usdrub', SGModel.roundTo(xhr.response.Valute.USD.Value, 2));
 		};
 		xhr.onerror = (err)=>{
 			// no code
 		};
-		let d = new Date();
-		let day = d.getDate();
-		if (day < 10) day = '0' + day;
-		let month = d.getMonth() + 1;
-		if (month < 10) month = '0' + month;
-		let year = d.getFullYear();
 		
-		xhr.open('GET', Salary.currencyURL.replace('%DATE%', day + '/' + month +'/' + year));
-		xhr.responseType = 'document';
-		xhr.send();
-	}
-	
-	//static currencyURL = 'https://data.fixer.io/api/latest?access_key=%KEY%&symbols=USD,RUB';
-	/*checkDollarInRubles(key_index = -1) {
-		
-		if (key_index === -1) {
-			key_index = 0;
-		}
-		
-		if (Salary.currencyKeys.length <= key_index) {
-			return false;
-		}
-		
-		var xhr = new XMLHttpRequest();
-		xhr.onload = ()=>{
-			//let response = '{"success":true,"timestamp":1641400744,"base":"EUR","date":"2022-01-05","rates":{"USD":1.133061,"RUB":86.041935}}';
-			//let json = JSON.parse(xhr.response);
-			let json = xhr.response;
-			if (json.base === 'EUR') {
-				 this.set('usdrub', SGModel.roundTo(json.rates.RUB / json.rates.USD, 2));
-			}
-		};
-		xhr.onerror = (err)=>{
-			this.getDollarInRubles(key_index + 1);
-		};
-		xhr.open('GET', Salary.currencyURL.replace('%KEY%', Salary.currencyKeys[key_index]));
+		xhr.open('GET', Salary.currencyURL);
 		xhr.responseType = 'json';
 		xhr.send();
-	}*/
+	}
 }
 
 addEventListener("load", ()=>{ window.salaryApp = new Salary(); });
