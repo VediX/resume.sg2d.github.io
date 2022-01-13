@@ -142,9 +142,10 @@ class Salary extends SGModelView {
 		s: "sg2d"
 	};
 	
+	//static HOUR_RATE_BASE = 1388.8888; // 100K 4h medium
+	static HOUR_RATE_BASE = 1750; // 126K 4h medium (with ES8+/nodeJS 120K)
 	//static HOUR_RATE_BASE = 2222.22222;
-	static HOUR_RATE_BASE = 1388.8888
-	static HOUR_RATE_MIN = 1000;
+	static HOUR_RATE_MIN = 1250;
 	static RELOCATION_MONTH_MIN = 500000;
 	static CONTRACT_SELF_LIMIT = 2400000;
 	
@@ -162,7 +163,7 @@ class Salary extends SGModelView {
 	static RELOCATION_KOEF = 2;
 	
 	//static HOURS_KOEF = [0.85,1.8,2.85,4,6.25,9,12.25,16]; // -15%, -10%, -5%, 0%, +25%, +50%, +75%, +100%
-	static HOURS_KOEF = [0.85,1.8,2.85,4,5.5,7.2,9.1,11.20]; // -15%, -10%, -5%, 0%, +10%, +20%, +30%, +50%
+	static HOURS_KOEF = [0.85,1.8,2.85,4,5.5,7.2,9.1,11.20]; // -15%, -10%, -5%, 0%, +10%, +20%, +30%, +40%
 	static HOURS_EXTRA_CHARGE = [];
 	
 	initialize() {
@@ -391,7 +392,7 @@ class Salary extends SGModelView {
 		
 		var xhr = new XMLHttpRequest();
 		xhr.onload = (evt)=>{
-			debugger;
+			//debugger;
 			this.set('usdrub', SGModel.roundTo(xhr.response.Valute.USD.Value, 2));
 		};
 		xhr.onerror = (err)=>{
