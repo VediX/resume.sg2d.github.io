@@ -51,7 +51,8 @@
 - HTML5: +
 - Bootstrap, CSS2 (LESS): +
 - Smarty, mustache: +
-- SQL, MySQL, SQLite, PostgreSQL: +
+- SQL, MySQL, SQLite: +
+- PostgreSQL, PL/pgSQL: +
 - MS SQL, Firebird/Interbase: junior
 - websocket, Socket.io-client: +
 - SAPUI5 (Fiori Developer), SAP Cloud Platform: junior

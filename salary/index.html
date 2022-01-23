@@ -25,8 +25,8 @@
 
 	<link href="salary.css" rel="stylesheet">
 	<!--<script src="./../res/sg-model/sg-model-view.min.js" defer></script>-->
-	<script type="module" src="./../res/sg-model/sg-model-view-20.js" defer></script>
-	<script type="module" src="salary-026.js"></script>
+	<script type="module" src="./../res/sg-model/sg-model-view-21.js" defer></script>
+	<script type="module" src="salary-027.js"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
 
@@ -51,22 +51,22 @@
 							<button sg-property="contract" sg-type="dropdown" id="contract" class="btn btn-primary dropdown-toggle btn-warning bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Самозанятый (договор услуг)</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="contract">
-								<li class="dropdown-item" sg-value="1" sg-dropdown="contract">Самозанятый (договор услуг)</li>
-								<li class="dropdown-item" sg-value="2" sg-dropdown="contract">Трудовой договор, в т.ч. по совм. <span class="text-danger" sg-property="contract_labor_per" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-								<li class="dropdown-item" sg-value="3" sg-dropdown="contract">Фриланс + Безопасная сделка <span class="text-danger" sg-property="contract_freelance_per" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-								<li class="dropdown-item" sg-value="4" sg-dropdown="contract">Индивидуальный предприниматель <span class="text-danger" sg-property="contract_ip_per" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="s" sg-dropdown="contract">Самозанятый (договор услуг) <span sg-property="contract_self" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="l" sg-dropdown="contract">Трудовой договор, в т.ч. по совм. <span sg-property="contract_labor" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="f" sg-dropdown="contract">Фриланс + Безопасная сделка <span sg-property="contract_freelance" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="i" sg-dropdown="contract">Индивидуальный предприниматель <span sg-property="contract_ip" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
 							</ul>
 						</div>
 						
 						<div class="btn-group" title="Если при устройстве на работу будет уровень Стажер или Junior, то в течение нескольких месяцев, но не более 1 года, ожидаю роста как минимум до Middle уровня, что также означает рост зарплатных ожиданий согласно форме расчета!">
 							<button sg-property="level" sg-type="dropdown" id="level" class="btn btn-secondary dropdown-toggle btn-success bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Уровень навыков: Middle <span class="text-success">(-10%)</span></button>
+								Уровень навыков: Middle</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="level">
-								<li class="dropdown-item" sg-value="1" sg-dropdown="level">Уровень навыков: Trainee <span class="text-success">(-50%)</span></li>
-								<li class="dropdown-item" sg-value="2" sg-dropdown="level">Уровень навыков: Junior <span class="text-success">(-25%)</span></li>
-								<li class="dropdown-item" sg-value="3" sg-dropdown="level">Уровень навыков: Middle <span class="text-success">(-10%)</span></li>
-								<li class="dropdown-item" sg-value="4" sg-dropdown="level">Уровень навыков: Senior</li>
-								<li class="dropdown-item" sg-value="5" sg-dropdown="level">Уровень навыков: Team Lead <span class="text-danger">(+25%)</span></li>
+								<li class="dropdown-item" sg-option="t" sg-dropdown="level">Уровень навыков: Trainee <span sg-property="level_trainee" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="j" sg-dropdown="level">Уровень навыков: Junior <span sg-property="level_junior" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="m" sg-dropdown="level">Уровень навыков: Middle <span sg-property="level_middle" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="s" sg-dropdown="level">Уровень навыков: Senior <span sg-property="level_senior" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="l" sg-dropdown="level">Уровень навыков: Team Lead <span sg-property="level_teamlead" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
 							</ul>
 						</div>
 					
@@ -74,155 +74,166 @@
 							<button sg-property="days_in_week" sg-type="dropdown" id="days_in_week" class="btn btn-primary dropdown-toggle btn-info bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Занятость: 5 дней в неделю</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="days_in_week">
-								<li class="dropdown-item" sg-value="1" sg-dropdown="days_in_week">Занятость: 1 день в неделю <span class="text-success">(-50%)</span></li>
-								<li class="dropdown-item" sg-value="2" sg-dropdown="days_in_week">Занятость: 2 дня в неделю <span class="text-success">(-40%)</span></li>
-								<li class="dropdown-item" sg-value="3" sg-dropdown="days_in_week">Занятость: 3 дня в неделю <span class="text-success">(-30%)</span></li>
-								<li class="dropdown-item" sg-value="4" sg-dropdown="days_in_week">Занятость: 4 дня в неделю <span class="text-success">(-20%)</span></li>
-								<li class="dropdown-item" sg-value="5" sg-dropdown="days_in_week">Занятость: 5 дней в неделю</li>
-								<li class="dropdown-item" sg-value="6" sg-dropdown="days_in_week">Занятость: 6 дней в неделю <span class="text-danger">(+100%)</span></li>
-								<li class="dropdown-item" sg-value="7" sg-dropdown="days_in_week">Занятость: 7 дней в неделю <span class="text-danger">(+200%)</span></li>
+								<li class="dropdown-item" sg-option="1" sg-dropdown="days_in_week">Занятость: 1 день в неделю <span sg-property="days_in_week_1" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="2" sg-dropdown="days_in_week">Занятость: 2 дня в неделю <span sg-property="days_in_week_2" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="3" sg-dropdown="days_in_week">Занятость: 3 дня в неделю <span sg-property="days_in_week_3" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="4" sg-dropdown="days_in_week">Занятость: 4 дня в неделю <span sg-property="days_in_week_4" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="5" sg-dropdown="days_in_week">Занятость: 5 дней в неделю <span sg-property="days_in_week_5" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="6" sg-dropdown="days_in_week">Занятость: 6 дней в неделю <span sg-property="days_in_week_6" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="7" sg-dropdown="days_in_week">Занятость: 7 дней в неделю <span sg-property="days_in_week_7" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
 							</ul>
 						</div>
 					
-						<div class="container p-0">
-							<div class="row m-0">
-								<div class="col-md-6 p-0 pt-3 pe-1 position-relative" style="font-size: 10pt">
-									<input sg-property="hours_in_day" type="range" class="form-range" min="1" max="8" aria-describedby="hours_in_day_desc" value="4">
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-1 text-success" title="-15%">1h</div>
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-2 text-success" title="-10%">2h</div>
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-3 text-success" title="-5%">3h</div>
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-4">4h</div>
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-5 text-danger" title="+10%">5h</div>
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-6 text-danger" title="+20%">6h</div>
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-7 text-danger" title="+30%">7h</div>
-									<div class="position-absolute top-0 translate-middle-y label-hour lhour-8 text-danger" title="+40%">8h</div>
+						<fieldset class="row mb-2 bg-white p-2 ms-1 me-1" style="border-radius: 10px; border: 1px solid #ddd;">
+							<!--<legend class="col-form-label pt-0">Поддержка кода:</legend>-->
+							<div class="container p-0">
+								<div class="row m-0">
+									<div class="col-md-6 p-0 pt-3 pe-1 position-relative" style="font-size: 10pt">
+										<input sg-property="hours_in_day" type="range" class="form-range" min="1" max="8" aria-describedby="hours_in_day_desc" value="4">
+										<div class="position-absolute top-0 translate-middle-y label-hour lhour-1 text-success" sg-attributes="{ title: getHourTitle('1') }">1h</div>
+										<div class="position-absolute top-0 translate-middle-y label-hour lhour-2 text-success" sg-attributes="{ title: getHourTitle('2') }">2h</div>
+										<div class="position-absolute top-0 translate-middle-y label-hour lhour-3 text-success" sg-attributes="{ title: getHourTitle('3') }">3h</div>
+										<div class="position-absolute top-0 translate-middle-y label-hour lhour-4" sg-attributes="{ title: getHourTitle('4') }">4h</div>
+										<div class="position-absolute top-0 translate-middle-y label-hour lhour-5 text-danger" sg-attributes="{ title: getHourTitle('5') }">5h</div>
+										<div class="position-absolute top-0 translate-middle-y label-hour lhour-6 text-danger" sg-attributes="{ title: getHourTitle('6') }">6h</div>
+										<div class="position-absolute top-0 translate-middle-y label-hour lhour-7 text-danger" sg-attributes="{ title: getHourTitle('7') }">7h</div>
+										<div class="position-absolute top-0 translate-middle-y label-hour lhour-8 text-danger" sg-attributes="{ title: getHourTitle('8') }">8h</div>
+									</div>
+									<div class="col-md-6 p-0">
+										<div class="input-group-text bg-gradient" style="justify-content: center">
+											<span sg-property="hours_in_day_desc">4 часа/день</span><sup class="text-danger" sg-css="hours_in_day >= 5 ? 'visible-inline' : 'no-visible'">1</sup>&nbsp;<span sg-property="hours_in_day" sg-format="formatHoursExtraCharge" sg-css="this.constructor.HOURS_KOEF[hours_in_day] > 0 ? 'text-danger' : 'text-success'">-20%</span>
+										</div>
+									</div>
 								</div>
-								<div class="col-md-6 p-0">
-									<div class="input-group-text bg-gradient" style="justify-content: center">
-										<span sg-property="hours_in_day_desc">4 часа/день</span>&nbsp;<span sg-property="hours_extra_charge" sg-format="formatHoursExtraCharge" sg-css="hours_extra_charge > 0 ? 'text-danger' : 'text-success'">-20%</span>
+							</div>
+						</fieldset>
+						
+						<div class="container pe-0 ps-0">
+							<div class="row">
+								<div class="col pe-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="deadline" type="checkbox" sg-property="deadline">
+										<label class="form-check-label text-danger" for="deadline" id="deadline_label" title="При наличии дедлайнов ставка эквивалента фуллтайму и пятидневной рабочей недели!">Есть дедлайны<sup class="text-danger" sg-css="deadline ? 'visible-inline' : 'no-visible'">3</sup></label>
+									</div>
+								</div>
+								<div class="col ps-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="relocation" type="checkbox" sg-property="relocation">
+										<label class="form-check-label text-danger" for="relocation" id="relocation_label" title="При релокации в мегаполис минимальная месячная зарплата составляет %relocation_month_min% руб.">Релокация<sup sg-css="relocation ? 'visible-inline' : 'no-visible'">2</sup></label>
 									</div>
 								</div>
 							</div>
 						</div>
 						
-						<div class="form-check form-switch">
-							<input class="form-check-input" id="relocation" type="checkbox" sg-property="relocation">
-							<label class="form-check-label text-danger" for="relocation" id="relocation_label" title="При релокации в мегаполис минимальная месячная зарплата составляет %relocation_month_min% руб.">Релокация в мегаполис<sup>1</sup></label>
-						</div>
-						
-						<div class="btn-group">
+						<!--<div class="btn-group">
 							<button type="button" sg-click="toggleOptions" class="btn btn-primary bg-gradient" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-								Технологии и поддержка кода<span sg-property="options_expand_icon">...</span>
+								Поддержка кода и технологии<span sg-property="options_expand_icon">...</span>
 							</button>
 						</div>
-						
 						<div class="collapse show" id="collapseExample">
-						
 							<div class="container pe-0 ps-0">
-								<div class="row">
-									<div class="col pe-0">
-										<div class="form-check form-switch">
-											<input class="form-check-input" id="es8_node" type="checkbox" sg-property="es8_node">
-											<label class="form-check-label text-nowrap" for="es8_node">ES8+/NodeJS <span sg-property="es8_node_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
-										</div>
-									</div>
-									<div class="col ps-0">
-										<div class="form-check form-switch">
-											<input class="form-check-input" id="react" type="checkbox" sg-property="react">
-											<label class="form-check-label text-nowrap" for="react">React <span sg-property="react_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+15%)</span></label>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col pe-0">
-										<div class="form-check form-switch">
-											<input class="form-check-input" id="sg2d" type="checkbox" sg-property="sg2d">
-											<label class="form-check-label" for="sg2d"><a href="https://sg2d.ru" target="_blank" class="link-success">SG2D</a> <span sg-property="sg2d_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">-50%</span></label>
-										</div>
-									</div>
-									<div class="col ps-0">
-										<div class="form-check form-switch">
-											<input class="form-check-input" id="php" type="checkbox" sg-property="php">
-											<label class="form-check-label text-nowrap" for="php">PHP <span sg-property="php_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+20%)</span></label>
-										</div>
+								<div class="row"></div>
+							</div>
+						</div>-->
+						
+						<fieldset class="row mb-2 bg-white p-2 ms-1 me-1" style="border-radius: 10px; border: 1px solid #ddd;">
+							<!--<legend class="col-form-label pt-0">Поддержка кода:</legend>-->
+							<div class="container p-0">
+								<div class="row m-0">
+									<div class="col-md-12 p-0 pt-3 pe-1 position-relative" style="font-size: 10pt">
+										<input sg-property="code" type="range" class="form-range" min="0" max="5" aria-describedby="code_desc" value="4">
+										<div class="position-absolute top-0 translate-middle-y label-code lcode-1 text-success" sg-attributes="{ title: getCodeTitle('0') }">(-)</div>
+										<div class="position-absolute top-0 translate-middle-y label-code lcode-2" sg-attributes="{ title: getCodeTitle('1') }">Есть</div>
+										<div class="position-absolute top-0 translate-middle-y label-code lcode-3 text-danger" sg-attributes="{ title: getCodeTitle('2') }">1/4</div>
+										<div class="position-absolute top-0 translate-middle-y label-code lcode-4 text-danger" sg-attributes="{ title: getCodeTitle('3') }">1/2</div>
+										<div class="position-absolute top-0 translate-middle-y label-code lcode-5 text-danger" sg-attributes="{ title: getCodeTitle('4') }">3/4</div>
+										<div class="position-absolute top-0 translate-middle-y label-code lcode-6 text-danger" sg-attributes="{ title: getCodeTitle('5') }">All</div>
 									</div>
 								</div>
-								<div class="row">
-									<div class="col pe-0">
-										<div class="form-check form-switch">
-											<input class="form-check-input" id="sapui5" type="checkbox" sg-property="sapui5">
-											<label class="form-check-label text-nowrap" for="sapui5" title="В том числе OpenUI5">SAPUI5 <span sg-property="sapui5_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-5%)</span></label>
-										</div>
-									</div>
-									<div class="col ps-0">
-										<div class="form-check form-switch">
-											<input class="form-check-input" id="cpp" type="checkbox" sg-property="cpp">
-											<label class="form-check-label text-nowrap" for="cpp">C#/C++ <span sg-property="cpp_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">+20%</span></label>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col pe-0">
-										<div class="form-check form-switch">
-											<input class="form-check-input" id="typescript" type="checkbox" sg-property="typescript">
-											<label class="form-check-label" for="typescript">Typescript <span sg-property="typescript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+10%)</span></label>
-										</div>
-									</div>
-									<div class="col ps-0">
-										<div class="form-check form-switch">
-											<input class="form-check-input" id="angular" type="checkbox" sg-property="angular">
-											<label class="form-check-label text-nowrap" for="angular">Angular <span sg-property="angular_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+25%)</span></label>
+								<div class="row m-0">
+									<div class="col-md-12 p-0">
+										<div class="input-group-text bg-gradient" style="justify-content: center">
+											<span sg-property="code_desc" style="overflow: hidden; text-overflow: ellipsis">Код поддерживается</span>&nbsp;<span sg-property="code" sg-format="formatCodeExtraCharge" sg-css="this.constructor.CODES[code][0] > 0 ? 'text-danger' : 'text-success'">0%</span>
 										</div>
 									</div>
 								</div>
 							</div>
-							
-							<fieldset class="row mb-2 bg-white p-2 ms-1 me-1" style="border-radius: 10px;">
-								<legend class="col-form-label col-sm-1 pt-0">Код:</legend>
-								<div class="col-sm-11 ps-3">
-									<div class="form-check ps-5 c-pointer" title="(нет уже написанного кода или его количество ничтожно мало с планируемым)">
-										<input class="form-check-input" type="radio" name="code" sg-property="code_startup" id="cb_code_startup">
-										<label class="form-check-label" for="cb_code_startup">пишется с нуля или его очень мало <span sg-property="code_startup_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(-25%)</span></label>
-									</div>
-
-									<div class="form-check ps-5  c-pointer selected">
-										<input class="form-check-input" type="radio" name="code" sg-property="code_supported" id="cb_code_supported" checked>
-										<label class="form-check-label" for="cb_code_supported">есть и полностью поддерживается текущим штатом разработчиков <span sg-property="code_supported_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(0%)</span></label>
-									</div>
-									
-									<div class="form-check ps-5 c-pointer">
-										<input class="form-check-input" type="radio" name="code" sg-property="code_supported_and_legacy" id="cb_code_supported_and_legacy">
-										<label class="form-check-label" for="cb_code_supported_and_legacy">есть как legacy, так и поддерживаемый текущим штатом разработчиков <span sg-property="code_supported_and_legacy_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+100%)</span></label>
-									</div>
-
-									<div class="form-check ps-5 c-pointer">
-										<input class="form-check-input" type="radio" name="code" sg-property="code_legacy" id="cb_code_legacy">
-										<label class="form-check-label" for="cb_code_legacy">полностью legacy, который никто не поддерживает <span sg-property="code_legacy_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess">(+200%)</span></label>
+						</fieldset>
+						
+						<div class="container pe-0 ps-0">
+							<div class="row">
+								<div class="col pe-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="es8_node" type="checkbox" sg-property="es8_node">
+										<label class="form-check-label text-nowrap" for="es8_node">ES8+/NodeJS <span sg-property="es8_node_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
 									</div>
 								</div>
-							</fieldset>
+								<div class="col ps-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="react" type="checkbox" sg-property="react">
+										<label class="form-check-label text-nowrap" for="react">React <span sg-property="react_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col pe-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="sg2d" type="checkbox" sg-property="sg2d">
+										<label class="form-check-label" for="sg2d"><a href="https://sg2d.ru" target="_blank" class="link-success">SG2D</a> <span sg-property="sg2d_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+									</div>
+								</div>
+								<div class="col ps-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="php" type="checkbox" sg-property="php">
+										<label class="form-check-label text-nowrap" for="php">PHP <span sg-property="php_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col pe-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="vue3" type="checkbox" sg-property="vue3">
+										<label class="form-check-label text-nowrap" for="vue3">Vue3 <span sg-property="vue3_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+									</div>
+								</div>
+								<div class="col ps-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="cpp" type="checkbox" sg-property="cpp">
+										<label class="form-check-label text-nowrap" for="cpp">C#/C++ <span sg-property="cpp_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col pe-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="typescript" type="checkbox" sg-property="typescript">
+										<label class="form-check-label" for="typescript">Typescript <span sg-property="typescript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+									</div>
+								</div>
+								<div class="col ps-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="angular" type="checkbox" sg-property="angular">
+										<label class="form-check-label text-nowrap" for="angular">Angular <span sg-property="angular_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+									</div>
+								</div>
+							</div>
 						</div>
-						
 					</form>
 
 					<hr class="my-3"/>
 					
 					<div class="totals">
 						<div>
-							<p class="text-center fw-bold lh-1">Итого: <span sg-property="salary_month" sg-format="getNumThinsp">0</span>&nbsp;руб. <span class="text-nowrap">(<span sg-property="salary_hour" sg-format="getNumThinsp">0</span>&nbsp;руб./час)<sup>2</sup></span></p>
+							<p class="text-center fw-bold lh-1">Итого: <span sg-property="salary_month" sg-format="getNumThinsp">0</span>&nbsp;руб.<sup>*</sup> <span class="text-nowrap">(<span sg-property="rate" sg-format="getNumThinsp">0</span>&nbsp;руб./час)<sup class="text-secondary" sg-css="rate == rate_hour_min ? 'visible-inline': 'no-visible'">4</sup></span></p>
 							<p class="text-center fw-bold lh-1">
 								<span sg-property="hours">0</span>&nbsp;<span sg-property="hours_meas">часов</span>/месяц,
-								<span sg-property="salary_year" sg-format="getNumThinsp" sg-css="contract === this.constructor.CONTRACT_SELF && salary_year > contract_self_limit ? 'text-danger' : ''">0</span>&nbsp;руб./год<sup sg-css="contract !== this.constructor.CONTRACT_LABOR ? 'visible-inline': 'no-visible'">3</sup>
-							</p>
-							<p class="text-danger" style="font-size: 0.8rem; text-align: justify;" sg-css="contract === this.constructor.CONTRACT_SELF && salary_year > contract_self_limit ? 'visible-block' : 'no-visible'">
-								Со дня, когда доходы контрагента-самозанятого (без статуса ИП) превысили <span sg-property="contract_self_limit" sg-format="getNumThinsp">0</span>&nbsp;руб.,
-								вы обязаны удерживать НДФЛ и перечислять страховые взносы с выплат в его пользу. Переоформлять договор с ним необязательно, <a href="http://www.consultant.ru/document/cons_doc_LAW_318780/57fe9d25246fad33498a9766e465c4c35c1113b6/#dst100069" target="_blank">разъясняет ФНС</a>. <span class="text-success">Также самозанятый может зарегистрироваться как ИП.</span>
+								<span sg-property="salary_year" sg-format="getNumThinsp" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'text-danger' : ''">0</span>&nbsp;руб./год<sup sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-inline': 'no-visible'">5</sup><sup class="text-danger" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-inline' : 'no-visible'">,6</sup>
 							</p>
 						</div>
 						<div sg-css="usdrub > 0 ? 'visible-block': 'no-visible'">
-							<p class="text-center fw-bold lh-1">Total: $<span sg-property="salary_month_usd" sg-format="getNumThinsp">0</span> <span class="text-nowrap">($<span sg-property="salary_hour_usd" sg-format="getNumThinsp">0</span>/hour)<sup>4</sup></span></p>
+							<p class="text-center fw-bold lh-1">Total: $<span sg-property="salary_month_usd" sg-format="getNumThinsp">0</span> <span class="text-nowrap">($<span sg-property="rate_usd" sg-format="getNumThinsp">0</span>/hour)<sup>7</sup></span></p>
 						</div>
-						<div class="for-labor-contract" sg-css="contract === this.constructor.CONTRACT_LABOR ? 'visible-block' : 'no-visible'">
+						<div class="for-labor-contract" sg-css="contract === this.constructor.CONTRACTS.symb('labor') ? 'visible-block' : 'no-visible'">
 							
 							<hr class="my-1"/>
 
@@ -253,10 +264,16 @@
 					<hr class="my-3"/>
 
 					<p class="text-dark" style="font-size: 0.8rem;">* Уровень оплаты рассчитывается чистыми (на руки)!</p>
-					<p class="text-danger" style="font-size: 0.8rem;" sg-css="relocation ? 'visible-block': 'no-visible'"><sup>1</sup> &mdash; При релокации в мегаполис минимальная месячная оплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&nbsp;000</span>&nbsp;руб.</p>
-					<p class="text-secondary" style="font-size: 0.8rem;"><sup>2</sup> &mdash; минимальная почасовая ставка <span sg-property="rate_hour_min" sg-format="getNumThinsp">500</span>&nbsp;руб.</p>
-					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="contract !== this.constructor.CONTRACT_LABOR ? 'visible-block': 'no-visible'"><sup>3</sup> &mdash; годовая оплата рассчитывается за 11 месяцев.</p>
-					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="usdrub > 0 ? 'visible-block': 'no-visible'"><sup>4</sup> &mdash; при оплате в валюте +50%! Текущий курс: <span sg-property="usdrub"></span> руб/$</p>
+					<p class="text-danger" style="font-size: 0.8rem;" sg-css="hours_in_day >= 5 ? 'visible-block': 'no-visible'"><sup>1</sup> &mdash; При 5-8 часовой занятости перерыв 5-15 минут входит в час работы!</p>
+					<p class="text-danger" style="font-size: 0.8rem;" sg-css="relocation ? 'visible-block': 'no-visible'"><sup>2</sup> &mdash; При релокации в мегаполис минимальная месячная оплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&nbsp;000</span>&nbsp;руб., а минимальная ставка <span sg-property="relocation_rate_min" sg-format="getNumThinsp">5&nbsp;000</span>&nbsp;руб./час</p>
+					<p class="text-danger" style="font-size: 0.8rem;" sg-css="deadline ? 'visible-block': 'no-visible'"><sup>3</sup> &mdash; При наличии дедлайнов ставка не меньше ставки фуллтайма с пятидневной рабочей неделей!</p>
+					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="rate == rate_hour_min ? 'visible-block': 'no-visible'"><sup>4</sup> &mdash; минимальная почасовая ставка <span sg-property="rate_hour_min" sg-format="getNumThinsp">500</span>&nbsp;руб.</p>
+					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-block': 'no-visible'"><sup>5</sup> &mdash; годовая оплата рассчитывается за 11 месяцев.</p>
+					<p class="text-danger" style="font-size: 0.8rem; text-align: justify;" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-block' : 'no-visible'">
+						<sup>6</sup> &mdash; Со дня, когда доходы контрагента-самозанятого (без статуса ИП) превысили <span sg-property="contract_self_limit" sg-format="getNumThinsp">0</span>&nbsp;руб.,
+						вы обязаны удерживать НДФЛ и перечислять страховые взносы с выплат в его пользу. Переоформлять договор с ним необязательно, <a href="http://www.consultant.ru/document/cons_doc_LAW_318780/57fe9d25246fad33498a9766e465c4c35c1113b6/#dst100069" target="_blank">разъясняет ФНС</a>. <span class="text-success">Также самозанятый может зарегистрироваться как ИП.</span>
+					</p>
+					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="usdrub > 0 ? 'visible-block': 'no-visible'"><sup>7</sup> &mdash; при оплате в валюте +50%! Текущий курс: <span sg-property="usdrub"></span> руб/$</p>
 				</div>
 				<div class="col"></div>
 			</div>
@@ -303,7 +320,7 @@
 									type="button"
 									sg-click="sendEmail"
 									data-subject="Отклик на резюме"
-									data-body="Занятость %hours_in_day% ч/день, ставка %salary_hour% руб/час. Подробнее: %link%"
+									data-body="Занятость %hours_in_day% ч/день, ставка %rate% руб/час. Подробнее: %link%"
 								>Отправить ссылку по e-mail...</button>
 							</div>
 						</div>
