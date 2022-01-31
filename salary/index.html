@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Javascript Разработчик - Рассчитайте ожидаемую стоимость услуг (зарплату), указав параметры сотрудничества и технологии">
-	<title>Javascript Разработчик - Форма расчёта зарплаты/стоимости услуг</title>
+	<title>Javascript/NodeJS-разработчик - Форма расчёта зарплаты/стоимости услуг</title>
 	<link href="/../res/bootstrap/bootstrap.min.css" rel="stylesheet"><!-- https://bootstrap-4.ru/docs/5.0/getting-started/introduction/ -->
 	<meta name="theme-color" content="#7952b3">
 
@@ -51,8 +51,8 @@
 							<button sg-property="contract" sg-type="dropdown" id="contract" class="btn btn-primary dropdown-toggle btn-warning bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Самозанятый (договор услуг)</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="contract">
+                                <li class="dropdown-item" sg-option="l" sg-dropdown="contract">Трудовой договор, в т.ч. по совм. <span sg-property="contract_labor" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
 								<li class="dropdown-item" sg-option="s" sg-dropdown="contract">Самозанятый (договор услуг) <span sg-property="contract_self" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-								<li class="dropdown-item" sg-option="l" sg-dropdown="contract">Трудовой договор, в т.ч. по совм. <span sg-property="contract_labor" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
 								<li class="dropdown-item" sg-option="f" sg-dropdown="contract">Фриланс + Безопасная сделка <span sg-property="contract_freelance" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
 								<li class="dropdown-item" sg-option="i" sg-dropdown="contract">Индивидуальный предприниматель <span sg-property="contract_ip" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
 							</ul>

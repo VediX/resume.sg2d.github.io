@@ -1,3 +1,5 @@
 /nbproject/private/
 /nbproject
 /_nogit
+/node_modules/
+/package-lock.json

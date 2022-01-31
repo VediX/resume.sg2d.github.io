@@ -154,9 +154,9 @@ class Salary extends SGModelView {
 	
 	static CONTRACTS = Object.assign({
 		"s": [0, 'self'],
-		"l": [+50, 'labor'],
-		"f": [+50, 'freelance'],
-		"i": [+100, 'ip'],
+		"l": [-5, 'labor'],
+		"f": [+40, 'freelance'],
+		"i": [+50, 'ip'],
 	}, optionsMethods);
 	
 	static NDFL = 0.13;

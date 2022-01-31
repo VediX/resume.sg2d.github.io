@@ -1,0 +1,20 @@
+{
+    "name": "SG2D Resume",
+    "version": "1.0.0",
+    "description": "SG2D Resume",
+    "author": "Kalashnikov Ilya <ilyak@sg2d.ru> (http://sg2d.ru/)",
+    "homepage": "https://resume.sg2d.ru",
+    "keywords": [
+        "sg2d",
+        "resume",
+        "salary",
+        "calculator"
+    ],
+    "devDependencies": {
+        "node-static": "latest",
+        "nodemon": "^2.0.15"
+    },
+    "scripts": {
+        "start": "nodemon server/index.js"
+    }
+}
