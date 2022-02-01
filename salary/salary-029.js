@@ -34,8 +34,7 @@ class Salary extends SGModelView {
 		relocation: false,
 		deadline: true,
 		code: '1',
-		es8_node: true,
-		//nodejs: false,
+		es_node: true,
 		vue3: false,
 		react: false,
 		angular: false,
@@ -48,8 +47,7 @@ class Salary extends SGModelView {
 		sg2d: false,
 		
 		// скидки/наценки в %
-		es8_node_koef: -10,
-		//nodejs_koef: -5,
+		es_node_koef: -10,
 		vue3_koef: 5,
 		react_koef: 15,
 		angular_koef: 30,
@@ -97,8 +95,7 @@ class Salary extends SGModelView {
 		relocation: SGModel.TYPE_BOOLEAN,
 		deadline: SGModel.TYPE_BOOLEAN,
 		code: SGModel.TYPE_STRING,
-		es8_node: SGModel.TYPE_BOOLEAN,
-		//nodejs: SGModel.TYPE_BOOLEAN,
+		es_node: SGModel.TYPE_BOOLEAN,
 		vue3: SGModel.TYPE_BOOLEAN,
 		react: SGModel.TYPE_BOOLEAN,
 		angular: SGModel.TYPE_BOOLEAN,
@@ -132,8 +129,7 @@ class Salary extends SGModelView {
 		Q: "relocation",
 		W: "deadline",
 		G: "code",
-		E: "es8_node",
-		//N: "nodejs",
+		E: "es_node",
 		V: "vue3",
 		R: "react",
 		A: "angular",
@@ -273,7 +269,16 @@ class Salary extends SGModelView {
 		this.set("initialized", true);
 	}
 	
-	static _fields_koef = ["es8_node","react","angular","vue3","php","cpp","typescript","sg2d"];
+	static _fields_koef = [
+		"es_node",
+		"react",
+		"angular",
+		"vue3",
+		"php",
+		"cpp",
+		"typescript",
+		"sg2d"
+	];
 	
 	calc() {
 		let hours = 4 * this.get("days_in_week") * this.get("hours_in_day");
@@ -320,8 +325,8 @@ class Salary extends SGModelView {
 		this.set("rate", SGModel.roundTo(rate, -1));
 		this.set("salary_month", salary);
 		this.set("salary_year", this.get("salary_month") * (this.get("contract") === Salary.CONTRACTS.symb('labor') ? 12 : 11));
-		this.set('rate_usd', SGModel.roundTo(1.5 * this.get('rate') / this.get('usdrub'), 0));
-		this.set('salary_month_usd', SGModel.roundTo(1.5 * this.get('salary_month') / this.get('usdrub'), -2));
+		this.set('rate_usd', SGModel.roundTo(1.1 * this.get('rate') / this.get('usdrub'), 0));
+		this.set('salary_month_usd', SGModel.roundTo(1.1 * this.get('salary_month') / this.get('usdrub'), -2));
 		
 		if (this.get("contract") === Salary.CONTRACTS.symb('labor')) {
 			const sml_fot = salary + salary * Salary.NDFL;
@@ -450,8 +455,11 @@ class Salary extends SGModelView {
 		
 		var xhr = new XMLHttpRequest();
 		xhr.onload = (evt)=>{
-			//debugger;
-			this.set('usdrub', SGModel.roundTo(xhr.response.Valute.USD.Value, 2));
+			try {
+				this.set('usdrub', SGModel.roundTo(xhr.response.Valute.USD.Value, 2));
+			} catch(err) {
+				// no code
+			}
 		};
 		xhr.onerror = (err)=>{
 			// no code
