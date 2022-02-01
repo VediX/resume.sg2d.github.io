@@ -26,7 +26,7 @@
 	<link href="salary.css" rel="stylesheet">
 	<!--<script src="./../res/sg-model/sg-model-view.min.js" defer></script>-->
 	<script type="module" src="./../res/sg-model/sg-model-view-21.js" defer></script>
-	<script type="module" src="salary-028.js"></script>
+	<script type="module" src="salary-029.js"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
 
@@ -266,7 +266,7 @@
 					<p class="text-dark" style="font-size: 0.8rem;">* Уровень оплаты рассчитывается чистыми (на руки)!</p>
 					<p class="text-danger" style="font-size: 0.8rem;" sg-css="hours_in_day >= 5 ? 'visible-block': 'no-visible'"><sup>1</sup> &mdash; При 5-8 часовой занятости перерыв 5-15 минут входит в час работы!</p>
 					<p class="text-danger" style="font-size: 0.8rem;" sg-css="relocation ? 'visible-block': 'no-visible'"><sup>2</sup> &mdash; При релокации в мегаполис минимальная месячная оплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&nbsp;000</span>&nbsp;руб., а минимальная ставка <span sg-property="relocation_rate_min" sg-format="getNumThinsp">5&nbsp;000</span>&nbsp;руб./час</p>
-					<p class="text-danger" style="font-size: 0.8rem;" sg-css="deadline ? 'visible-block': 'no-visible'"><sup>3</sup> &mdash; При наличии дедлайнов ставка не меньше ставки фуллтайма с пятидневной рабочей неделей!</p>
+					<p class="text-danger" style="font-size: 0.8rem;" sg-css="deadline ? 'visible-block': 'no-visible'"><sup>3</sup> &mdash; При наличии дедлайнов ставка не меньше ставки фуллтайма с пятидневной рабочей неделей! Под дедлайном понимается некий срок за который нужно выполнить определенный пул задач.</p>
 					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="rate == rate_hour_min ? 'visible-block': 'no-visible'"><sup>4</sup> &mdash; минимальная почасовая ставка <span sg-property="rate_hour_min" sg-format="getNumThinsp">500</span>&nbsp;руб.</p>
 					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-block': 'no-visible'"><sup>5</sup> &mdash; годовая оплата рассчитывается за 11 месяцев.</p>
 					<p class="text-danger" style="font-size: 0.8rem; text-align: justify;" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-block' : 'no-visible'">

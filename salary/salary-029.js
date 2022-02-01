@@ -32,9 +32,9 @@ class Salary extends SGModelView {
 		days_in_week: 5,
 		hours_in_day: 4,
 		relocation: false,
-		deadline: false,
+		deadline: true,
 		code: '1',
-		es8_node: false,
+		es8_node: true,
 		//nodejs: false,
 		vue3: false,
 		react: false,
@@ -411,7 +411,7 @@ class Salary extends SGModelView {
 		for (var code in Salary.hashProperties) {
 			var name = Salary.hashProperties[code];
 			var value = this.properties[name];
-			if (value === false) continue;
+			if (value === false) value = 0;
 			if (value === true) value = 1;
 			hash.push(code + value);
 		}
