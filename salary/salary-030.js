@@ -308,7 +308,7 @@ class Salary extends SGModelView {
 			}
 		}
 		
-		let rate = Math.max(Salary.HOUR_RATE_BASE * koef, Salary.HOUR_RATE_MIN);
+		let rate = SGModel.roundTo(Math.max(Salary.HOUR_RATE_BASE * koef, Salary.HOUR_RATE_MIN) / 5, -1) * 5;
 		let salary = SGModel.roundTo(rate * hours, -3);
 		
 		if (this.get('relocation')) {
@@ -322,7 +322,7 @@ class Salary extends SGModelView {
 			}
 		}
 		
-		this.set("rate", SGModel.roundTo(rate, -1));
+		this.set("rate", rate);
 		this.set("salary_month", salary);
 		this.set("salary_year", this.get("salary_month") * (this.get("contract") === Salary.CONTRACTS.symb('labor') ? 12 : 11));
 		this.set('rate_usd', SGModel.roundTo(1.1 * this.get('rate') / this.get('usdrub'), 0));
