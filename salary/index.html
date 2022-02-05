@@ -22,7 +22,13 @@
 		}
 	}
 </style>
-
+    <script>
+        setTimeout(function(){
+            if (document.getElementById("content_not_ie").style.display !== 'block') {
+                document.getElementById("content_loading").innerHTML = 'Ваш браузер не может отобразить содержимое этой страницы!<br/>Попробуйте обновить браузер или использовать другой бразуер!';
+            }
+        }, 5000);
+    </script>
 	<link href="salary.css" rel="stylesheet">
 	<script type="module" src="./../res/sg-model/sg-model-view-21.js" defer></script>
 	<script type="module" src="salary-029.js"></script>
@@ -39,9 +45,9 @@
 				<p><a href="/" class="link-success">Перейти в резюме...</a></p>
 			</div>
 			
-			<h5 class="text-center" sg-css="initialized ? 'loading-hide' : ''">Загрузка формы...</h5>
+			<h5 id="content_loading" class="text-center" sg-css="initialized ? 'loading-hide' : ''">Загрузка формы...</h5>
 
-			<div class="row" style="display: none" sg-css="initialized ? 'calc-show' : ''">
+			<div id="content_not_ie" class="row" style="display: none" sg-css="initialized ? 'calc-show' : ''">
 				<div class="col"></div>
 				<div class="col-md-6">
 					
