@@ -8,3 +8,5 @@ fetch("/README.md").then(async function(response) {
 		location.href = location.href;
 	}
 });
+
+window.es6_supported = true;

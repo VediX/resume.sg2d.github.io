@@ -8,6 +8,14 @@
 	<link href="/res/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<meta name="theme-color" content="#7952b3">
 	<link href="/res/main.css" rel="stylesheet">
+    <script>
+        window.es6_supported = false;
+        setTimeout(function(){
+            if (! window.es6_supported) {
+                document.getElementById("markdown_content").innerHTML = 'Ваш браузер не может отобразить содержимое этой страницы!<br/>Попробуйте обновить браузер или использовать другой бразуер!';
+            }
+        }, 5000);
+    </script>
 	<script src="/res/markdown/showdown.min.js" defer></script>
 	<script src="/res/main.js" defer></script>
   </head>
