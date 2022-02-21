@@ -66,6 +66,7 @@ class Salary extends SGModelView {
 		hours: 0,
 		hours_meas: "",
 		hours_in_day_desc: "",
+    timeout: 5,
 		rate: 0,
 		salary_year: 0,
 		
@@ -179,6 +180,8 @@ class Salary extends SGModelView {
 		[+75, 'Около 75% legacy в проекте'],
 		[+100, 'Проект никто не поддерживает!'],
 	];
+  
+  static TIMEOUTS = [void 0, 5, 5, 5, 5, 10, 10, 15, 15];
 	
 	initialize() {
 		
@@ -219,6 +222,7 @@ class Salary extends SGModelView {
 		
 		this.on("hours_in_day", (hours)=>{
 			this.set("hours_in_day_desc", (hours == 8 ? "Фуллтайм" : hours + " " + this.getHoursMeas(hours)+"/день")); // TODO: надписи вытащить в шаблон?
+      this.set("timeout", Salary.TIMEOUTS[hours]);
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
 		this.on('code', (code)=>{
