@@ -66,7 +66,7 @@ class Salary extends SGModelView {
 		hours: 0,
 		hours_meas: "",
 		hours_in_day_desc: "",
-    timeout: 5,
+        timeout: 5,
 		rate: 0,
 		salary_year: 0,
 		
@@ -143,7 +143,7 @@ class Salary extends SGModelView {
 		S: "sg2d",
 	};
 	
-	static HOUR_RATE_BASE = 2000;
+	static HOUR_RATE_BASE = 2990;
 	static HOUR_RATE_MIN = 1500;
 	static RELOCATION_MONTH_MIN = 500000;
 	static RELOCATION_RATE_MIN = 500000/80;
