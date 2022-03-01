@@ -143,7 +143,7 @@ class Salary extends SGModelView {
 		S: "sg2d",
 	};
 	
-	static HOUR_RATE_BASE = 2990;
+	static HOUR_RATE_BASE = 2500;
 	static HOUR_RATE_MIN = 1500;
 	static RELOCATION_MONTH_MIN = 500000;
 	static RELOCATION_RATE_MIN = 500000/80;
