@@ -32,9 +32,9 @@ class Salary extends SGModelView {
 		days_in_week: 5,
 		hours_in_day: 4,
 		relocation: false,
-		deadline: true,
+		deadline: false,
 		code: '1',
-		es_node: true,
+		es_node: false,
 		vue3: false,
 		react: false,
 		angular: false,
@@ -66,7 +66,7 @@ class Salary extends SGModelView {
 		hours: 0,
 		hours_meas: "",
 		hours_in_day_desc: "",
-        timeout: 5,
+    timeout: 5,
 		rate: 0,
 		salary_year: 0,
 		
@@ -145,8 +145,8 @@ class Salary extends SGModelView {
 	
 	static HOUR_RATE_BASE = 2500;
 	static HOUR_RATE_MIN = 1500;
-	static RELOCATION_MONTH_MIN = 500000;
-	static RELOCATION_RATE_MIN = 500000/80;
+	static RELOCATION_MONTH_MIN = 600000;
+	static RELOCATION_RATE_MIN = 600000/80;
 	static CONTRACT_SELF_LIMIT = 2400000;
 	
 	static CONTRACTS = Object.assign({

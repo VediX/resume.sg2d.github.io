@@ -67,7 +67,7 @@
 - Интеграция MobileID, JWT, AES, HSA, RS256, HS256: +
 - Netbeans, WebStorm, Visual Studio, Eclipse, chrome: +
 - Fiddler, Android Studio (AVD), https-proxy: +
-- SVN, Git, webpack: +
+- SVN, Git, webpack, ESLint: +
 - YouTrack/Jira/Confluence/Bitbucket: +
 
 ### Условия сотрудничества
