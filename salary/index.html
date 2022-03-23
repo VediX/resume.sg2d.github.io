@@ -31,7 +31,7 @@
   </script>
 	<link href="salary.css" rel="stylesheet">
 	<script type="module" src="./../res/sg-model/sg-model-view-21.js" defer></script>
-	<script type="module" src="salary-032.js"></script>
+	<script type="module" src="salary-033.js"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
 
@@ -53,7 +53,7 @@
 					
 					<form class="d-grid gap-2">
 						<div class="btn-group">
-							<button sg-property="contract" sg-type="dropdown" id="contract" class="btn btn-primary dropdown-toggle btn-warning bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<button sg-property="contract" sg-type="dropdown" id="contract" class="btn btn-warning dropdown-toggle bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Самозанятый (договор услуг)</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="contract">
 								<li class="dropdown-item" sg-option="l" sg-dropdown="contract">Трудовой договор, в т.ч. по совм. <span sg-property="contract_labor" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
@@ -64,7 +64,7 @@
 						</div>
 						
 						<div class="btn-group" title="Если при устройстве на работу будет уровень Стажер или Junior, то в течение нескольких месяцев, но не более 1 года, ожидаю роста как минимум до Middle уровня, что также означает рост зарплатных ожиданий согласно форме расчета!">
-							<button sg-property="level" sg-type="dropdown" id="level" class="btn btn-secondary dropdown-toggle btn-success bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<button sg-property="level" sg-type="dropdown" id="level" class="btn dropdown-toggle btn-success bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Уровень навыков: Middle</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="level">
 								<li class="dropdown-item" sg-option="t" sg-dropdown="level">Уровень навыков: Trainee <span sg-property="level_trainee" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
@@ -76,7 +76,7 @@
 						</div>
 					
 						<div class="btn-group">
-							<button sg-property="days_in_week" sg-type="dropdown" id="days_in_week" class="btn btn-primary dropdown-toggle btn-info bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<button sg-property="days_in_week" sg-type="dropdown" id="days_in_week" class="btn btn-info dropdown-toggle bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Занятость: 5 дней в неделю</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="days_in_week">
 								<li class="dropdown-item" sg-option="1" sg-dropdown="days_in_week">Занятость: 1 день в неделю <span sg-property="days_in_week_1" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
@@ -229,7 +229,17 @@
 								</div>
 							</div>
 						</div>
-					</form>
+            
+            <div class="btn-group">
+							<button sg-property="england" sg-type="dropdown" id="england" class="btn btn-dark dropdown-toggle bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Английский: Basic</button>
+							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="england">
+								<li class="dropdown-item" sg-option="a" sg-dropdown="england">Английский: Basic <span sg-property="eng_a" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="b" sg-dropdown="england">Английский: Intermediate <span sg-property="eng_b" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+							</ul>
+						</div>
+            
+          </form>
 
 					<hr class="my-3"/>
 					

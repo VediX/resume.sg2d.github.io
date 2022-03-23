@@ -1,19 +1,22 @@
 "use strict";
 
-const optionsMethods = {
-	getSymbolByIndex: function(code) { return Object.keys(this)[code]; },
-	getValueByIndex: function(code) { return this[this.getSymbolByIndex(code)][0]; },
-	getDescByIndex: function(code) { return this[this.getSymbolByIndex(code)][1]; },
-	symb: function(name) {
-		for (let p in this) {
-			if (p.length === 1 && typeof this[p] === 'object') {
-				if (this[p][1] === name) {
-					return p;
-				}
-			}
-		}
-		return void 0;
-	},
+class OptionsMethods {
+  constructor(values) {
+    Object.assign(this, values);
+  }
+  getSymbolByIndex(code) { return Object.keys(this)[code]; };
+  getValueByIndex(code) { return this[this.getSymbolByIndex(code)][0]; };
+  getDescByIndex(code) { return this[this.getSymbolByIndex(code)][1]; };
+  symb(name) {
+    for (let p in this) {
+      if (p.length === 1 && typeof this[p] === 'object') {
+        if (this[p][1] === name) {
+          return p;
+        }
+      }
+    }
+    return void 0;
+  };
 };
 
 class Salary extends SGModelView {
@@ -25,11 +28,12 @@ class Salary extends SGModelView {
 	static defaultProperties = {
 		initialized: false,
 		
-		version: 2,
+		version: 3,
 		
 		contract: 's',
 		level: 'm',
 		days_in_week: 5,
+    england: 'a',
 		hours_in_day: 4,
 		relocation: false,
 		deadline: false,
@@ -92,6 +96,7 @@ class Salary extends SGModelView {
 		contract: SGModel.TYPE_STRING,
 		level: SGModel.TYPE_STRING,
 		days_in_week: SGModel.TYPE_NUMBER,
+    england: SGModel.TYPE_STRING,
 		hours_in_day: SGModel.TYPE_NUMBER,
 		relocation: SGModel.TYPE_BOOLEAN,
 		deadline: SGModel.TYPE_BOOLEAN,
@@ -126,11 +131,12 @@ class Salary extends SGModelView {
 		C: "contract",
 		L: "level",
 		D: "days_in_week",
+		E: "england",
 		H: "hours_in_day",
 		Q: "relocation",
 		W: "deadline",
 		G: "code",
-		E: "es_node",
+		J: "es_node",
 		V: "vue3",
 		R: "react",
 		A: "angular",
@@ -149,23 +155,28 @@ class Salary extends SGModelView {
 	static RELOCATION_RATE_MIN = 600000/80;
 	static CONTRACT_SELF_LIMIT = 2400000;
 	
-	static CONTRACTS = Object.assign({
+	static CONTRACTS = new OptionsMethods({
 		"s": [0, 'self'],
 		"l": [-5, 'labor'],
 		"f": [+40, 'freelance'],
 		"i": [+50, 'ip'],
-	}, optionsMethods);
+	});
 	
 	static NDFL = 0.13;
 	static INSURANCE = 0.22 + 0.051+0.029 + 0.002;
 	
-	static LEVELS = Object.assign({
+	static LEVELS = new OptionsMethods({
 		"t": [-25, 'trainee'],
 		"j": [-10, 'junior'],
 		"m": [0, 'middle'],
 		"s": [+10, 'senior'],
 		"l": [+25, 'teamlead']
-	}, optionsMethods);
+	});
+  
+  static ENGLANDS = new OptionsMethods({
+    "a": [0, 'a'],
+		"b": [100, 'b']
+	});
 	
 	static DAYS_IN_WEEK_KOEF = [void 0, -50, -40, -30, -20, 0, +100, +200];
 	
@@ -197,6 +208,10 @@ class Salary extends SGModelView {
 		
 		for (let p in Salary.LEVELS) {
 			this.set('level_' + Salary.LEVELS[p][1], Salary.LEVELS[p][0]);
+		}
+    
+    for (let p in Salary.ENGLANDS) {
+			this.set('eng_' + Salary.ENGLANDS[p][1], Salary.ENGLANDS[p][0]);
 		}
 		
 		for (let i = 1; i < Salary.DAYS_IN_WEEK_KOEF.length; i++) {
@@ -296,6 +311,7 @@ class Salary extends SGModelView {
 		koef *= k(Salary.CONTRACTS[this.get("contract")][0]);
 		koef *= k(Salary.LEVELS[this.get("level")][0]);
 		koef *= k(Salary.CODES[this.get("code")][0]);
+    koef *= k(Salary.ENGLANDS[this.get("england")][0]);
 		
 		if (this.get('deadline')) {
 			koef *= k(Salary.DAYS_IN_WEEK_KOEF[ Math.max(5, this.get("days_in_week")) ]);
