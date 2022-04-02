@@ -33,7 +33,7 @@ class Salary extends SGModelView {
 		contract: 's',
 		level: 'm',
 		days_in_week: 5,
-    england: 'a',
+		england: 'a',
 		hours_in_day: 4,
 		relocation: false,
 		deadline: false,
@@ -70,7 +70,7 @@ class Salary extends SGModelView {
 		hours: 0,
 		hours_meas: "",
 		hours_in_day_desc: "",
-    timeout: 5,
+		timeout: 5,
 		rate: 0,
 		salary_year: 0,
 		
@@ -96,7 +96,7 @@ class Salary extends SGModelView {
 		contract: SGModel.TYPE_STRING,
 		level: SGModel.TYPE_STRING,
 		days_in_week: SGModel.TYPE_NUMBER,
-    england: SGModel.TYPE_STRING,
+		england: SGModel.TYPE_STRING,
 		hours_in_day: SGModel.TYPE_NUMBER,
 		relocation: SGModel.TYPE_BOOLEAN,
 		deadline: SGModel.TYPE_BOOLEAN,
@@ -173,14 +173,16 @@ class Salary extends SGModelView {
 		"l": [+25, 'teamlead']
 	});
   
-  static ENGLANDS = new OptionsMethods({
-    "a": [0, 'a'],
+	static ENGLANDS = new OptionsMethods({
+		"a": [0, 'a'],
 		"b": [100, 'b']
 	});
 	
 	static DAYS_IN_WEEK_KOEF = [void 0, -50, -40, -30, -20, 0, +100, +200];
 	
 	static RELOCATION_KOEF = 2;
+	
+	static USDKOEF = 1.25;
 	
 	static HOURS_KOEF = [void 0, -15, -10, -5, 0, +10, +20, +30, +40];
 	static CODES = [
@@ -192,7 +194,7 @@ class Salary extends SGModelView {
 		[+100, 'Проект никто не поддерживает!'],
 	];
   
-  static TIMEOUTS = [void 0, 5, 5, 5, 5, 10, 10, 15, 15];
+	static TIMEOUTS = [void 0, 5, 5, 5, 5, 10, 10, 15, 15];
 	
 	initialize() {
 		
@@ -210,7 +212,7 @@ class Salary extends SGModelView {
 			this.set('level_' + Salary.LEVELS[p][1], Salary.LEVELS[p][0]);
 		}
     
-    for (let p in Salary.ENGLANDS) {
+		for (let p in Salary.ENGLANDS) {
 			this.set('eng_' + Salary.ENGLANDS[p][1], Salary.ENGLANDS[p][0]);
 		}
 		
@@ -311,7 +313,7 @@ class Salary extends SGModelView {
 		koef *= k(Salary.CONTRACTS[this.get("contract")][0]);
 		koef *= k(Salary.LEVELS[this.get("level")][0]);
 		koef *= k(Salary.CODES[this.get("code")][0]);
-    koef *= k(Salary.ENGLANDS[this.get("england")][0]);
+		koef *= k(Salary.ENGLANDS[this.get("england")][0]);
 		
 		if (this.get('deadline')) {
 			koef *= k(Salary.DAYS_IN_WEEK_KOEF[ Math.max(5, this.get("days_in_week")) ]);
@@ -345,7 +347,7 @@ class Salary extends SGModelView {
 		this.set("rate", rate);
 		this.set("salary_month", salary);
 		this.set("salary_year", this.get("salary_month") * (this.get("contract") === Salary.CONTRACTS.symb('labor') ? 12 : 11));
-		this.set('rate_usd', SGModel.roundTo(1.1 * this.get('rate') / this.get('usdrub'), 0));
+		this.set('rate_usd', SGModel.roundTo(Salary.USDKOEF * this.get('rate') / this.get('usdrub'), 0));
 		this.set('salary_month_usd', SGModel.roundTo(1.1 * this.get('salary_month') / this.get('usdrub'), -2));
 		
 		if (this.get("contract") === Salary.CONTRACTS.symb('labor')) {

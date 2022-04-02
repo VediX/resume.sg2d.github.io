@@ -106,7 +106,7 @@
 									</div>
 									<div class="col-md-6 p-0">
 										<div class="input-group-text bg-gradient" style="justify-content: center">
-                      <span sg-property="hours_in_day_desc">4 часа/день</span><sup sg-css="hours_in_day >= 5 ? 'text-danger' : ''">1</sup><span sg-css="! deadline ? 'visible-inline' : 'no-visible'">&nbsp;<span sg-property="hours_in_day" sg-format="formatHoursExtraCharge" sg-css="this.constructor.HOURS_KOEF[hours_in_day] > 0 ? 'text-danger' : 'text-success'">-20%</span></span>
+											<span sg-property="hours_in_day_desc">4 часа/день</span><sup sg-css="hours_in_day >= 5 ? 'text-danger' : ''">1</sup><span sg-css="! deadline ? 'visible-inline' : 'no-visible'">&nbsp;<span sg-property="hours_in_day" sg-format="formatHoursExtraCharge" sg-css="this.constructor.HOURS_KOEF[hours_in_day] > 0 ? 'text-danger' : 'text-success'">-20%</span></span>
 										</div>
 									</div>
 								</div>
@@ -119,12 +119,12 @@
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="deadline" type="checkbox" sg-property="deadline">
 										<label
-                            class="form-check-label"
-                            for="deadline"
-                            id="deadline_label"
-                            title="При наличии дедлайнов ставка эквивалента фуллтайму и пятидневной рабочей недели!"
-                            sg-css="hours_in_day < 8 ? 'text-danger' : ''"
-                    >Есть дедлайны<sup class="text-danger" sg-css="deadline && hours_in_day !== 8 ? 'visible-inline' : 'no-visible'">3</sup></label>
+											class="form-check-label"
+											for="deadline"
+											id="deadline_label"
+											title="При наличии дедлайнов ставка эквивалента фуллтайму и пятидневной рабочей недели!"
+											sg-css="hours_in_day < 8 ? 'text-danger' : ''"
+										>Есть дедлайны<sup class="text-danger" sg-css="deadline && hours_in_day !== 8 ? 'visible-inline' : 'no-visible'">3</sup></label>
 									</div>
 								</div>
 								<div class="col ps-0">
@@ -285,7 +285,7 @@
 					<hr class="my-3"/>
 
 					<p class="text-dark" style="font-size: 0.8rem;">* Уровень оплаты рассчитывается чистыми (на руки)!</p>
-          <p class="" style="font-size: 0.8rem;" sg-css="hours_in_day >= 5 ? 'text-danger': ''"><sup>1</sup> &mdash; При <span sg-property="hours_in_day">4</span> часовой занятости перерыв <span sg-property="timeout">5</span> минут входит в час работы!</p>
+					<p class="" style="font-size: 0.8rem;" sg-css="hours_in_day >= 5 ? 'text-danger': ''"><sup>1</sup> &mdash; При <span sg-property="hours_in_day">4</span> часовой занятости перерыв <span sg-property="timeout">5</span> минут входит в час работы!</p>
 					<p class="text-danger" style="font-size: 0.8rem;" sg-css="relocation ? 'visible-block': 'no-visible'"><sup>2</sup> &mdash; При релокации в мегаполис минимальная месячная оплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&nbsp;000</span>&nbsp;руб., а минимальная ставка <span sg-property="relocation_rate_min" sg-format="getNumThinsp">5&nbsp;000</span>&nbsp;руб./час</p>
 					<p class="text-danger" style="font-size: 0.8rem;" sg-css="deadline && hours_in_day !== 8 ? 'visible-block': 'no-visible'"><sup>3</sup> &mdash; При наличии дедлайнов ставка не меньше ставки фуллтайма с пятидневной рабочей неделей! Под дедлайном понимается некий срок за который нужно выполнить определенный пул задач.</p>
 					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="rate == rate_hour_min ? 'visible-block': 'no-visible'"><sup>4</sup> &mdash; минимальная почасовая ставка <span sg-property="rate_hour_min" sg-format="getNumThinsp">500</span>&nbsp;руб.</p>
@@ -294,7 +294,7 @@
 						<sup>6</sup> &mdash; Со дня, когда доходы контрагента-самозанятого (без статуса ИП) превысили <span sg-property="contract_self_limit" sg-format="getNumThinsp">0</span>&nbsp;руб.,
 						вы обязаны удерживать НДФЛ и перечислять страховые взносы с выплат в его пользу. Переоформлять договор с ним необязательно, <a href="http://www.consultant.ru/document/cons_doc_LAW_318780/57fe9d25246fad33498a9766e465c4c35c1113b6/#dst100069" target="_blank">разъясняет ФНС</a>. <span class="text-success">Также самозанятый может зарегистрироваться как ИП.</span>
 					</p>
-					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="usdrub > 0 ? 'visible-block': 'no-visible'"><sup>7</sup> &mdash; при оплате в валюте +10%! Текущий курс: <span sg-property="usdrub"></span> руб/$</p>
+					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="usdrub > 0 ? 'visible-block': 'no-visible'"><sup>7</sup> &mdash; при оплате в валюте +<span>25</span>%! Текущий курс: <span sg-property="usdrub"></span> руб/$</p>
 				</div>
 				<div class="col"></div>
 			</div>
@@ -302,13 +302,9 @@
 
 		<footer class="my-1 pt-1 mb-3 text-muted text-center text-small my-fixed" sg-css="initialized ? 'my-static' : ''">
 			<div class="container">
-				<div class="row">
-					<div class="col text-start text-nowrap">Power By <a href="https://model.sg2d.ru/#mvvm-%D0%BF%D0%B0%D1%82%D1%82%D0%B5%D1%80%D0%BD-%D0%B2-sgmodelview">SGModelView</a></div>
-					<div class="col text-end text-nowrap">&copy; 2021 Kalashnikov Ilya</div>
-				</div>
-				<div class="row">
-					<a href="https://www.cbr-xml-daily.ru/">Курсы валют, API</a>
-				</div>
+				<div class="text-start text-nowrap">Power By <a href="https://model.sg2d.ru/#mvvm-%D0%BF%D0%B0%D1%82%D1%82%D0%B5%D1%80%D0%BD-%D0%B2-sgmodelview">SGModelView</a></div>
+				<div class="text-start text-nowrap">&copy; 2021 Kalashnikov Ilya</div>
+				<div class="text-start text-nowrap"><a href="https://www.cbr-xml-daily.ru/">Курсы валют, API</a></div>
 			</div>
 		</footer>
 	</div>
