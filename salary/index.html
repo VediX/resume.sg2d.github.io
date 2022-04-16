@@ -31,7 +31,7 @@
   </script>
 	<link href="salary.css" rel="stylesheet">
 	<script type="module" src="./../res/sg-model/sg-model-view-21.js" defer></script>
-	<script type="module" src="salary-033.js"></script>
+	<script type="module" src="salary-034.js"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
 
@@ -131,6 +131,19 @@
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="relocation" type="checkbox" sg-property="relocation">
 										<label class="form-check-label text-danger" for="relocation" id="relocation_label" title="При релокации в мегаполис минимальная месячная зарплата составляет %relocation_month_min% руб.">Релокация<sup sg-css="relocation ? 'visible-inline' : 'no-visible'">2</sup></label>
+									</div>
+								</div>
+							</div>
+              <div class="row">
+								<div class="col pe-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="otech" type="checkbox" sg-property="otech">
+										<label
+											class="form-check-label link-success"
+											for="otech"
+											id="otech_label"
+											title="При участии в проектах при разработке отечественного ПО/ОС скидка до 10%!"
+										>Разработка отечественного ПО/ОС <span sg-property="otech_per" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
 									</div>
 								</div>
 							</div>

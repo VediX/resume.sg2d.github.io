@@ -37,6 +37,7 @@ class Salary extends SGModelView {
 		hours_in_day: 4,
 		relocation: false,
 		deadline: false,
+    otech: false,
 		code: '1',
 		es_node: false,
 		vue3: false,
@@ -100,6 +101,7 @@ class Salary extends SGModelView {
 		hours_in_day: SGModel.TYPE_NUMBER,
 		relocation: SGModel.TYPE_BOOLEAN,
 		deadline: SGModel.TYPE_BOOLEAN,
+    otech: SGModel.TYPE_BOOLEAN,
 		code: SGModel.TYPE_STRING,
 		es_node: SGModel.TYPE_BOOLEAN,
 		vue3: SGModel.TYPE_BOOLEAN,
@@ -113,6 +115,8 @@ class Salary extends SGModelView {
 		//matterjs: SGModel.TYPE_BOOLEAN,
 		sg2d: SGModel.TYPE_BOOLEAN,
 		
+    otech_per: SGModel.TYPE_NUMBER,
+    
 		salary_labor_fot: SGModel.TYPE_NUMBER,
 		salary_labor_ndfl: SGModel.TYPE_NUMBER,
 		salary_labor_insurance: SGModel.TYPE_NUMBER,
@@ -135,6 +139,7 @@ class Salary extends SGModelView {
 		H: "hours_in_day",
 		Q: "relocation",
 		W: "deadline",
+    Z: "otech",
 		G: "code",
 		J: "es_node",
 		V: "vue3",
@@ -181,6 +186,8 @@ class Salary extends SGModelView {
 	static DAYS_IN_WEEK_KOEF = [void 0, -50, -40, -30, -20, 0, +100, +200];
 	
 	static RELOCATION_KOEF = 2;
+  
+  static OTECH_KOEF = 0.8;
 	
 	static USDKOEF = 1.25;
 	
@@ -221,6 +228,8 @@ class Salary extends SGModelView {
 		}
 		
 		this.set("contract_self_limit", Salary.CONTRACT_SELF_LIMIT);
+    
+		this.set('otech_per', 100*(Salary.OTECH_KOEF - 1), { precision: 1 });
 		
 		/*let codeTypes = ["code_startup", "code_supported", "code_supported_and_legacy", "code_legacy"];
 		this.on(codeTypes, (value, valuePrev, name)=>{
@@ -306,10 +315,6 @@ class Salary extends SGModelView {
 		this.set("hours", hours);
 		let koef = 1;
 		
-		function k(per) {
-			return 1 + per/100;
-		}
-		
 		koef *= k(Salary.CONTRACTS[this.get("contract")][0]);
 		koef *= k(Salary.LEVELS[this.get("level")][0]);
 		koef *= k(Salary.CODES[this.get("code")][0]);
@@ -322,6 +327,10 @@ class Salary extends SGModelView {
 			koef *= k(Salary.DAYS_IN_WEEK_KOEF[this.get("days_in_week")]);
 			koef *= k(Salary.HOURS_KOEF[this.get("hours_in_day")]);
 		}
+    
+    if (this.get('otech')) {
+      koef *= Salary.OTECH_KOEF;
+    }
 		
 		for (var i = 0; i < Salary._fields_koef.length; i++) {
 			var name = Salary._fields_koef[i];
@@ -364,7 +373,7 @@ class Salary extends SGModelView {
 			this.set("self_benefit_percent", ((this.get("salary_labor_year") - salary_self * 11) / this.get("salary_labor_year") * 100).toFixed(1));
 		}
 	}
-	
+  
 	getHoursMeas(h) {
 		return "час" + this._getNoun(h, "", "а", "ов");
 	}
@@ -491,6 +500,10 @@ class Salary extends SGModelView {
 		xhr.responseType = 'json';
 		xhr.send();
 	}
+}
+
+function k(per) {
+  return 1 + per/100;
 }
 
 addEventListener("load", ()=>{ window.salaryApp = new Salary(); });
