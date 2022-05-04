@@ -30,7 +30,6 @@
 
 ## Контакты:
 * E-mail: [offer@sg2d.ru](mailto:offer@sg2d.ru)
-* Telegram: [@iliakb](https://t.me/iliakb)
 * Skype: [live:veddbrus](https://join.skype.com/invite/CpNuqHruupJ6)
 
 ## Пожелания к будущей работе
