@@ -16,13 +16,13 @@
 * Разработка информационных систем и баз данных
 * Разработка мобильных приложений
 
-## Зарплата/стоимость услуг: от 200 000 руб.
+## Зарплата/стоимость услуг: от 120 000 руб.
 
 - [См. форму расчёта зарплаты/стоимости услуг](https://resume.sg2d.ru/salary/)
 
 ## Занятость
 
-- Частичная занятость 4-6ч/фуллтайм
+- Частичная занятость 2-6ч/фуллтайм
 - 3-6 дней в неделю
 - Гибкий график / Проектная работа
 - К командировкам не готов
@@ -30,8 +30,6 @@
 
 ## Контакты:
 * E-mail: [offer@sg2d.ru](mailto:offer@sg2d.ru)
-* Telegram: [@iliakb](https://t.me/iliakb)
-* Skype: [live:veddbrus](https://join.skype.com/invite/CpNuqHruupJ6)
 
 ## Пожелания к будущей работе
 
@@ -39,8 +37,8 @@
 
 ### Мои знания и навыки:
 
-- Javascript: senior
-- ES6-ES11+: middle
+- Javascript (ES5): senior
+- ES6+: middle
 - NodeJS, Express.js, npm: middle
 - TypeScript / Google Traceur-compiler: junior
 - PHP5 / PHP7+: middle / junior
@@ -54,7 +52,7 @@
 - SQL, MySQL, SQLite: +
 - PostgreSQL, PL/pgSQL: +
 - MS SQL, Firebird/Interbase: junior
-- Redis, RabbitMQ: junior
+- Redis: +
 - websocket, Socket.io-client: +
 - SAPUI5 (Fiori Developer), SAP Cloud Platform: junior
 - Delphi/C++ (Embarcadero RAD Studio): junior
@@ -67,7 +65,7 @@
 - Nginx, Apache (htaccess, mod rewrite, httpd.conf): +
 - Интеграция MobileID, JWT, AES, HSA, RS256, HS256: +
 - Netbeans, WebStorm, Visual Studio, Eclipse, chrome: +
-- Fiddler, Android Studio (AVD), https-proxy: +
+- Fiddler, Postman, Android Studio (AVD), https-proxy: +
 - SVN, Git, webpack, ESLint: +
 - YouTrack/Jira/Confluence/Bitbucket: +
 
