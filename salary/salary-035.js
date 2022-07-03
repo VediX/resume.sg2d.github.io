@@ -37,12 +37,12 @@ class Salary extends SGModelView {
 		hours_in_day: 4,
 		relocation: false,
 		deadline: false,
-    otech: false,
+		otech: false,
 		code: '1',
 		es_node: false,
 		vue3: false,
 		react: false,
-		angular: false,
+		java: false,
 		//sapui5: false,
 		php: false,
 		cpp: false,
@@ -55,7 +55,7 @@ class Salary extends SGModelView {
 		es_node_koef: -10,
 		vue3_koef: 5,
 		react_koef: 25,
-		angular_koef: 50,
+		java_koef: 50,
 		//sapui5_koef: 5,
 		php_koef: 30,
 		cpp_koef: 30,
@@ -106,7 +106,7 @@ class Salary extends SGModelView {
 		es_node: SGModel.TYPE_BOOLEAN,
 		vue3: SGModel.TYPE_BOOLEAN,
 		react: SGModel.TYPE_BOOLEAN,
-		angular: SGModel.TYPE_BOOLEAN,
+		java: SGModel.TYPE_BOOLEAN,
 		//sapui5: SGModel.TYPE_BOOLEAN,
 		php: SGModel.TYPE_BOOLEAN,
 		cpp: SGModel.TYPE_BOOLEAN,
@@ -144,7 +144,7 @@ class Salary extends SGModelView {
 		J: "es_node",
 		V: "vue3",
 		R: "react",
-		A: "angular",
+		A: "java",
 		//U: "sapui5",
 		P: "php",
 		O: "cpp",
@@ -187,7 +187,7 @@ class Salary extends SGModelView {
 	
 	static RELOCATION_KOEF = 2;
   
-  static OTECH_KOEF = 0.8;
+	static OTECH_KOEF = 0.8;
 	
 	static USDKOEF = 1.25;
 	
@@ -248,7 +248,7 @@ class Salary extends SGModelView {
 		
 		this.on("hours_in_day", (hours)=>{
 			this.set("hours_in_day_desc", (hours == 8 ? "Фуллтайм" : hours + " " + this.getHoursMeas(hours)+"/день")); // TODO: надписи вытащить в шаблон?
-      this.set("timeout", Salary.TIMEOUTS[hours]);
+			this.set("timeout", Salary.TIMEOUTS[hours]);
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
 		this.on('code', (code)=>{
@@ -302,7 +302,7 @@ class Salary extends SGModelView {
 	static _fields_koef = [
 		"es_node",
 		"react",
-		"angular",
+		"java",
 		"vue3",
 		"php",
 		"cpp",
