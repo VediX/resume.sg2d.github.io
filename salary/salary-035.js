@@ -158,7 +158,7 @@ class Salary extends SGModelView {
 	static HOUR_RATE_MIN = 1500;
 	static RELOCATION_MONTH_MIN = 600000;
 	static RELOCATION_RATE_MIN = 600000/80;
-	static CONTRACT_SELF_LIMIT = 2400000;
+	static CONTRACT_SELF_LIMIT = 5000000;
 	
 	static CONTRACTS = new OptionsMethods({
 		"s": [0, 'self'],
