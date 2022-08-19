@@ -23,7 +23,7 @@ class Salary extends SGModelView {
 	
 	static singleInstance = true;
 	
-	static CURRENT_VERSION = 2;
+	static CURRENT_VERSION = 3;
 	
 	static defaultProperties = {
 		initialized: false,
@@ -154,8 +154,8 @@ class Salary extends SGModelView {
 		S: "sg2d",
 	};
 	
-	static HOUR_RATE_BASE = 2000;
-	static HOUR_RATE_MIN = 1500;
+	static HOUR_RATE_BASE = 1440.5;
+	static HOUR_RATE_MIN = 1000;
 	static RELOCATION_MONTH_MIN = 600000;
 	static RELOCATION_RATE_MIN = 600000/80;
 	static CONTRACT_SELF_LIMIT = 5000000;
@@ -202,6 +202,17 @@ class Salary extends SGModelView {
 	];
   
 	static TIMEOUTS = [void 0, 5, 5, 5, 5, 10, 10, 15, 15];
+	
+	static _fields_koef = [
+		"es_node",
+		"react",
+		"java",
+		"vue3",
+		"php",
+		"cpp",
+		"typescript",
+		"sg2d"
+	];
 	
 	initialize() {
 		
@@ -296,19 +307,47 @@ class Salary extends SGModelView {
 		this.on(Object.values(Salary.hashProperties), this.calc);
 		this.on('usdrub', this.calc, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
+		// Попытка обуздать input range, ято бы он не реагировал при touch-перемещения экрана
+		/*this.onInputRangePointerDown = this.onInputRangePointerDown.bind(this);
+		this.onInputRangePointerMove = this.onInputRangePointerMove.bind(this);
+		this.onInputRangePointerOut = this.onInputRangePointerOut.bind(this);
+		this.onInputRangePointerLeave = this.onInputRangePointerLeave.bind(this);
+		this.onInputRangePointerCancel = this.onInputRangePointerCancel.bind(this);
+		this.onInputRangePointerUp = this.onInputRangePointerUp.bind(this);
+		this.pointerIds = [];
+		let inputsTypeRange = document.querySelectorAll('input[type=range]');
+		for (let i = 0; i < inputsTypeRange.length; i++) {
+			inputsTypeRange[i].addEventListener('pointerdown', this.onInputRangePointerDown);
+			inputsTypeRange[i].addEventListener('pointermove', this.onInputRangePointerMove);
+			inputsTypeRange[i].addEventListener('pointerout', this.onInputRangePointerOut);
+			inputsTypeRange[i].addEventListener('pointerleave', this.onInputRangePointerLeave);
+			inputsTypeRange[i].addEventListener('pointercancel', this.onInputRangePointerCancel);
+			inputsTypeRange[i].addEventListener('pointerup', this.onInputRangePointerUp);
+		}*/
+		
 		this.set("initialized", true);
 	}
 	
-	static _fields_koef = [
-		"es_node",
-		"react",
-		"java",
-		"vue3",
-		"php",
-		"cpp",
-		"typescript",
-		"sg2d"
-	];
+	/*onInputRangePointerDown(evt) {
+		this.pointerIds[evt.pointerId] = true;
+		console.log('PointerDown');
+	}
+	onInputRangePointerMove(evt) {
+		console.log('PointerMove');
+		console.log(evt);
+	}
+	onInputRangePointerOut(evt) {
+		console.log('PointerOut');
+	}
+	onInputRangePointerLeave(evt) {
+		console.log('PointerLeave');
+	}
+	onInputRangePointerCancel(evt) {
+		console.log('PointerCancel');
+	}
+	onInputRangePointerUp(evt) {
+		console.log('PointerUp');
+	}*/
 	
 	calc() {
 		let hours = 4 * this.get("days_in_week") * this.get("hours_in_day");
