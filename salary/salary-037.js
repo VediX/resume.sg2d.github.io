@@ -58,7 +58,7 @@ class Salary extends SGModelView {
 		java_koef: 50,
 		//sapui5_koef: 5,
 		php_koef: 30,
-		cpp_koef: 30,
+		cpp_koef: 25,
 		typescript_koef: 25,
 		//pixijs_koef: -5,
 		//matterjs_koef: -5,
@@ -156,13 +156,13 @@ class Salary extends SGModelView {
 	
 	static HOUR_RATE_BASE = 1440.5;
 	static HOUR_RATE_MIN = 1000;
-	static RELOCATION_MONTH_MIN = 600000;
-	static RELOCATION_RATE_MIN = 600000/80;
+	static RELOCATION_MONTH_MIN = 300000;
+	static RELOCATION_RATE_MIN = 300000/80;
 	static CONTRACT_SELF_LIMIT = 5000000;
 	
 	static CONTRACTS = new OptionsMethods({
 		"s": [0, 'self'],
-		"l": [-5, 'labor'],
+		"l": [-10, 'labor'],
 		"f": [+40, 'freelance'],
 		"i": [+50, 'ip'],
 	});
@@ -185,9 +185,9 @@ class Salary extends SGModelView {
 	
 	static DAYS_IN_WEEK_KOEF = [void 0, -50, -40, -30, -20, 0, +100, +200];
 	
-	static RELOCATION_KOEF = 2;
+	static RELOCATION_KOEF = [void 0,12,6,4,3,2.5,2.3,2.1,2.0];
   
-	static OTECH_KOEF = 0.8;
+	static OTECH_KOEF = 0.75;
 	
 	static USDKOEF = 1.25;
 	
@@ -260,6 +260,8 @@ class Salary extends SGModelView {
 		this.on("hours_in_day", (hours)=>{
 			this.set("hours_in_day_desc", (hours == 8 ? "Фуллтайм" : hours + " " + this.getHoursMeas(hours)+"/день")); // TODO: надписи вытащить в шаблон?
 			this.set("timeout", Salary.TIMEOUTS[hours]);
+			// TODO: переделать, когда sgAttribute будет динамическим!
+			document.querySelector('input#deadline').disabled = (hours == 8);
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
 		this.on('code', (code)=>{
@@ -273,6 +275,14 @@ class Salary extends SGModelView {
 		/*this.on("options_expand", (options_expand)=>{
 			this.set("options_expand_icon", options_expand ? "&nbsp;&#9660;" : "...");
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);*/
+		
+		// TODO: переделать, когда sgAttribute будет динамическим!
+		this.on('relocation', (relocation) => {
+			const nodes = document.querySelectorAll('#technologies input');
+			for (let i = 0; i < nodes.length; i++) {
+				nodes[i].disabled = relocation;
+			}
+		});
 		
 		this.set("rate_hour_min", Salary.HOUR_RATE_MIN);
 		this.set("relocation_month_min", Salary.RELOCATION_MONTH_MIN);
@@ -378,10 +388,14 @@ class Salary extends SGModelView {
 			}
 		}
 		
+		if (this.get('relocation')) {
+      koef *= Salary.RELOCATION_KOEF[this.get('hours_in_day')];
+    }
+		
 		let rate = SGModel.roundTo(Math.max(Salary.HOUR_RATE_BASE * koef, Salary.HOUR_RATE_MIN) / 5, -1) * 5;
 		let salary = SGModel.roundTo(rate * hours, -3);
 		
-		if (this.get('relocation')) {
+		/*if (this.get('relocation')) {
 			if (rate < Salary.RELOCATION_RATE_MIN) {
 				rate = Salary.RELOCATION_RATE_MIN;
 				salary = SGModel.roundTo(rate * hours, -3);
@@ -390,7 +404,7 @@ class Salary extends SGModelView {
 				salary = Salary.RELOCATION_MONTH_MIN;
 				rate = salary / hours;
 			}
-		}
+		}*/
 		
 		this.set("rate", rate);
 		this.set("salary_month", salary);

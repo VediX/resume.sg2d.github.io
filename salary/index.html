@@ -50,7 +50,7 @@
   </script>
 	<link href="salary.css" rel="stylesheet">
 	<script type="module" src="./../res/sg-model/sg-model-view-21.js" defer></script>
-	<script type="module" src="salary-036.js"></script>
+	<script type="module" src="salary-037.js"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
 
@@ -203,7 +203,7 @@
 							</div>
 						</fieldset>
 						
-						<div class="container pe-0 ps-0">
+						<div class="container pe-0 ps-0" id="technologies">
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
@@ -241,16 +241,16 @@
 								</div>
 								<div class="col ps-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="cpp" type="checkbox" sg-property="cpp">
-										<label class="form-check-label text-nowrap" for="cpp">C#/C++ <span sg-property="cpp_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+										<input class="form-check-input" id="typescript" type="checkbox" sg-property="typescript">
+										<label class="form-check-label" for="typescript">Typescript <span sg-property="typescript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="typescript" type="checkbox" sg-property="typescript">
-										<label class="form-check-label" for="typescript">Typescript <span sg-property="typescript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+										<input class="form-check-input" id="cpp" type="checkbox" sg-property="cpp">
+										<label class="form-check-label text-nowrap" for="cpp">C#/C++ <span sg-property="cpp_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
 									</div>
 								</div>
 								<div class="col ps-0">
@@ -286,7 +286,7 @@
 						<div sg-css="usdrub > 0 ? 'visible-block': 'no-visible'">
 							<p class="text-center fw-bold lh-1">Total: $<span sg-property="salary_month_usd" sg-format="getNumThinsp">0</span> <span class="text-nowrap">($<span sg-property="rate_usd" sg-format="getNumThinsp">0</span>/hour)<sup>7</sup></span></p>
 						</div>
-						<div class="for-labor-contract" sg-css="contract === this.constructor.CONTRACTS.symb('labor') ? 'visible-block' : 'no-visible'">
+						<!--<div class="for-labor-contract" sg-css="contract === this.constructor.CONTRACTS.symb('labor') ? 'visible-block' : 'no-visible'">
 							
 							<hr class="my-1"/>
 
@@ -298,7 +298,7 @@
 								<b><span sg-property="salary_labor_year" sg-format="getNumThinsp">0</span>&nbsp;руб./год</b>, включая отпуск.
 							</p>
 							<p class="text-danger fw-bold" style="font-size: 0.75rem;">* <a class="link-contract-self" sg-click="setContractSelf" href="#" onclick="return false;">Сотрудничество в режиме самозанятого выгоднее на <span class="text-success text-decoration-underline"><span sg-property="self_benefit_percent">10</span>%</span>!</a></p>
-						</div>
+						</div>-->
 					</div>
 					
 					<!--<hr class="my-3"/>
@@ -318,7 +318,8 @@
 
 					<p class="text-dark" style="font-size: 0.8rem;">* Уровень оплаты рассчитывается чистыми (на руки)!</p>
 					<p class="" style="font-size: 0.8rem;" sg-css="hours_in_day >= 5 ? 'text-danger': ''"><sup>1</sup> &mdash; При <span sg-property="hours_in_day">4</span> часовой занятости перерыв <span sg-property="timeout">5</span> минут входит в час работы!</p>
-					<p class="text-danger" style="font-size: 0.8rem;" sg-css="relocation ? 'visible-block': 'no-visible'"><sup>2</sup> &mdash; При релокации в мегаполис минимальная месячная оплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&nbsp;000</span>&nbsp;руб., а минимальная ставка <span sg-property="relocation_rate_min" sg-format="getNumThinsp">5&nbsp;000</span>&nbsp;руб./час</p>
+					<!--<p class="text-danger" style="font-size: 0.8rem;" sg-css="relocation && !otech ? 'visible-block': 'no-visible'"><sup>2</sup> &mdash; При релокации минимальная месячная оплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&nbsp;000</span>&nbsp;руб., а минимальная ставка <span sg-property="relocation_rate_min" sg-format="getNumThinsp">5&nbsp;000</span>&nbsp;руб./час</p>-->
+					<p class="text-danger" style="font-size: 0.8rem;" sg-css="relocation ? 'visible-block': 'no-visible'"><sup>2</sup> &mdash; При релокации действует повышенная ставка </p>
 					<p class="text-danger" style="font-size: 0.8rem;" sg-css="deadline && hours_in_day !== 8 ? 'visible-block': 'no-visible'"><sup>3</sup> &mdash; При наличии дедлайнов ставка не меньше ставки фуллтайма с пятидневной рабочей неделей! Под дедлайном понимается некий срок за который нужно выполнить определенный пул задач.</p>
 					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="rate == rate_hour_min ? 'visible-block': 'no-visible'"><sup>4</sup> &mdash; минимальная почасовая ставка <span sg-property="rate_hour_min" sg-format="getNumThinsp">500</span>&nbsp;руб.</p>
 					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-block': 'no-visible'"><sup>5</sup> &mdash; годовая оплата рассчитывается за 11 месяцев.</p>
