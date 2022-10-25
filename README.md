@@ -63,11 +63,11 @@
 - Lua, Visual Basic (разработка 2D игр): junior
 - Roblox: junior
 - QUIK, Lua, TSLab 2, C#: +
-- Docker, GitLab, CI/CD: trainee
+- Docker, CI/CD: trainee
 - Linux (Ubuntu): +
 - Nginx (proxy, ssl): +
 - Apache (htaccess, mod rewrite, httpd.conf): +
-- Интеграция Telegram Bot, MobileID, JWT, AES, HSA, RS256, HS256: +
+- Интеграция Telegram Bot, MobileID (JWT, AES, HSA, RS256, HS256): +
 - Netbeans, WebStorm, Visual Studio, Eclipse, Chrome: +
 - Fiddler (https proxy), Postman, Android Studio (AVD): +
 - SVN, Git: +

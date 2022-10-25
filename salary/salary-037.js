@@ -277,12 +277,12 @@ class Salary extends SGModelView {
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);*/
 		
 		// TODO: переделать, когда sgAttribute будет динамическим!
-		this.on('relocation', (relocation) => {
+		/*this.on('relocation', (relocation) => {
 			const nodes = document.querySelectorAll('#technologies input');
 			for (let i = 0; i < nodes.length; i++) {
 				nodes[i].disabled = relocation;
 			}
-		});
+		});*/
 		
 		this.set("rate_hour_min", Salary.HOUR_RATE_MIN);
 		this.set("relocation_month_min", Salary.RELOCATION_MONTH_MIN);
