@@ -23,12 +23,12 @@ class Salary extends SGModelView {
 	
 	static singleInstance = true;
 	
-	static CURRENT_VERSION = 3;
+	static CURRENT_VERSION = 4;
 	
 	static defaultProperties = {
 		initialized: false,
 		
-		version: 3,
+		version: 4,
 		
 		contract: 's',
 		level: 'm',
@@ -43,26 +43,20 @@ class Salary extends SGModelView {
 		vue3: false,
 		react: false,
 		java: false,
-		//sapui5: false,
 		php: false,
 		cpp: false,
 		typescript: false,
-		//pixijs: false,
-		//matterjs: false,
-		sg2d: false,
+		vanilla: false,
 		
 		// скидки/наценки в %
 		es_node_koef: -10,
-		vue3_koef: 5,
-		react_koef: 25,
+		vue3_koef: 10,
+		react_koef: 40,
 		java_koef: 50,
-		//sapui5_koef: 5,
-		php_koef: 30,
-		cpp_koef: 25,
+		php_koef: 35,
+		cpp_koef: 30,
 		typescript_koef: 25,
-		//pixijs_koef: -5,
-		//matterjs_koef: -5,
-		sg2d_koef: -25,
+		vanilla_koef: -5,
 		
 		rate_hour_min: 0,
 		relocation_month_min: 0,
@@ -107,13 +101,10 @@ class Salary extends SGModelView {
 		vue3: SGModel.TYPE_BOOLEAN,
 		react: SGModel.TYPE_BOOLEAN,
 		java: SGModel.TYPE_BOOLEAN,
-		//sapui5: SGModel.TYPE_BOOLEAN,
 		php: SGModel.TYPE_BOOLEAN,
 		cpp: SGModel.TYPE_BOOLEAN,
 		typescript: SGModel.TYPE_BOOLEAN,
-		//pixijs: SGModel.TYPE_BOOLEAN,
-		//matterjs: SGModel.TYPE_BOOLEAN,
-		sg2d: SGModel.TYPE_BOOLEAN,
+		vanilla: SGModel.TYPE_BOOLEAN,
 		
     otech_per: SGModel.TYPE_NUMBER,
     
@@ -131,27 +122,32 @@ class Salary extends SGModelView {
 	
 	static hashProperties = {
 		v: "version",
-		
+		A: "vanilla",
+		//B: "",
 		C: "contract",
-		L: "level",
 		D: "days_in_week",
 		E: "england",
-		H: "hours_in_day",
-		Q: "relocation",
-		W: "deadline",
-    Z: "otech",
+		//F: "",
 		G: "code",
-		J: "es_node",
-		V: "vue3",
-		R: "react",
-		A: "java",
-		//U: "sapui5",
+		H: "hours_in_day",
+		//I: "",
+		J: "java",
+		//K: "",
+		L: "level",
+		//M: "",
+		N: "es_node",
+		//O: "",
 		P: "php",
-		O: "cpp",
+		Q: "relocation",
+		R: "react",
+		S: "cpp",
 		T: "typescript",
-		//I: "pixijs",
-		//M: "matterjs",
-		S: "sg2d",
+		//U: "",
+		W: "deadline",
+		V: "vue3",
+		//X: "",
+		//Y: "",
+    Z: "otech",
 	};
 	
 	static HOUR_RATE_BASE = 2000;
@@ -211,7 +207,7 @@ class Salary extends SGModelView {
 		"php",
 		"cpp",
 		"typescript",
-		"sg2d"
+		"vanilla",
 	];
 	
 	initialize() {
