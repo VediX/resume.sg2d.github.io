@@ -150,7 +150,7 @@ class Salary extends SGModelView {
     Z: "otech",
 	};
 	
-	static HOUR_RATE_BASE = 2000;
+	static HOUR_RATE_BASE = 2000;//1260;
 	static HOUR_RATE_MIN = 1000;
 	static RELOCATION_MONTH_MIN = 300000;
 	static RELOCATION_RATE_MIN = 300000/80;
@@ -388,7 +388,9 @@ class Salary extends SGModelView {
       koef *= Salary.RELOCATION_KOEF[this.get('hours_in_day')];
     }
 		
-		let rate = SGModel.roundTo(Math.max(Salary.HOUR_RATE_BASE * koef, Salary.HOUR_RATE_MIN) / 5, -1) * 5;
+		let rate = Math.max(Salary.HOUR_RATE_BASE * koef, Salary.HOUR_RATE_MIN);
+		document.querySelector('#rate_title').title = rate;
+		rate = SGModel.roundTo(rate / 5, -1) * 5;
 		let salary = SGModel.roundTo(rate * hours, -3);
 		
 		/*if (this.get('relocation')) {

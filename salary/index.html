@@ -46,7 +46,7 @@
       if (document.getElementById("content_not_ie").style.display !== 'block') {
         document.getElementById("content_loading").innerHTML = 'Ваш браузер не может отобразить содержимое этой страницы!<br/>Попробуйте обновить браузер или использовать другой бразуер!';
       }
-    }, 5000);
+    }, 4000);
   </script>
 	<link href="salary.css" rel="stylesheet">
 	<script type="module" src="./../res/sg-model/sg-model-view-21.js" defer></script>
@@ -161,7 +161,7 @@
 											class="form-check-label link-success"
 											for="otech"
 											id="otech_label"
-											title="При участии в проектах при разработке отечественного ПО/ОС скидка до 20%!"
+											title="При участии в проектах при разработке отечественного ПО/ОС скидка до 25%!"
 										>Разработка отечественного ПО/ОС <span sg-property="otech_per" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
 									</div>
 								</div>
@@ -277,7 +277,7 @@
 					
 					<div class="totals">
 						<div>
-							<p class="text-center fw-bold lh-1">Итого: <span sg-property="salary_month" sg-format="getNumThinsp">0</span>&nbsp;руб.<sup>*</sup> <span class="text-nowrap">(<span sg-property="rate" sg-format="getNumThinsp">0</span>&nbsp;руб./час)<sup class="text-secondary" sg-css="rate == rate_hour_min ? 'visible-inline': 'no-visible'">4</sup></span></p>
+							<p class="text-center fw-bold lh-1">Итого: <span sg-property="salary_month" sg-format="getNumThinsp">0</span>&nbsp;руб.<sup>*</sup> <span class="text-nowrap">(<span id="rate_title" title="loading..." sg-property="rate" sg-format="getNumThinsp">0</span>&nbsp;руб./час)<sup class="text-secondary" sg-css="rate == rate_hour_min ? 'visible-inline': 'no-visible'">4</sup></span></p>
 							<p class="text-center fw-bold lh-1">
 								<span sg-property="hours">0</span>&nbsp;<span sg-property="hours_meas">часов</span>/месяц,
 								<span sg-property="salary_year" sg-format="getNumThinsp" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'text-danger' : ''">0</span>&nbsp;руб./год<sup sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-inline': 'no-visible'">5</sup><sup class="text-danger" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-inline' : 'no-visible'">,6</sup>

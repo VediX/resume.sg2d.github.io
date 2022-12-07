@@ -8,9 +8,6 @@
 # Backend-разработчик
 
 ------
-# Разработчик игр на Canvas/PixiJS
-
-------
 ## Профессиональная область:
 
 * Программирование
@@ -19,7 +16,7 @@
 * Разработка информационных систем и баз данных
 * Разработка мобильных приложений
 
-## Зарплата/стоимость услуг: от 150 000 руб.
+## Зарплата/стоимость услуг: от 160 000 руб.
 
 - [См. форму расчёта зарплаты/стоимости услуг](https://resume.sg2d.ru/salary/)
 
@@ -36,46 +33,49 @@
 
 ## Ключевые факты и пожелания к будущей работе
 
-С 2004 года работал в качестве Backend, Frontend и Fullstack разработчика, как в офисах, так и удалённо. Сейчас отдаю предпочтение разработке на ES.Next (Javascript), VanillaJS, NodeJS, PostgreSQL, pl/SQL. Допускаю немного HTML и CSS. Рассмотрю участие в разработке отечественных аналогов западного ПО и ОС. Рассмотрю своё участие в проектах по разработке веб-приложений и сайтов, информационных систем и баз данных, мобильных приложений, программированию графики, разработке игр определенного жанра - со всеми перечисленными направлениями есть опыт работы. Рассмотрю другие типы направлений. В плане роли предпочитаю быть просто Junior/Middle/Senior-исполнителем в зависимости от используемых технологий. Допускаю карьерный рост до тимлида/архитектора, если сотрудничество в компании будет долгосрочным и интересным с нескольких точек зрения (технологии, проекты, люди, занятость, уровень з/п).
+С 2004 года работал в качестве Backend, Frontend и Fullstack разработчика, как в офисах, так и удалённо. Сейчас отдаю предпочтение разработке на ES.Next (Javascript), VanillaJS, NodeJS, PostgreSQL, PL/pgSQL. Допускаю немного HTML и CSS. Рассмотрю участие в разработке отечественных аналогов западного ПО и ОС. Рассмотрю своё участие в проектах по разработке веб-приложений и сайтов, информационных систем и баз данных, мобильных приложений, программированию графики, разработке игр определенного жанра - со всеми перечисленными направлениями есть опыт работы. Рассмотрю другие типы направлений. В плане роли предпочитаю быть просто Junior/Middle/Senior-исполнителем в зависимости от используемых технологий. Допускаю карьерный рост до тимлида/архитектора, если сотрудничество в компании будет долгосрочным и интересным с нескольких точек зрения (технологии, проекты, люди, занятость, уровень з/п).
 
 ### Мои знания и навыки:
 
 - Javascript: senior
 - ES6+: middle
-- ES.Next: continuous training
 - NodeJS, Express.js, npm: middle
 - TypeScript / Google Traceur-compiler: junior
 - PHP5 / PHP7+: middle / junior
+- Delphi/C++ (Embarcadero RAD Studio): junior
+- C# (Visual Studio): junior
+- Lua, Visual Basic (разработка 2D игр): junior
 - VanillaJS: middle
 - HTML5: +
-- Bootstrap, CSS2 (LESS): +
+- CSS (LESS): +
+- Bootstrap: +
 - BackboneJS, KnockoutJS: +
-- VueJS, React: trainee
 - Lodash, Underscore.js, jQuery: +
-- PixiJS (+PixiJS Sound) / PhaserJS: +
 - Smarty, mustache: +
 - SQL, MySQL, SQLite: +
 - PostgreSQL, PL/pgSQL: +
 - MS SQL, Firebird/Interbase: junior
 - Redis: +
-- rabbitMQ: trainee
-- websocket, Socket.io-client: +
-- SAPUI5 (Fiori Developer), SAP Cloud Platform: junior
-- Delphi/C++ (Embarcadero RAD Studio): junior
-- C# (Visual Studio): junior
-- Lua, Visual Basic (разработка 2D игр): junior
-- Roblox: junior
-- QUIK, Lua, TSLab 2, C#: +
-- Docker, CI/CD: trainee
+- websocket: +
+- Docker: +
+- SVN, Git: +
 - Linux (Ubuntu): +
 - Nginx (proxy, ssl): +
 - Apache (htaccess, mod rewrite, httpd.conf): +
-- Интеграция Telegram Bot, MobileID (JWT, AES, HSA, RS256, HS256): +
-- Netbeans, WebStorm, Visual Studio, Eclipse, Chrome: +
-- Fiddler (https proxy), Postman, Android Studio (AVD): +
-- SVN, Git: +
-- Webpack, ESLint: +
+- Интеграция Telegram Bot: +
+- MobileID (JWT, AES, HSA, RS256, HS256): +
+- IDE/debugger: Netbeans, WebStorm, Visual Studio, Eclipse, Chrome: +
+- Fiddler (https proxy), Postman: +
+- Webpack: +
+- ESLint: +
 - YouTrack, Jira, Confluence, Bitbucket, GitLab: +
+- PixiJS (+PixiJS Sound) / PhaserJS: +
+- Roblox: junior
+- SAPUI5 (Fiori Developer), SAP Cloud Platform: junior
+- QUIK + Lua + TSLab2 + C#: +
+- rabbitMQ: trainee
+- VueJS, React: trainee
+- CI/CD: trainee
 
 ### Условия сотрудничества
 
