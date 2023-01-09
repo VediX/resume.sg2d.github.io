@@ -83,6 +83,8 @@ class Salary extends SGModelView {
 		
 		//options_expand: true,
 		//options_expand_icon: ""
+		
+		current_year: new Date().getFullYear()
 	};
 	
 	static typeProperties = {
