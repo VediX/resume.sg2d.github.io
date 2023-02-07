@@ -39,10 +39,10 @@ class Salary extends SGModelView {
 		deadline: false,
 		otech: false,
 		code: '1',
-		es_node: false,
+		es_node: true,
 		vue3: false,
 		react: false,
-		java: false,
+		postgresql: true,
 		php: false,
 		cpp: false,
 		typescript: false,
@@ -50,12 +50,12 @@ class Salary extends SGModelView {
 		
 		// скидки/наценки в %
 		es_node_koef: -10,
-		vue3_koef: 10,
+		vue3_koef: 5,
 		react_koef: 40,
-		java_koef: 50,
+		postgresql_koef: -5,
 		php_koef: 35,
 		cpp_koef: 30,
-		typescript_koef: 25,
+		typescript_koef: 20,
 		vanilla_koef: -5,
 		
 		rate_hour_min: 0,
@@ -102,7 +102,7 @@ class Salary extends SGModelView {
 		es_node: SGModel.TYPE_BOOLEAN,
 		vue3: SGModel.TYPE_BOOLEAN,
 		react: SGModel.TYPE_BOOLEAN,
-		java: SGModel.TYPE_BOOLEAN,
+		postgresql: SGModel.TYPE_BOOLEAN,
 		php: SGModel.TYPE_BOOLEAN,
 		cpp: SGModel.TYPE_BOOLEAN,
 		typescript: SGModel.TYPE_BOOLEAN,
@@ -129,11 +129,11 @@ class Salary extends SGModelView {
 		C: "contract",
 		D: "days_in_week",
 		E: "england",
-		//F: "",
+		F: "postgresql",
 		G: "code",
 		H: "hours_in_day",
 		//I: "",
-		J: "java",
+		//J: "",
 		//K: "",
 		L: "level",
 		//M: "",
@@ -156,7 +156,7 @@ class Salary extends SGModelView {
 	static HOUR_RATE_MIN = 1000;
 	static RELOCATION_MONTH_MIN = 300000;
 	static RELOCATION_RATE_MIN = 300000/80;
-	static CONTRACT_SELF_LIMIT = 5000000;
+	static CONTRACT_SELF_LIMIT = 2400000;
 	
 	static CONTRACTS = new OptionsMethods({
 		"s": [0, 'self'],
@@ -172,8 +172,8 @@ class Salary extends SGModelView {
 		"t": [-25, 'trainee'],
 		"j": [-10, 'junior'],
 		"m": [0, 'middle'],
-		"s": [+10, 'senior'],
-		"l": [+25, 'teamlead']
+		"s": [+20, 'senior'],
+		"l": [+40, 'teamlead']
 	});
   
 	static ENGLANDS = new OptionsMethods({
@@ -204,7 +204,7 @@ class Salary extends SGModelView {
 	static _fields_koef = [
 		"es_node",
 		"react",
-		"java",
+		"postgresql",
 		"vue3",
 		"php",
 		"cpp",
