@@ -53,8 +53,8 @@ class Salary extends SGModelView {
 		vue3_koef: 5,
 		react_koef: 40,
 		postgresql_koef: -5,
-		php_koef: 35,
-		cpp_koef: 30,
+		php_koef: 30,
+		cpp_koef: 10,
 		typescript_koef: 20,
 		vanilla_koef: -5,
 		
@@ -169,11 +169,11 @@ class Salary extends SGModelView {
 	static INSURANCE = 0.22 + 0.051+0.029 + 0.002;
 	
 	static LEVELS = new OptionsMethods({
-		"t": [-25, 'trainee'],
-		"j": [-10, 'junior'],
+		"t": [-50, 'trainee'],
+		"j": [-25, 'junior'],
 		"m": [0, 'middle'],
-		"s": [+20, 'senior'],
-		"l": [+40, 'teamlead']
+		"s": [+50, 'senior'],
+		"l": [+100, 'teamlead']
 	});
   
 	static ENGLANDS = new OptionsMethods({

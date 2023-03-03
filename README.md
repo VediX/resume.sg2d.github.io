@@ -16,7 +16,7 @@
 * Разработка информационных систем и баз данных
 * Разработка мобильных приложений
 
-## Зарплата/стоимость услуг: от 160 000 руб.
+## Зарплата/стоимость услуг: от 1000 руб/час
 
 - [См. форму расчёта зарплаты/стоимости услуг](https://resume.sg2d.ru/salary/)
 
@@ -39,12 +39,10 @@
 
 - Javascript: senior
 - ES6+: middle
-- ES.Next: junior
 - NodeJS, Express.js, npm: middle
 - TypeScript / Google Traceur-compiler: junior
 - PHP5 / PHP7+: middle / junior
-- VanillaJS: middle
-- HTML5: +
+- HTML5, VanillaJS: +
 - Bootstrap, CSS2 (LESS): +
 - BackboneJS, KnockoutJS: +
 - VueJS, React: trainee
@@ -64,8 +62,7 @@
 - Roblox: junior
 - QUIK, Lua, TSLab 2, C# (торговые роботы, индикаторы): +
 - Docker: +
-- CI/CD: trainee
-- Linux (Ubuntu): +
+- Linux: +
 - Nginx (proxy, ssl): +
 - Apache (htaccess, mod rewrite, httpd.conf): +
 - Интеграция Telegram Bot, MobileID (JWT, AES, HSA, RS256, HS256): +
@@ -74,7 +71,9 @@
 - Android Studio (AVD): +
 - SVN, Git: +
 - Webpack, ESLint: +
-- YouTrack, Jira, Confluence, Bitbucket, GitLab: +
+- Jira, Confluence, Bitbucket: +
+- YouTrack & GitLab (linux+nginx+https+docker=server): +
+- CI/CD: trainee
 
 ### Условия сотрудничества
 
