@@ -25,7 +25,6 @@
 		/*input[type=range].input-range-off {
 			pointer-events: none;
 		}*/
-		/*TODO DEL:*/
 		input[type=range]{
 			pointer-events: none;
 		}
@@ -38,8 +37,10 @@
 		input[type=range]::-ms-thumb{
 			pointer-events: auto;
 		}
-		/*/TODO DEL.*/
 		
+		span.tech-title-minimize {
+			font-size: calc(var(--bs-body-font-size) * 0.9);
+		}
   </style>
   <script>
     setTimeout(function(){
@@ -50,7 +51,7 @@
   </script>
 	<link href="salary.css" rel="stylesheet">
 	<script type="module" src="./../res/sg-model/sg-model-view-21.js" defer></script>
-	<script type="module" src="salary-039.js"></script>
+	<script type="module" src="salary-040.js"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
 
@@ -109,7 +110,7 @@
 						</div>
 					
 						<fieldset class="row mb-2 bg-white p-2 ms-1 me-1" style="border-radius: 10px; border: 1px solid #ddd;">
-							<!--<legend class="col-form-label pt-0">Поддержка кода:</legend>-->
+							<!--<legend class="col-form-label pt-0">Занятость:</legend>-->
 							<div class="container p-0">
 								<div class="row m-0">
 									<div class="col-md-6 p-0 pt-3 pe-1 position-relative" style="font-size: 10pt">
@@ -125,7 +126,9 @@
 									</div>
 									<div class="col-md-6 p-0">
 										<div class="input-group-text bg-gradient" style="justify-content: center">
-											<span sg-property="hours_in_day_desc">4 часа/день</span><sup sg-css="hours_in_day >= 5 ? 'text-danger' : ''">1</sup><span sg-css="!relocation && !deadline ? 'visible-inline' : 'no-visible'">&nbsp;<span sg-property="hours_in_day" sg-format="formatHoursExtraCharge" sg-css="this.constructor.HOURS_KOEF[hours_in_day] > 0 ? 'text-danger' : 'text-success'">-20%</span></span>
+											<span sg-property="hours_in_day_desc">4 часа/день</span><sup sg-css="hours_in_day >= 5 ? 'text-danger' : ''">1</sup>
+											<span sg-css="!relocation && !deadline ? 'visible-inline' : 'no-visible'">&nbsp;<span sg-property="hours_in_day" sg-format="formatHoursExtraCharge" sg-css="this.constructor.HOURS_KOEF[hours_in_day] > 0 ? 'text-danger' : 'text-success'">-20%</span></span>
+											<span sg-css="deadline ? 'visible-inline' : 'no-visible'">&nbsp;<span sg-property="deadline_extra_charge_per_h" sg-format="formatHoursExtraCharge" class="text-danger">+40%</span></span>
 										</div>
 									</div>
 								</div>
@@ -208,7 +211,7 @@
 								<div class="col pe-0">
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="es_node" type="checkbox" sg-property="es_node">
-										<label class="form-check-label text-nowrap" for="es_node">ES6+/NodeJS <span sg-property="es_node_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+										<label class="form-check-label text-nowrap" for="es_node"><span class="tech-title-minimize">ES9+/NodeJS</span> <span sg-property="es_node_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
 									</div>
 								</div>
 								<div class="col ps-0">
@@ -228,7 +231,7 @@
 								<div class="col ps-0">
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="typescript" type="checkbox" sg-property="typescript">
-										<label class="form-check-label" for="typescript">Typescript <span sg-property="typescript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+										<label class="form-check-label" for="typescript"><span class="tech-title-minimize">Typescript</span> <span sg-property="typescript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
 									</div>
 								</div>
 							</div>

@@ -37,6 +37,7 @@ class Salary extends SGModelView {
 		hours_in_day: 4,
 		relocation: false,
 		deadline: false,
+		deadline_extra_charge_per_h: 8, // Ставка для 8-ч раб.дня
 		otech: false,
 		code: '1',
 		es_node: true,
@@ -97,6 +98,7 @@ class Salary extends SGModelView {
 		hours_in_day: SGModel.TYPE_NUMBER,
 		relocation: SGModel.TYPE_BOOLEAN,
 		deadline: SGModel.TYPE_BOOLEAN,
+		deadline_extra_charge_per_h: SGModel.TYPE_NUMBER,
     otech: SGModel.TYPE_BOOLEAN,
 		code: SGModel.TYPE_STRING,
 		es_node: SGModel.TYPE_BOOLEAN,
@@ -166,7 +168,7 @@ class Salary extends SGModelView {
 	});
 	
 	static NDFL = 0.13;
-	static INSURANCE = 0.22 + 0.051+0.029 + 0.002;
+	static INSURANCE = 0.22 + 0.051 + 0.029 + 0.002;
 	
 	static LEVELS = new OptionsMethods({
 		"t": [-50, 'trainee'],
@@ -315,47 +317,8 @@ class Salary extends SGModelView {
 		this.on(Object.values(Salary.hashProperties), this.calc);
 		this.on('usdrub', this.calc, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
-		// Попытка обуздать input range, ято бы он не реагировал при touch-перемещения экрана
-		/*this.onInputRangePointerDown = this.onInputRangePointerDown.bind(this);
-		this.onInputRangePointerMove = this.onInputRangePointerMove.bind(this);
-		this.onInputRangePointerOut = this.onInputRangePointerOut.bind(this);
-		this.onInputRangePointerLeave = this.onInputRangePointerLeave.bind(this);
-		this.onInputRangePointerCancel = this.onInputRangePointerCancel.bind(this);
-		this.onInputRangePointerUp = this.onInputRangePointerUp.bind(this);
-		this.pointerIds = [];
-		let inputsTypeRange = document.querySelectorAll('input[type=range]');
-		for (let i = 0; i < inputsTypeRange.length; i++) {
-			inputsTypeRange[i].addEventListener('pointerdown', this.onInputRangePointerDown);
-			inputsTypeRange[i].addEventListener('pointermove', this.onInputRangePointerMove);
-			inputsTypeRange[i].addEventListener('pointerout', this.onInputRangePointerOut);
-			inputsTypeRange[i].addEventListener('pointerleave', this.onInputRangePointerLeave);
-			inputsTypeRange[i].addEventListener('pointercancel', this.onInputRangePointerCancel);
-			inputsTypeRange[i].addEventListener('pointerup', this.onInputRangePointerUp);
-		}*/
-		
 		this.set("initialized", true);
 	}
-	
-	/*onInputRangePointerDown(evt) {
-		this.pointerIds[evt.pointerId] = true;
-		console.log('PointerDown');
-	}
-	onInputRangePointerMove(evt) {
-		console.log('PointerMove');
-		console.log(evt);
-	}
-	onInputRangePointerOut(evt) {
-		console.log('PointerOut');
-	}
-	onInputRangePointerLeave(evt) {
-		console.log('PointerLeave');
-	}
-	onInputRangePointerCancel(evt) {
-		console.log('PointerCancel');
-	}
-	onInputRangePointerUp(evt) {
-		console.log('PointerUp');
-	}*/
 	
 	calc() {
 		let hours = 4 * this.get("days_in_week") * this.get("hours_in_day");
