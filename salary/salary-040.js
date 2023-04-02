@@ -30,7 +30,7 @@ class Salary extends SGModelView {
 		
 		version: 4,
 		
-		contract: 's',
+		contract: 'l',
 		level: 'm',
 		days_in_week: 5,
 		england: 'a',
@@ -43,7 +43,7 @@ class Salary extends SGModelView {
 		es_node: true,
 		vue3: false,
 		react: false,
-		postgresql: true,
+		postgresql: false,
 		php: false,
 		cpp: false,
 		typescript: false,
@@ -316,6 +316,10 @@ class Salary extends SGModelView {
 		
 		this.on(Object.values(Salary.hashProperties), this.calc);
 		this.on('usdrub', this.calc, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
+		
+		['contract', 'level', 'days_in_work', 'england'].forEach((name) => {
+			this.set(name, this.get(name), void 0, SGModel.FLAG_FORCE_CALLBACKS);
+		});
 		
 		this.set("initialized", true);
 	}

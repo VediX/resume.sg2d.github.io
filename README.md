@@ -22,8 +22,8 @@
 
 ## Занятость
 
-- Частичная занятость 2-6ч/фуллтайм
-- 3-6 дней в неделю
+- Частичная занятость 2-7ч/фуллтайм
+- 1-7 дней в неделю
 - Гибкий график / Проектная работа
 - К командировкам не готов
 - Релокация очень дорого
@@ -33,46 +33,44 @@
 
 ## Ключевые факты и пожелания к будущей работе
 
-С 2004 года работал в качестве Backend, Frontend и Fullstack разработчика, как в офисах, так и удалённо. Опыт работы более 13 лет. Сейчас отдаю предпочтение разработке на ES.Next (Javascript), VanillaJS, NodeJS, PostgreSQL, PL/pgSQL. Допускаю немного HTML и CSS. Рассмотрю участие в разработке отечественных аналогов западного ПО и ОС. Рассмотрю своё участие в проектах по разработке веб-приложений и сайтов, информационных систем и баз данных, мобильных приложений, программированию графики, разработке игр определенного жанра - со всеми перечисленными направлениями есть опыт работы. Рассмотрю другие типы направлений. В плане роли предпочитаю быть просто Junior/Middle/Senior-исполнителем в зависимости от используемых технологий. Допускаю карьерный рост до тимлида/архитектора, если сотрудничество в компании будет долгосрочным и интересным с нескольких точек зрения (технологии, проекты, люди, занятость, уровень з/п).
+С 2004 года работаю в качестве Backend, Frontend и Fullstack разработчика, как в офисах, так и удалённо. Сейчас отдаю предпочтение разработке на ES.Next (Javascript), VanillaJS, NodeJS, PostgreSQL, PL/pgSQL. Допускаю немного HTML и CSS. Рассмотрю участие в разработке отечественных аналогов западного ПО и ОС. Рассмотрю своё участие в проектах по разработке веб-приложений и сайтов, информационных систем и баз данных, мобильных приложений, программированию графики, разработке игр определенного жанра - со всеми перечисленными направлениями есть опыт работы. Рассмотрю другие типы направлений. В плане роли предпочитаю быть просто Junior/Middle/Senior-исполнителем в зависимости от используемых технологий. Допускаю карьерный рост до тимлида/архитектора, если сотрудничество в компании будет долгосрочным и интересным с нескольких точек зрения (технологии, проекты, люди, занятость, уровень з/п).
 
 ### Мои знания и навыки:
 
 - Javascript: senior
-- ES6+: middle
-- NodeJS, Express.js, npm: middle
-- TypeScript / Google Traceur-compiler: junior
-- PHP5 / PHP7+: middle / junior
-- HTML5, VanillaJS: +
-- Bootstrap, CSS2 (LESS): +
+- ES6+/NodeJS, express.js: middle+
+- PostgreSQL, PL/pgSQL: middle
+- TypeScript / Google Traceur-compiler: junior+
+- Delphi/C++ (Embarcadero RAD Studio): junior+
+- Lua, Visual Basic (разработка 2D игр): junior+
+- C# (Visual Studio): junior+
+- SAPUI5 (Fiori Developer), SAP Cloud Platform: junior+
+- PHP5 / PHP7+: middle / junior+
+- MSSQL, Firebird/Interbase, MySQL, SQLite: junior+
 - BackboneJS, KnockoutJS: +
-- VueJS, React: trainee
 - Lodash, Underscore.js, jQuery: +
-- PixiJS (+PixiJS Sound) / PhaserJS: +
-- Smarty, mustache: +
-- SQL, MySQL, SQLite: +
-- PostgreSQL, PL/pgSQL: +
-- MSSQL, Firebird/Interbase: junior
+- Smarty (PHP), mustache: +
+- HTML5, Bootstrap, CSS2/LESS: +
 - Redis: +
-- rabbitMQ: trainee
-- websocket, Socket.io-client: +
-- SAPUI5 (Fiori Developer), SAP Cloud Platform: junior
-- Delphi/C++ (Embarcadero RAD Studio): junior
-- C# (Visual Studio): junior
-- Lua, Visual Basic (разработка 2D игр): junior
-- Roblox: junior
-- QUIK, Lua, TSLab 2, C# (торговые роботы, индикаторы): +
-- Docker: +
-- Linux: +
+- grpc, websocket: +
+- Docker (shell+docker+nodejs+nginx(proxy+balancer)): +
+- Linux, Bash-скрипты: +
 - Nginx (proxy, ssl): +
 - Apache (htaccess, mod rewrite, httpd.conf): +
-- Интеграция Telegram Bot, MobileID (JWT, AES, HSA, RS256, HS256): +
+- Интеграция Telegram Bot: +
+- Интеграция MobileID (JWT, AES, HSA, RS256, HS256): +
 - Netbeans, WebStorm, Visual Studio, Eclipse, Chrome: +
 - Fiddler (https proxy), Postman: +
 - Android Studio (AVD): +
-- SVN, Git: +
+- Git: +
 - Webpack, ESLint: +
 - Jira, Confluence, Bitbucket: +
-- YouTrack & GitLab (linux+nginx+https+docker=server): +
+- YouTrack & GitLab (linux+nginx+ssl+dns+docker=server): +
+- PixiJS (+Sound) / PhaserJS: +
+- QUIK/Lua, TSLab2/C# (торговые роботы, индикаторы): +
+- VueJS, React: trainee
+- Roblox: junior
+- rabbitMQ: trainee
 - CI/CD: trainee
 
 ### Условия сотрудничества
@@ -81,7 +79,7 @@
 * В приоритете предложения с постоянной работой с 4 часовым рабочим днём.
 * Если у вас есть дедлайны, то условия сотрудничества эквивалентны фуллтайму (почасовая ставка с наценкой +40%)!
 * Фуллтайм очень дорого! Для начала предлагаю part-time что бы понять - подходим мы друг другу или нет.
-* Перерывы входят в почасовую оплату: для занятости до 4-х часов/день перерыв 5 минут/час, 4-6 часов - 10 минут/час, 6-8 часов - 15 мин/час.
+* Перерывы входят в почасовую оплату: для занятости до 4-х часов/день перерыв 5 минут/час, 4-6 часов - до 10 минут/час, 6-8 часов - до 15 мин/час.
 * Рассматриваю освоение новых технологий и ЯП, которых нет в моих навыках, а также улучшение текущих до требуемого уровня.
 * Предпочитаю работать самостоятельно, общаться только по делу, вопросы задаю только когда понимаю, что это ускорит выполнение задачи и при этом (в идеале) не займёт много времени у коллег.
 * Рассматриваю только удалённую работу (релокация очень дорого)!
