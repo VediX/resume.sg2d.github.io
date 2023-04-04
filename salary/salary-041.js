@@ -272,9 +272,16 @@ class Salary extends SGModelView {
 			this.set('code_desc', Salary.CODES[code][1]);
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
-		this.on("hours", (hours)=>{
-			this.set("hours_meas", this.getHoursMeas(hours));
+		this.on('hours', (hours)=>{
+			this.set('hours_meas', this.getHoursMeas(hours));
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
+		
+		this.on('deadline', () => {
+			['days_in_week_1', 'days_in_week_2', 'days_in_week_3', 'days_in_week_4'].forEach((name) => {
+				this.set(name, this.get(name), void 0, SGModel.FLAG_FORCE_CALLBACKS);
+			});
+			this.set('days_in_week', this.get('days_in_week'), void 0, SGModel.FLAG_FORCE_CALLBACKS);
+		});
 		
 		/*this.on("options_expand", (options_expand)=>{
 			this.set("options_expand_icon", options_expand ? "&nbsp;&#9660;" : "...");
@@ -444,6 +451,14 @@ class Salary extends SGModelView {
 		const per = Salary.HOURS_KOEF[hour];
 		if (! per) return '';
 		return (per > 0 ? '+' : '') + per + '%';
+	}
+	
+	cssDangerOrSuccessAndDiscountForDaysInWeek(propertyOrValue) {
+		let cssClass = this.cssDangerOrSuccess(propertyOrValue);
+		if (this.get('deadline')) {
+			cssClass += ' no-visible';
+		}
+		return cssClass;
 	}
 	
 	cssDangerOrSuccess(propertyOrValue) {
