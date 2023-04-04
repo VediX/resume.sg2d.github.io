@@ -71,8 +71,11 @@ class Salary extends SGModelView {
 		salary_year: 0,
 		
 		usdrub: 0,
+		cnyrub: 0,
 		salary_month_usd: 0,
 		rate_usd: 0,
+		salary_month_cny: 0,
+		rate_cny: 0,
 		
 		salary_labor_fot: 0,
 		salary_labor_ndfl: 0,
@@ -214,9 +217,10 @@ class Salary extends SGModelView {
 		"vanilla",
 	];
 	
-	initialize() {
+	async initialize() {
 		
-		this.checkDollarInRubles();
+		await this.checkDollarInRubles();
+		await this.checkCNYInRubles();
 		
 		Salary.CONTRACTS._inverse = {};
 		for (let p in Salary.CONTRACTS) {
@@ -377,7 +381,9 @@ class Salary extends SGModelView {
 		this.set("salary_month", salary);
 		this.set("salary_year", this.get("salary_month") * (this.get("contract") === Salary.CONTRACTS.symb('labor') ? 12 : 11));
 		this.set('rate_usd', SGModel.roundTo(Salary.USDKOEF * this.get('rate') / this.get('usdrub'), 0));
-		this.set('salary_month_usd', SGModel.roundTo(1.1 * this.get('salary_month') / this.get('usdrub'), -2));
+		this.set('salary_month_usd', SGModel.roundTo(Salary.USDKOEF * this.get('salary_month') / this.get('usdrub'), -2));
+		this.set('rate_cny', SGModel.roundTo(this.get('rate') / this.get('cnyrub'), 1));
+		this.set('salary_month_cny', SGModel.roundTo(this.get('salary_month') / this.get('cnyrub'), -2));
 		
 		if (this.get("contract") === Salary.CONTRACTS.symb('labor')) {
 			const sml_fot = salary + salary * Salary.NDFL;
@@ -500,25 +506,49 @@ class Salary extends SGModelView {
 		this.set("contract", Salary.CONTRACTS.symb('self'));
 	}
 	
-	static currencyURL = 'https://www.cbr-xml-daily.ru/daily_json.js';
+	//static currencyURL = 'https://www.cbr-xml-daily.ru/daily_json.js';
+	static currencyURL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/rub.json';
+	static currencyURLcny = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cny/rub.json';
 	
 	checkDollarInRubles() {
-		
-		var xhr = new XMLHttpRequest();
-		xhr.onload = (evt)=>{
-			try {
-				this.set('usdrub', SGModel.roundTo(xhr.response.Valute.USD.Value, 2));
-			} catch(err) {
-				// no code
-			}
-		};
-		xhr.onerror = (err)=>{
-			// no code
-		};
-		
-		xhr.open('GET', Salary.currencyURL);
-		xhr.responseType = 'json';
-		xhr.send();
+		return new Promise((resolve, reject) => {
+			const xhr = new XMLHttpRequest();
+			xhr.onload = (evt)=>{
+				try {
+					//this.set('usdrub', SGModel.roundTo(xhr.response.Valute.USD.Value, 2));
+					this.set('usdrub', SGModel.roundTo(xhr.response.rub, 2));
+					resolve();
+				} catch(err) {
+					reject(err);
+				}
+			};
+			xhr.onerror = (err)=>{
+				reject(err);
+			};
+			xhr.open('GET', Salary.currencyURL);
+			xhr.responseType = 'json';
+			xhr.send();
+		});
+	}
+
+	checkCNYInRubles() {
+		return new Promise((resolve, reject) => {
+			const xhr = new XMLHttpRequest();
+			xhr.onload = (evt)=>{
+				try {
+					this.set('cnyrub', SGModel.roundTo(xhr.response.rub, 2));
+					resolve();
+				} catch(err) {
+					reject(err);
+				}
+			};
+			xhr.onerror = (err)=>{
+				reject(err);
+			};
+			xhr.open('GET', Salary.currencyURLcny);
+			xhr.responseType = 'json';
+			xhr.send();
+		});
 	}
 }
 

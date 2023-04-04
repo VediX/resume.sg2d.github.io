@@ -51,7 +51,7 @@
   </script>
 	<link href="salary.css" rel="stylesheet">
 	<script type="module" src="./../res/sg-model/sg-model-view-21.js" defer></script>
-	<script type="module" src="salary-040.js"></script>
+	<script type="module" src="salary-041.js"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
 
@@ -289,6 +289,9 @@
 						<div sg-css="usdrub > 0 ? 'visible-block': 'no-visible'">
 							<p class="text-center fw-bold lh-1">Total: $<span sg-property="salary_month_usd" sg-format="getNumThinsp">0</span> <span class="text-nowrap">($<span sg-property="rate_usd" sg-format="getNumThinsp">0</span>/hour)<sup>7</sup></span></p>
 						</div>
+						<div sg-css="cnyrub > 0 ? 'visible-block': 'no-visible'">
+							<p class="text-center fw-bold lh-1">总计: Ұ<span sg-property="salary_month_cny" sg-format="getNumThinsp">0</span> <span class="text-nowrap">(Ұ<span sg-property="rate_cny" sg-format="getNumThinsp">0</span>/小时)</span></p>
+						</div>
 						<!--<div class="for-labor-contract" sg-css="contract === this.constructor.CONTRACTS.symb('labor') ? 'visible-block' : 'no-visible'">
 							
 							<hr class="my-1"/>
@@ -330,7 +333,7 @@
 						<sup>6</sup> &mdash; Со дня, когда доходы контрагента-самозанятого (без статуса ИП) превысили <span sg-property="contract_self_limit" sg-format="getNumThinsp">0</span>&nbsp;руб.,
 						вы обязаны удерживать НДФЛ и перечислять страховые взносы с выплат в его пользу. Переоформлять договор с ним необязательно, <a href="http://www.consultant.ru/document/cons_doc_LAW_318780/57fe9d25246fad33498a9766e465c4c35c1113b6/#dst100069" target="_blank">разъясняет ФНС</a>. <span class="text-success">Также самозанятый может зарегистрироваться как ИП.</span>
 					</p>
-					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="usdrub > 0 ? 'visible-block': 'no-visible'"><sup>7</sup> &mdash; при оплате в валюте +<span>25</span>%! Текущий курс: <span sg-property="usdrub"></span> руб/$</p>
+					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="usdrub > 0 ? 'visible-block': 'no-visible'"><sup>7</sup> &mdash; при оплате в западных валютах +<span>25</span>%!<br/>Текущие курсы: <span sg-property="usdrub"></span> руб/$, <span sg-property="cnyrub"></span> руб/Ұ</p>
 				</div>
 				<div class="col"></div>
 			</div>
@@ -340,7 +343,7 @@
 			<div class="container">
 				<div class="text-nowrap">Power By <a href="https://model.sg2d.ru/#mvvm-%D0%BF%D0%B0%D1%82%D1%82%D0%B5%D1%80%D0%BD-%D0%B2-sgmodelview">SGModelView</a></div>
 				<div class="text-nowrap">&copy; 2021-<span sg-property="current_year">2023</span> Kalashnikov Ilya</div>
-				<div class="text-nowrap"><a href="https://www.cbr-xml-daily.ru/">Курсы валют, API</a></div>
+				<!--<div class="text-nowrap"><a href="https://www.cbr-xml-daily.ru/">Курсы валют, API</a></div>-->
 			</div>
 		</footer>
 	</div>
