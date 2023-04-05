@@ -219,8 +219,10 @@ class Salary extends SGModelView {
 	
 	async initialize() {
 		
-		await this.checkDollarInRubles();
-		await this.checkCNYInRubles();
+		try {
+			await this.checkDollarInRubles();
+			await this.checkCNYInRubles();
+		} catch (err) {}
 		
 		Salary.CONTRACTS._inverse = {};
 		for (let p in Salary.CONTRACTS) {
@@ -522,16 +524,24 @@ class Salary extends SGModelView {
 	}
 	
 	//static currencyURL = 'https://www.cbr-xml-daily.ru/daily_json.js';
-	static currencyURL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/rub.json';
-	static currencyURLcny = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cny/rub.json';
+	static currencyURL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/$DATE$/currencies/usd/rub.json';
+	static currencyURLcny = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/$DATE$/currencies/cny/rub.json';
 	
 	checkDollarInRubles() {
+		return this.getCourceInRubles(Salary.currencyURL, 'usdrub');
+	}
+
+	checkCNYInRubles() {
+		return this.getCourceInRubles(Salary.currencyURLcny, 'cnyrub');
+	}
+	
+	getCourceInRubles(currencyURL, currencyCode, precision = 2) {
 		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
 			xhr.onload = (evt)=>{
 				try {
 					//this.set('usdrub', SGModel.roundTo(xhr.response.Valute.USD.Value, 2));
-					this.set('usdrub', SGModel.roundTo(xhr.response.rub, 2));
+					this.set(currencyCode, SGModel.roundTo(xhr.response.rub, precision));
 					resolve();
 				} catch(err) {
 					reject(err);
@@ -540,27 +550,10 @@ class Salary extends SGModelView {
 			xhr.onerror = (err)=>{
 				reject(err);
 			};
-			xhr.open('GET', Salary.currencyURL);
-			xhr.responseType = 'json';
-			xhr.send();
-		});
-	}
-
-	checkCNYInRubles() {
-		return new Promise((resolve, reject) => {
-			const xhr = new XMLHttpRequest();
-			xhr.onload = (evt)=>{
-				try {
-					this.set('cnyrub', SGModel.roundTo(xhr.response.rub, 2));
-					resolve();
-				} catch(err) {
-					reject(err);
-				}
-			};
-			xhr.onerror = (err)=>{
-				reject(err);
-			};
-			xhr.open('GET', Salary.currencyURLcny);
+			xhr.open('GET', currencyURL.replace('$DATE$', new Date().toISOString().substring(0, 10)));
+			//xhr.setRequestHeader('Cache-Control', 'no-cache, no-store, max-age=0');
+			//xhr.setRequestHeader('Expires', 'Tue, 01 Jan 2000 0:00:00 GMT');
+			//xhr.setRequestHeader('Pragma', 'no-cache');
 			xhr.responseType = 'json';
 			xhr.send();
 		});
