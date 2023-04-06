@@ -51,7 +51,7 @@
   </script>
 	<link href="salary.css" rel="stylesheet">
 	<script type="module" src="./../res/sg-model/sg-model-view-41.js" defer></script>
-	<script type="module" src="salary-041.js"></script>
+	<script type="module" src="salary-042.js"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
 
@@ -83,15 +83,17 @@
 							</ul>
 						</div>
 						
-						<div class="btn-group" title="Если при устройстве на работу будет уровень Стажер или Junior, то в течение нескольких месяцев, но не более 1 года, ожидаю роста как минимум до Middle уровня, что также означает рост зарплатных ожиданий согласно форме расчета!">
+						<div class="btn-group" title="Если при устройстве на работу будет уровень меньше Middle, то в течение нескольких месяцев, но не более 1 года, ожидаю роста как минимум до Middle уровня, что также означает рост зарплатных ожиданий согласно форме расчета!">
 							<button sg-property="level" sg-type="dropdown" id="level" class="btn dropdown-toggle btn-success bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Уровень навыков: Middle</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="level">
-								<li class="dropdown-item" sg-option="t" sg-dropdown="level">Уровень навыков: Trainee <span sg-property="level_trainee" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-								<li class="dropdown-item" sg-option="j" sg-dropdown="level">Уровень навыков: Junior <span sg-property="level_junior" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-								<li class="dropdown-item" sg-option="m" sg-dropdown="level">Уровень навыков: Middle <span sg-property="level_middle" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-								<li class="dropdown-item" sg-option="s" sg-dropdown="level">Уровень навыков: Senior <span sg-property="level_senior" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-								<li class="dropdown-item" sg-option="l" sg-dropdown="level">Уровень навыков: Team Lead <span sg-property="level_teamlead" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="t" sg-dropdown="level">AVG навыков: Trainee <span sg-property="level_trainee" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="j" sg-dropdown="level">AVG навыков: Junior <span sg-property="level_junior" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="i" sg-dropdown="level">AVG навыков: Junior+ <span sg-property="level_junior_plus" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="m" sg-dropdown="level">AVG навыков: Middle <span sg-property="level_middle" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="n" sg-dropdown="level">AVG навыков: Middle+ <span sg-property="level_middle_plus" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="s" sg-dropdown="level">AVG навыков: Senior <span sg-property="level_senior" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="l" sg-dropdown="level">AVG навыков: Team Lead <span sg-property="level_teamlead" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
 							</ul>
 						</div>
 					
@@ -324,8 +326,7 @@
 
 					<p class="text-dark" style="font-size: 0.8rem;">* Уровень оплаты рассчитывается чистыми (на руки)!</p>
 					<p class="" style="font-size: 0.8rem;" sg-css="hours_in_day >= 5 ? 'text-danger': ''"><sup>1</sup> &mdash; При <span sg-property="hours_in_day">4</span> часовой занятости перерыв до <span sg-property="timeout">5</span> минут входит в час работы!</p>
-					<!--<p class="text-danger" style="font-size: 0.8rem;" sg-css="relocation && !otech ? 'visible-block': 'no-visible'"><sup>2</sup> &mdash; При релокации минимальная месячная оплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&nbsp;000</span>&nbsp;руб., а минимальная ставка <span sg-property="relocation_rate_min" sg-format="getNumThinsp">5&nbsp;000</span>&nbsp;руб./час</p>-->
-					<p class="text-danger" style="font-size: 0.8rem;" sg-css="relocation ? 'visible-block': 'no-visible'"><sup>2</sup> &mdash; При релокации действует повышенная ставка </p>
+					<p class="text-danger" style="font-size: 0.8rem;" sg-css="relocation ? 'visible-block': 'no-visible'"><sup>2</sup> &mdash; При релокации по территории РФ действует повышенная ставка и минимальная месячная оплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&nbsp;000</span>&nbsp;руб.</p>
 					<p class="text-danger" style="font-size: 0.8rem;" sg-css="deadline && hours_in_day !== 8 ? 'visible-block': 'no-visible'"><sup>3</sup> &mdash; При наличии дедлайнов ставка не меньше ставки фуллтайма с пятидневной рабочей неделей! Под дедлайном понимается некий срок за который нужно выполнить определенный пул задач.</p>
 					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="rate == rate_hour_min ? 'visible-block': 'no-visible'"><sup>4</sup> &mdash; минимальная почасовая ставка <span sg-property="rate_hour_min" sg-format="getNumThinsp">500</span>&nbsp;руб.</p>
 					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-block': 'no-visible'"><sup>5</sup> &mdash; годовая оплата рассчитывается за 11 месяцев.</p>
