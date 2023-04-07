@@ -40,7 +40,9 @@ class Salary extends SGModelView {
 		deadline_extra_charge_per_h: 8, // Ставка для 8-ч раб.дня
 		otech: false,
 		code: '1',
-		es_node: true,
+		javascript: false,
+		es_node: false,
+		java: false,
 		vue3: false,
 		react: false,
 		postgresql: false,
@@ -50,13 +52,15 @@ class Salary extends SGModelView {
 		vanilla: false,
 		
 		// скидки/наценки в %
-		es_node_koef: -10,
-		vue3_koef: 5,
-		react_koef: 40,
+		javascript_koef: -5,
+		es_node_koef: -5,
+		java_koef: +50,
+		vue3_koef: +5,
+		react_koef: +40,
 		postgresql_koef: -5,
-		php_koef: 30,
-		cpp_koef: 10,
-		typescript_koef: 20,
+		php_koef: +30,
+		cpp_koef: +10,
+		typescript_koef: +20,
 		vanilla_koef: -5,
 		
 		rate_hour_min: 0,
@@ -103,7 +107,9 @@ class Salary extends SGModelView {
 		deadline_extra_charge_per_h: SGModel.TYPE_NUMBER,
     otech: SGModel.TYPE_BOOLEAN,
 		code: SGModel.TYPE_STRING,
+		javascript: SGModel.TYPE_BOOLEAN,
 		es_node: SGModel.TYPE_BOOLEAN,
+		java: SGModel.TYPE_BOOLEAN,
 		vue3: SGModel.TYPE_BOOLEAN,
 		react: SGModel.TYPE_BOOLEAN,
 		postgresql: SGModel.TYPE_BOOLEAN,
@@ -137,7 +143,7 @@ class Salary extends SGModelView {
 		G: "code",
 		H: "hours_in_day",
 		//I: "",
-		//J: "",
+		J: "javascript",
 		//K: "",
 		
 		//M: "",
@@ -152,7 +158,7 @@ class Salary extends SGModelView {
 		W: "deadline",
 		V: "vue3",
 		//X: "",
-		//Y: "",
+		Y: "java",
     Z: "otech",
 		
 		L: "level",
@@ -209,14 +215,16 @@ class Salary extends SGModelView {
 	static TIMEOUTS = [void 0, 5, 5, 5, 5, 10, 10, 15, 15];
 	
 	static _fields_koef = {
+		'javascript': 's',
 		'es_node': 'm',
 		'react': 't',
 		'postgresql': 'm',
-		'vue3': 't',
+		'vue3': 'j',
 		'php': 'i',
 		'cpp': 'i',
-		'typescript': 'i',
+		'typescript': 'j',
 		'vanilla': 'm',
+		'java': 'j',
 	};
 	
 	async initialize() {

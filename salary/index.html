@@ -58,11 +58,9 @@
   <body class="bg-light">
     
 	<div class="container">
-		<main class="pb-5">
+		<main class="pb-2">
 			<div class="py-4 text-center">
-				<h2></h2>
-				<p class="lead fs-6">Уважаемые работодатели/партнёры! Вы можете рассчитать примерный ожидаемый уровень зарплаты/стоимость моих услуг в зависимости от условий сотрудничества и технологий используемых в проектах!</p>
-				<p><a href="/" class="link-success">Перейти в резюме...</a></p>
+				<p class="lead fs-6 text-muted fw-bold">Уважаемые работодатели/партнёры!<br/>Вы можете рассчитать примерную ожидаемую стоимость моих услуг в зависимости от условий сотрудничества и технологий используемых в проектах!</p>
 			</div>
 			
 			<h5 id="content_loading" class="text-center" sg-css="initialized ? 'loading-hide' : ''">Загрузка формы...</h5>
@@ -83,20 +81,6 @@
 							</ul>
 						</div>
 						
-						<div class="btn-group" title="Если при устройстве на работу будет уровень меньше Middle, то в течение нескольких месяцев, но не более 1 года, ожидаю роста как минимум до Middle уровня, что также означает рост зарплатных ожиданий согласно форме расчета!">
-							<button sg-property="level" sg-type="dropdown" id="level" class="btn dropdown-toggle btn-success bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Уровень навыков: Middle</button>
-							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="level">
-								<li class="dropdown-item" sg-option="t" sg-dropdown="level">AVG навыков: Trainee <span sg-property="level_trainee" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-								<li class="dropdown-item" sg-option="j" sg-dropdown="level">AVG навыков: Junior <span sg-property="level_junior" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-								<li class="dropdown-item" sg-option="i" sg-dropdown="level">AVG навыков: Junior+ <span sg-property="level_junior_plus" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-								<li class="dropdown-item" sg-option="m" sg-dropdown="level">AVG навыков: Middle <span sg-property="level_middle" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-								<li class="dropdown-item" sg-option="n" sg-dropdown="level">AVG навыков: Middle+ <span sg-property="level_middle_plus" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-								<li class="dropdown-item" sg-option="s" sg-dropdown="level">AVG навыков: Senior <span sg-property="level_senior" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-								<li class="dropdown-item" sg-option="l" sg-dropdown="level">AVG навыков: Team Lead <span sg-property="level_teamlead" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
-							</ul>
-						</div>
-					
 						<div class="btn-group">
 							<button sg-property="days_in_week" sg-type="dropdown" id="days_in_week" class="btn btn-info dropdown-toggle bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Занятость: 5 дней в неделю</button>
@@ -208,12 +192,26 @@
 							</div>
 						</fieldset>
 						
+						<div class="btn-group" title="Если при устройстве на работу будет уровень меньше Middle, то в течение нескольких месяцев, но не более 1 года, ожидаю роста как минимум до Middle уровня, что также означает рост зарплатных ожиданий согласно форме расчета!">
+							<button sg-property="level" sg-type="dropdown" id="level" class="btn dropdown-toggle btn-success bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Уровень навыков: Middle</button>
+							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="level">
+								<li class="dropdown-item" sg-option="t" sg-dropdown="level">AVG навыков: Trainee <span sg-property="level_trainee" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="j" sg-dropdown="level">AVG навыков: Junior <span sg-property="level_junior" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="i" sg-dropdown="level">AVG навыков: Junior+ <span sg-property="level_junior_plus" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="m" sg-dropdown="level">AVG навыков: Middle <span sg-property="level_middle" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="n" sg-dropdown="level">AVG навыков: Middle+ <span sg-property="level_middle_plus" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="s" sg-dropdown="level">AVG навыков: Senior <span sg-property="level_senior" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+								<li class="dropdown-item" sg-option="l" sg-dropdown="level">AVG навыков: Team Lead <span sg-property="level_teamlead" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></li>
+							</ul>
+						</div>
+						
 						<div class="container pe-0 ps-0" id="technologies">
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="es_node" type="checkbox" sg-property="es_node">
-										<label class="form-check-label text-nowrap" for="es_node"><span class="tech-title-minimize">ES9+/NodeJS</span> <span sg-property="es_node_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+										<input class="form-check-input" id="javascript" type="checkbox" sg-property="javascript">
+										<label class="form-check-label text-nowrap" for="javascript"><span>Javascript</span> <span sg-property="javascript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
 									</div>
 								</div>
 								<div class="col ps-0">
@@ -226,8 +224,8 @@
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="postgresql" type="checkbox" sg-property="postgresql">
-										<label class="form-check-label text-nowrap" for="postgresql">PostgreSQL <span sg-property="postgresql_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+										<input class="form-check-input" id="es_node" type="checkbox" sg-property="es_node">
+										<label class="form-check-label text-nowrap" for="es_node"><span>NodeJS</span> <span sg-property="es_node_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
 									</div>
 								</div>
 								<div class="col ps-0">
@@ -240,8 +238,8 @@
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="vanilla" type="checkbox" sg-property="vanilla">
-										<label class="form-check-label" for="vanilla">VanillaJS <span sg-property="vanilla_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+										<input class="form-check-input" id="postgresql" type="checkbox" sg-property="postgresql">
+										<label class="form-check-label text-nowrap" for="postgresql">PostgreSQL <span sg-property="postgresql_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
 									</div>
 								</div>
 								<div class="col ps-0">
@@ -254,14 +252,28 @@
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="vue3" type="checkbox" sg-property="vue3">
-										<label class="form-check-label text-nowrap" for="vue3">Vue3 <span sg-property="vue3_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+										<input class="form-check-input" id="vanilla" type="checkbox" sg-property="vanilla">
+										<label class="form-check-label" for="vanilla">VanillaJS <span sg-property="vanilla_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
 									</div>
 								</div>
 								<div class="col ps-0">
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="react" type="checkbox" sg-property="react">
 										<label class="form-check-label text-nowrap" for="react">React <span sg-property="react_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col pe-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="vue3" type="checkbox" sg-property="vue3">
+										<label class="form-check-label text-nowrap" for="vue3">Vue3 <span sg-property="vue3_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
+									</div>
+								</div>
+								<div class="col ps-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="java" type="checkbox" sg-property="java">
+										<label class="form-check-label text-nowrap" for="java">Java <span sg-property="java_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></label>
 									</div>
 								</div>
 							</div>
@@ -342,6 +354,7 @@
 
 		<footer class="my-1 pt-1 mb-3 text-muted text-center text-small my-fixed" sg-css="initialized ? 'my-static' : ''">
 			<div class="container">
+				<div><a href="/" class="link-success">Перейти в резюме...</a><br/>&nbsp;</div>
 				<div class="text-nowrap">Power By <a href="https://model.sg2d.ru/#mvvm-%D0%BF%D0%B0%D1%82%D1%82%D0%B5%D1%80%D0%BD-%D0%B2-sgmodelview">SGModelView</a></div>
 				<div class="text-nowrap">&copy; 2021-<span sg-property="current_year">2023</span> Kalashnikov Ilya</div>
 				<!--<div class="text-nowrap"><a href="https://www.cbr-xml-daily.ru/">Курсы валют, API</a></div>-->
