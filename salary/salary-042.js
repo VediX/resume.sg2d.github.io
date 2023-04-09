@@ -50,6 +50,8 @@ class Salary extends SGModelView {
 		cpp: false,
 		typescript: false,
 		vanilla: false,
+		python: false,
+		goland: false,
 		
 		// скидки/наценки в %
 		javascript_koef: -5,
@@ -59,9 +61,11 @@ class Salary extends SGModelView {
 		react_koef: +40,
 		postgresql_koef: -5,
 		php_koef: +30,
-		cpp_koef: +10,
-		typescript_koef: +20,
+		cpp_koef: +20,
+		typescript_koef: +10,
 		vanilla_koef: -5,
+		goland_koef: +50,
+		python_koef: +50,
 		
 		rate_hour_min: 0,
 		relocation_month_min: 0,
@@ -117,6 +121,8 @@ class Salary extends SGModelView {
 		cpp: SGModel.TYPE_BOOLEAN,
 		typescript: SGModel.TYPE_BOOLEAN,
 		vanilla: SGModel.TYPE_BOOLEAN,
+		python: SGModel.TYPE_BOOLEAN,
+		goland: SGModel.TYPE_BOOLEAN,
 		
     otech_per: SGModel.TYPE_NUMBER,
     
@@ -142,13 +148,13 @@ class Salary extends SGModelView {
 		F: "postgresql",
 		G: "code",
 		H: "hours_in_day",
-		//I: "",
+		I: "python",
 		J: "javascript",
 		//K: "",
 		
 		//M: "",
 		N: "es_node",
-		//O: "",
+		O: "goland",
 		P: "php",
 		Q: "relocation",
 		R: "react",
@@ -222,9 +228,11 @@ class Salary extends SGModelView {
 		'vue3': 'j',
 		'php': 'i',
 		'cpp': 'i',
-		'typescript': 'j',
+		'typescript': 'i',
 		'vanilla': 'm',
 		'java': 'j',
+		'python': 't',
+		'goland': 't',
 	};
 	
 	async initialize() {

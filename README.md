@@ -72,6 +72,7 @@
 - Roblox: junior
 - rabbitMQ: trainee
 - CI/CD: trainee
+- Python/Goland: trainee
 
 ### Условия сотрудничества
 
