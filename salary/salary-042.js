@@ -54,18 +54,18 @@ class Salary extends SGModelView {
 		goland: false,
 		
 		// скидки/наценки в %
-		javascript_koef: -5,
+		javascript_koef: -10,
 		es_node_koef: -5,
 		java_koef: +50,
 		vue3_koef: +5,
 		react_koef: +40,
 		postgresql_koef: -5,
 		php_koef: +30,
-		cpp_koef: +20,
-		typescript_koef: +10,
+		cpp_koef: +10,
+		typescript_koef: +20,
 		vanilla_koef: -5,
 		goland_koef: +50,
-		python_koef: +50,
+		python_koef: +40,
 		
 		rate_hour_min: 0,
 		relocation_month_min: 0,
@@ -177,9 +177,9 @@ class Salary extends SGModelView {
 	
 	static CONTRACTS = new OptionsMethods({
 		"s": [0, 'self'],
-		"l": [-10, 'labor'],
-		"f": [+40, 'freelance'],
-		"i": [+50, 'ip'],
+		"l": [-15, 'labor'],
+		"f": [+25, 'freelance'],
+		"i": [+40, 'ip'],
 	});
 	
 	static NDFL = 0.13;
@@ -192,7 +192,7 @@ class Salary extends SGModelView {
 		"m": [0, 'middle'],
 		"n": [+25, 'middle_plus'],
 		"s": [+50, 'senior'],
-		"l": [+100, 'teamlead']
+		"l": [+75, 'teamlead']
 	});
   
 	static ENGLANDS = new OptionsMethods({
@@ -208,7 +208,7 @@ class Salary extends SGModelView {
 	
 	static USDKOEF = 1.25;
 	
-	static HOURS_KOEF = [void 0, -15, -10, -5, 0, +10, +20, +30, +40];
+	static HOURS_KOEF = [void 0, -15, -10, -5, 0, +5, +10, +20, +40];
 	static CODES = [
 		[-25, 'Проект с нуля или кода очень мало'],
 		[0, 'Код поддерживается полностью текущим штатом'],
