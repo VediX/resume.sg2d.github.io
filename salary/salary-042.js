@@ -200,7 +200,7 @@ class Salary extends SGModelView {
 		"b": [100, 'b']
 	});
 	
-	static DAYS_IN_WEEK_KOEF = [void 0, -50, -40, -30, -20, 0, +100, +200];
+	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -20, -10, 0, +100, +200];
 	
 	static RELOCATION_KOEF = [void 0,12,6,4,3,2.5,2.3,2.1,2.0];
   
@@ -208,7 +208,7 @@ class Salary extends SGModelView {
 	
 	static USDKOEF = 1.25;
 	
-	static HOURS_KOEF = [void 0, -15, -10, -5, 0, +5, +10, +20, +40];
+	static HOURS_KOEF = [void 0, +5, -10, -5, 0, +5, +10, +20, +40];
 	static CODES = [
 		[-25, 'Проект с нуля или кода очень мало'],
 		[0, 'Код поддерживается полностью текущим штатом'],
