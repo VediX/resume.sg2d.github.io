@@ -16,18 +16,16 @@
       -moz-user-select: none;
       user-select: none;
     }
-    @media (min-width: 768px) {
+    @media screen and (min-width: 768px) {
       .bd-placeholder-img-lg {
         font-size: 3.5rem;
       }
+			html {
+				/*margin-left: calc(100vw - 100%);
+				margin-right: 0;*/
+				overflow-y: scroll;
+			}
     }
-		
-		@media screen and (min-width: 960px) {
-		html {
-			/*margin-left: calc(100vw - 100%);
-			margin-right: 0;*/
-			overflow-y: scroll;
-		}
 		
 		/*input[type=range].input-range-off {
 			pointer-events: none;
@@ -317,7 +315,7 @@
 								<div class="col ps-0">
 									<div class="form-check form-switch">
 										<input class="form-check-input" id="goland" type="checkbox" sg-property="goland">
-										<label class="form-check-label text-nowrap" for="goland">Go <sup sg-property="goland_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
+										<label class="form-check-label text-nowrap" for="goland">Go/Rust <sup sg-property="goland_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
 									</div>
 								</div>
 							</div>

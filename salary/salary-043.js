@@ -56,7 +56,7 @@ class Salary extends SGModelView {
 		goland: false,
 		
 		// скидки/наценки в %
-		javascript_koef: -10,
+		javascript_koef: -25,
 		es_node_koef: -5,
 		java_koef: +50,
 		vue3_koef: +5,
