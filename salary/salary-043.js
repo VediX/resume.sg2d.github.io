@@ -56,7 +56,7 @@ class Salary extends SGModelView {
 		goland: false,
 		
 		// скидки/наценки в %
-		javascript_koef: -25,
+		javascript_koef: -20,
 		es_node_koef: -5,
 		java_koef: +50,
 		vue3_koef: +5,
@@ -214,7 +214,7 @@ class Salary extends SGModelView {
 	
 	static USDKOEF = 1.25;
 	
-	static HOURS_KOEF = [void 0, +5, -10, -5, 0, +5, +10, +20, +40];
+	static HOURS_KOEF = [void 0, +25, -10, -5, 0, +5, +10, +20, +40];
 	static CODES = [
 		[-25, 'Проект с нуля или кода очень мало'],
 		[0, 'Код поддерживается полностью текущим штатом'],
