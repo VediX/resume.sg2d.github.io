@@ -174,7 +174,7 @@ class Salary extends SGModelView {
 		L: "level",
 	};
 	
-	static HOUR_RATE_BASE = 4000;
+	static HOUR_RATE_BASE = 3500;
 	static HOUR_RATE_MIN = 1000;
 	static RELOCATION_MONTH_MIN = 500000;
 	static RELOCATION_OUT_MONTH_MIN = 1000000;
@@ -183,8 +183,8 @@ class Salary extends SGModelView {
 	static CONTRACTS = new OptionsMethods({
 		"s": [0, 'self'],
 		"l": [-15, 'labor'],
-		"f": [+25, 'freelance'],
-		"i": [+40, 'ip'],
+		"i": [+15, 'ip'],
+		"f": [+30, 'freelance'],
 	});
 	
 	static NDFL = 0.13;
@@ -214,7 +214,7 @@ class Salary extends SGModelView {
 	
 	static USDKOEF = 1.25;
 	
-	static HOURS_KOEF = [void 0, +25, -10, -5, 0, +5, +10, +20, +40];
+	static HOURS_KOEF = [void 0, +25, -10, -5, 0, +5, +10, +15, +20];
 	static CODES = [
 		[-25, 'Проект с нуля или кода очень мало'],
 		[0, 'Код поддерживается полностью текущим штатом'],
