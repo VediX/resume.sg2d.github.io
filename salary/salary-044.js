@@ -23,21 +23,23 @@ class Salary extends SGModelView {
 	
 	static singleInstance = true;
 	
-	static CURRENT_VERSION = 5;
+	static CURRENT_VERSION = 6;
 	
 	static defaultProperties = {
 		initialized: false,
 		
-		version: 5,
+		version: 6,
 		
 		contract: 'l',
 		level: 'm',
 		days_in_week: 5,
 		england: 'a',
 		hours_in_day: 4,
-		remote_work: true,
-		relocation: false,
-		relocation_out: false,
+		hourly_payment: false,
+		schedule: 'b',
+		//remote_work: true,
+		//relocation: false,
+		//relocation_out: false,
 		deadline: false,
 		deadline_extra_charge_per_h: 8, // Ставка для 8-ч раб.дня
 		otech: false,
@@ -70,7 +72,7 @@ class Salary extends SGModelView {
 		python_koef: +40,
 		
 		rate_hour_min: 0,
-		relocation_month_min: 0,
+		//relocation_month_min: 0,
 		salary_month: 0,
 		hours: 0,
 		hours_meas: "",
@@ -108,9 +110,10 @@ class Salary extends SGModelView {
 		days_in_week: SGModel.TYPE_NUMBER,
 		england: SGModel.TYPE_STRING,
 		hours_in_day: SGModel.TYPE_NUMBER,
-		remote_work: SGModel.TYPE_BOOLEAN,
-		relocation_out: SGModel.TYPE_BOOLEAN,
-		relocation: SGModel.TYPE_BOOLEAN,
+		hourly_payment: SGModel.TYPE_BOOLEAN,
+		//remote_work: SGModel.TYPE_BOOLEAN,
+		//relocation_out: SGModel.TYPE_BOOLEAN,
+		//relocation: SGModel.TYPE_BOOLEAN,
 		deadline: SGModel.TYPE_BOOLEAN,
 		deadline_extra_charge_per_h: SGModel.TYPE_NUMBER,
     otech: SGModel.TYPE_BOOLEAN,
@@ -145,7 +148,7 @@ class Salary extends SGModelView {
 	static hashProperties = {
 		v: "version",
 		A: "vanilla",
-		//B: "",
+		B: "hourly_payment",
 		C: "contract",
 		D: "days_in_week",
 		E: "england",
@@ -160,14 +163,14 @@ class Salary extends SGModelView {
 		N: "es_node",
 		O: "goland",
 		P: "php",
-		Q: "relocation",
+		//Q: "relocation",
 		R: "react",
 		S: "cpp",
 		T: "typescript",
-		U: "relocation_out",
+		//U: "relocation_out",
 		W: "deadline",
 		V: "vue3",
-		X: "remote_work",
+		X: "schedule",
 		Y: "java",
     Z: "otech",
 		
@@ -176,8 +179,8 @@ class Salary extends SGModelView {
 	
 	static HOUR_RATE_BASE = 3500;
 	static HOUR_RATE_MIN = 1000;
-	static RELOCATION_MONTH_MIN = 500000;
-	static RELOCATION_OUT_MONTH_MIN = 1000000;
+	//static RELOCATION_MONTH_MIN = 500000;
+	//static RELOCATION_OUT_MONTH_MIN = 1000000;
 	static CONTRACT_SELF_LIMIT = 2400000;
 	
 	static CONTRACTS = new OptionsMethods({
@@ -185,6 +188,13 @@ class Salary extends SGModelView {
 		"l": [-15, 'labor'],
 		"i": [+15, 'ip'],
 		"f": [+30, 'freelance'],
+	});
+	
+	static SCHEDULES = new OptionsMethods({
+		"a": [0, 'office'],
+		"b": [-50, 'remote'],
+		"c": [+100, 'relocation'],
+		"d": [+200, 'relocation_out'],
 	});
 	
 	static NDFL = 0.13;
@@ -206,12 +216,12 @@ class Salary extends SGModelView {
 	});
 	
 	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -20, -10, 0, +100, +200];
-	static REMOTE_WORK_KOEF = 0.5;
-	static RELOCATION_KOEF = [void 0,12,6,4,3,2.5,2.3,2.1,2.0];
-	static RELOCATION_OUT_KOEF = [void 0,12,6,4,3,2.5,2.3,2.1,2.0];
+	//static REMOTE_WORK_KOEF = 0.5;
+	//static RELOCATION_KOEF = [void 0,12,6,4,3,2.5,2.3,2.1,2.0];
+	//static RELOCATION_OUT_KOEF = [void 0,12,6,4,3,2.5,2.3,2.1,2.0];
   
 	static OTECH_KOEF = 0.75;
-	
+	static HOURLY_PAYMENT_PER = +40; // %
 	static USDKOEF = 1.25;
 	
 	static HOURS_KOEF = [void 0, +25, -10, -5, 0, +5, +10, +15, +20];
@@ -256,6 +266,14 @@ class Salary extends SGModelView {
 			this.set('contract_' + Salary.CONTRACTS[p][1], Salary.CONTRACTS[p][0]);
 		}
 		
+		Salary.SCHEDULES._inverse = {};
+		for (let p in Salary.SCHEDULES) {
+			if (p[0] !== '_') {
+				Salary.SCHEDULES._inverse[Salary.SCHEDULES[p][1]] = p;
+			}
+			this.set('schedule_' + Salary.SCHEDULES[p][1], Salary.SCHEDULES[p][0]);
+		}
+		
 		for (let p in Salary.LEVELS) {
 			this.set('level_' + Salary.LEVELS[p][1], Salary.LEVELS[p][0]);
 		}
@@ -268,10 +286,11 @@ class Salary extends SGModelView {
 			this.set('days_in_week_' + i, Salary.DAYS_IN_WEEK_KOEF[i]);
 		}
 		
-		this.set("contract_self_limit", Salary.CONTRACT_SELF_LIMIT);
+		this.set('contract_self_limit', Salary.CONTRACT_SELF_LIMIT);
     
 		this.set('otech_per', 100*(Salary.OTECH_KOEF - 1), { precision: 1 });
-		this.set('remote_work_per', 100*(Salary.REMOTE_WORK_KOEF - 1), { precision: 1 });
+		this.set('hourly_payment_per', Salary.HOURLY_PAYMENT_PER);
+		//this.set('remote_work_per', 100*(Salary.REMOTE_WORK_KOEF - 1), { precision: 1 });
 		
 		/*let codeTypes = ["code_startup", "code_supported", "code_supported_and_legacy", "code_legacy"];
 		this.on(codeTypes, (value, valuePrev, name)=>{
@@ -288,9 +307,22 @@ class Salary extends SGModelView {
 			});
 		});*/
 		
-		this.on("hours_in_day", (hours)=>{
-			this.set("hours_in_day_desc", (hours == 8 ? "Фуллтайм" : hours + " " + this.getHoursMeas(hours)+"/день")); // TODO: надписи вытащить в шаблон?
-			this.set("timeout", Salary.TIMEOUTS[hours]);
+		this.on('hourly_payment', (hourly_payment) => {
+			const input1 = document.querySelector('#hours_in_day');
+			const input2 = document.querySelector('#deadline');
+			if (hourly_payment) {
+				input1.disabled = true;
+				input2.disabled = true;
+				input2.blur();
+			} else {
+				input1.disabled = false;
+				input2.disabled = false;
+			}
+		});
+		
+		this.on('hours_in_day', (hours)=>{
+			this.set('hours_in_day_desc', (hours == 8 ? 'Фуллтайм' : hours + ' ' + this.getHoursMeas(hours) + '/день')); // TODO: надписи вытащить в шаблон?
+			this.set('timeout', Salary.TIMEOUTS[hours]);
 			// TODO: переделать, когда sgAttribute будет динамическим!
 			document.querySelector('input#deadline').disabled = (hours == 8);
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
@@ -310,7 +342,7 @@ class Salary extends SGModelView {
 			this.set('days_in_week', this.get('days_in_week'), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 		});
 		
-		this.on('remote_work', (remote_work) => {
+		/*this.on('remote_work', (remote_work) => {
 			if (remote_work) {
 				this.set('relocation', false);
 				this.set('relocation_out', false);
@@ -327,7 +359,7 @@ class Salary extends SGModelView {
 				this.set('relocation', false);
 				this.set('remote_work', false);
 			}
-		});
+		});*/
 		
 		// Автоматический level
 		this.on(Object.keys(Salary._fields_koef), (value, previousValue, propName) => {
@@ -372,14 +404,14 @@ class Salary extends SGModelView {
 		});*/
 		
 		this.set('rate_hour_min', Salary.HOUR_RATE_MIN);
-		this.set('relocation_month_min', Salary.RELOCATION_MONTH_MIN);
-		this.set('relocation_out_month_min', Salary.RELOCATION_OUT_MONTH_MIN);
+		//this.set('relocation_month_min', Salary.RELOCATION_MONTH_MIN);
+		//this.set('relocation_out_month_min', Salary.RELOCATION_OUT_MONTH_MIN);
 		
-		let eRelocationLabel = document.querySelector("#relocation_label");
-		eRelocationLabel.title = eRelocationLabel.title.replace("%relocation_month_min%", Salary.RELOCATION_MONTH_MIN);
+		//let eRelocationLabel = document.querySelector("#relocation_label");
+		//eRelocationLabel.title = eRelocationLabel.title.replace("%relocation_month_min%", Salary.RELOCATION_MONTH_MIN);
 		
-		let eRelocationOutLabel = document.querySelector("#relocation_out_label");
-		eRelocationOutLabel.title = eRelocationOutLabel.title.replace("%relocation_out_month_min%", Salary.RELOCATION_OUT_MONTH_MIN);
+		//let eRelocationOutLabel = document.querySelector("#relocation_out_label");
+		//eRelocationOutLabel.title = eRelocationOutLabel.title.replace("%relocation_out_month_min%", Salary.RELOCATION_OUT_MONTH_MIN);
 		
 		this.bindHTML("body");
 		
@@ -408,7 +440,7 @@ class Salary extends SGModelView {
 		
 		// to update the DOM on first launch:
 		this.on('usdrub', this.calc, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
-		['contract', 'level', 'days_in_work', 'england'].forEach((name) => {
+		['contract', 'level', 'schedule', 'days_in_work', 'england'].forEach((name) => {
 			this.set(name, this.get(name), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 		});
 		
@@ -421,18 +453,23 @@ class Salary extends SGModelView {
 		let koef = 1;
 		
 		koef *= k(Salary.CONTRACTS[this.get("contract")][0]);
+		koef *= k(Salary.SCHEDULES[this.get('schedule')][0]);
 		koef *= k(Salary.LEVELS[this.get("level")][0]);
 		koef *= k(Salary.CODES[this.get("code")][0]);
 		koef *= k(Salary.ENGLANDS[this.get("england")][0]);
 		
-		if (this.get('deadline')) {
-			koef *= k(Salary.DAYS_IN_WEEK_KOEF[ Math.max(5, this.get("days_in_week")) ]);
-			koef *= k(Salary.HOURS_KOEF[8]);
+		if (this.get('hourly_payment')) {
+			koef *= k(Salary.HOURLY_PAYMENT_PER);
 		} else {
-			koef *= k(Salary.DAYS_IN_WEEK_KOEF[this.get("days_in_week")]);
-			koef *= k(Salary.HOURS_KOEF[this.get("hours_in_day")]);
+			if (this.get('deadline')) {
+				koef *= k(Salary.DAYS_IN_WEEK_KOEF[ Math.max(5, this.get('days_in_week')) ]);
+				koef *= k(Salary.HOURS_KOEF[8]);
+			} else {
+				koef *= k(Salary.DAYS_IN_WEEK_KOEF[this.get('days_in_week')]);
+				koef *= k(Salary.HOURS_KOEF[this.get('hours_in_day')]);
+			}
 		}
-    
+		
     if (this.get('otech')) {
       koef *= Salary.OTECH_KOEF;
     }
@@ -443,23 +480,22 @@ class Salary extends SGModelView {
 			}
 		}
 		
-		if (this.get('remote_work')) {
+		/*if (this.get('remote_work')) {
 			koef *= Salary.REMOTE_WORK_KOEF;
 		}
-		
-		if (this.get('relocation')) {
+		/*if (this.get('relocation')) {
       koef *= Salary.RELOCATION_KOEF[this.get('hours_in_day')] * Salary.REMOTE_WORK_KOEF;
     }
 		if (this.get('relocation_out')) {
       koef *= Salary.RELOCATION_OUT_KOEF[this.get('hours_in_day')];// * Salary.REMOTE_WORK_KOEF;
-    }
+    }*/
 		
 		let rate = Math.max(Salary.HOUR_RATE_BASE * koef, Salary.HOUR_RATE_MIN);
 		document.querySelector('#rate_title').title = rate;
 		rate = SGModel.roundTo(rate / 5, -1) * 5;
 		let salary = SGModel.roundTo(rate * hours, -3);
 		
-		if (this.get('relocation')) {
+		/*if (this.get('relocation')) {
 			if (salary < Salary.RELOCATION_MONTH_MIN) {
 				salary = Salary.RELOCATION_MONTH_MIN;
 				rate = salary / hours;
@@ -470,7 +506,7 @@ class Salary extends SGModelView {
 				salary = Salary.RELOCATION_OUT_MONTH_MIN;
 				rate = salary / hours;
 			}
-		}
+		}*/
 		
 		this.set('rate', rate);
 		this.set('salary_month', salary);
@@ -480,7 +516,7 @@ class Salary extends SGModelView {
 		this.set('rate_cny', SGModel.roundTo(this.get('rate') / this.get('cnyrub'), 1));
 		this.set('salary_month_cny', SGModel.roundTo(this.get('salary_month') / this.get('cnyrub'), -2));
 		
-		if (this.get("contract") === Salary.CONTRACTS.symb('labor')) {
+		if (this.get('contract') === Salary.CONTRACTS.symb('labor')) {
 			const sml_fot = salary + salary * Salary.NDFL;
 			const sml = sml_fot + sml_fot * Salary.INSURANCE;
 

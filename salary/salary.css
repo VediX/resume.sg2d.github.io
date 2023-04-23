@@ -10,14 +10,35 @@
 sup {
   font-weight: bold;
 }
-.btn-success span.text-success {
-  color: #7f7 !important;
+.btn-contract {
+  color: black;
+  background-color: #eee;
+  border-color: #eee;
 }
-.btn-info span.text-success {
-  color: #070 !important;
+.btn-days_in_week {
+  color: black;
+  background-color: #388bfd;
+  border-color: #388bfd;
 }
-.btn-success .text-danger {
-  color: #faa !important;
+.btn-schedule {
+  color: black;
+  background-color: #faa;
+  border-color: #faa;
+}
+.btn-level {
+  color: black;
+  background-color: #57ab5a;
+  border-color: #57ab5a;
+}
+.btn-sharelink {
+  color: black;
+  background-color: gold;
+  border-color: goldenrod;
+}
+.btn-england {
+  color: black;
+  background-color: orange;
+  border-color: orange;
 }
 .dropdown-menu-pointer li {
   cursor: pointer;
@@ -26,6 +47,12 @@ sup {
   width: 0.5rem;
   height: 0.5rem;
   color: gray;
+}
+.yes-hourly-payment div,
+.yes-hourly-payment span,
+.yes-hourly-payment sup,
+.yes-hourly-payment label {
+  color: gray !important;
 }
 .lhour-1 {
   left: 0% !important;

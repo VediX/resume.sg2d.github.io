@@ -56,7 +56,7 @@
   </script>
 	<link href="salary.css" rel="stylesheet">
 	<script type="module" src="./../res/sg-model/sg-model-view-41.js" defer></script>
-	<script type="module" src="salary-043.js"></script>
+	<script type="module" src="salary-044.js"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
 
@@ -76,7 +76,7 @@
 					
 					<form class="d-grid gap-2">
 						<div class="btn-group">
-							<button sg-property="contract" sg-type="dropdown" id="contract" class="btn btn-warning dropdown-toggle bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<button sg-property="contract" sg-type="dropdown" id="contract" class="btn dropdown-toggle bg-gradient btn-contract" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Самозанятый (договор услуг)</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="contract">
 								<li class="dropdown-item" sg-option="l" sg-dropdown="contract">Трудовой договор, в т.ч. по совм. <sup sg-property="contract_labor" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
@@ -87,7 +87,7 @@
 						</div>
 						
 						<div class="btn-group">
-							<button sg-property="days_in_week" sg-type="dropdown" id="days_in_week" class="btn btn-info dropdown-toggle bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<button sg-property="days_in_week" sg-type="dropdown" id="days_in_week" class="btn dropdown-toggle bg-gradient btn-days_in_week" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Занятость: 5 дней в неделю</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="days_in_week">
 								<li class="dropdown-item" sg-option="1" sg-dropdown="days_in_week">Занятость: 1 день в неделю <sup sg-property="days_in_week_1" sg-format="formatDiscount" sg-css="cssDangerOrSuccessAndDiscountForDaysInWeek"></sup></li>
@@ -99,47 +99,69 @@
 								<li class="dropdown-item" sg-option="7" sg-dropdown="days_in_week">Занятость: 7 дней в неделю <sup sg-property="days_in_week_7" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
 							</ul>
 						</div>
-					
-						<fieldset class="row mb-2 bg-white p-2 ms-1 me-1" style="border-radius: 10px; border: 1px solid #ddd;">
-							<!--<legend class="col-form-label pt-0">Занятость:</legend>-->
-							<div class="container p-0">
-								<div class="row m-0">
-									<div class="col-md-6 p-0 pt-3 pe-1 position-relative" style="font-size: 10pt">
-										<input sg-property="hours_in_day" type="range" class="form-range input-range-off" min="1" max="8" aria-describedby="hours_in_day_desc" value="4">
-										<div class="position-absolute top-0 translate-middle-y label-hour lhour-1 text-danger" sg-attributes="{ title: getHourTitle('1') }">1h</div>
-										<div class="position-absolute top-0 translate-middle-y label-hour lhour-2 text-success" sg-attributes="{ title: getHourTitle('2') }">2h</div>
-										<div class="position-absolute top-0 translate-middle-y label-hour lhour-3 text-success" sg-attributes="{ title: getHourTitle('3') }">3h</div>
-										<div class="position-absolute top-0 translate-middle-y label-hour lhour-4" sg-attributes="{ title: getHourTitle('4') }">4h</div>
-										<div class="position-absolute top-0 translate-middle-y label-hour lhour-5 text-danger" sg-attributes="{ title: getHourTitle('5') }">5h</div>
-										<div class="position-absolute top-0 translate-middle-y label-hour lhour-6 text-danger" sg-attributes="{ title: getHourTitle('6') }">6h</div>
-										<div class="position-absolute top-0 translate-middle-y label-hour lhour-7 text-danger" sg-attributes="{ title: getHourTitle('7') }">7h</div>
-										<div class="position-absolute top-0 translate-middle-y label-hour lhour-8 text-danger" sg-attributes="{ title: getHourTitle('8') }">8h</div>
-									</div>
-									<div class="col-md-6 p-0">
-										<div class="input-group-text bg-gradient" style="justify-content: center">
-											<span sg-property="hours_in_day_desc">4 часа/день</span><sup sg-css="hours_in_day >= 5 ? 'text-danger' : ''">1</sup>
-											<span sg-css="!relocation && !deadline ? 'visible-inline' : 'no-visible'">&nbsp;<sup sg-property="hours_in_day" sg-format="formatHoursExtraCharge" sg-css="this.constructor.HOURS_KOEF[hours_in_day] > 0 ? 'text-danger' : 'text-success'">-20%</sup></span>
-											<span sg-css="deadline ? 'visible-inline' : 'no-visible'">&nbsp;<sup sg-property="deadline_extra_charge_per_h" sg-format="formatHoursExtraCharge" class="text-danger">+40%</sup></span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</fieldset>
+						
+						<div class="btn-group">
+							<button sg-property="schedule" sg-type="dropdown" id="schedule" class="btn dropdown-toggle bg-gradient btn-schedule" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Удаленная работа</button>
+							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="schedule">
+								<li class="dropdown-item" sg-option="a" sg-dropdown="schedule">Офис <sup sg-property="schedule_office" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
+								<li class="dropdown-item" sg-option="b" sg-dropdown="schedule">Удаленная работа <sup sg-property="schedule_remote" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
+								<li class="dropdown-item" sg-option="c" sg-dropdown="schedule">Релокация в пределах РФ <sup sg-property="schedule_relocation" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
+								<li class="dropdown-item" sg-option="d" sg-dropdown="schedule">Релокация из РФ в другую страну<sup sg-property="schedule_relocation_out" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
+							</ul>
+						</div>
 						
 						<div class="container pe-0 ps-0">
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="otech" type="checkbox" sg-property="otech">
+										<input class="form-check-input" id="hourly_payment" type="checkbox" sg-property="hourly_payment">
+										<label class="form-check-label text-danger" for="hourly_payment" id="hourly_payment_label" title="В т.ч. с использованием тайм-трекера. При почасовой оплате без минимально оплачиваемых часов действует повышенная ставка!">
+											Почасовая оплата<sup class="text-danger" sg-css="hourly_payment ? 'visible-inline' : 'no-visible'">1</sup>
+										</label>
+									</div>
+								</div>
+								<div class="col ps-0">
+									<div class="form-check form-switch" sg-css="hourly_payment ? 'yes-hourly-payment' : 'no-hourly-payment'">
+										<input class="form-check-input" id="deadline" type="checkbox" sg-property="deadline">
 										<label
-											class="form-check-label link-success"
-											for="otech"
-											id="otech_label"
-											title="При участии в проектах при разработке отечественного ПО/ОС скидка до 25%!"
-										>Разработка отечественного ПО/ОС <sup sg-property="otech_per" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
+											class="form-check-label"
+											for="deadline"
+											id="deadline_label"
+											title="При наличии дедлайнов ставка эквивалента фуллтайму и пятидневной рабочей недели!"
+											sg-css="hours_in_day < 8 ? 'text-danger' : ''"
+										>Есть дедлайны<sup class="text-danger" sg-css="deadline && hours_in_day !== 8 ? 'visible-inline' : 'no-visible'">2</sup></label>
 									</div>
 								</div>
 							</div>
+							<fieldset class="row mb-0 bg-white p-2 ms-1 me-1 hourly-cnt" style="border-radius: 10px; border: 1px solid #ddd;" sg-css="hourly_payment ? 'yes-hourly-payment' : 'no-hourly-payment'">
+								<!--<legend class="col-form-label pt-0">Занятость:</legend>-->
+								<div class="container p-0">
+									<div class="row m-0">
+										<div class="col-md-6 p-0 pt-3 pe-1 position-relative" style="font-size: 10pt">
+											<input sg-property="hours_in_day" id="hours_in_day" type="range" class="form-range input-range-off" min="1" max="8" aria-describedby="hours_in_day_desc" value="4">
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-1 text-danger" sg-attributes="{ title: getHourTitle('1') }">1h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-2 text-success" sg-attributes="{ title: getHourTitle('2') }">2h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-3 text-success" sg-attributes="{ title: getHourTitle('3') }">3h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-4" sg-attributes="{ title: getHourTitle('4') }">4h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-5 text-danger" sg-attributes="{ title: getHourTitle('5') }">5h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-6 text-danger" sg-attributes="{ title: getHourTitle('6') }">6h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-7 text-danger" sg-attributes="{ title: getHourTitle('7') }">7h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-8 text-danger" sg-attributes="{ title: getHourTitle('8') }">8h</div>
+										</div>
+										<div class="col-md-6 p-0">
+											<div class="input-group-text bg-gradient" style="justify-content: center">
+												<span sg-property="hours_in_day_desc">4 часа/день</span><span sg-css="hours_in_day > 2 ? 'visible-inline': 'no-visible'"><sup sg-css="hours_in_day >= 5 ? 'text-danger' : ''">3</sup></span>
+												<span sg-css="schedule !== 'c' && schedule !== 'd' && !deadline ? 'visible-inline' : 'no-visible'">&nbsp;<sup sg-property="hours_in_day" sg-format="formatHoursExtraCharge" sg-css="this.constructor.HOURS_KOEF[hours_in_day] > 0 ? 'text-danger' : 'text-success'">-20%</sup></span>
+												<span sg-css="deadline ? 'visible-inline' : 'no-visible'">&nbsp;<sup sg-property="deadline_extra_charge_per_h" sg-format="formatHoursExtraCharge" class="text-danger">+40%</sup></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+						
+						<!--<div class="container pe-0 ps-0">
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
@@ -150,18 +172,6 @@
 											<sup sg-property="remote_work_per" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup>
 											</span>
 										</label>
-									</div>
-								</div>
-								<div class="col ps-0">
-									<div class="form-check form-switch">
-										<input class="form-check-input" id="deadline" type="checkbox" sg-property="deadline">
-										<label
-											class="form-check-label"
-											for="deadline"
-											id="deadline_label"
-											title="При наличии дедлайнов ставка эквивалента фуллтайму и пятидневной рабочей недели!"
-											sg-css="hours_in_day < 8 ? 'text-danger' : ''"
-										>Есть дедлайны<sup class="text-danger" sg-css="deadline && hours_in_day !== 8 ? 'visible-inline' : 'no-visible'">2</sup></label>
 									</div>
 								</div>
 							</div>
@@ -183,7 +193,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div>-->
 						
 						<!--<div class="btn-group">
 							<button type="button" sg-click="toggleOptions" class="btn btn-primary bg-gradient" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -196,7 +206,7 @@
 							</div>
 						</div>-->
 						
-						<fieldset class="row mb-2 bg-white p-2 ms-1 me-1" style="border-radius: 10px; border: 1px solid #ddd;">
+						<fieldset class="row mb-0 bg-white p-2 ms-1 me-1" style="border-radius: 10px; border: 1px solid #ddd;">
 							<!--<legend class="col-form-label pt-0">Поддержка кода:</legend>-->
 							<div class="container p-0">
 								<div class="row m-0">
@@ -220,8 +230,24 @@
 							</div>
 						</fieldset>
 						
+						<div class="container pe-0 ps-0">
+							<div class="row">
+								<div class="col pe-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="otech" type="checkbox" sg-property="otech">
+										<label
+											class="form-check-label link-success"
+											for="otech"
+											id="otech_label"
+											title="При участии в проектах при разработке отечественного ПО/ОС скидка до 25%!"
+										>Разработка отечественного ПО/ОС <sup sg-property="otech_per" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
+									</div>
+								</div>
+							</div>
+						</div>
+						
 						<div class="btn-group" title="Если при устройстве на работу будет уровень меньше Middle, то в течение нескольких месяцев, но не более 1 года, ожидаю роста как минимум до Middle уровня, что также означает рост зарплатных ожиданий согласно форме расчета!">
-							<button sg-property="level" sg-type="dropdown" id="level" class="btn dropdown-toggle btn-success bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<button sg-property="level" sg-type="dropdown" id="level" class="btn dropdown-toggle bg-gradient btn-level" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Уровень навыков: Middle</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="level">
 								<li class="dropdown-item" sg-option="t" sg-dropdown="level">AVG навыков: Trainee <sup sg-property="level_trainee" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
@@ -322,7 +348,7 @@
 						</div>
             
 						<div class="btn-group">
-							<button sg-property="england" sg-type="dropdown" id="england" class="btn btn-dark dropdown-toggle bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<button sg-property="england" sg-type="dropdown" id="england" class="btn btn-england dropdown-toggle bg-gradient" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Английский: Basic</button>
 							<ul class="dropdown-menu dropdown-menu-pointer" aria-labelledby="england">
 								<li class="dropdown-item" sg-option="a" sg-dropdown="england">Английский: Basic <sup sg-property="eng_a" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
@@ -374,15 +400,20 @@
 					
 					<hr class="my-3"/>
 					
-					<button sg-click="saveLink" class="w-100 btn btn-primary btn-lg bg-gradient" data-bs-toggle="modal" data-bs-target="#modalLink">Поделиться ссылкой</button>
+					<button sg-click="saveLink" class="w-100 btn btn-sharelink btn-lg bg-gradient" data-bs-toggle="modal" data-bs-target="#modalLink">Поделиться ссылкой</button>
 					
 					<hr class="my-3"/>
 
 					<p class="text-dark" style="font-size: 0.8rem;">* Уровень оплаты рассчитывается чистыми (на руки)!</p>
-					<p class="" style="font-size: 0.8rem;" sg-css="hours_in_day >= 5 ? 'text-danger': ''"><sup>1</sup> &mdash; При <span sg-property="hours_in_day">4</span> часовой занятости перерыв до <span sg-property="timeout">5</span> минут входит в час работы!</p>
-					<p class="text-danger" style="font-size: 0.8rem;" sg-css="deadline && hours_in_day !== 8 ? 'visible-block': 'no-visible'"><sup>2</sup> &mdash; При наличии дедлайнов ставка не меньше ставки фуллтайма с пятидневной рабочей неделей! Под дедлайном понимается некий срок за который нужно выполнить определенный пул задач.</p>
-					<p class="text-danger" style="font-size: 0.8rem;" sg-css="relocation ? 'visible-block': 'no-visible'"><sup>3</sup> &mdash; При релокации по территории РФ действует повышенная ставка и минимальная месячная оплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&nbsp;000</span>&nbsp;руб.</p>
-					<p class="text-danger" style="font-size: 0.8rem;" sg-css="relocation_out ? 'visible-block': 'no-visible'"><sup>4</sup> &mdash; При релокации за пределы территории РФ действует повышенная ставка и минимальная месячная оплата составляет <span sg-property="relocation_out_month_min" sg-format="getNumThinsp">1&nbsp;000&nbsp;000</span>&nbsp;руб.</p>
+					<p class="text-danger" style="font-size: 0.8rem;" sg-css="hourly_payment ? 'visible-block': 'no-visible'"><sup>1</sup> &mdash; При почасовой оплате без минимально оплачиваемых часов действует повышенная ставка <span sg-property="hourly_payment_per" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></p>
+					<p class="" style="font-size: 0.8rem;" sg-css="hours_in_day >= 5 ? 'text-danger': ''">
+						<span sg-css="hours_in_day > 2 ? 'visible-inline': 'no-visible'">
+							<sup>3</sup> &mdash; При <span sg-property="hours_in_day">4</span> часовой занятости перерыв до <span sg-property="timeout">5</span> минут входит в час работы!
+						</span>
+					</p>
+					<p class="text-danger" style="font-size: 0.8rem;" sg-css="deadline && !hourly_payment && hours_in_day !== 8 ? 'visible-block': 'no-visible'"><sup>2</sup> &mdash; При наличии дедлайнов ставка не меньше ставки фуллтайма с пятидневной рабочей неделей! Под дедлайном понимается некий срок за который нужно выполнить определенный пул задач.</p>
+					<!--<p class="text-danger" style="font-size: 0.8rem;" sg-css="schedule === 'c' ? 'visible-block': 'no-visible'"><sup>3</sup> &mdash; При релокации по территории РФ действует повышенная ставка и минимальная месячная оплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&nbsp;000</span>&nbsp;руб.</p>
+					<p class="text-danger" style="font-size: 0.8rem;" sg-css="schedule === 'd' ? 'visible-block': 'no-visible'"><sup>4</sup> &mdash; При релокации за пределы территории РФ действует повышенная ставка и минимальная месячная оплата составляет <span sg-property="relocation_out_month_min" sg-format="getNumThinsp">1&nbsp;000&nbsp;000</span>&nbsp;руб.</p>-->
 					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="rate == rate_hour_min ? 'visible-block': 'no-visible'"><sup>5</sup> &mdash; минимальная почасовая ставка <span sg-property="rate_hour_min" sg-format="getNumThinsp">500</span>&nbsp;руб.</p>
 					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-block': 'no-visible'"><sup>6</sup> &mdash; годовая оплата рассчитывается за 11 месяцев.</p>
 					<p class="text-danger" style="font-size: 0.8rem; text-align: justify;" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-block' : 'no-visible'">
