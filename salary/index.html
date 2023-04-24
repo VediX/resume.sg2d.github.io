@@ -122,20 +122,19 @@
 									</div>
 								</div>
 								<div class="col ps-0">
-									<div class="form-check form-switch" sg-css="hourly_payment ? 'yes-hourly-payment' : 'no-hourly-payment'">
+									<div class="form-check form-switch">
 										<input class="form-check-input" id="deadline" type="checkbox" sg-property="deadline">
-										<label
-											class="form-check-label"
-											for="deadline"
-											id="deadline_label"
-											title="При наличии дедлайнов ставка эквивалента фуллтайму и пятидневной рабочей недели!"
-											sg-css="hours_in_day < 8 ? 'text-danger' : ''"
-										>Есть дедлайны<sup class="text-danger" sg-css="deadline && hours_in_day !== 8 ? 'visible-inline' : 'no-visible'">2</sup></label>
+										<label class="form-check-label text-danger" for="deadline" id="deadline_label" title=" При наличии дедлайнов ставка не меньше ставки фуллтайма с пятидневной рабочей неделей! Под дедлайном понимается некий срок за который нужно выполнить определенный пул задач">
+											Есть дедлайны<sup class="text-danger" sg-css="deadline && hours_in_day !== 8 ? 'visible-inline' : 'no-visible'">2</sup>
+										</label>
 									</div>
 								</div>
 							</div>
 							<fieldset class="row mb-0 bg-white p-2 ms-1 me-1 hourly-cnt" style="border-radius: 10px; border: 1px solid #ddd;" sg-css="hourly_payment ? 'yes-hourly-payment' : 'no-hourly-payment'">
-								<!--<legend class="col-form-label pt-0">Занятость:</legend>-->
+								<legend class="col-form-label pt-0">
+									<span sg-css="hourly_payment ? 'inline-visible' : 'no-visible'">Почасовая оплата (простой не оплачивается):</span>
+									<span sg-css="!hourly_payment ? 'inline-visible' : 'no-visible'">Минимально оплачиваемые часы (оклад):</span>
+								</legend>
 								<div class="container p-0">
 									<div class="row m-0">
 										<div class="col-md-6 p-0 pt-3 pe-1 position-relative" style="font-size: 10pt">
@@ -152,8 +151,11 @@
 										<div class="col-md-6 p-0">
 											<div class="input-group-text bg-gradient" style="justify-content: center">
 												<span sg-property="hours_in_day_desc">4 часа/день</span><span sg-css="hours_in_day > 2 ? 'visible-inline': 'no-visible'"><sup sg-css="hours_in_day >= 5 ? 'text-danger' : ''">3</sup></span>
-												<span sg-css="schedule !== 'c' && schedule !== 'd' && !deadline ? 'visible-inline' : 'no-visible'">&nbsp;<sup sg-property="hours_in_day" sg-format="formatHoursExtraCharge" sg-css="this.constructor.HOURS_KOEF[hours_in_day] > 0 ? 'text-danger' : 'text-success'">-20%</sup></span>
-												<span sg-css="deadline ? 'visible-inline' : 'no-visible'">&nbsp;<sup sg-property="deadline_extra_charge_per_h" sg-format="formatHoursExtraCharge" class="text-danger">+40%</sup></span>
+												<span sg-css="schedule !== 'c' && schedule !== 'd' && !deadline && !hourly_payment ? 'visible-inline' : 'no-visible'">&nbsp;<sup sg-property="hours_in_day" sg-format="formatHoursExtraCharge" sg-css="this.constructor.HOURS_KOEF[hours_in_day] > 0 ? 'text-danger' : 'text-success'">-20%</sup></span>
+												<!--<span sg-css="deadline ? 'visible-inline' : 'no-visible'">&nbsp;<sup sg-property="deadline_extra_charge_per_h" sg-format="formatHoursExtraCharge" class="text-danger">+40%</sup></span>-->
+												<span sg-css="deadline && !hourly_payment ? 'visible-inline' : 'no-visible'">&nbsp;<sup sg-value="Salary.HOURS_DEADLINE_KOEF" sg-format="formatDiscount" class="text-danger">+30%</sup></span>
+												<span sg-css="hourly_payment && !deadline ? 'visible-inline' : 'no-visible'">&nbsp;<sup sg-value="Salary.HOURLY_PAYMENT_PER" sg-format="formatDiscount" class="text-danger">+40%</sup></span>
+												<span sg-css="hourly_payment && deadline ? 'visible-inline' : 'no-visible'">&nbsp;<sup sg-value="Salary.HOURS_DEADLINEHOURLY_PAYMENT_PER" sg-format="formatDiscount" class="text-danger">+70%</sup></span>
 											</div>
 										</div>
 									</div>
@@ -405,7 +407,7 @@
 					<hr class="my-3"/>
 
 					<p class="text-dark" style="font-size: 0.8rem;">* Уровень оплаты рассчитывается чистыми (на руки)!</p>
-					<p class="text-danger" style="font-size: 0.8rem;" sg-css="hourly_payment ? 'visible-block': 'no-visible'"><sup>1</sup> &mdash; При почасовой оплате без минимально оплачиваемых часов действует повышенная ставка <span sg-property="hourly_payment_per" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></span></p>
+					<p class="text-danger" style="font-size: 0.8rem;" sg-css="hourly_payment ? 'visible-block': 'no-visible'"><sup>1</sup> &mdash; При почасовой оплате без минимально оплачиваемых часов действует повышенная ставка</p>
 					<p class="" style="font-size: 0.8rem;" sg-css="hours_in_day >= 5 ? 'text-danger': ''">
 						<span sg-css="hours_in_day > 2 ? 'visible-inline': 'no-visible'">
 							<sup>3</sup> &mdash; При <span sg-property="hours_in_day">4</span> часовой занятости перерыв до <span sg-property="timeout">5</span> минут входит в час работы!

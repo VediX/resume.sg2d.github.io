@@ -20,6 +20,9 @@ sup {
   background-color: #388bfd;
   border-color: #388bfd;
 }
+.btn-days_in_week sup.text-success {
+  color: #7e7 !important;
+}
 .btn-schedule {
   color: black;
   background-color: #faa;
@@ -29,6 +32,12 @@ sup {
   color: black;
   background-color: #57ab5a;
   border-color: #57ab5a;
+}
+.btn-level sup.text-success {
+  color: #afa !important;
+}
+.btn-level sup.text-danger {
+  color: #ffa !important;
 }
 .btn-sharelink {
   color: black;
@@ -48,12 +57,11 @@ sup {
   height: 0.5rem;
   color: gray;
 }
-.yes-hourly-payment div,
-.yes-hourly-payment span,
-.yes-hourly-payment sup,
-.yes-hourly-payment label {
-  color: gray !important;
-}
+/*.yes-hourly-payment {
+	div, span, sup, label, legend {
+		color: gray !important;
+	}
+}*/
 .lhour-1 {
   left: 0% !important;
 }

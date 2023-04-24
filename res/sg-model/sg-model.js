@@ -625,6 +625,8 @@ SGModel.uid = function() {
 	return ++SGModel._uid;
 };
 
+SGModel.fStub = (v) => v;
+
 /**
  * If **dest** does not have a property from **sources**, then it is copied from **sources** to **dest** (composite objects are copied completely using recursion!)
  * @param {object} dest

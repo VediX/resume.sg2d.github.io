@@ -37,11 +37,7 @@ class Salary extends SGModelView {
 		hours_in_day: 4,
 		hourly_payment: false,
 		schedule: 'b',
-		//remote_work: true,
-		//relocation: false,
-		//relocation_out: false,
 		deadline: false,
-		deadline_extra_charge_per_h: 8, // Ставка для 8-ч раб.дня
 		otech: false,
 		code: '1',
 		javascript: false,
@@ -72,7 +68,6 @@ class Salary extends SGModelView {
 		python_koef: +40,
 		
 		rate_hour_min: 0,
-		//relocation_month_min: 0,
 		salary_month: 0,
 		hours: 0,
 		hours_meas: "",
@@ -111,11 +106,7 @@ class Salary extends SGModelView {
 		england: SGModel.TYPE_STRING,
 		hours_in_day: SGModel.TYPE_NUMBER,
 		hourly_payment: SGModel.TYPE_BOOLEAN,
-		//remote_work: SGModel.TYPE_BOOLEAN,
-		//relocation_out: SGModel.TYPE_BOOLEAN,
-		//relocation: SGModel.TYPE_BOOLEAN,
 		deadline: SGModel.TYPE_BOOLEAN,
-		deadline_extra_charge_per_h: SGModel.TYPE_NUMBER,
     otech: SGModel.TYPE_BOOLEAN,
 		code: SGModel.TYPE_STRING,
 		javascript: SGModel.TYPE_BOOLEAN,
@@ -163,11 +154,11 @@ class Salary extends SGModelView {
 		N: "es_node",
 		O: "goland",
 		P: "php",
-		//Q: "relocation",
+		//Q: "",
 		R: "react",
 		S: "cpp",
 		T: "typescript",
-		//U: "relocation_out",
+		//U: "",
 		W: "deadline",
 		V: "vue3",
 		X: "schedule",
@@ -177,7 +168,7 @@ class Salary extends SGModelView {
 		L: "level",
 	};
 	
-	static HOUR_RATE_BASE = 3500;
+	static HOUR_RATE_BASE = 2400;
 	static HOUR_RATE_MIN = 1000;
 	//static RELOCATION_MONTH_MIN = 500000;
 	//static RELOCATION_OUT_MONTH_MIN = 1000000;
@@ -192,7 +183,7 @@ class Salary extends SGModelView {
 	
 	static SCHEDULES = new OptionsMethods({
 		"a": [0, 'office'],
-		"b": [-50, 'remote'],
+		"b": [-25, 'remote'],
 		"c": [+100, 'relocation'],
 		"d": [+200, 'relocation_out'],
 	});
@@ -216,7 +207,6 @@ class Salary extends SGModelView {
 	});
 	
 	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -20, -10, 0, +100, +200];
-	//static REMOTE_WORK_KOEF = 0.5;
 	//static RELOCATION_KOEF = [void 0,12,6,4,3,2.5,2.3,2.1,2.0];
 	//static RELOCATION_OUT_KOEF = [void 0,12,6,4,3,2.5,2.3,2.1,2.0];
   
@@ -225,6 +215,7 @@ class Salary extends SGModelView {
 	static USDKOEF = 1.25;
 	
 	static HOURS_KOEF = [void 0, +25, -10, -5, 0, +5, +10, +15, +20];
+	static HOURS_DEADLINE_KOEF = +30;
 	static CODES = [
 		[-25, 'Проект с нуля или кода очень мало'],
 		[0, 'Код поддерживается полностью текущим штатом'],
@@ -258,6 +249,8 @@ class Salary extends SGModelView {
 			await this.checkCNYInRubles();
 		} catch (err) {}
 		
+		Salary.HOURS_DEADLINEHOURLY_PAYMENT_PER = SGModel.roundTo(100*((1+Salary.HOURS_DEADLINE_KOEF/100) * (1+Salary.HOURLY_PAYMENT_PER/100) - 1));
+		
 		Salary.CONTRACTS._inverse = {};
 		for (let p in Salary.CONTRACTS) {
 			if (p[0] !== '_') {
@@ -289,7 +282,6 @@ class Salary extends SGModelView {
 		this.set('contract_self_limit', Salary.CONTRACT_SELF_LIMIT);
     
 		this.set('otech_per', 100*(Salary.OTECH_KOEF - 1), { precision: 1 });
-		this.set('hourly_payment_per', Salary.HOURLY_PAYMENT_PER);
 		//this.set('remote_work_per', 100*(Salary.REMOTE_WORK_KOEF - 1), { precision: 1 });
 		
 		/*let codeTypes = ["code_startup", "code_supported", "code_supported_and_legacy", "code_legacy"];
@@ -307,24 +299,20 @@ class Salary extends SGModelView {
 			});
 		});*/
 		
-		this.on('hourly_payment', (hourly_payment) => {
+		/*this.on('hourly_payment', (hourly_payment) => {
 			const input1 = document.querySelector('#hours_in_day');
-			const input2 = document.querySelector('#deadline');
 			if (hourly_payment) {
 				input1.disabled = true;
-				input2.disabled = true;
-				input2.blur();
 			} else {
 				input1.disabled = false;
-				input2.disabled = false;
 			}
-		});
+		});*/
 		
 		this.on('hours_in_day', (hours)=>{
 			this.set('hours_in_day_desc', (hours == 8 ? 'Фуллтайм' : hours + ' ' + this.getHoursMeas(hours) + '/день')); // TODO: надписи вытащить в шаблон?
 			this.set('timeout', Salary.TIMEOUTS[hours]);
 			// TODO: переделать, когда sgAttribute будет динамическим!
-			document.querySelector('input#deadline').disabled = (hours == 8);
+			//document.querySelector('input#deadline').disabled = (hours == 8);
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
 		this.on('code', (code)=>{
@@ -342,13 +330,7 @@ class Salary extends SGModelView {
 			this.set('days_in_week', this.get('days_in_week'), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 		});
 		
-		/*this.on('remote_work', (remote_work) => {
-			if (remote_work) {
-				this.set('relocation', false);
-				this.set('relocation_out', false);
-			}
-		});
-		this.on('relocation', (relocation) => {
+		/*	this.on('relocation', (relocation) => {
 			if (relocation) {
 				this.set('relocation_out', false);
 				this.set('remote_work', false);
@@ -448,8 +430,8 @@ class Salary extends SGModelView {
 	}
 	
 	calc() {
-		let hours = 4 * this.get("days_in_week") * this.get("hours_in_day");
-		this.set("hours", hours);
+		let hours = 4 * this.get('days_in_week') * this.get('hours_in_day');
+		this.set('hours', hours);
 		let koef = 1;
 		
 		koef *= k(Salary.CONTRACTS[this.get("contract")][0]);
@@ -459,11 +441,15 @@ class Salary extends SGModelView {
 		koef *= k(Salary.ENGLANDS[this.get("england")][0]);
 		
 		if (this.get('hourly_payment')) {
-			koef *= k(Salary.HOURLY_PAYMENT_PER);
+			if (this.get('deadline')) {
+				koef *= k(Salary.HOURS_DEADLINEHOURLY_PAYMENT_PER);
+			} else {
+				koef *= k(Salary.HOURLY_PAYMENT_PER);
+			}
 		} else {
 			if (this.get('deadline')) {
 				koef *= k(Salary.DAYS_IN_WEEK_KOEF[ Math.max(5, this.get('days_in_week')) ]);
-				koef *= k(Salary.HOURS_KOEF[8]);
+				koef *= k(Salary.HOURS_DEADLINE_KOEF);
 			} else {
 				koef *= k(Salary.DAYS_IN_WEEK_KOEF[this.get('days_in_week')]);
 				koef *= k(Salary.HOURS_KOEF[this.get('hours_in_day')]);

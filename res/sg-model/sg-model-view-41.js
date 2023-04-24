@@ -165,10 +165,16 @@ class SGModelView extends SGModel {
 			// Now attributes are implemented only for static output (only at initialization)
 			if (sgValue) {
 				try {
+					const fFormat = this[sgFormat] || SGModel.fStub;
 					const method = sgValue.replace(/(\w+)(.*)/, '$1');
 					const args = Array.from(sgValue.matchAll(/'(.*?)'/g));
 					if (typeof this[method] === 'function') {
-						elementDOM.innerHTML = this[method].apply(this, args.map((o)=>o[1]));
+						elementDOM.innerHTML = fFormat.call(this, this[method].apply(this, args.map((o)=>o[1])));
+					} else {
+						const props = sgValue.split('.');
+						if (props.length === 2 && props[0] === this.constructor.name) {
+							elementDOM.innerHTML = fFormat.call(this, this.constructor[props[1]]);
+						}
 					}
 				} catch(err) {
 					debugger;
