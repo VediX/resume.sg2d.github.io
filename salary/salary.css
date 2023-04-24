@@ -57,11 +57,9 @@ sup {
   height: 0.5rem;
   color: gray;
 }
-/*.yes-hourly-payment {
-	div, span, sup, label, legend {
-		color: gray !important;
-	}
-}*/
+.hourly-payment-or-deadline .label-hour {
+  color: gray !important;
+}
 .lhour-1 {
   left: 0% !important;
 }

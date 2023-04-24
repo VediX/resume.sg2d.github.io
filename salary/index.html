@@ -130,7 +130,7 @@
 									</div>
 								</div>
 							</div>
-							<fieldset class="row mb-0 bg-white p-2 ms-1 me-1 hourly-cnt" style="border-radius: 10px; border: 1px solid #ddd;" sg-css="hourly_payment ? 'yes-hourly-payment' : 'no-hourly-payment'">
+							<fieldset class="row mb-0 bg-white p-2 ms-1 me-1 hourly-cnt" style="border-radius: 10px; border: 1px solid #ddd;" sg-css="hourly_payment || deadline ? 'hourly-payment-or-deadline' : ''">
 								<legend class="col-form-label pt-0">
 									<span sg-css="hourly_payment ? 'inline-visible' : 'no-visible'">Почасовая оплата (простой не оплачивается):</span>
 									<span sg-css="!hourly_payment ? 'inline-visible' : 'no-visible'">Минимально оплачиваемые часы (оклад):</span>
