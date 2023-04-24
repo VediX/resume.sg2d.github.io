@@ -170,8 +170,6 @@ class Salary extends SGModelView {
 	
 	static HOUR_RATE_BASE = 2400;
 	static HOUR_RATE_MIN = 1000;
-	//static RELOCATION_MONTH_MIN = 500000;
-	//static RELOCATION_OUT_MONTH_MIN = 1000000;
 	static CONTRACT_SELF_LIMIT = 2400000;
 	
 	static CONTRACTS = new OptionsMethods({
@@ -207,8 +205,6 @@ class Salary extends SGModelView {
 	});
 	
 	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -20, -10, 0, +100, +200];
-	//static RELOCATION_KOEF = [void 0,12,6,4,3,2.5,2.3,2.1,2.0];
-	//static RELOCATION_OUT_KOEF = [void 0,12,6,4,3,2.5,2.3,2.1,2.0];
   
 	static OTECH_KOEF = 0.75;
 	static HOURLY_PAYMENT_PER = +40; // %
@@ -330,19 +326,6 @@ class Salary extends SGModelView {
 			this.set('days_in_week', this.get('days_in_week'), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 		});
 		
-		/*	this.on('relocation', (relocation) => {
-			if (relocation) {
-				this.set('relocation_out', false);
-				this.set('remote_work', false);
-			}
-		});
-		this.on('relocation_out', (relocation_out) => {
-			if (relocation_out) {
-				this.set('relocation', false);
-				this.set('remote_work', false);
-			}
-		});*/
-		
 		// Автоматический level
 		this.on(Object.keys(Salary._fields_koef), (value, previousValue, propName) => {
 			let level_cumm = 0, q = 0;
@@ -377,23 +360,7 @@ class Salary extends SGModelView {
 			this.set("options_expand_icon", options_expand ? "&nbsp;&#9660;" : "...");
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);*/
 		
-		// TODO: переделать, когда sgAttribute будет динамическим!
-		/*this.on('relocation', (relocation) => {
-			const nodes = document.querySelectorAll('#technologies input');
-			for (let i = 0; i < nodes.length; i++) {
-				nodes[i].disabled = relocation;
-			}
-		});*/
-		
 		this.set('rate_hour_min', Salary.HOUR_RATE_MIN);
-		//this.set('relocation_month_min', Salary.RELOCATION_MONTH_MIN);
-		//this.set('relocation_out_month_min', Salary.RELOCATION_OUT_MONTH_MIN);
-		
-		//let eRelocationLabel = document.querySelector("#relocation_label");
-		//eRelocationLabel.title = eRelocationLabel.title.replace("%relocation_month_min%", Salary.RELOCATION_MONTH_MIN);
-		
-		//let eRelocationOutLabel = document.querySelector("#relocation_out_label");
-		//eRelocationOutLabel.title = eRelocationOutLabel.title.replace("%relocation_out_month_min%", Salary.RELOCATION_OUT_MONTH_MIN);
 		
 		this.bindHTML("body");
 		
@@ -441,19 +408,21 @@ class Salary extends SGModelView {
 		koef *= k(Salary.ENGLANDS[this.get("england")][0]);
 		
 		if (this.get('hourly_payment')) {
-			if (this.get('deadline')) {
-				koef *= k(Salary.HOURS_DEADLINEHOURLY_PAYMENT_PER);
-			} else {
-				koef *= k(Salary.HOURLY_PAYMENT_PER);
-			}
-		} else {
-			if (this.get('deadline')) {
-				koef *= k(Salary.DAYS_IN_WEEK_KOEF[ Math.max(5, this.get('days_in_week')) ]);
-				koef *= k(Salary.HOURS_DEADLINE_KOEF);
+			koef *= k(Salary.HOURLY_PAYMENT_PER);
+		}
+		
+		if (this.get('deadline')) {
+			koef *= k(Salary.HOURS_DEADLINE_KOEF);
+			if (this.get('days_in_week') <= 5) {
+				//koef *= k(Salary.HOURS_DEADLINE_KOEF);
 			} else {
 				koef *= k(Salary.DAYS_IN_WEEK_KOEF[this.get('days_in_week')]);
+			}
+		} else {
+			if (!this.get('hourly_payment')) {
 				koef *= k(Salary.HOURS_KOEF[this.get('hours_in_day')]);
 			}
+			koef *= k(Salary.DAYS_IN_WEEK_KOEF[this.get('days_in_week')]);
 		}
 		
     if (this.get('otech')) {
@@ -466,33 +435,10 @@ class Salary extends SGModelView {
 			}
 		}
 		
-		/*if (this.get('remote_work')) {
-			koef *= Salary.REMOTE_WORK_KOEF;
-		}
-		/*if (this.get('relocation')) {
-      koef *= Salary.RELOCATION_KOEF[this.get('hours_in_day')] * Salary.REMOTE_WORK_KOEF;
-    }
-		if (this.get('relocation_out')) {
-      koef *= Salary.RELOCATION_OUT_KOEF[this.get('hours_in_day')];// * Salary.REMOTE_WORK_KOEF;
-    }*/
-		
 		let rate = Math.max(Salary.HOUR_RATE_BASE * koef, Salary.HOUR_RATE_MIN);
 		document.querySelector('#rate_title').title = rate;
 		rate = SGModel.roundTo(rate / 5, -1) * 5;
 		let salary = SGModel.roundTo(rate * hours, -3);
-		
-		/*if (this.get('relocation')) {
-			if (salary < Salary.RELOCATION_MONTH_MIN) {
-				salary = Salary.RELOCATION_MONTH_MIN;
-				rate = salary / hours;
-			}
-		}
-		if (this.get('relocation_out')) {
-			if (salary < Salary.RELOCATION_OUT_MONTH_MIN) {
-				salary = Salary.RELOCATION_OUT_MONTH_MIN;
-				rate = salary / hours;
-			}
-		}*/
 		
 		this.set('rate', rate);
 		this.set('salary_month', salary);

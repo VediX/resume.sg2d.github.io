@@ -23,6 +23,9 @@ sup {
 .btn-days_in_week sup.text-success {
   color: #7e7 !important;
 }
+.btn-days_in_week sup.text-danger {
+  color: #ffa !important;
+}
 .btn-schedule {
   color: black;
   background-color: #faa;
