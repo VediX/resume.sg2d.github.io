@@ -207,7 +207,7 @@ class Salary extends SGModelView {
 	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -20, -10, 0, +100, +200];
   
 	static OTECH_KOEF = 0.75;
-	static HOURLY_PAYMENT_PER = +40; // %
+	static HOURLY_PAYMENT_PER = +30; // %
 	static USDKOEF = 1.25;
 	
 	static HOURS_KOEF = [void 0, +25, -10, -5, 0, +5, +10, +15, +20];
@@ -215,10 +215,10 @@ class Salary extends SGModelView {
 	static CODES = [
 		[-25, 'Проект с нуля или кода очень мало'],
 		[0, 'Код поддерживается полностью текущим штатом'],
-		[+25, 'Около 25% legacy в проекте'],
-		[+50, 'Около 50% legacy в проекте'],
-		[+75, 'Около 75% legacy в проекте'],
-		[+100, 'Проект никто не поддерживает!'],
+		[+10, 'Около 25% legacy в проекте'],
+		[+20, 'Около 50% legacy в проекте'],
+		[+40, 'Около 75% legacy в проекте'],
+		[+50, 'Проект никто не поддерживает!'],
 	];
   
 	static TIMEOUTS = [void 0, 5, 5, 5, 5, 10, 10, 15, 15];
@@ -326,6 +326,12 @@ class Salary extends SGModelView {
 			this.set('days_in_week', this.get('days_in_week'), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 		});
 		
+		this.on('typescript', (typescript) => {
+			if (typescript) {
+				this.set('javascript', true);
+			}
+		});
+		
 		// Автоматический level
 		this.on(Object.keys(Salary._fields_koef), (value, previousValue, propName) => {
 			let level_cumm = 0, q = 0;
@@ -343,12 +349,16 @@ class Salary extends SGModelView {
 			for (const ln_cur in Salary.LEVELS) {
 				if (ln_cur === 't') continue;
 				const l_cur = Salary.LEVELS[ln_cur][0];
-				if (level_cumm >= l_prev && level_cumm <= l_cur) {
+				/*if (level_cumm >= l_prev && level_cumm <= l_cur) {
 					if (Math.abs(level_cumm - l_prev) - Math.abs(level_cumm - l_cur) > 0) {
 						level = ln_cur;
 					} else {
 						level = ln_prev;
 					}
+					break;
+				}*/
+				if (level_cumm >= l_prev && level_cumm < l_cur) {
+					level = ln_prev;
 					break;
 				}
 				ln_prev = ln_cur;
