@@ -371,7 +371,7 @@
 							</p>
 						</div>
 						<div sg-css="usdrub > 0 ? 'visible-block': 'no-visible'">
-							<p class="text-center fw-bold lh-1">Total: $<span sg-property="salary_month_usd" sg-format="getNumThinsp">0</span> <span class="text-nowrap">($<span sg-property="rate_usd" sg-format="getNumThinsp">0</span>/hour)<sup>7</sup></span></p>
+							<p class="text-center fw-bold lh-1">Total: $<span sg-property="salary_month_usd" sg-format="getNumThinsp">0</span> <span class="text-nowrap">($<span sg-property="rate_usd" sg-format="getNumThinsp">0</span>/hour)<sup>8</sup></span></p>
 						</div>
 						<div sg-css="cnyrub > 0 ? 'visible-block': 'no-visible'">
 							<p class="text-center fw-bold lh-1">总计: Ұ<span sg-property="salary_month_cny" sg-format="getNumThinsp">0</span> <span class="text-nowrap">(Ұ<span sg-property="rate_cny" sg-format="getNumThinsp">0</span>/小时)</span></p>
@@ -408,21 +408,19 @@
 
 					<p class="text-dark" style="font-size: 0.8rem;">* Уровень оплаты рассчитывается чистыми (на руки)!</p>
 					<p class="text-danger" style="font-size: 0.8rem;" sg-css="hourly_payment ? 'visible-block': 'no-visible'"><sup>1</sup> &mdash; При почасовой оплате без минимально оплачиваемых часов действует повышенная ставка</p>
+					<p class="text-danger" style="font-size: 0.8rem;" sg-css="deadline ? 'visible-block': 'no-visible'"><sup>2</sup> &mdash; При наличии дедлайнов ставка не меньше ставки фуллтайма с пятидневной рабочей неделей! Под дедлайном понимается некий срок за который нужно выполнить определенный пул задач.</p>
 					<p class="" style="font-size: 0.8rem;" sg-css="hours_in_day >= 5 ? 'text-danger': ''">
 						<span sg-css="hours_in_day > 2 ? 'visible-inline': 'no-visible'">
 							<sup>3</sup> &mdash; При <span sg-property="hours_in_day">4</span> часовой занятости перерыв до <span sg-property="timeout">5</span> минут входит в час работы!
 						</span>
 					</p>
-					<p class="text-danger" style="font-size: 0.8rem;" sg-css="deadline && !hourly_payment && hours_in_day !== 8 ? 'visible-block': 'no-visible'"><sup>2</sup> &mdash; При наличии дедлайнов ставка не меньше ставки фуллтайма с пятидневной рабочей неделей! Под дедлайном понимается некий срок за который нужно выполнить определенный пул задач.</p>
-					<!--<p class="text-danger" style="font-size: 0.8rem;" sg-css="schedule === 'c' ? 'visible-block': 'no-visible'"><sup>3</sup> &mdash; При релокации по территории РФ действует повышенная ставка и минимальная месячная оплата составляет <span sg-property="relocation_month_min" sg-format="getNumThinsp">500&nbsp;000</span>&nbsp;руб.</p>
-					<p class="text-danger" style="font-size: 0.8rem;" sg-css="schedule === 'd' ? 'visible-block': 'no-visible'"><sup>4</sup> &mdash; При релокации за пределы территории РФ действует повышенная ставка и минимальная месячная оплата составляет <span sg-property="relocation_out_month_min" sg-format="getNumThinsp">1&nbsp;000&nbsp;000</span>&nbsp;руб.</p>-->
 					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="rate == rate_hour_min ? 'visible-block': 'no-visible'"><sup>5</sup> &mdash; минимальная почасовая ставка <span sg-property="rate_hour_min" sg-format="getNumThinsp">500</span>&nbsp;руб.</p>
 					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-block': 'no-visible'"><sup>6</sup> &mdash; годовая оплата рассчитывается за 11 месяцев.</p>
 					<p class="text-danger" style="font-size: 0.8rem; text-align: justify;" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-block' : 'no-visible'">
 						<sup>7</sup> &mdash; Со дня, когда доходы контрагента-самозанятого (без статуса ИП) превысили <span sg-property="contract_self_limit" sg-format="getNumThinsp">0</span>&nbsp;руб.,
 						вы обязаны удерживать НДФЛ и перечислять страховые взносы с выплат в его пользу. Переоформлять договор с ним необязательно, <a href="http://www.consultant.ru/document/cons_doc_LAW_318780/57fe9d25246fad33498a9766e465c4c35c1113b6/#dst100069" target="_blank">разъясняет ФНС</a>. <span class="text-success">Также самозанятый может зарегистрироваться как ИП.</span>
 					</p>
-					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="usdrub > 0 ? 'visible-block': 'no-visible'"><sup>7</sup> &mdash; при оплате в западных валютах +<span>25</span>%!<br/>Текущие курсы: <span sg-property="usdrub"></span> руб/$, <span sg-property="cnyrub"></span> руб/Ұ</p>
+					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="usdrub > 0 ? 'visible-block': 'no-visible'"><sup>8</sup> &mdash; при оплате в западных валютах +<span>25</span>%!<br/>Текущие курсы: <span sg-property="usdrub"></span> руб/$, <span sg-property="cnyrub"></span> руб/Ұ</p>
 				</div>
 				<div class="col"></div>
 			</div>
