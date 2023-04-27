@@ -174,9 +174,9 @@ class Salary extends SGModelView {
 	
 	static CONTRACTS = new OptionsMethods({
 		"s": [0, 'self'],
-		"l": [-15, 'labor'],
+		"l": [-10, 'labor'],
 		"i": [+15, 'ip'],
-		"f": [+30, 'freelance'],
+		"f": [+35, 'freelance'],
 	});
 	
 	static SCHEDULES = new OptionsMethods({
@@ -186,8 +186,12 @@ class Salary extends SGModelView {
 		"d": [+200, 'relocation_out'],
 	});
 	
-	static NDFL = 0.13;
-	static INSURANCE = 0.22 + 0.051 + 0.029 + 0.002;
+	static NDFL_PER = 13; // %
+	static NDFL_LIMIT = 5000000;
+	static NDFL_LIMIT_PER = 15; // %
+	static INSURANCE_PER = 30; // per //0.22 + 0.051 + 0.029 + 0.002;
+	static INSURANCE_LIMIT = 1917000; // for 2023 year
+	static INSURANCE_LIMIT_PER = 15.1; // %
 	
 	static LEVELS = new OptionsMethods({
 		"t": [-50, 'trainee'],
@@ -217,7 +221,7 @@ class Salary extends SGModelView {
 		[0, 'Код поддерживается полностью текущим штатом'],
 		[+10, 'Около 25% legacy в проекте'],
 		[+20, 'Около 50% legacy в проекте'],
-		[+40, 'Около 75% legacy в проекте'],
+		[+33, 'Около 75% legacy в проекте'],
 		[+50, 'Проект никто не поддерживает!'],
 	];
   
@@ -459,7 +463,14 @@ class Salary extends SGModelView {
 		this.set('salary_month_cny', SGModel.roundTo(this.get('salary_month') / this.get('cnyrub'), -2));
 		
 		if (this.get('contract') === Salary.CONTRACTS.symb('labor')) {
-			const sml_fot = salary + salary * Salary.NDFL;
+			/*static NDFL_PER = 13; // %
+			static NDFL_LIMIT = 5000000;
+			static NDFL_LIMIT_PER = 15; // %
+			static INSURANCE_PER = 30; // per //0.22 + 0.051 + 0.029 + 0.002;
+			static INSURANCE_LIMIT = 1917000; // for 2023 year
+			static INSURANCE_LIMIT_PER = 15.1; // %*/
+			
+			const sml_fot = salary + salary * 1 / (1 - Salary.NDFL_PER/100);
 			const sml = sml_fot + sml_fot * Salary.INSURANCE;
 
 			this.set("salary_labor_fot", sml_fot);
