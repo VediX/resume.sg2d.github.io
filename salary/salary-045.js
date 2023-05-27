@@ -7,6 +7,7 @@ class OptionsMethods {
   getSymbolByIndex(code) { return Object.keys(this)[code]; };
   getValueByIndex(code) { return this[this.getSymbolByIndex(code)][0]; };
   getDescByIndex(code) { return this[this.getSymbolByIndex(code)][1]; };
+	getValueBySymbol(symb) { return this[symb][1]; };
   symb(name) {
     for (let p in this) {
       if (p.length === 1 && typeof this[p] === 'object') {
@@ -41,30 +42,30 @@ class Salary extends SGModelView {
 		otech: false,
 		code: '1',
 		javascript: false,
-		es_node: false,
+		nodejs: false,
 		java: false,
-		vue3: false,
+		vue: false,
 		react: false,
 		postgresql: false,
 		php: false,
 		cpp: false,
 		typescript: false,
-		vanilla: false,
+		vanillajs: false,
 		python: false,
-		goland: false,
+		gorust: false,
 		
 		// скидки/наценки в %
 		javascript_koef: -20,
-		es_node_koef: -5,
+		nodejs_koef: -5,
 		java_koef: +50,
-		vue3_koef: +5,
+		vue_koef: +5,
 		react_koef: +40,
 		postgresql_koef: -5,
 		php_koef: +30,
 		cpp_koef: +10,
 		typescript_koef: +20,
-		vanilla_koef: -5,
-		goland_koef: +50,
+		vanillajs_koef: -5,
+		gorust_koef: +50,
 		python_koef: +40,
 		
 		rate_hour_min: 0,
@@ -91,9 +92,6 @@ class Salary extends SGModelView {
 		contract_self_limit: 0,
 		self_benefit_percent: 0.0,
 		
-		//options_expand: true,
-		//options_expand_icon: ""
-		
 		current_year: new Date().getFullYear()
 	};
 	
@@ -110,17 +108,17 @@ class Salary extends SGModelView {
     otech: SGModel.TYPE_BOOLEAN,
 		code: SGModel.TYPE_STRING,
 		javascript: SGModel.TYPE_BOOLEAN,
-		es_node: SGModel.TYPE_BOOLEAN,
+		nodejs: SGModel.TYPE_BOOLEAN,
 		java: SGModel.TYPE_BOOLEAN,
-		vue3: SGModel.TYPE_BOOLEAN,
+		vue: SGModel.TYPE_BOOLEAN,
 		react: SGModel.TYPE_BOOLEAN,
 		postgresql: SGModel.TYPE_BOOLEAN,
 		php: SGModel.TYPE_BOOLEAN,
 		cpp: SGModel.TYPE_BOOLEAN,
 		typescript: SGModel.TYPE_BOOLEAN,
-		vanilla: SGModel.TYPE_BOOLEAN,
+		vanillajs: SGModel.TYPE_BOOLEAN,
 		python: SGModel.TYPE_BOOLEAN,
-		goland: SGModel.TYPE_BOOLEAN,
+		gorust: SGModel.TYPE_BOOLEAN,
 		
     otech_per: SGModel.TYPE_NUMBER,
     
@@ -131,14 +129,11 @@ class Salary extends SGModelView {
 		salary_labor_year: SGModel.TYPE_NUMBER,
 		contract_self_limit: SGModel.TYPE_NUMBER,
 		self_benefit_percent: SGModel.TYPE_NUMBER,
-		
-		//options_expand: SGModel.TYPE_BOOLEAN,
-		//options_expand_icon: SGModel.TYPE_STRING
 	};
 	
 	static hashProperties = {
 		v: "version",
-		A: "vanilla",
+		A: "vanillajs",
 		B: "hourly_payment",
 		C: "contract",
 		D: "days_in_week",
@@ -149,10 +144,9 @@ class Salary extends SGModelView {
 		I: "python",
 		J: "javascript",
 		//K: "",
-		
 		//M: "",
-		N: "es_node",
-		O: "goland",
+		N: "nodejs",
+		O: "gorust",
 		P: "php",
 		//Q: "",
 		R: "react",
@@ -160,12 +154,11 @@ class Salary extends SGModelView {
 		T: "typescript",
 		//U: "",
 		W: "deadline",
-		V: "vue3",
+		V: "vue",
 		X: "schedule",
 		Y: "java",
     Z: "otech",
-		
-		L: "level",
+		L: "level", // level идёт последним!
 	};
 	
 	static HOUR_RATE_BASE = 2400;
@@ -211,11 +204,15 @@ class Salary extends SGModelView {
 	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -20, -10, 0, +100, +200];
   
 	static OTECH_KOEF = 0.75;
+	
 	static HOURLY_PAYMENT_PER = +30; // %
+	static HOURS_DEADLINE_KOEF = +30; // %
+	static DEADLINE_AND_HOURLY_PAYMENT_PER = +40; // %
+	
 	static USDKOEF = 1.25;
 	
 	static HOURS_KOEF = [void 0, +25, -10, -5, 0, +5, +10, +15, +20];
-	static HOURS_DEADLINE_KOEF = +30;
+	
 	static CODES = [
 		[-25, 'Проект с нуля или кода очень мало'],
 		[0, 'Код поддерживается полностью текущим штатом'],
@@ -229,17 +226,17 @@ class Salary extends SGModelView {
 	
 	static _fields_koef = {
 		'javascript': 's',
-		'es_node': 'm',
+		'nodejs': 'm',
 		'react': 't',
 		'postgresql': 'm',
-		'vue3': 'j',
+		'vue': 'j',
 		'php': 'i',
 		'cpp': 'i',
 		'typescript': 'i',
-		'vanilla': 'm',
+		'vanillajs': 'm',
 		'java': 'j',
 		'python': 't',
-		'goland': 't',
+		'gorust': 't',
 	};
 	
 	async initialize() {
@@ -248,8 +245,6 @@ class Salary extends SGModelView {
 			await this.checkDollarInRubles();
 			await this.checkCNYInRubles();
 		} catch (err) {}
-		
-		Salary.HOURS_DEADLINEHOURLY_PAYMENT_PER = SGModel.roundTo(100*((1+Salary.HOURS_DEADLINE_KOEF/100) * (1+Salary.HOURLY_PAYMENT_PER/100) - 1));
 		
 		Salary.CONTRACTS._inverse = {};
 		for (let p in Salary.CONTRACTS) {
@@ -282,31 +277,6 @@ class Salary extends SGModelView {
 		this.set('contract_self_limit', Salary.CONTRACT_SELF_LIMIT);
     
 		this.set('otech_per', 100*(Salary.OTECH_KOEF - 1), { precision: 1 });
-		//this.set('remote_work_per', 100*(Salary.REMOTE_WORK_KOEF - 1), { precision: 1 });
-		
-		/*let codeTypes = ["code_startup", "code_supported", "code_supported_and_legacy", "code_legacy"];
-		this.on(codeTypes, (value, valuePrev, name)=>{
-			codeTypes.forEach(_name=>{
-				var elem = document.querySelector("[sg-property="+_name+"]");
-				if (name !== _name) {
-					this.set(_name, false, void 0, SGModelView.FLAG_NO_CALLBACKS);
-				}
-				if (this.get(_name)) {
-					elem.parentNode.classList.add("selected");
-				} else {
-					elem.parentNode.classList.remove("selected");
-				}
-			});
-		});*/
-		
-		/*this.on('hourly_payment', (hourly_payment) => {
-			const input1 = document.querySelector('#hours_in_day');
-			if (hourly_payment) {
-				input1.disabled = true;
-			} else {
-				input1.disabled = false;
-			}
-		});*/
 		
 		this.on('hours_in_day', (hours)=>{
 			this.set('hours_in_day_desc', (hours == 8 ? 'Фуллтайм' : hours + ' ' + this.getHoursMeas(hours) + '/день')); // TODO: надписи вытащить в шаблон?
@@ -330,9 +300,19 @@ class Salary extends SGModelView {
 			this.set('days_in_week', this.get('days_in_week'), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 		});
 		
-		this.on('typescript', (typescript) => {
-			if (typescript) {
-				this.set('javascript', true);
+		const jsTechDependent = ['typescript', 'nodejs', 'vanillajs', 'react', 'vue'];
+		jsTechDependent.forEach(code => {
+			this.on(code, (value) => {
+				if (value) {
+					this.set('javascript', true);
+				}
+			});
+		});
+		this.on('javascript', (javascript) => {
+			if (!javascript) {
+				jsTechDependent.forEach(code => {
+					this.set(code, false)
+				});
 			}
 		});
 		
@@ -353,14 +333,6 @@ class Salary extends SGModelView {
 			for (const ln_cur in Salary.LEVELS) {
 				if (ln_cur === 't') continue;
 				const l_cur = Salary.LEVELS[ln_cur][0];
-				/*if (level_cumm >= l_prev && level_cumm <= l_cur) {
-					if (Math.abs(level_cumm - l_prev) - Math.abs(level_cumm - l_cur) > 0) {
-						level = ln_cur;
-					} else {
-						level = ln_prev;
-					}
-					break;
-				}*/
 				if (level_cumm >= l_prev && level_cumm < l_cur) {
 					level = ln_prev;
 					break;
@@ -369,10 +341,6 @@ class Salary extends SGModelView {
 			}
 			this.set('level', level);
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
-		
-		/*this.on("options_expand", (options_expand)=>{
-			this.set("options_expand_icon", options_expand ? "&nbsp;&#9660;" : "...");
-		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);*/
 		
 		this.set('rate_hour_min', Salary.HOUR_RATE_MIN);
 		
@@ -421,22 +389,27 @@ class Salary extends SGModelView {
 		koef *= k(Salary.CODES[this.get("code")][0]);
 		koef *= k(Salary.ENGLANDS[this.get("england")][0]);
 		
-		if (this.get('hourly_payment')) {
-			koef *= k(Salary.HOURLY_PAYMENT_PER);
-		}
-		
-		if (this.get('deadline')) {
-			koef *= k(Salary.HOURS_DEADLINE_KOEF);
-			if (this.get('days_in_week') <= 5) {
-				//koef *= k(Salary.HOURS_DEADLINE_KOEF);
-			} else {
+		if (this.get('hourly_payment') && this.get('deadline')) {
+			koef *= k(Salary.DEADLINE_AND_HOURLY_PAYMENT_PER);
+			if (this.get('days_in_week') > 5) {
 				koef *= k(Salary.DAYS_IN_WEEK_KOEF[this.get('days_in_week')]);
 			}
 		} else {
-			if (!this.get('hourly_payment')) {
-				koef *= k(Salary.HOURS_KOEF[this.get('hours_in_day')]);
+			if (this.get('hourly_payment')) {
+				koef *= k(Salary.HOURLY_PAYMENT_PER);
 			}
-			koef *= k(Salary.DAYS_IN_WEEK_KOEF[this.get('days_in_week')]);
+			if (this.get('deadline')) {
+				koef *= k(Salary.HOURS_DEADLINE_KOEF);
+				if (this.get('days_in_week') > 5) {
+					koef *= k(Salary.DAYS_IN_WEEK_KOEF[this.get('days_in_week')]);
+				}
+			}
+			if (!this.get('deadline')) {
+				if (!this.get('hourly_payment')) {
+					koef *= k(Salary.HOURS_KOEF[this.get('hours_in_day')]);
+				}
+				koef *= k(Salary.DAYS_IN_WEEK_KOEF[this.get('days_in_week')]);
+			}
 		}
 		
     if (this.get('otech')) {
@@ -543,22 +516,14 @@ class Salary extends SGModelView {
 		if (value == 0) return ""; else return value < 0 ? "text-success" : "text-danger";
 	}
 	
-	/*toggleOptions() {
-		this.set("options_expand", ! this.get("options_expand"));
-	}*/
+	supportCodeClick(evt) {
+		this.set('code', evt.target.dataset.code);
+	}
 	
-	/*sendOffer() {
-		debugger;
-		Email.send({
-			SecureToken: "todo",
-			To: "_@_.ru",
-			From: "_@sg2d.ru",
-			Subject: "Offer from the salary constructor form",
-			Body: "TODO..."
-		}).then(
-			message => console.log(message)
-		);
-	}*/
+	getLevelFor(tech) {
+		const level = String(Salary.LEVELS.getValueBySymbol(Salary._fields_koef[tech])).replace('_plus', '+');
+		return `${tech} - ${level}`;
+	}
 	
 	saveLink() {
 		var hash = [];
@@ -598,7 +563,6 @@ class Salary extends SGModelView {
 		this.set("contract", Salary.CONTRACTS.symb('self'));
 	}
 	
-	//static currencyURL = 'https://www.cbr-xml-daily.ru/daily_json.js';
 	static currencyURL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/$DATE$/currencies/usd/rub.json';
 	static currencyURLcny = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/$DATE$/currencies/cny/rub.json';
 	
@@ -615,7 +579,6 @@ class Salary extends SGModelView {
 			const xhr = new XMLHttpRequest();
 			xhr.onload = (evt)=>{
 				try {
-					//this.set('usdrub', SGModel.roundTo(xhr.response.Valute.USD.Value, 2));
 					this.set(currencyCode, SGModel.roundTo(xhr.response.rub, precision));
 					resolve();
 				} catch(err) {
@@ -626,9 +589,6 @@ class Salary extends SGModelView {
 				reject(err);
 			};
 			xhr.open('GET', currencyURL.replace('$DATE$', new Date().toISOString().substring(0, 10)));
-			//xhr.setRequestHeader('Cache-Control', 'no-cache, no-store, max-age=0');
-			//xhr.setRequestHeader('Expires', 'Tue, 01 Jan 2000 0:00:00 GMT');
-			//xhr.setRequestHeader('Pragma', 'no-cache');
 			xhr.responseType = 'json';
 			xhr.send();
 		});

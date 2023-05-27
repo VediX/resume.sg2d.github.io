@@ -10,6 +10,10 @@
 sup {
   font-weight: bold;
 }
+label,
+.cursor-pointer {
+  cursor: pointer;
+}
 .btn-contract {
   color: black;
   background-color: #eee;
