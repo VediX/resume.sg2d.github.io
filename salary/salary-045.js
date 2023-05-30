@@ -516,6 +516,10 @@ class Salary extends SGModelView {
 		if (value == 0) return ""; else return value < 0 ? "text-success" : "text-danger";
 	}
 	
+	hoursInDayClick(evt) {
+		this.set('hours_in_day', evt.target.dataset.hours);
+	}
+	
 	supportCodeClick(evt) {
 		this.set('code', evt.target.dataset.code);
 	}

@@ -41,7 +41,6 @@
 - PostgreSQL, PL/pgSQL: middle
 - TypeScript / Google Traceur-compiler: junior+
 - Delphi/C++ (Embarcadero RAD Studio): junior+
-- Lua, Visual Basic (разработка 2D игр): junior+
 - C# (Visual Studio): junior+
 - SAPUI5 (Fiori Developer), SAP Cloud Platform: junior+
 - PHP: junior+
@@ -65,6 +64,7 @@
 - YouTrack & GitLab (linux+nginx+ssl+dns+docker=server): +
 - PixiJS (+Sound) / PhaserJS: +
 - QUIK/Lua, TSLab2/C# (торговые роботы, индикаторы): +
+- Lua, Visual Basic (разработка 2D игр): junior+
 - Roblox: junior
 
 P.S: junior+ подразумевает, что с данной технологией я работал давно и с тех пор многое могло измениться, тем не менее при постоянном использовании она прокачивается до middle в течение 6-12 месяцев с соответствующим ожиданием повышения рейта. С middle/middle+ до senior'а я прокачиваюсь несколько лет, если использую эту технологию длительное время.

@@ -139,14 +139,14 @@
 									<div class="row m-0">
 										<div class="col-md-6 p-0 pt-3 pe-1 position-relative" style="font-size: 10pt">
 											<input sg-property="hours_in_day" id="hours_in_day" type="range" class="form-range input-range-off" min="1" max="8" aria-describedby="hours_in_day_desc" value="4">
-											<div class="position-absolute top-0 translate-middle-y label-hour lhour-1 text-danger" sg-attributes="{ title: getHourTitle('1') }">1h</div>
-											<div class="position-absolute top-0 translate-middle-y label-hour lhour-2 text-success" sg-attributes="{ title: getHourTitle('2') }">2h</div>
-											<div class="position-absolute top-0 translate-middle-y label-hour lhour-3 text-success" sg-attributes="{ title: getHourTitle('3') }">3h</div>
-											<div class="position-absolute top-0 translate-middle-y label-hour lhour-4" sg-attributes="{ title: getHourTitle('4') }">4h</div>
-											<div class="position-absolute top-0 translate-middle-y label-hour lhour-5 text-danger" sg-attributes="{ title: getHourTitle('5') }">5h</div>
-											<div class="position-absolute top-0 translate-middle-y label-hour lhour-6 text-danger" sg-attributes="{ title: getHourTitle('6') }">6h</div>
-											<div class="position-absolute top-0 translate-middle-y label-hour lhour-7 text-danger" sg-attributes="{ title: getHourTitle('7') }">7h</div>
-											<div class="position-absolute top-0 translate-middle-y label-hour lhour-8 text-danger" sg-attributes="{ title: getHourTitle('8') }">8h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-1 text-danger cursor-pointer" sg-attributes="{ title: getHourTitle('1') }" sg-click="hoursInDayClick" data-hours="1">1h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-2 text-success cursor-pointer" sg-attributes="{ title: getHourTitle('2') }" sg-click="hoursInDayClick" data-hours="2">2h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-3 text-success cursor-pointer" sg-attributes="{ title: getHourTitle('3') }" sg-click="hoursInDayClick" data-hours="3">3h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-4 cursor-pointer" sg-attributes="{ title: getHourTitle('4') }" sg-click="hoursInDayClick" data-hours="4">4h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-5 text-danger cursor-pointer" sg-attributes="{ title: getHourTitle('5') }" sg-click="hoursInDayClick" data-hours="5">5h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-6 text-danger cursor-pointer" sg-attributes="{ title: getHourTitle('6') }" sg-click="hoursInDayClick" data-hours="6">6h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-7 text-danger cursor-pointer" sg-attributes="{ title: getHourTitle('7') }" sg-click="hoursInDayClick" data-hours="7">7h</div>
+											<div class="position-absolute top-0 translate-middle-y label-hour lhour-8 text-danger cursor-pointer" sg-attributes="{ title: getHourTitle('8') }" sg-click="hoursInDayClick" data-hours="8">8h</div>
 										</div>
 										<div class="col-md-6 p-0">
 											<div class="input-group-text bg-gradient" style="justify-content: center">
