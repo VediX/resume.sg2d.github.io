@@ -161,9 +161,9 @@ class Salary extends SGModelView {
 		L: "level", // level идёт последним!
 	};
 	
-	static HOUR_RATE_BASE = 2400;
+	static HOUR_RATE_BASE = 3650;
 	static HOUR_RATE_MIN = 1000;
-	static CONTRACT_SELF_LIMIT = 2400000;
+	static CONTRACT_SELF_LIMIT = 4800000;
 	
 	static CONTRACTS = new OptionsMethods({
 		"s": [0, 'self'],
