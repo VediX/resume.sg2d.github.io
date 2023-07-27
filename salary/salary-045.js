@@ -55,15 +55,15 @@ class Salary extends SGModelView {
 		gorust: false,
 		
 		// скидки/наценки в %
-		javascript_koef: -20,
-		nodejs_koef: -5,
+		javascript_koef: -25,
+		nodejs_koef: -10,
 		java_koef: +50,
 		vue_koef: +5,
 		react_koef: +40,
-		postgresql_koef: -5,
+		postgresql_koef: -10,
 		php_koef: +30,
 		cpp_koef: +10,
-		typescript_koef: +20,
+		typescript_koef: +25,
 		vanillajs_koef: -5,
 		gorust_koef: +50,
 		python_koef: +40,
@@ -201,7 +201,7 @@ class Salary extends SGModelView {
 		"b": [100, 'b']
 	});
 	
-	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -20, -10, 0, +100, +200];
+	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -15, -10, 0, +100, +200];
   
 	static OTECH_KOEF = 0.75;
 	
