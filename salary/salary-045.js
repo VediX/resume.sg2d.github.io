@@ -55,15 +55,15 @@ class Salary extends SGModelView {
 		gorust: false,
 		
 		// скидки/наценки в %
-		javascript_koef: -25,
-		nodejs_koef: -10,
+		javascript_koef: -5,
+		nodejs_koef: -5,
 		java_koef: +50,
 		vue_koef: +5,
 		react_koef: +40,
-		postgresql_koef: -10,
+		postgresql_koef: -5,
 		php_koef: +30,
 		cpp_koef: +10,
-		typescript_koef: +25,
+		typescript_koef: +15,
 		vanillajs_koef: -5,
 		gorust_koef: +50,
 		python_koef: +40,
@@ -161,7 +161,7 @@ class Salary extends SGModelView {
 		L: "level", // level идёт последним!
 	};
 	
-	static HOUR_RATE_BASE = 3650;
+	static HOUR_RATE_BASE = 3000;
 	static HOUR_RATE_MIN = 1000;
 	static CONTRACT_SELF_LIMIT = 4800000;
 	
@@ -171,6 +171,8 @@ class Salary extends SGModelView {
 		"i": [+15, 'ip'],
 		"f": [+35, 'freelance'],
 	});
+	
+	static LEVEL_DEFAULT = 'j';
 	
 	static SCHEDULES = new OptionsMethods({
 		"a": [0, 'office'],
@@ -315,6 +317,21 @@ class Salary extends SGModelView {
 				});
 			}
 		});
+		['react', 'vue'].forEach(code => {
+			this.on(code, (value) => {
+				if (value) {
+					this.set('vanillajs', false);
+				}
+			});
+		});
+		['vanillajs'].forEach(code => {
+			this.on(code, (value) => {
+				if (value) {
+					this.set('react', false);
+					this.set('vue', false);
+				}
+			});
+		});
 		
 		// Автоматический level
 		this.on(Object.keys(Salary._fields_koef), (value, previousValue, propName) => {
@@ -327,7 +344,7 @@ class Salary extends SGModelView {
 				}
 			}
 			level_cumm /= q;
-			let level = 'm';
+			let level = Salary.LEVEL_DEFAULT;
 			let ln_prev = 't';
 			let l_prev = Salary.LEVELS[ln_prev][0];
 			for (const ln_cur in Salary.LEVELS) {
@@ -416,11 +433,14 @@ class Salary extends SGModelView {
       koef *= Salary.OTECH_KOEF;
     }
 		
+		let perSum = 0;
 		for (let t in Salary._fields_koef) {
 			if (this.get(t)) {
-				koef *= k(this.get(t + '_koef'));
+				perSum += this.get(t + '_koef');
+				//koef *= k(this.get(t + '_koef'));
 			}
 		}
+		koef *= k(perSum);
 		
 		let rate = Math.max(Salary.HOUR_RATE_BASE * koef, Salary.HOUR_RATE_MIN);
 		document.querySelector('#rate_title').title = rate;
