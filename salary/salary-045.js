@@ -52,7 +52,7 @@ class Salary extends SGModelView {
 		typescript: false,
 		vanillajs: false,
 		python: false,
-		gorust: false,
+		other: false,
 		
 		// скидки/наценки в %
 		javascript_koef: -5,
@@ -65,7 +65,7 @@ class Salary extends SGModelView {
 		cpp_koef: +10,
 		typescript_koef: +15,
 		vanillajs_koef: -5,
-		gorust_koef: +50,
+		other_koef: +100,
 		python_koef: +40,
 		
 		rate_hour_min: 0,
@@ -118,7 +118,7 @@ class Salary extends SGModelView {
 		typescript: SGModel.TYPE_BOOLEAN,
 		vanillajs: SGModel.TYPE_BOOLEAN,
 		python: SGModel.TYPE_BOOLEAN,
-		gorust: SGModel.TYPE_BOOLEAN,
+		other: SGModel.TYPE_BOOLEAN,
 		
     otech_per: SGModel.TYPE_NUMBER,
     
@@ -146,7 +146,7 @@ class Salary extends SGModelView {
 		//K: "",
 		//M: "",
 		N: "nodejs",
-		O: "gorust",
+		O: "other",
 		P: "php",
 		//Q: "",
 		R: "react",
@@ -238,7 +238,7 @@ class Salary extends SGModelView {
 		'vanillajs': 'm',
 		'java': 'j',
 		'python': 't',
-		'gorust': 't',
+		'other': 't',
 	};
 	
 	async initialize() {
@@ -313,7 +313,7 @@ class Salary extends SGModelView {
 		this.on('javascript', (javascript) => {
 			if (!javascript) {
 				jsTechDependent.forEach(code => {
-					this.set(code, false)
+					this.set(code, false);
 				});
 			}
 		});
