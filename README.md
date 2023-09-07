@@ -25,8 +25,8 @@
 - Частичная занятость 1-7ч/фуллтайм
 - 1-7 дней в неделю
 - Гибкий график / Проектная работа
-- К командировкам не готов
-- Релокация очень дорого
+- Командировки не рассматриваю
+- При релокации з/п 100%+
 
 ## Контакты:
 * E-mail: [offer@sg2d.ru](mailto:offer@sg2d.ru)
@@ -52,6 +52,7 @@
 - Sequelize (ORM): +
 - HTML5, Bootstrap, CSS2/LESS: +
 - Redis, RabbitMQ: +
+- Moleculer, Prometheus: junior
 - grpc, websocket: +
 - Linux, Docker, Bash-скрипты: +
 - Nginx, Apache: +
