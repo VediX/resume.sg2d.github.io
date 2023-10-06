@@ -26,7 +26,7 @@
 - 1-7 дней в неделю
 - Гибкий график / Проектная работа
 - Командировки не рассматриваю
-- При релокации з/п 100%+
+- При релокации з/п от 100%+
 
 ## Контакты:
 * E-mail: [offer@sg2d.ru](mailto:offer@sg2d.ru)
@@ -39,18 +39,19 @@
 
 - ES6+/NodeJS, express.js: middle+
 - PostgreSQL, PL/pgSQL: middle
-- TypeScript / Google Traceur-compiler: junior+
-- PHP: junior+
-- MSSQL, Firebird/Interbase, MySQL, SQLite: junior+
-- Delphi/C++ (Embarcadero RAD Studio): junior+
-- Lua, Visual Basic (разработка 2D игр): junior+
-- C# (Visual Studio): junior+
-- SAPUI5 (Fiori Developer), SAP Cloud Platform: junior+
+- Lua: middle
+- TypeScript / Google Traceur-compiler: middle-
+- PHP: middle-
+- MSSQL, Firebird/Interbase, MySQL, SQLite: middle-
+- Delphi/C++ (Embarcadero RAD Studio): middle-
+- Visual Basic (разработка 2D игр): middle-
+- C# (Visual Studio): middle-
+- SAPUI5 (Fiori Developer), SAP Cloud Platform: junior
 - BackboneJS, KnockoutJS: +
 - Lodash, Underscore.js, jQuery: +
 - Smarty (PHP), mustache: +
 - Sequelize (ORM): +
-- HTML5, Bootstrap, CSS2/LESS: +
+- HTML5, Bootstrap, CSS/LESS: +
 - Redis, RabbitMQ: +
 - Moleculer, Prometheus: junior
 - grpc, websocket: +
@@ -65,11 +66,11 @@
 - Webpack, ESLint: +
 - Jira, Confluence, Bitbucket: +
 - YouTrack & GitLab (linux+nginx+ssl+dns+docker=server): +
-- PixiJS (+Sound) / PhaserJS: +
 - QUIK/Lua, TSLab2/C# (торговые роботы, индикаторы): +
-- Roblox: junior
+- PixiJS (+Sound) / PhaserJS: +
+- Roblox: +
 
-P.S: junior+ подразумевает, что с данной технологией работал давно и с тех пор многое могло измениться, тем не менее при постоянном использовании она прокачивается до middle в течение 6-12 месяцев с соответствующим ожиданием повышения рейта. С middle/middle+ до senior'а прокачиваюсь несколько лет, если использую эту технологию длительное время.
+P.S: middle- подразумевает, что с данной технологией работал давно и с тех пор многое могло измениться, тем не менее при постоянном использовании она прокачивается до middle в течение 6-12 месяцев с соответствующим ожиданием повышения рейта. С middle/middle+ до senior'а прокачиваюсь несколько лет, если использую эту технологию длительное время.
 
 ### Условия сотрудничества
 
@@ -86,7 +87,7 @@ P.S: junior+ подразумевает, что с данной технолог
 * Тестовое задание длительностью от 4-х часов и больше выполню только при его оплате (при успешном выполнении оплата 100%, при не успешном минимум 25%)!
 * legacy-код интересен только при повышенной з/п в зависимости от его количества (+50% при полном legacy-проекте)!
 * Работа в выходные или более 4-8 часов в день только с взаимного согласия и с повышенной оплатой.
-* Ежегодная индексация з/п на уровень фактической инфляции.
+* Ежеквартальная индексация з/п на уровень фактической инфляции.
 
 **!!! Уважаемые работодатели/партнёры! Прошу воспользоваться [формой](/salary/) для понимания ожидаемого уровня зарплаты/стоимости моих услуг в зависимости от условий сотрудничества и технологий используемых в проектах. При отклике прошу отправить мне ссылку на расчёт, либо просто написать фразу "С резюме ознакомились полностью!" - таким образом, я буду знать что Вы ознакомились с моим резюме полностью и согласны рассмотреть мою кандидатуру с учётом моих пожеланий по условиям сотрудничества!**
 
