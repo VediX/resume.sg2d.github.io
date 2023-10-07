@@ -79,10 +79,13 @@ class Salary extends SGModelView {
 		
 		usdrub: 0,
 		cnyrub: 0,
+		tonrub: 0,
 		salary_month_usd: 0,
 		rate_usd: 0,
 		salary_month_cny: 0,
 		rate_cny: 0,
+		salary_month_ton: 0,
+		rate_ton: 0,
 		
 		salary_labor_fot: 0,
 		salary_labor_ndfl: 0,
@@ -246,6 +249,7 @@ class Salary extends SGModelView {
 		try {
 			await this.checkDollarInRubles();
 			await this.checkCNYInRubles();
+			await this.checkTONCoinInRubles();
 		} catch (err) {}
 		
 		Salary.CONTRACTS._inverse = {};
@@ -450,10 +454,12 @@ class Salary extends SGModelView {
 		this.set('rate', rate);
 		this.set('salary_month', salary);
 		this.set('salary_year', this.get('salary_month') * (this.get('contract') === Salary.CONTRACTS.symb('labor') ? 12 : 11));
-		this.set('rate_usd', SGModel.roundTo(Salary.USDKOEF * this.get('rate') / this.get('usdrub'), 0));
-		this.set('salary_month_usd', SGModel.roundTo(Salary.USDKOEF * this.get('salary_month') / this.get('usdrub'), -2));
+		this.set('rate_usd', SGModel.roundTo(Salary.USDKOEF * this.get('rate') / this.get('usdrub'), 1));
+		this.set('salary_month_usd', SGModel.roundTo(Salary.USDKOEF * this.get('salary_month') / this.get('usdrub'), -1));
 		this.set('rate_cny', SGModel.roundTo(this.get('rate') / this.get('cnyrub'), 1));
-		this.set('salary_month_cny', SGModel.roundTo(this.get('salary_month') / this.get('cnyrub'), -2));
+		this.set('salary_month_cny', SGModel.roundTo(this.get('salary_month') / this.get('cnyrub'), -1));
+		this.set('rate_ton', SGModel.roundTo(this.get('rate') / this.get('tonrub'), 2));
+		this.set('salary_month_ton', SGModel.roundTo(this.get('salary_month') / this.get('tonrub'), 0));
 		
 		if (this.get('contract') === Salary.CONTRACTS.symb('labor')) {
 			/*static NDFL_PER = 13; // %
@@ -493,6 +499,11 @@ class Salary extends SGModelView {
 	
 	getNumThinsp(value) {
 		return (''+value.toLocaleString().replace(/,.*/, "")).replace(/\s/g, "&thinsp;");
+	}
+	
+	getNumThinsp2(value) {
+		const fractional = Math.floor(100*(value - Math.floor(value)));
+		return (''+value.toLocaleString().replace(/,.*/, "")).replace(/\s/g, "&thinsp;") + '.' + fractional;
 	}
 	
 	formatHoursExtraCharge(value) {
@@ -589,6 +600,7 @@ class Salary extends SGModelView {
 	
 	static currencyURL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/$DATE$/currencies/usd/rub.json';
 	static currencyURLcny = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/$DATE$/currencies/cny/rub.json';
+	static currencyURLTONCoin = 'https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=rub';
 	
 	checkDollarInRubles() {
 		return this.getCourceInRubles(Salary.currencyURL, 'usdrub');
@@ -598,12 +610,22 @@ class Salary extends SGModelView {
 		return this.getCourceInRubles(Salary.currencyURLcny, 'cnyrub');
 	}
 	
-	getCourceInRubles(currencyURL, currencyCode, precision = 2) {
+	checkTONCoinInRubles() {
+		return this.getCourceInRubles(Salary.currencyURLTONCoin, 'tonrub', 'the-open-network.rub');
+	}
+	
+	getCourceInRubles(currencyURL, currencyCode, pathProps = 'rub', precision = 2) {
 		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
 			xhr.onload = (evt)=>{
 				try {
-					this.set(currencyCode, SGModel.roundTo(xhr.response.rub, precision));
+					const props = pathProps.split('.');
+					let value = xhr.response;
+					for (let i = 0; i < props.length; i++) {
+						value = value[props[i]];
+						if (!value) break;
+					}
+					this.set(currencyCode, SGModel.roundTo(value, precision));
 					resolve();
 				} catch(err) {
 					reject(err);

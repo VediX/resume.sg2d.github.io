@@ -56,7 +56,7 @@
   </script>
 	<link href="salary.css" rel="stylesheet">
 	<script type="module" src="./../res/sg-model/sg-model-view-41.js" defer></script>
-	<script type="module" src="salary-045.js"></script>
+	<script type="module" src="salary-046.js"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
 
@@ -325,10 +325,13 @@
 							</p>
 						</div>
 						<div sg-css="usdrub > 0 ? 'visible-block': 'no-visible'">
-							<p class="text-center fw-bold lh-1">Total: $<span sg-property="salary_month_usd" sg-format="getNumThinsp">0</span> <span class="text-nowrap">($<span sg-property="rate_usd" sg-format="getNumThinsp">0</span>/hour)<sup>8</sup></span></p>
+							<p class="text-center fw-bold lh-1">$<span sg-property="salary_month_usd" sg-format="getNumThinsp">0</span> <span class="text-nowrap">($<span sg-property="rate_usd" sg-format="getNumThinsp2">0</span>/hour)<sup>8</sup></span></p>
 						</div>
 						<div sg-css="cnyrub > 0 ? 'visible-block': 'no-visible'">
 							<p class="text-center fw-bold lh-1">总计: Ұ<span sg-property="salary_month_cny" sg-format="getNumThinsp">0</span> <span class="text-nowrap">(Ұ<span sg-property="rate_cny" sg-format="getNumThinsp">0</span>/小时)</span></p>
+						</div>
+						<div sg-css="tonrub > 0 ? 'visible-block': 'no-visible'">
+							<p class="text-center fw-bold lh-1"><a href="https://www.coingecko.com/en/coins/toncoin" target="_blank">TON</a>: <img src="/res/imgs/toncoin.png" width="16" alt="toncoin" style="vertical-align: bottom"/><span sg-property="salary_month_ton" sg-format="getNumThinsp">0</span> <span class="text-nowrap">(<img src="/res/imgs/toncoin.png" width="16" alt="toncoin" style="vertical-align: bottom"/><span sg-property="rate_ton" sg-format="getNumThinsp2">0</span>/hour)</span></p>
 						</div>
 						<!--<div class="for-labor-contract" sg-css="contract === this.constructor.CONTRACTS.symb('labor') ? 'visible-block' : 'no-visible'">
 							
