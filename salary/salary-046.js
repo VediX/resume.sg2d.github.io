@@ -459,7 +459,7 @@ class Salary extends SGModelView {
 		this.set('salary_month_usd', SGModel.roundTo(Salary.USDKOEF * this.get('salary_month') / this.get('usdrub'), -1));
 		this.set('rate_cny', SGModel.roundTo(this.get('rate') / this.get('cnyrub'), 1));
 		this.set('salary_month_cny', SGModel.roundTo(this.get('salary_month') / this.get('cnyrub'), -1));
-		this.set('rate_ton', Math.ceil(this.get('rate') / this.get('tonrub')));
+		this.set('rate_ton', SGModel.roundTo(this.get('rate') / this.get('tonrub'), 2));
 		this.set('salary_month_ton', SGModel.roundTo(this.get('rate_ton') * hours, -1));
 		
 		if (this.get('contract') === Salary.CONTRACTS.symb('labor')) {
