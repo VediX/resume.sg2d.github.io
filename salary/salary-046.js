@@ -170,6 +170,7 @@ class Salary extends SGModelView {
 	
 	static CONTRACTS = new OptionsMethods({
 		"s": [0, 'self'],
+		"c": [-5, 'crypta'],
 		"l": [-10, 'labor'],
 		"i": [+15, 'ip'],
 		"f": [+35, 'freelance'],
@@ -458,8 +459,8 @@ class Salary extends SGModelView {
 		this.set('salary_month_usd', SGModel.roundTo(Salary.USDKOEF * this.get('salary_month') / this.get('usdrub'), -1));
 		this.set('rate_cny', SGModel.roundTo(this.get('rate') / this.get('cnyrub'), 1));
 		this.set('salary_month_cny', SGModel.roundTo(this.get('salary_month') / this.get('cnyrub'), -1));
-		this.set('rate_ton', SGModel.roundTo(this.get('rate') / this.get('tonrub'), 2));
-		this.set('salary_month_ton', SGModel.roundTo(this.get('salary_month') / this.get('tonrub'), 0));
+		this.set('rate_ton', Math.ceil(this.get('rate') / this.get('tonrub')));
+		this.set('salary_month_ton', SGModel.roundTo(this.get('rate_ton') * hours, -1));
 		
 		if (this.get('contract') === Salary.CONTRACTS.symb('labor')) {
 			/*static NDFL_PER = 13; // %
