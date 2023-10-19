@@ -325,13 +325,13 @@
 								<span sg-property="salary_year" sg-format="getNumThinsp" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'text-danger' : ''">0</span>&nbsp;руб./год<sup sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-inline': 'no-visible'">6</sup><sup class="text-danger" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-inline' : 'no-visible'">,7</sup>
 							</p>
 						</div>
-						<div sg-css="usdrub > 0 ? 'visible-block': 'no-visible'">
+						<div sg-css="(usdrub > 0 && contract !== 'c') ? 'visible-block': 'no-visible'">
 							<p class="text-center fw-bold lh-1">$<span sg-property="salary_month_usd" sg-format="getNumThinsp">0</span> <span class="text-nowrap">($<span sg-property="rate_usd" sg-format="getNumThinsp2">0</span>/hour)<sup>8</sup></span></p>
 						</div>
-						<div sg-css="cnyrub > 0 ? 'visible-block': 'no-visible'">
+						<div sg-css="(cnyrub > 0 && contract !== 'c') ? 'visible-block': 'no-visible'">
 							<p class="text-center fw-bold lh-1">总计: Ұ<span sg-property="salary_month_cny" sg-format="getNumThinsp">0</span> <span class="text-nowrap">(Ұ<span sg-property="rate_cny" sg-format="getNumThinsp">0</span>/小时)</span></p>
 						</div>
-						<div sg-css="tonrub > 0 ? 'visible-block': 'no-visible'">
+						<div sg-css="(tonrub > 0 && contract == 'c') ? 'visible-block': 'no-visible'">
 							<p class="text-center fw-bold lh-1"><a href="https://www.coingecko.com/en/coins/toncoin" target="_blank">TON</a>: <img src="/res/imgs/toncoin.png" width="16" alt="toncoin" style="vertical-align: bottom"/><span sg-property="salary_month_ton" sg-format="getNumThinsp">0</span> <span class="text-nowrap">(<img src="/res/imgs/toncoin.png" width="16" alt="toncoin" style="vertical-align: bottom"/><span sg-property="rate_ton" sg-format="getNumThinsp2">0</span>/hour)</span></p>
 						</div>
 						<!--<div class="for-labor-contract" sg-css="contract === this.constructor.CONTRACTS.symb('labor') ? 'visible-block' : 'no-visible'">
