@@ -170,7 +170,7 @@ class Salary extends SGModelView {
 	
 	static CONTRACTS = new OptionsMethods({
 		"s": [0, 'self'],
-		"c": [-5, 'crypta'],
+		"c": [0, 'crypta'],
 		"l": [-10, 'labor'],
 		"i": [+15, 'ip'],
 		"f": [+35, 'freelance'],
@@ -220,7 +220,7 @@ class Salary extends SGModelView {
 	static HOURS_KOEF = [void 0, +25, -10, -5, 0, +5, +10, +15, +20];
 	
 	static CODES = [
-		[-25, 'Проект с нуля или кода очень мало'],
+		[-10, 'Проект с нуля или кода очень мало'],
 		[0, 'Код поддерживается полностью текущим штатом'],
 		[+10, 'Около 25% legacy в проекте'],
 		[+20, 'Около 50% legacy в проекте'],
