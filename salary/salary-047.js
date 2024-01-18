@@ -209,7 +209,7 @@ class Salary extends SGModelView {
 	
 	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -15, -10, 0, +100, +200];
   
-	static OTECH_KOEF = 0.75;
+	static OTECH_KOEF = 13.9;
 	
 	static HOURLY_PAYMENT_PER = +30; // %
 	static HOURS_DEADLINE_KOEF = +30; // %
