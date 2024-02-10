@@ -29,7 +29,7 @@
 - При релокации з/п от 100%+
 
 ## Контакты:
-* E-mail: [offer@sg2d.ru](mailto:offer@sg2d.ru)
+* E-mail: [offer.sg2d@yandex.ru](mailto:offer.sg2d@yandex.ru)
 
 ## Пожелания к будущей работе
 

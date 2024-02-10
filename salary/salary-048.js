@@ -576,7 +576,7 @@ class Salary extends SGModelView {
 	}
 	
 	sendEmail(event) {
-		window.open("mailto:offer@sg2d.ru?subject="+event.currentTarget.dataset.subject+
+		window.open("mailto:offer.sg2d@yandex.ru?subject="+event.currentTarget.dataset.subject+
 			"&body="+event.currentTarget.dataset.body
 				.replace("%hours_in_day%", this.get("hours_in_day"))
 				.replace("%rate%", this.get("rate"))
