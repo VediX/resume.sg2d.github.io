@@ -83,7 +83,7 @@ P.S: middle- подразумевает, что с данной технолог
 - Jira, Confluence, Bitbucket
 - Docker (DockerFile+bash, Docker Compose)
 - Nginx Server, Apache HTTP Server
-- Ubuntu, ALT Linux
+- Ubuntu, Debian, ALT Linux
 
 ### Условия сотрудничества
 
