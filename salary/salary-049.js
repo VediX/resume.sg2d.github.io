@@ -1,23 +1,23 @@
 "use strict";
 
 class OptionsMethods {
-  constructor(values) {
-    Object.assign(this, values);
-  }
-  getSymbolByIndex(code) { return Object.keys(this)[code]; };
-  getValueByIndex(code) { return this[this.getSymbolByIndex(code)][0]; };
-  getDescByIndex(code) { return this[this.getSymbolByIndex(code)][1]; };
+	constructor(values) {
+		Object.assign(this, values);
+	}
+	getSymbolByIndex(code) { return Object.keys(this)[code]; };
+	getValueByIndex(code) { return this[this.getSymbolByIndex(code)][0]; };
+	getDescByIndex(code) { return this[this.getSymbolByIndex(code)][1]; };
 	getValueBySymbol(symb) { return this[symb][1]; };
-  symb(name) {
-    for (let p in this) {
-      if (p.length === 1 && typeof this[p] === 'object') {
-        if (this[p][1] === name) {
-          return p;
-        }
-      }
-    }
-    return void 0;
-  };
+	symb(name) {
+		for (let p in this) {
+			if (p.length === 1 && typeof this[p] === 'object') {
+				if (this[p][1] === name) {
+					return p;
+				}
+			}
+		}
+		return void 0;
+	};
 };
 
 class Salary extends SGModelView {
@@ -108,7 +108,7 @@ class Salary extends SGModelView {
 		hours_in_day: SGModel.TYPE_NUMBER,
 		hourly_payment: SGModel.TYPE_BOOLEAN,
 		deadline: SGModel.TYPE_BOOLEAN,
-    otech: SGModel.TYPE_BOOLEAN,
+		otech: SGModel.TYPE_BOOLEAN,
 		code: SGModel.TYPE_STRING,
 		javascript: SGModel.TYPE_BOOLEAN,
 		nodejs: SGModel.TYPE_BOOLEAN,
@@ -123,7 +123,7 @@ class Salary extends SGModelView {
 		python: SGModel.TYPE_BOOLEAN,
 		other: SGModel.TYPE_BOOLEAN,
 		
-    otech_per: SGModel.TYPE_NUMBER,
+		otech_per: SGModel.TYPE_NUMBER,
     
 		salary_labor_fot: SGModel.TYPE_NUMBER,
 		salary_labor_ndfl: SGModel.TYPE_NUMBER,
@@ -160,7 +160,7 @@ class Salary extends SGModelView {
 		V: "vue",
 		X: "schedule",
 		Y: "java",
-    Z: "otech",
+		Z: "otech",
 		L: "level", // level идёт последним!
 	};
 	
@@ -208,7 +208,7 @@ class Salary extends SGModelView {
 	});
 	
 	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -15, -10, 0, +100, +200];
-  
+
 	static OTECH_KOEF = 13.9;
 	
 	static HOURLY_PAYMENT_PER = +30; // %
@@ -227,7 +227,7 @@ class Salary extends SGModelView {
 		[+33, 'Около 75% legacy в проекте'],
 		[+50, 'Проект никто не поддерживает!'],
 	];
-  
+	
 	static TIMEOUTS = [void 0, 5, 5, 5, 5, 10, 10, 15, 15];
 	
 	static _fields_koef = {
@@ -248,9 +248,9 @@ class Salary extends SGModelView {
 	async initialize() {
 		
 		try {
-			await this.checkDollarInRubles();
-			await this.checkCNYInRubles();
-			await this.checkTONCoinInRubles();
+			this.checkDollarInRubles();
+			this.checkCNYInRubles();
+			this.checkTONCoinInRubles();
 		} catch (err) {}
 		
 		Salary.CONTRACTS._inverse = {};
@@ -272,7 +272,7 @@ class Salary extends SGModelView {
 		for (let p in Salary.LEVELS) {
 			this.set('level_' + Salary.LEVELS[p][1], Salary.LEVELS[p][0]);
 		}
-    
+		
 		for (let p in Salary.ENGLANDS) {
 			this.set('eng_' + Salary.ENGLANDS[p][1], Salary.ENGLANDS[p][0]);
 		}
@@ -282,7 +282,7 @@ class Salary extends SGModelView {
 		}
 		
 		this.set('contract_self_limit', Salary.CONTRACT_SELF_LIMIT);
-    
+		
 		this.set('otech_per', 100*(Salary.OTECH_KOEF - 1), { precision: 1 });
 		
 		this.on('hours_in_day', (hours)=>{
@@ -434,9 +434,9 @@ class Salary extends SGModelView {
 			}
 		}
 		
-    if (this.get('otech')) {
-      koef *= Salary.OTECH_KOEF;
-    }
+		if (this.get('otech')) {
+			koef *= Salary.OTECH_KOEF;
+		}
 		
 		let perSum = 0;
 		for (let t in Salary._fields_koef) {
@@ -618,22 +618,30 @@ class Salary extends SGModelView {
 	getCourceInRubles(currencyURL, currencyCode, pathProps = 'rub', precision = 2) {
 		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
+			//xhr.timeout = 2000; // ms
 			xhr.onload = (evt)=>{
 				try {
 					const props = pathProps.split('.');
 					let value = xhr.response;
-					for (let i = 0; i < props.length; i++) {
-						value = value[props[i]];
-						if (!value) break;
+					if (value) {
+						for (let i = 0; i < props.length; i++) {
+							value = value[props[i]];
+							if (!value) break;
+						}
+						this.set(currencyCode, SGModel.roundTo(value, precision));
+						resolve();
+					} else {
+						reject(new Error('For url ' + currencyURL + ' a bad response has been received! xhr.response=' + String(value) + '!'));
 					}
-					this.set(currencyCode, SGModel.roundTo(value, precision));
-					resolve();
 				} catch(err) {
 					reject(err);
 				}
 			};
 			xhr.onerror = (err)=>{
 				reject(err);
+			};
+			xhr.ontimeout = (err)=>{
+				// no code
 			};
 			xhr.open('GET', currencyURL.replace('$DATE$', new Date().toISOString().substring(0, 10)));
 			xhr.responseType = 'json';
@@ -643,7 +651,7 @@ class Salary extends SGModelView {
 }
 
 function k(per) {
-  return 1 + per/100;
+	return 1 + per/100;
 }
 
 addEventListener("load", ()=>{ window.salaryApp = new Salary(); });
