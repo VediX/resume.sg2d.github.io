@@ -55,8 +55,8 @@ class Salary extends SGModelView {
 		other: false,
 		
 		// скидки/наценки в %
-		javascript_koef: -5,
-		nodejs_koef: -5,
+		javascript_koef: -25,
+		nodejs_koef: 0,
 		java_koef: +50,
 		vue_koef: +5,
 		react_koef: +40,
@@ -65,7 +65,7 @@ class Salary extends SGModelView {
 		cpp_koef: +10,
 		typescript_koef: +15,
 		vanillajs_koef: -5,
-		other_koef: +100,
+		other_koef: +50,
 		python_koef: +40,
 		
 		rate_hour_min: 0,
@@ -193,9 +193,10 @@ class Salary extends SGModelView {
 	static INSURANCE_LIMIT_PER = 15.1; // %
 	
 	static LEVELS = new OptionsMethods({
-		"t": [-50, 'trainee'],
-		"j": [-25, 'junior'],
-		"i": [-10, 'junior_plus'],
+		"t": [-40, 'trainee'],
+		"j": [-30, 'junior'],
+		"i": [-20, 'junior_plus'],
+		"u": [-10, 'middle_minus'],
 		"m": [0, 'middle'],
 		"n": [+20, 'middle_plus'],
 		"s": [+50, 'senior'],
@@ -231,15 +232,15 @@ class Salary extends SGModelView {
 	static TIMEOUTS = [void 0, 5, 5, 5, 5, 10, 10, 15, 15];
 	
 	static _fields_koef = {
-		'javascript': 's',
+		'javascript': 'n',
 		'nodejs': 'm',
 		'react': 't',
 		'postgresql': 'm',
 		'vue': 'j',
-		'php': 'i',
-		'cpp': 'i',
-		'typescript': 'i',
-		'vanillajs': 'm',
+		'php': 'u',
+		'cpp': 'u',
+		'typescript': 'u',
+		'vanillajs': 'u',
 		'java': 'j',
 		'python': 't',
 		'other': 't',
@@ -557,7 +558,7 @@ class Salary extends SGModelView {
 	}
 	
 	getLevelFor(tech) {
-		const level = String(Salary.LEVELS.getValueBySymbol(Salary._fields_koef[tech])).replace('_plus', '+');
+		const level = String(Salary.LEVELS.getValueBySymbol(Salary._fields_koef[tech])).replace('_plus', '+').replace('_minus', '-');
 		return `${tech} - ${level}`;
 	}
 	

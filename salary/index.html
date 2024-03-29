@@ -210,6 +210,7 @@
 								<li class="dropdown-item" sg-option="t" sg-dropdown="level">AVG навыков: Trainee <sup sg-property="level_trainee" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
 								<li class="dropdown-item" sg-option="j" sg-dropdown="level">AVG навыков: Junior <sup sg-property="level_junior" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
 								<li class="dropdown-item" sg-option="i" sg-dropdown="level">AVG навыков: Junior+ <sup sg-property="level_junior_plus" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
+								<li class="dropdown-item" sg-option="u" sg-dropdown="level">AVG навыков: Middle- <sup sg-property="level_middle_minus" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
 								<li class="dropdown-item" sg-option="m" sg-dropdown="level">AVG навыков: Middle <sup sg-property="level_middle" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
 								<li class="dropdown-item" sg-option="n" sg-dropdown="level">AVG навыков: Middle+ <sup sg-property="level_middle_plus" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
 								<li class="dropdown-item" sg-option="s" sg-dropdown="level">AVG навыков: Senior <sup sg-property="level_senior" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
@@ -319,7 +320,7 @@
 					
 					<div class="totals">
 						<div>
-							<p class="text-center fw-bold lh-1">Итого: <span sg-property="salary_month" sg-format="getNumThinsp">0</span>&nbsp;руб.<sup>*</sup> <span class="text-nowrap">(<span id="rate_title" title="loading..." sg-property="rate" sg-format="getNumThinsp">0</span>&nbsp;руб./час)<sup class="text-secondary" sg-css="rate == rate_hour_min ? 'visible-inline': 'no-visible'">5</sup></span></p>
+							<p class="text-center fw-bold lh-1">Итого: <span sg-property="salary_month" sg-format="getNumThinsp">0</span>&nbsp;руб.<sup>*</sup> <span class="text-nowrap">(<span id="rate_title" title="loading..." sg-property="rate" sg-format="getNumThinsp" sg-css="rate == rate_hour_min ? 'text-secondary': ''">0</span>&nbsp;руб./час)<sup class="text-secondary" sg-css="rate == rate_hour_min ? 'visible-inline': 'no-visible'">5</sup></span></p>
 							<p class="text-center fw-bold lh-1">
 								<span sg-property="hours">0</span>&nbsp;<span sg-property="hours_meas">часов</span>/месяц,
 								<span sg-property="salary_year" sg-format="getNumThinsp" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'text-danger' : ''">0</span>&nbsp;руб./год<sup sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-inline': 'no-visible'">6</sup><sup class="text-danger" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-inline' : 'no-visible'">,7</sup>
@@ -334,19 +335,6 @@
 						<div sg-css="(tonrub > 0 && contract == 'c') ? 'visible-block': 'no-visible'">
 							<p class="text-center fw-bold lh-1"><a href="https://www.coingecko.com/en/coins/toncoin" target="_blank">TON</a>: <img src="/res/imgs/toncoin.png" width="16" alt="toncoin" style="vertical-align: bottom"/><span sg-property="salary_month_ton" sg-format="getNumThinsp">0</span> <span class="text-nowrap">(<img src="/res/imgs/toncoin.png" width="16" alt="toncoin" style="vertical-align: bottom"/><span sg-property="rate_ton" sg-format="getNumThinsp2">0</span>/hour)</span></p>
 						</div>
-						<!--<div class="for-labor-contract" sg-css="contract === this.constructor.CONTRACTS.symb('labor') ? 'visible-block' : 'no-visible'">
-							
-							<hr class="my-1"/>
-
-							<p class="fw-bold">Итого расходы работодателя:</p>
-							<p>
-								<span class="fw-bold"><span sg-property="salary_labor_month" sg-format="getNumThinsp">0</span>&nbsp;руб./месяц</span>,<br/>
-								ФОТ: <span sg-property="salary_labor_fot" sg-format="getNumThinsp"></span>&nbsp;руб., <span title="13%"><u>НДФЛ</u></span>:&nbsp;<span sg-property="salary_labor_ndfl" sg-format="getNumThinsp">0</span>&nbsp;руб.,<br/>
-								<span title="(22%+5.1%+2.9%+0.2%)"><u>страховые&nbsp;взносы</u></span>:&nbsp;<span sg-property="salary_labor_insurance" sg-format="getNumThinsp">0</span>&nbsp;руб.<br/>
-								<b><span sg-property="salary_labor_year" sg-format="getNumThinsp">0</span>&nbsp;руб./год</b>, включая отпуск.
-							</p>
-							<p class="text-danger fw-bold" style="font-size: 0.75rem;">* <a class="link-contract-self" sg-click="setContractSelf" href="#" onclick="return false;">Сотрудничество в режиме самозанятого выгоднее на <span class="text-success text-decoration-underline"><span sg-property="self_benefit_percent">10</span>%</span>!</a></p>
-						</div>-->
 					</div>
 					
 					<hr class="my-3"/>
