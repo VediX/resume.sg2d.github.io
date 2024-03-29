@@ -164,9 +164,9 @@ class Salary extends SGModelView {
 		L: "level", // level идёт последним!
 	};
 	
-	static HOUR_RATE_BASE = 2675;
-	static HOUR_RATE_MIN = 1000;
-	static CONTRACT_SELF_LIMIT = 4800000;
+	static HOUR_RATE_BASE = 3100;
+	static HOUR_RATE_MIN = 1500;
+	static CONTRACT_SELF_LIMIT = 2400000;
 	
 	static CONTRACTS = new OptionsMethods({
 		"s": [0, 'self'],
@@ -197,9 +197,9 @@ class Salary extends SGModelView {
 		"j": [-25, 'junior'],
 		"i": [-10, 'junior_plus'],
 		"m": [0, 'middle'],
-		"n": [+25, 'middle_plus'],
+		"n": [+20, 'middle_plus'],
 		"s": [+50, 'senior'],
-		"l": [+75, 'teamlead']
+		"l": [+100, 'teamlead']
 	});
   
 	static ENGLANDS = new OptionsMethods({
@@ -209,7 +209,7 @@ class Salary extends SGModelView {
 	
 	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -15, -10, 0, +100, +200];
 
-	static OTECH_KOEF = 13.9;
+	static OTECH_KOEF = 11.00;
 	
 	static HOURLY_PAYMENT_PER = +30; // %
 	static HOURS_DEADLINE_KOEF = +30; // %
