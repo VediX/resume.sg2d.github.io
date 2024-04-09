@@ -170,10 +170,10 @@ class Salary extends SGModelView {
 	
 	static CONTRACTS = new OptionsMethods({
 		"s": [0, 'self'],
-		"c": [0, 'crypta'],
 		"l": [-10, 'labor'],
 		"i": [+15, 'ip'],
 		"f": [+35, 'freelance'],
+		"c": [+50, 'crypta'],
 	});
 	
 	static LEVEL_DEFAULT = 'j';
