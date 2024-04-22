@@ -1,5 +1,7 @@
 "use strict";
 
+const CURRENT_VERSION = 7;
+
 class OptionsMethods {
 	constructor(values) {
 		Object.assign(this, values);
@@ -24,12 +26,10 @@ class Salary extends SGModelView {
 	
 	static singleInstance = true;
 	
-	static CURRENT_VERSION = 7;
-	
 	static defaultProperties = {
 		initialized: false,
 		
-		version: 6,
+		version: CURRENT_VERSION,
 		
 		contract: 'l',
 		level: 'm',
@@ -52,11 +52,11 @@ class Salary extends SGModelView {
 		typescript: false,
 		vanillajs: false,
 		python: false,
-		other: false,
+		nestjs: false,
 		
 		// скидки/наценки в %
-		javascript_koef: -25,
-		nodejs_koef: 0,
+		javascript_koef: -10,
+		nodejs_koef: -10,
 		java_koef: +50,
 		vue_koef: +5,
 		react_koef: +40,
@@ -65,7 +65,7 @@ class Salary extends SGModelView {
 		cpp_koef: +10,
 		typescript_koef: +15,
 		vanillajs_koef: -5,
-		other_koef: +50,
+		nestjs_koef: -10,
 		python_koef: +40,
 		
 		rate_hour_min: 0,
@@ -121,7 +121,7 @@ class Salary extends SGModelView {
 		typescript: SGModel.TYPE_BOOLEAN,
 		vanillajs: SGModel.TYPE_BOOLEAN,
 		python: SGModel.TYPE_BOOLEAN,
-		other: SGModel.TYPE_BOOLEAN,
+		nestjs: SGModel.TYPE_BOOLEAN,
 		
 		otech_per: SGModel.TYPE_NUMBER,
     
@@ -149,7 +149,7 @@ class Salary extends SGModelView {
 		//K: "",
 		//M: "",
 		N: "nodejs",
-		O: "other",
+		O: "nestjs",
 		P: "php",
 		//Q: "",
 		R: "react",
@@ -244,7 +244,7 @@ class Salary extends SGModelView {
 		'vanillajs': 'u',
 		'java': 'j',
 		'python': 't',
-		'other': 't',
+		'nestjs': 't',
 	};
 	
 	async initialize() {
@@ -309,7 +309,7 @@ class Salary extends SGModelView {
 			this.set('days_in_week', this.get('days_in_week'), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 		});
 		
-		const jsTechDependent = ['typescript', 'nodejs', 'vanillajs', 'react', 'vue'];
+		const jsTechDependent = ['vanillajs', 'react', 'vue'];
 		jsTechDependent.forEach(code => {
 			this.on(code, (value) => {
 				if (value) {
@@ -322,6 +322,22 @@ class Salary extends SGModelView {
 				jsTechDependent.forEach(code => {
 					this.set(code, false);
 				});
+			}
+		});
+		this.on('nestjs', (nestjs) => {
+			if (nestjs) {
+				this.set('nodejs', true);
+				this.set('typescript', true);
+			}
+		});
+		this.on('react', (react) => {
+			if (react) {
+				this.set('typescript', true);
+			}
+		});
+		this.on('nodejs', (nodejs) => {
+			if (!nodejs) {
+				this.set('nestjs', false);
 			}
 		});
 		['react', 'vue'].forEach(code => {
@@ -382,7 +398,7 @@ class Salary extends SGModelView {
 					_parameters[name] = value;
 				}
 			}
-			if ((_parameters.version || 1) >= Salary.CURRENT_VERSION) {
+			if ((_parameters.version || 1) >= CURRENT_VERSION) {
 				for (let p in _parameters) {
 					this.set(p, _parameters[p]);
 				}
