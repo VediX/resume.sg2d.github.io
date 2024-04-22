@@ -24,7 +24,7 @@ class Salary extends SGModelView {
 	
 	static singleInstance = true;
 	
-	static CURRENT_VERSION = 6;
+	static CURRENT_VERSION = 7;
 	
 	static defaultProperties = {
 		initialized: false,
@@ -172,8 +172,8 @@ class Salary extends SGModelView {
 		"s": [0, 'self'],
 		"l": [-10, 'labor'],
 		"i": [+15, 'ip'],
-		"f": [+35, 'freelance'],
 		"c": [+50, 'crypta'],
+		"f": [+100, 'freelance'],
 	});
 	
 	static LEVEL_DEFAULT = 'j';
@@ -193,7 +193,7 @@ class Salary extends SGModelView {
 	static INSURANCE_LIMIT_PER = 15.1; // %
 	
 	static LEVELS = new OptionsMethods({
-		"t": [-40, 'trainee'],
+		"t": [-50, 'trainee'],
 		"j": [-30, 'junior'],
 		"i": [-20, 'junior_plus'],
 		"u": [-10, 'middle_minus'],
@@ -205,7 +205,8 @@ class Salary extends SGModelView {
   
 	static ENGLANDS = new OptionsMethods({
 		"a": [0, 'a'],
-		"b": [100, 'b']
+		"b": [25, 'b'],
+		"c": [100, 'c']
 	});
 	
 	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -15, -10, 0, +100, +200];
@@ -229,7 +230,7 @@ class Salary extends SGModelView {
 		[+50, 'Проект никто не поддерживает!'],
 	];
 	
-	static TIMEOUTS = [void 0, 5, 5, 5, 5, 10, 10, 15, 15];
+	static TIMEOUTS = [void 0, 0, 0, 5, 5, 10, 10, 15, 15];
 	
 	static _fields_koef = {
 		'javascript': 'n',
