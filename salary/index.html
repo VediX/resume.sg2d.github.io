@@ -327,14 +327,14 @@
 								<span sg-property="salary_year" sg-format="getNumThinsp" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'text-danger' : ''">0</span>&nbsp;руб./год<sup sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-inline': 'no-visible'">6</sup><sup class="text-danger" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-inline' : 'no-visible'">,7</sup>
 							</p>
 						</div>
-						<div sg-css="(usdrub > 0 && contract !== 'c') ? 'visible-block': 'no-visible'">
+						<div sg-css="(isFinite(usdrub) && usdrub > 0 && contract !== 'c') ? 'visible-block': 'no-visible'">
 							<p class="text-center fw-bold lh-1">$<span sg-property="salary_month_usd" sg-format="getNumThinsp">0</span> <span class="text-nowrap">($<span sg-property="rate_usd" sg-format="getNumThinsp2">0</span>/hour)<sup>8</sup></span></p>
 						</div>
-						<div sg-css="(cnyrub > 0 && contract !== 'c') ? 'visible-block': 'no-visible'">
+						<div sg-css="(isFinite(cnyrub) && cnyrub > 0 && contract !== 'c') ? 'visible-block': 'no-visible'">
 							<p class="text-center fw-bold lh-1">总计: Ұ<span sg-property="salary_month_cny" sg-format="getNumThinsp">0</span> <span class="text-nowrap">(Ұ<span sg-property="rate_cny" sg-format="getNumThinsp">0</span>/小时)</span></p>
 						</div>
-						<div sg-css="(tonrub > 0 && contract == 'c') ? 'visible-block': 'no-visible'">
-							<p class="text-center fw-bold lh-1"><a href="https://www.coingecko.com/en/coins/toncoin" target="_blank">TON</a>: <img src="/res/imgs/toncoin.png" width="16" alt="toncoin" style="vertical-align: bottom"/><span sg-property="salary_month_ton" sg-format="getNumThinsp">0</span> <span class="text-nowrap">(<img src="/res/imgs/toncoin.png" width="16" alt="toncoin" style="vertical-align: bottom"/><span sg-property="rate_ton" sg-format="getNumThinsp2">0</span>/hour)</span></p>
+						<div sg-css="(isFinite(tonrub) && tonrub > 0 && contract == 'c') ? 'visible-block': 'no-visible'">
+							<p class="text-center fw-bold lh-1"><a href="#" data-bs-toggle="modal" data-bs-target="#modalWallets">TON</a>: <img src="/res/imgs/toncoin.png" width="16" alt="toncoin" style="vertical-align: bottom"/><span sg-property="salary_month_ton" sg-format="getNumThinsp">0</span> <span class="text-nowrap">(<img src="/res/imgs/toncoin.png" width="16" alt="toncoin" style="vertical-align: bottom"/><span sg-property="rate_ton" sg-format="getNumThinsp2">0</span>/hour)</span></p>
 						</div>
 					</div>
 					
@@ -370,9 +370,7 @@
 				<div><a href="/" class="link-success">Перейти в резюме...</a><br/>&nbsp;</div>
 				<div class="text-nowrap">Power By <a href="https://model.sg2d.ru/#mvvm-%D0%BF%D0%B0%D1%82%D1%82%D0%B5%D1%80%D0%BD-%D0%B2-sgmodelview">SGModelView</a></div>
 				<div class="text-nowrap">&copy; 2021-<span sg-property="current_year">2024</span> Kalashnikov Ilya</div>
-				<!--<div class="text-nowrap">BTC <img src="/res/imgs/bitcoin.png" alt="bitcoin icon" width="21" style="vertical-align: text-bottom"/> <span style="color: goldenrod;">1EaoFmbFUECm4i7qgeng85W6iRLqoBYcHm</span></div>-->
 				<div data-bs-toggle="modal" data-bs-target="#modalWallets"><span class="bitcoin-wallet-link">BTC <img src="/res/imgs/bitcoin.png" alt="bitcoin icon" width="21" style="vertical-align: text-bottom"/> <span style="color: goldenrod; overflow: hidden;">1EaoFmbFUECm4i7qgeng85W6iRLqoBYcHm</span></span></div>
-				<!--<div class="text-nowrap">TON <img src="/res/imgs/toncoin.png" alt="toncoin icon" width="17" style="vertical-align: text-bottom"/> <span style="color: royalblue;">UQDqtoFa0Gnp610-in2fpmoTXvnxD54fQbhDTIcPlf3YWTUK</span></div>-->
 			</div>
 		</footer>
 	</div>
@@ -438,7 +436,7 @@
 						<br/>
 						<span style="font-size: 0.7rem;">UQC_F32NUEAiNySGRiNe4VI1_wLD4SEof3aDf0dDv0si0mrR</span>
 						<br/><br/>
-						<span>Toncoin (TON)/USDT TON</span><br/>
+						<span><a href="https://www.coingecko.com/en/coins/toncoin" target="_blank">Toncoin</a> (TON)/USDT TON</span><br/>
 						<img src="/res/imgs/toncoin(ton_usdt)-qr-UQDqtoFa0Gnp610-in2fpmoTXvnxD54fQbhDTIcPlf3YWTUK.jpg" width="250px" alt="TONCoin wallet UQDqtoFa0Gnp610-in2fpmoTXvnxD54fQbhDTIcPlf3YWTUK"/>
 						<br/>
 						<span style="font-size: 0.7rem;">UQDqtoFa0Gnp610-in2fpmoTXvnxD54fQbhDTIcPlf3YWTUK</span>

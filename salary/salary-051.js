@@ -410,7 +410,7 @@ class Salary extends SGModelView {
 		this.on(Object.values(Salary.hashProperties), this.calc);
 		
 		// to update the DOM on first launch:
-		this.on('usdrub', this.calc, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
+		this.on(['usdrub', 'cnyrub', 'tonrub'], this.calc);
 		['contract', 'level', 'schedule', 'days_in_work', 'england'].forEach((name) => {
 			this.set(name, this.get(name), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 		});
