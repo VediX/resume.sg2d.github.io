@@ -189,6 +189,12 @@ a.link-contract-self:hover {
 .form-check-input {
   cursor: pointer;
 }
+span.bitcoin-wallet-link:hover {
+  background-color: #ddd;
+  cursor: pointer;
+  border-radius: 5px;
+  color: black;
+}
 footer.my-fixed {
   position: fixed;
   bottom: 0px;

@@ -370,13 +370,14 @@
 				<div><a href="/" class="link-success">Перейти в резюме...</a><br/>&nbsp;</div>
 				<div class="text-nowrap">Power By <a href="https://model.sg2d.ru/#mvvm-%D0%BF%D0%B0%D1%82%D1%82%D0%B5%D1%80%D0%BD-%D0%B2-sgmodelview">SGModelView</a></div>
 				<div class="text-nowrap">&copy; 2021-<span sg-property="current_year">2024</span> Kalashnikov Ilya</div>
-				<div class="text-nowrap">BTC <img src="/res/imgs/bitcoin.png" alt="bitcoin icon" width="21" style="vertical-align: text-bottom"/> <span style="color: goldenrod;">1EaoFmbFUECm4i7qgeng85W6iRLqoBYcHm</span></div>
+				<!--<div class="text-nowrap">BTC <img src="/res/imgs/bitcoin.png" alt="bitcoin icon" width="21" style="vertical-align: text-bottom"/> <span style="color: goldenrod;">1EaoFmbFUECm4i7qgeng85W6iRLqoBYcHm</span></div>-->
+				<div data-bs-toggle="modal" data-bs-target="#modalWallets"><span class="bitcoin-wallet-link">BTC <img src="/res/imgs/bitcoin.png" alt="bitcoin icon" width="21" style="vertical-align: text-bottom"/> <span style="color: goldenrod; overflow: hidden;">1EaoFmbFUECm4i7qgeng85W6iRLqoBYcHm</span></span></div>
 				<!--<div class="text-nowrap">TON <img src="/res/imgs/toncoin.png" alt="toncoin icon" width="17" style="vertical-align: text-bottom"/> <span style="color: royalblue;">UQDqtoFa0Gnp610-in2fpmoTXvnxD54fQbhDTIcPlf3YWTUK</span></div>-->
 			</div>
 		</footer>
 	</div>
 	  
-	<!-- Modal -->
+	<!-- Modal for link -->
 	<div class="modal fade" id="modalLink" tabindex="-1" aria-labelledby="modalLinkLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -411,6 +412,39 @@
 					</div>
 				</div>
 				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal for wallets -->
+	<div class="modal fade" id="modalWallets" tabindex="-1" aria-labelledby="modalWalletsLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalWalletsLabel">Реквизиты для оплаты услуг криптовалютой</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="container text-center">
+						<span>Bitcoin</span><br/>
+						<img src="/res/imgs/bitcoin-qr-1EaoFmbFUECm4i7qgeng85W6iRLqoBYcHm.jpg" width="250px" alt="bitcoin wallet 1EaoFmbFUECm4i7qgeng85W6iRLqoBYcHm"/>
+						<br/>
+						<span style="font-size: 0.7rem;">1EaoFmbFUECm4i7qgeng85W6iRLqoBYcHm</span>
+						<br/><br/>
+						<span>TON Space (TON)</span><br/>
+						<img src="/res/imgs/ton-space-qr-UQC_F32NUEAiNySGRiNe4VI1_wLD4SEof3aDf0dDv0si0mrR.jpg" width="250px" alt="TON Space wallet UQC_F32NUEAiNySGRiNe4VI1_wLD4SEof3aDf0dDv0si0mrR"/>
+						<br/>
+						<span style="font-size: 0.7rem;">UQC_F32NUEAiNySGRiNe4VI1_wLD4SEof3aDf0dDv0si0mrR</span>
+						<br/><br/>
+						<span>Toncoin (TON)/USDT TON</span><br/>
+						<img src="/res/imgs/toncoin(ton_usdt)-qr-UQDqtoFa0Gnp610-in2fpmoTXvnxD54fQbhDTIcPlf3YWTUK.jpg" width="250px" alt="TONCoin wallet UQDqtoFa0Gnp610-in2fpmoTXvnxD54fQbhDTIcPlf3YWTUK"/>
+						<br/>
+						<span style="font-size: 0.7rem;">UQDqtoFa0Gnp610-in2fpmoTXvnxD54fQbhDTIcPlf3YWTUK</span>
+					</div>
+				</div>
+				<div class="modal-footer text-center">
 					<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
 				</div>
 			</div>
