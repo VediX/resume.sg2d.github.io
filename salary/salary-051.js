@@ -36,6 +36,7 @@ class Salary extends SGModelView {
 		days_in_week: 5,
 		england: 'a',
 		hours_in_day: 4,
+		with_combining: false,
 		hourly_payment: false,
 		schedule: 'b',
 		deadline: false,
@@ -87,14 +88,7 @@ class Salary extends SGModelView {
 		salary_month_ton: 0,
 		rate_ton: 0,
 		
-		salary_labor_fot: 0,
-		salary_labor_ndfl: 0,
-		salary_labor_insurance: 0,
-		salary_labor_month: 0,
-		salary_labor_year: 0,
 		contract_self_limit: 0,
-		self_benefit_percent: 0.0,
-		
 		current_year: new Date().getFullYear()
 	};
 	
@@ -106,6 +100,7 @@ class Salary extends SGModelView {
 		days_in_week: SGModel.TYPE_NUMBER,
 		england: SGModel.TYPE_STRING,
 		hours_in_day: SGModel.TYPE_NUMBER,
+		with_combining: SGModel.TYPE_NUMBER,
 		hourly_payment: SGModel.TYPE_BOOLEAN,
 		deadline: SGModel.TYPE_BOOLEAN,
 		otech: SGModel.TYPE_BOOLEAN,
@@ -125,13 +120,7 @@ class Salary extends SGModelView {
 		
 		otech_per: SGModel.TYPE_NUMBER,
     
-		salary_labor_fot: SGModel.TYPE_NUMBER,
-		salary_labor_ndfl: SGModel.TYPE_NUMBER,
-		salary_labor_insurance: SGModel.TYPE_NUMBER,
-		salary_labor_month: SGModel.TYPE_NUMBER,
-		salary_labor_year: SGModel.TYPE_NUMBER,
 		contract_self_limit: SGModel.TYPE_NUMBER,
-		self_benefit_percent: SGModel.TYPE_NUMBER,
 	};
 	
 	static hashProperties = {
@@ -155,7 +144,7 @@ class Salary extends SGModelView {
 		R: "react",
 		S: "cpp",
 		T: "typescript",
-		//U: "",
+		U: "with_combining",
 		W: "deadline",
 		V: "vue",
 		X: "schedule",
@@ -185,13 +174,6 @@ class Salary extends SGModelView {
 		"d": [+200, 'relocation_out'],
 	});
 	
-	static NDFL_PER = 13; // %
-	static NDFL_LIMIT = 5000000;
-	static NDFL_LIMIT_PER = 15; // %
-	static INSURANCE_PER = 30; // per //0.22 + 0.051 + 0.029 + 0.002;
-	static INSURANCE_LIMIT = 1917000; // for 2023 year
-	static INSURANCE_LIMIT_PER = 15.1; // %
-	
 	static LEVELS = new OptionsMethods({
 		"t": [-50, 'trainee'],
 		"j": [-30, 'junior'],
@@ -212,7 +194,7 @@ class Salary extends SGModelView {
 	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -15, -10, 0, +100, +200];
 
 	static OTECH_KOEF = 11.00;
-	
+	static WITH_COMBINING = -20; // %
 	static HOURLY_PAYMENT_PER = +30; // %
 	static HOURS_DEADLINE_KOEF = +30; // %
 	static DEADLINE_AND_HOURLY_PAYMENT_PER = +40; // %
@@ -250,8 +232,7 @@ class Salary extends SGModelView {
 	async initialize() {
 		
 		try {
-			this.checkDollarInRubles();
-			this.checkCNYInRubles();
+			this.checkUSDCNYInRubles();
 			this.checkTONCoinInRubles();
 		} catch (err) {}
 		
@@ -287,7 +268,13 @@ class Salary extends SGModelView {
 		
 		this.set('otech_per', 100*(Salary.OTECH_KOEF - 1), { precision: 1 });
 		
-		this.on('hours_in_day', (hours)=>{
+		this.on('hours_in_day', (hours) => {
+			if (hours > 4) {
+				this.set('with_combining', false);
+				document.querySelector('#with_combining').disabled = true;
+			} else {
+				document.querySelector('#with_combining').disabled = false;
+			}
 			this.set('hours_in_day_desc', (hours == 8 ? 'Фуллтайм' : hours + ' ' + this.getHoursMeas(hours) + '/день')); // TODO: надписи вытащить в шаблон?
 			this.set('timeout', Salary.TIMEOUTS[hours]);
 			// TODO: переделать, когда sgAttribute будет динамическим!
@@ -429,6 +416,10 @@ class Salary extends SGModelView {
 		koef *= k(Salary.CODES[this.get("code")][0]);
 		koef *= k(Salary.ENGLANDS[this.get("england")][0]);
 		
+		if (this.get('with_combining')) {
+			koef *= k(Salary.WITH_COMBINING);
+		}
+		
 		if (this.get('hourly_payment') && this.get('deadline')) {
 			koef *= k(Salary.DEADLINE_AND_HOURLY_PAYMENT_PER);
 			if (this.get('days_in_week') > 5) {
@@ -479,27 +470,6 @@ class Salary extends SGModelView {
 		this.set('salary_month_cny', SGModel.roundTo(this.get('salary_month') / this.get('cnyrub'), -1));
 		this.set('rate_ton', SGModel.roundTo(this.get('rate') / this.get('tonrub'), 2));
 		this.set('salary_month_ton', SGModel.roundTo(this.get('rate_ton') * hours, -1));
-		
-		if (this.get('contract') === Salary.CONTRACTS.symb('labor')) {
-			/*static NDFL_PER = 13; // %
-			static NDFL_LIMIT = 5000000;
-			static NDFL_LIMIT_PER = 15; // %
-			static INSURANCE_PER = 30; // per //0.22 + 0.051 + 0.029 + 0.002;
-			static INSURANCE_LIMIT = 1917000; // for 2023 year
-			static INSURANCE_LIMIT_PER = 15.1; // %*/
-			
-			const sml_fot = salary + salary * 1 / (1 - Salary.NDFL_PER/100);
-			const sml = sml_fot + sml_fot * Salary.INSURANCE;
-
-			this.set("salary_labor_fot", sml_fot);
-			this.set("salary_labor_ndfl", sml_fot * Salary.NDFL);
-			this.set("salary_labor_insurance", sml_fot * Salary.INSURANCE);
-			this.set("salary_labor_month", sml);
-			this.set("salary_labor_year", sml * 12);
-			
-			const salary_self = this.get("salary_month") / k(Salary.CONTRACTS[Salary.CONTRACTS.symb('labor')][0]);
-			this.set("self_benefit_percent", ((this.get("salary_labor_year") - salary_self * 11) / this.get("salary_labor_year") * 100).toFixed(1));
-		}
 	}
   
 	getHoursMeas(h) {
@@ -617,40 +587,49 @@ class Salary extends SGModelView {
 		this.set("contract", Salary.CONTRACTS.symb('self'));
 	}
 	
-	static currencyURL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/$DATE$/currencies/usd/rub.json';
-	static currencyURLcny = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/$DATE$/currencies/cny/rub.json';
-	static currencyURLTONCoin = 'https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=rub';
+	static currencyURLUsdCny = 'https://www.cbr-xml-daily.ru/latest.js';
+	static currencyURLToncoin = 'https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=rub';
 	
-	checkDollarInRubles() {
-		return this.getCourceInRubles(Salary.currencyURL, 'usdrub');
-	}
-
-	checkCNYInRubles() {
-		return this.getCourceInRubles(Salary.currencyURLcny, 'cnyrub');
+	checkUSDCNYInRubles() {
+		return this.getCourceInRubles(Salary.currencyURLUsdCny, ['usdrub', 'cnyrub'], ['rates.USD', 'rates.CNY'], [-1, -1]);
 	}
 	
 	checkTONCoinInRubles() {
-		return this.getCourceInRubles(Salary.currencyURLTONCoin, 'tonrub', 'the-open-network.rub');
+		return this.getCourceInRubles(Salary.currencyURLToncoin, ['tonrub'], ['the-open-network.rub'], [1]);
 	}
 	
-	getCourceInRubles(currencyURL, currencyCode, pathProps = 'rub', precision = 2) {
+	/**
+	 * Получить значение курса валюты
+	 * @param {string} currencyURL
+	 * @param {array of string} currenciesCode
+	 * @param {array of string} pathProps
+	 * @param {array of number} forwardOrReverse
+	 * @param {number} [precision=2]
+	 * @returns {Promise}
+	 */
+	getCourceInRubles(currencyURL, currenciesCode = [], pathProps = [], forwardOrReverse = [], precision = 2) {
 		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
 			//xhr.timeout = 2000; // ms
 			xhr.onload = (evt)=>{
 				try {
-					const props = pathProps.split('.');
-					let value = xhr.response;
-					if (value) {
-						for (let i = 0; i < props.length; i++) {
-							value = value[props[i]];
-							if (!value) break;
+					for (let i = 0; i < currenciesCode.length; i++) {
+						const props = pathProps[i].split('.');
+						let value = xhr.response;
+						if (value) {
+							for (let i = 0; i < props.length; i++) {
+								value = value[props[i]];
+								if (!value) break;
+							}
+							if (forwardOrReverse[i] === -1) {
+								value = 1 / value;
+							}
+							this.set(currenciesCode[i], SGModel.roundTo(value, precision));
+						} else {
+							reject(new Error('For url ' + currencyURL + ' a bad response has been received! xhr.response=' + String(value) + '!'));
 						}
-						this.set(currencyCode, SGModel.roundTo(value, precision));
-						resolve();
-					} else {
-						reject(new Error('For url ' + currencyURL + ' a bad response has been received! xhr.response=' + String(value) + '!'));
 					}
+					resolve();
 				} catch(err) {
 					reject(err);
 				}

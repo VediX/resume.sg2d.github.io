@@ -131,9 +131,19 @@
 									</div>
 								</div>
 							</div>
+							<div class="row">
+								<div class="col pe-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="with_combining" type="checkbox" sg-property="with_combining">
+										<label class="form-check-label" for="with_combining" id="with_combining_label">
+											<span style="font-size: 0.90rem;">Возможно совмещение с другой работой</span> <sup sg-value="Salary.WITH_COMBINING" sg-format="formatDiscount" class="text-success"></sup>
+										</label>
+									</div>
+								</div>
+							</div>
 							<fieldset class="row mb-0 bg-white p-2 ms-1 me-1 hourly-cnt" style="border-radius: 10px; border: 1px solid #ddd;" sg-css="hourly_payment || deadline ? 'hourly-payment-or-deadline' : ''">
 								<legend class="col-form-label pt-0">
-									<span sg-css="hourly_payment ? 'inline-visible' : 'no-visible'">Почасовая оплата (простой не оплачивается):</span>
+									<span sg-css="hourly_payment ? 'inline-visible' : 'no-visible'" style="font-size: 0.9rem;">Почасовая оплата (простой не оплачивается):</span>
 									<span sg-css="!hourly_payment ? 'inline-visible' : 'no-visible'">Минимально оплачиваемые часы (оклад):</span>
 								</legend>
 								<div class="container p-0">
