@@ -170,7 +170,7 @@ class Salary extends SGModelView {
 	static SCHEDULES = new OptionsMethods({
 		"a": [0, 'office'],
 		"b": [-25, 'remote'],
-		"c": [+100, 'relocation'],
+		"c": [+25, 'relocation'],
 		"d": [+200, 'relocation_out'],
 	});
 	
