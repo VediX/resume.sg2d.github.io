@@ -47,8 +47,8 @@ P.S: middle- подразумевает, что с данной технолог
 - PostgreSQL, PL/pgSQL: middle
 - MSSQL, Firebird/Interbase, MySQL, SQLite: middle-
 - Redis, RabbitMQ: +
-- Delphi/C++ (Embarcadero RAD Studio): middle-
-- C# (Visual Studio): middle-
+- Delphi/C++ (Embarcadero RAD Studio): junior+
+- C# (Visual Studio): junior+
 - Lua: middle
 - Visual Basic: middle-
 - CSS/LESS: junior+

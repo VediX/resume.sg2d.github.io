@@ -1,6 +1,6 @@
 "use strict";
 
-const CURRENT_VERSION = 7;
+const CURRENT_VERSION = 8;
 
 class OptionsMethods {
 	constructor(values) {
@@ -42,8 +42,8 @@ class Salary extends SGModelView {
 		deadline: false,
 		otech: false,
 		code: '1',
-		javascript: false,
-		nodejs: false,
+		ecmascript: false,
+		otherdbms: false,
 		java: false,
 		vue: false,
 		react: false,
@@ -56,18 +56,18 @@ class Salary extends SGModelView {
 		nestjs: false,
 		
 		// скидки/наценки в %
-		javascript_koef: -10,
-		nodejs_koef: -10,
-		java_koef: +50,
+		ecmascript_koef: -20,
+		otherdbms_koef: +10,
+		java_koef: +40,
 		vue_koef: +5,
 		react_koef: +40,
 		postgresql_koef: -5,
-		php_koef: +30,
+		php_koef: +25,
 		cpp_koef: +10,
 		typescript_koef: +15,
 		vanillajs_koef: -5,
 		nestjs_koef: -10,
-		python_koef: +40,
+		python_koef: +30,
 		
 		rate_hour_min: 0,
 		salary_month: 0,
@@ -105,8 +105,8 @@ class Salary extends SGModelView {
 		deadline: SGModel.TYPE_BOOLEAN,
 		otech: SGModel.TYPE_BOOLEAN,
 		code: SGModel.TYPE_STRING,
-		javascript: SGModel.TYPE_BOOLEAN,
-		nodejs: SGModel.TYPE_BOOLEAN,
+		ecmascript: SGModel.TYPE_BOOLEAN,
+		otherdbms: SGModel.TYPE_BOOLEAN,
 		java: SGModel.TYPE_BOOLEAN,
 		vue: SGModel.TYPE_BOOLEAN,
 		react: SGModel.TYPE_BOOLEAN,
@@ -134,11 +134,11 @@ class Salary extends SGModelView {
 		G: "code",
 		H: "hours_in_day",
 		I: "python",
-		J: "javascript",
+		J: "ecmascript",
 		//K: "",
 		//M: "",
-		N: "nodejs",
-		O: "nestjs",
+		N: "nestjs",
+		O: "otherdbms",
 		P: "php",
 		//Q: "",
 		R: "react",
@@ -215,13 +215,13 @@ class Salary extends SGModelView {
 	static TIMEOUTS = [void 0, 0, 0, 5, 5, 10, 10, 15, 15];
 	
 	static _fields_koef = {
-		'javascript': 'n',
-		'nodejs': 'm',
+		'ecmascript': 'n',
+		'otherdbms': 'i',
 		'react': 't',
 		'postgresql': 'm',
 		'vue': 'j',
 		'php': 'u',
-		'cpp': 'u',
+		'cpp': 'i',
 		'typescript': 'u',
 		'vanillajs': 'u',
 		'java': 'j',
@@ -275,7 +275,7 @@ class Salary extends SGModelView {
 			} else {
 				document.querySelector('#with_combining').disabled = false;
 			}
-			this.set('hours_in_day_desc', (hours == 8 ? 'Фуллтайм' : hours + ' ' + this.getHoursMeas(hours) + '/день')); // TODO: надписи вытащить в шаблон?
+			this.set('hours_in_day_desc', (hours === 8 ? 'Фуллтайм' : hours + ' ' + this.getHoursMeas(hours) + '/день')); // TODO: надписи вытащить в шаблон?
 			this.set('timeout', Salary.TIMEOUTS[hours]);
 			// TODO: переделать, когда sgAttribute будет динамическим!
 			//document.querySelector('input#deadline').disabled = (hours == 8);
@@ -296,35 +296,30 @@ class Salary extends SGModelView {
 			this.set('days_in_week', this.get('days_in_week'), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 		});
 		
-		const jsTechDependent = ['vanillajs', 'react', 'vue'];
-		jsTechDependent.forEach(code => {
+		const ecmaTechDependent = ['vanillajs', 'typescript', 'react', 'vue', 'nestjs'];
+		ecmaTechDependent.forEach(code => {
 			this.on(code, (value) => {
 				if (value) {
-					this.set('javascript', true);
+					this.set('ecmascript', true);
 				}
 			});
 		});
-		this.on('javascript', (javascript) => {
-			if (!javascript) {
-				jsTechDependent.forEach(code => {
+		this.on('ecmascript', (ecmascript) => {
+			if (!ecmascript) {
+				ecmaTechDependent.forEach(code => {
 					this.set(code, false);
 				});
 			}
 		});
 		this.on('nestjs', (nestjs) => {
 			if (nestjs) {
-				this.set('nodejs', true);
+				this.set('ecmascript', true);
 				this.set('typescript', true);
 			}
 		});
 		this.on('react', (react) => {
 			if (react) {
 				this.set('typescript', true);
-			}
-		});
-		this.on('nodejs', (nodejs) => {
-			if (!nodejs) {
-				this.set('nestjs', false);
 			}
 		});
 		['react', 'vue'].forEach(code => {
@@ -651,4 +646,6 @@ function k(per) {
 	return 1 + per/100;
 }
 
-addEventListener("load", ()=>{ window.salaryApp = new Salary(); });
+addEventListener("load", () => {
+	window.salaryApp = new Salary();
+});

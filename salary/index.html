@@ -56,7 +56,7 @@
   </script>
 	<link href="salary.css" rel="stylesheet">
 	<script type="module" src="./../res/sg-model/sg-model-view-41.js" defer></script>
-	<script type="module" src="salary-051.js"></script>
+	<script type="module" src="salary-052.js"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
 
@@ -232,22 +232,8 @@
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="javascript" type="checkbox" sg-property="javascript">
-										<label class="form-check-label text-nowrap" for="javascript"><span sg-attributes="{ title: getLevelFor('javascript') }">Javascript</span> <sup sg-property="javascript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
-									</div>
-								</div>
-								<div class="col ps-0">
-									<div class="form-check form-switch">
-										<input class="form-check-input" id="typescript" type="checkbox" sg-property="typescript">
-										<label class="form-check-label" for="typescript"><span class="tech-title-minimize" sg-attributes="{ title: getLevelFor('typescript') }">Typescript</span> <sup sg-property="typescript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col pe-0">
-									<div class="form-check form-switch">
-										<input class="form-check-input" id="nodejs" type="checkbox" sg-property="nodejs">
-										<label class="form-check-label text-nowrap" for="nodejs"><span sg-attributes="{ title: getLevelFor('nodejs') }">NodeJS</span> <sup sg-property="nodejs_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
+										<input class="form-check-input" id="ecmascript" type="checkbox" sg-property="ecmascript">
+										<label class="form-check-label text-nowrap" for="ecmascript"><span sg-attributes="{ title: getLevelFor('ecmascript') }">JS/NodeJS</span> <sup sg-property="ecmascript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
 									</div>
 								</div>
 								<div class="col ps-0">
@@ -260,22 +246,36 @@
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="postgresql" type="checkbox" sg-property="postgresql">
-										<label class="form-check-label text-nowrap" for="postgresql"><span sg-attributes="{ title: getLevelFor('postgresql') }">PostgreSQL</span> <sup sg-property="postgresql_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
+										<input class="form-check-input" id="typescript" type="checkbox" sg-property="typescript">
+										<label class="form-check-label" for="typescript"><span class_="tech-title-minimize" sg-attributes="{ title: getLevelFor('typescript') }">Typescript</span> <sup sg-property="typescript_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
 									</div>
 								</div>
 								<div class="col ps-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="php" type="checkbox" sg-property="php">
-										<label class="form-check-label text-nowrap" for="php"><span sg-attributes="{ title: getLevelFor('php') }">PHP</span> <sup sg-property="php_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
+										<input class="form-check-input" id="vanillajs" type="checkbox" sg-property="vanillajs">
+										<label class="form-check-label" for="vanillajs"><span sg-attributes="{ title: getLevelFor('vanillajs') }">VanillaJS</span> <sup sg-property="vanillajs_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="vanillajs" type="checkbox" sg-property="vanillajs">
-										<label class="form-check-label" for="vanillajs"><span sg-attributes="{ title: getLevelFor('vanillajs') }">VanillaJS</span> <sup sg-property="vanillajs_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
+										<input class="form-check-input" id="php" type="checkbox" sg-property="php">
+										<label class="form-check-label text-nowrap" for="php"><span sg-attributes="{ title: getLevelFor('php') }">PHP</span> <sup sg-property="php_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
+									</div>
+								</div>
+								<div class="col ps-0">
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="vue" type="checkbox" sg-property="vue">
+										<label class="form-check-label text-nowrap" for="vue"><span sg-attributes="{ title: getLevelFor('vue') }">Vue</span> <sup sg-property="vue_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col pe-0">
+									<div class="form-check form-switch">										
+										<input class="form-check-input" id="cpp" type="checkbox" sg-property="cpp">
+										<label class="form-check-label text-nowrap" for="cpp"><span sg-attributes="{ title: getLevelFor('cpp') }">C#/C++</span> <sup sg-property="cpp_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
 									</div>
 								</div>
 								<div class="col ps-0">
@@ -288,28 +288,28 @@
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="vue" type="checkbox" sg-property="vue">
-										<label class="form-check-label text-nowrap" for="vue"><span sg-attributes="{ title: getLevelFor('vue') }">Vue</span> <sup sg-property="vue_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
+										<input class="form-check-input" id="python" type="checkbox" sg-property="python">
+										<label class="form-check-label text-nowrap" for="python"><span sg-attributes="{ title: getLevelFor('python') }">Python</span> <sup sg-property="python_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
 									</div>
 								</div>
 								<div class="col ps-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="java" type="checkbox" sg-property="java">
-										<label class="form-check-label text-nowrap" for="java"><span sg-attributes="{ title: getLevelFor('java') }">Java</span> <sup sg-property="java_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
+										<input class="form-check-input" id="postgresql" type="checkbox" sg-property="postgresql">
+										<label class="form-check-label text-nowrap" for="postgresql"><span sg-attributes="{ title: getLevelFor('postgresql') }">PostgreSQL</span> <sup sg-property="postgresql_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col pe-0">
 									<div class="form-check form-switch">
-										<input class="form-check-input" id="python" type="checkbox" sg-property="python">
-										<label class="form-check-label text-nowrap" for="python"><span sg-attributes="{ title: getLevelFor('python') }">Python</span> <sup sg-property="python_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
+										<input class="form-check-input" id="java" type="checkbox" sg-property="java">
+										<label class="form-check-label text-nowrap" for="java"><span sg-attributes="{ title: getLevelFor('java') }">Java</span> <sup sg-property="java_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
 									</div>
 								</div>
 								<div class="col ps-0">
-									<div class="form-check form-switch">										
-										<input class="form-check-input" id="cpp" type="checkbox" sg-property="cpp">
-										<label class="form-check-label text-nowrap" for="cpp"><span sg-attributes="{ title: getLevelFor('cpp') }">C#/C++</span> <sup sg-property="cpp_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
+									<div class="form-check form-switch">
+										<input class="form-check-input" id="otherdbms" type="checkbox" sg-property="otherdbms">
+										<label class="form-check-label text-nowrap" for="otherdbms"><span sg-attributes="{ title: getLevelFor('otherdbms') }">др. СУБД</span> <sup sg-property="otherdbms_koef" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></label>
 									</div>
 								</div>
 							</div>
