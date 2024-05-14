@@ -201,7 +201,7 @@ class Salary extends SGModelView {
 	
 	static USDKOEF = 1.25;
 	
-	static HOURS_KOEF = [void 0, +25, -10, -5, 0, +5, +10, +15, +20];
+	static HOURS_KOEF = [void 0, +25, -10, -5, 0, +10, +20, +30, +40];
 	
 	static CODES = [
 		[-10, 'Проект с нуля или кода очень мало'],
