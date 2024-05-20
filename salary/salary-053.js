@@ -1,6 +1,6 @@
 "use strict";
 
-const CURRENT_VERSION = 8;
+const CURRENT_VERSION = 9;
 
 class OptionsMethods {
 	constructor(values) {
@@ -43,7 +43,7 @@ class Salary extends SGModelView {
 		otech: false,
 		code: '1',
 		ecmascript: false,
-		otherdbms: false,
+		esnext: false,
 		java: false,
 		vue: false,
 		react: false,
@@ -52,12 +52,12 @@ class Salary extends SGModelView {
 		cpp: false,
 		typescript: false,
 		vanillajs: false,
-		python: false,
+		threejs: false,
 		nestjs: false,
 		
 		// скидки/наценки в %
 		ecmascript_koef: -20,
-		otherdbms_koef: +10,
+		esnext_koef: -10,
 		java_koef: +40,
 		vue_koef: +5,
 		react_koef: +40,
@@ -67,7 +67,7 @@ class Salary extends SGModelView {
 		typescript_koef: +15,
 		vanillajs_koef: -5,
 		nestjs_koef: -10,
-		python_koef: +30,
+		threejs_koef: -10,
 		
 		rate_hour_min: 0,
 		salary_month: 0,
@@ -106,7 +106,7 @@ class Salary extends SGModelView {
 		otech: SGModel.TYPE_BOOLEAN,
 		code: SGModel.TYPE_STRING,
 		ecmascript: SGModel.TYPE_BOOLEAN,
-		otherdbms: SGModel.TYPE_BOOLEAN,
+		esnext: SGModel.TYPE_BOOLEAN,
 		java: SGModel.TYPE_BOOLEAN,
 		vue: SGModel.TYPE_BOOLEAN,
 		react: SGModel.TYPE_BOOLEAN,
@@ -115,7 +115,7 @@ class Salary extends SGModelView {
 		cpp: SGModel.TYPE_BOOLEAN,
 		typescript: SGModel.TYPE_BOOLEAN,
 		vanillajs: SGModel.TYPE_BOOLEAN,
-		python: SGModel.TYPE_BOOLEAN,
+		threejs: SGModel.TYPE_BOOLEAN,
 		nestjs: SGModel.TYPE_BOOLEAN,
 		
 		otech_per: SGModel.TYPE_NUMBER,
@@ -133,12 +133,12 @@ class Salary extends SGModelView {
 		F: "postgresql",
 		G: "code",
 		H: "hours_in_day",
-		I: "python",
+		I: "esnext",
 		J: "ecmascript",
-		//K: "",
+		K: "threejs",
 		//M: "",
 		N: "nestjs",
-		O: "otherdbms",
+		//O: "",
 		P: "php",
 		//Q: "",
 		R: "react",
@@ -216,7 +216,7 @@ class Salary extends SGModelView {
 	
 	static _fields_koef = {
 		'ecmascript': 'n',
-		'otherdbms': 'i',
+		'esnext': 'u',
 		'react': 't',
 		'postgresql': 'm',
 		'vue': 'j',
@@ -225,7 +225,7 @@ class Salary extends SGModelView {
 		'typescript': 'u',
 		'vanillajs': 'u',
 		'java': 'j',
-		'python': 't',
+		'threejs': 't',
 		'nestjs': 't',
 	};
 	
@@ -296,7 +296,7 @@ class Salary extends SGModelView {
 			this.set('days_in_week', this.get('days_in_week'), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 		});
 		
-		const ecmaTechDependent = ['vanillajs', 'typescript', 'react', 'vue', 'nestjs'];
+		const ecmaTechDependent = ['vanillajs', 'typescript', 'react', 'vue', 'nestjs', 'esnext'];
 		ecmaTechDependent.forEach(code => {
 			this.on(code, (value) => {
 				if (value) {
@@ -309,6 +309,16 @@ class Salary extends SGModelView {
 				ecmaTechDependent.forEach(code => {
 					this.set(code, false);
 				});
+			}
+		});
+		this.on('esnext', (esnext) => {
+			if (esnext) {
+				this.set('typescript', false);
+			}
+		});
+		this.on('typescript', (typescript) => {
+			if (typescript) {
+				this.set('esnext', false);
 			}
 		});
 		this.on('nestjs', (nestjs) => {
