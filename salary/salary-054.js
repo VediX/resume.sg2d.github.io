@@ -57,7 +57,7 @@ class Salary extends SGModelView {
 		
 		// скидки/наценки в %
 		ecmascript_koef: -20,
-		esnext_koef: -10,
+		esnext_koef: -20,
 		java_koef: +40,
 		vue_koef: +5,
 		react_koef: +40,
@@ -154,7 +154,7 @@ class Salary extends SGModelView {
 	};
 	
 	static HOUR_RATE_BASE = 3850;
-	static HOUR_RATE_MIN = 1500;
+	static HOUR_RATE_MIN = 1200;
 	static CONTRACT_SELF_LIMIT = 2400000;
 	
 	static CONTRACTS = new OptionsMethods({
@@ -195,9 +195,9 @@ class Salary extends SGModelView {
 
 	static OTECH_KOEF = 11.00;
 	static WITH_COMBINING = -20; // %
-	static HOURLY_PAYMENT_PER = +30; // %
-	static HOURS_DEADLINE_KOEF = +30; // %
-	static DEADLINE_AND_HOURLY_PAYMENT_PER = +40; // %
+	static HOURLY_PAYMENT_PER = +50; // %
+	static HOURS_DEADLINE_KOEF = +50; // %
+	static DEADLINE_AND_HOURLY_PAYMENT_PER = +70; // %
 	
 	static USDKOEF = 1.25;
 	
@@ -346,6 +346,11 @@ class Salary extends SGModelView {
 					this.set('vue', false);
 				}
 			});
+		});
+		this.on('threejs', (threejs) => {
+			if (threejs) {
+				this.set('ecmascript', true);
+			}
 		});
 		
 		// Автоматический level
