@@ -135,7 +135,7 @@ P.S: junior+/middle- подразумевает, что с данной техн
 ![Tank Miners](/res/imgs/game.png)
 
 ------
-##### SG2D, собственный проект по разработке 2D игрового движка на ES6+, PixiJS (WebGL) и MatterJS (физический движок). 2018 г. - по настоящее время
+##### SG2D, собственный проект по разработке 2D игрового движка на ES6+, PixiJS (WebGL) и MatterJS (физический движок). 2018-2022 г.
 ![SG2D Demo](/res/imgs/sg2d_demo.png)
 Сайт проекта: https://sg2d.ru | [Запустить демо](https://demo.sg2d.ru)
 

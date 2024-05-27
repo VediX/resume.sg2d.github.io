@@ -296,7 +296,7 @@ class Salary extends SGModelView {
 			this.set('days_in_week', this.get('days_in_week'), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 		});
 		
-		const ecmaTechDependent = ['vanillajs', 'typescript', 'react', 'vue', 'nestjs', 'esnext'];
+		const ecmaTechDependent = ['vanillajs', 'typescript', 'react', 'vue', 'nestjs', 'esnext', 'threejs'];
 		ecmaTechDependent.forEach(code => {
 			this.on(code, (value) => {
 				if (value) {
