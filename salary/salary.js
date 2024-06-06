@@ -42,16 +42,16 @@ class Salary extends SGModelView {
 		deadline: false,
 		otech: false,
 		code: '1',
-		ecmascript: false,
-		esnext: false,
+		ecmascript: true,
+		esnext: true,
 		java: false,
 		vue: false,
 		react: false,
-		postgresql: false,
+		postgresql: true,
 		php: false,
 		cpp: false,
 		typescript: false,
-		vanillajs: false,
+		vanillajs: true,
 		threejs: false,
 		nestjs: false,
 		
@@ -154,7 +154,7 @@ class Salary extends SGModelView {
 	};
 	
 	static HOUR_RATE_BASE = 3850;
-	static HOUR_RATE_MIN = 1200;
+	static HOUR_RATE_MIN = 1000;
 	static CONTRACT_SELF_LIMIT = 2400000;
 	
 	static CONTRACTS = new OptionsMethods({
