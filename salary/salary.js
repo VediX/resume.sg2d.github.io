@@ -222,7 +222,7 @@ class Salary extends SGModelView {
 		'vue': 'j',
 		'php': 'u',
 		'cpp': 'i',
-		'typescript': 'u',
+		'typescript': 'i',
 		'vanillajs': 'u',
 		'java': 'j',
 		'threejs': 't',
