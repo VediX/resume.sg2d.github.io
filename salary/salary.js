@@ -133,7 +133,6 @@ class Salary extends SGModelView {
 		F: "postgresql",
 		G: "code",
 		H: "hours_in_day",
-		I: "esnext",
 		J: "ecmascript",
 		K: "threejs",
 		//M: "",
@@ -150,6 +149,7 @@ class Salary extends SGModelView {
 		X: "schedule",
 		Y: "java",
 		Z: "otech",
+		I: "esnext", // после nestjs, react и vue
 		L: "level", // level идёт последним!
 	};
 	
