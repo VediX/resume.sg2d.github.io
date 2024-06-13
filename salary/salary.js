@@ -1,6 +1,6 @@
 "use strict";
 
-const CURRENT_VERSION = 9;
+const CURRENT_VERSION = 10;
 
 class OptionsMethods {
 	constructor(values) {
@@ -44,6 +44,7 @@ class Salary extends SGModelView {
 		code: '1',
 		ecmascript: true,
 		esnext: true,
+		nodejs: false,
 		java: false,
 		vue: false,
 		react: false,
@@ -54,10 +55,12 @@ class Salary extends SGModelView {
 		vanillajs: true,
 		threejs: false,
 		nestjs: false,
+		golang: false,
 		
 		// скидки/наценки в %
-		ecmascript_koef: -20,
-		esnext_koef: -20,
+		ecmascript_koef: -10,
+		esnext_koef: -10,
+		nodejs_koef: -10,
 		java_koef: +40,
 		vue_koef: +5,
 		react_koef: +40,
@@ -68,6 +71,7 @@ class Salary extends SGModelView {
 		vanillajs_koef: -5,
 		nestjs_koef: -10,
 		threejs_koef: -10,
+		golang_koef: +15,
 		
 		rate_hour_min: 0,
 		salary_month: 0,
@@ -107,6 +111,7 @@ class Salary extends SGModelView {
 		code: SGModel.TYPE_STRING,
 		ecmascript: SGModel.TYPE_BOOLEAN,
 		esnext: SGModel.TYPE_BOOLEAN,
+		nodejs: SGModel.TYPE_BOOLEAN,
 		java: SGModel.TYPE_BOOLEAN,
 		vue: SGModel.TYPE_BOOLEAN,
 		react: SGModel.TYPE_BOOLEAN,
@@ -117,6 +122,7 @@ class Salary extends SGModelView {
 		vanillajs: SGModel.TYPE_BOOLEAN,
 		threejs: SGModel.TYPE_BOOLEAN,
 		nestjs: SGModel.TYPE_BOOLEAN,
+		golang: SGModel.TYPE_BOOLEAN,
 		
 		otech_per: SGModel.TYPE_NUMBER,
     
@@ -135,9 +141,9 @@ class Salary extends SGModelView {
 		H: "hours_in_day",
 		J: "ecmascript",
 		K: "threejs",
-		//M: "",
-		N: "nestjs",
-		//O: "",
+		M: "nestjs",
+		N: "nodejs",
+		O: "golang",
 		P: "php",
 		//Q: "",
 		R: "react",
@@ -217,16 +223,18 @@ class Salary extends SGModelView {
 	static _fields_koef = {
 		'ecmascript': 'n',
 		'esnext': 'u',
+		'nodejs': 'u',
 		'react': 't',
 		'postgresql': 'm',
-		'vue': 'j',
+		'vue': 't',
 		'php': 'u',
 		'cpp': 'i',
 		'typescript': 'i',
 		'vanillajs': 'u',
 		'java': 'j',
-		'threejs': 't',
+		'threejs': 'j',
 		'nestjs': 't',
+		'golang': 't',
 	};
 	
 	async initialize() {
@@ -296,7 +304,7 @@ class Salary extends SGModelView {
 			this.set('days_in_week', this.get('days_in_week'), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 		});
 		
-		const ecmaTechDependent = ['vanillajs', 'typescript', 'react', 'vue', 'nestjs', 'esnext', 'threejs'];
+		const ecmaTechDependent = ['vanillajs', 'typescript', 'react', 'vue', 'nestjs', 'esnext', 'nodejs', 'threejs'];
 		ecmaTechDependent.forEach(code => {
 			this.on(code, (value) => {
 				if (value) {
@@ -325,6 +333,12 @@ class Salary extends SGModelView {
 			if (nestjs) {
 				this.set('ecmascript', true);
 				this.set('typescript', true);
+				this.set('nodejs', true);
+			}
+		});
+		this.on('nodejs', (nodejs) => {
+			if (nodejs) {
+				this.set('ecmascript', true);
 			}
 		});
 		this.on('react', (react) => {
@@ -384,23 +398,22 @@ class Salary extends SGModelView {
 		this.bindHTML("body");
 		
 		// Hash parser
-		let parameters = Array.from(location.hash.matchAll(/(\w)(\w)/g));
-		if (parameters.length) {
-			let _parameters = {};
-			for (let p in parameters) {
-				var code = parameters[p][1];
-				var value = parameters[p][2];
-				var name = Salary.hashProperties[code];
-				if (name) {
-					_parameters[name] = value;
-				}
-			}
-			if ((_parameters.version || 1) >= CURRENT_VERSION) {
-				for (let p in _parameters) {
-					this.set(p, _parameters[p]);
-				}
-			} else {
+		const result = Array.from(location.hash.matchAll(/#v([\d]+)(.*)/g));
+		const parts = result[0];
+		const version = parts && +parts[1] || null;
+		if (version) {
+			if (version < CURRENT_VERSION) {
 				alert('Ссылка не поддерживается - версия хеша ' + location.hash + ' устарела!');
+			} else if (parts[2]) {
+				let parameters = Array.from(parts[2].matchAll(/(\w)(\w)/g));
+				for (let p in parameters) {
+					var code = parameters[p][1];
+					var value = parameters[p][2];
+					var name = Salary.hashProperties[code];
+					if (name) {
+						this.set(name, value);
+					}
+				}
 			}
 		}
 		
