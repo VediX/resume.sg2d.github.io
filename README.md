@@ -34,19 +34,18 @@ P.S: middle- подразумевает, что с данной технолог
 
 ##### Языки программирования и СУБД:
 
-- NodeJS/Javascript (ES6+): middle+
+- Javascript (ES6+): middle+
+- NodeJS: middle-
 - TypeScript / Google Traceur-compiler: junior+
 - PHP: middle-
-- PostgreSQL, PL/pgSQL: middle
+- PostgreSQL, PL/pgSQL: middle-
 - MSSQL, Firebird/Interbase, MySQL, SQLite: middle-
 - Redis, RabbitMQ: +
 - Delphi/C++ (Embarcadero RAD Studio): junior+
 - C# (Visual Studio): junior+
 - Lua: middle
 - Visual Basic: middle-
-- CSS/LESS: junior+
-- HTML5: +
-- Bash: +
+- Bash: junior+
 
 ##### Фреймворки/библиотеки:
 
@@ -80,6 +79,8 @@ P.S: middle- подразумевает, что с данной технолог
 
 ##### Прочее:
 
+- HTML5
+- CSS, LESS
 - MobileID (JWT, AES, HSA, RS256, HS256)
 - websocket, grpc
 - RTSP, ffmpeg, bash, FTP
