@@ -73,7 +73,14 @@ class Salary extends SGModelView {
 		threejs_koef: -10,
 		golang_koef: +15,
 		
+		promocode: '',
+		promocode_status: false,
+		promocode_success: false,
+		promocode_error: false,
+		promocode_per: 0,
+		
 		rate_hour_min: 0,
+		salary_month_without_promocode: 0,
 		salary_month: 0,
 		hours: 0,
 		hours_meas: "",
@@ -125,6 +132,12 @@ class Salary extends SGModelView {
 		golang: SGModel.TYPE_BOOLEAN,
 		
 		otech_per: SGModel.TYPE_NUMBER,
+		
+		promocode: SGModel.TYPE_STRING,
+		promocode_status: SGModel.TYPE_BOOLEAN,
+		promocode_success: SGModel.TYPE_BOOLEAN,
+		promocode_error: SGModel.TYPE_BOOLEAN,
+		promocode_per: SGModel.TYPE_NUMBER,
     
 		contract_self_limit: SGModel.TYPE_NUMBER,
 	};
@@ -201,13 +214,13 @@ class Salary extends SGModelView {
 
 	static OTECH_KOEF = 11.00;
 	static WITH_COMBINING = -20; // %
-	static HOURLY_PAYMENT_PER = +50; // %
-	static HOURS_DEADLINE_KOEF = +50; // %
-	static DEADLINE_AND_HOURLY_PAYMENT_PER = +70; // %
+	static HOURLY_PAYMENT_PER = +30; // %
+	static HOURS_DEADLINE_KOEF = +30; // %
+	static DEADLINE_AND_HOURLY_PAYMENT_PER = +40; // %
 	
 	static USDKOEF = 1.25;
 	
-	static HOURS_KOEF = [void 0, +25, -10, -5, 0, +10, +20, +30, +40];
+	static HOURS_KOEF = [void 0, +25, -10, -5, 0, +5, +10, +15, +20];
 	
 	static CODES = [
 		[-10, 'Проект с нуля или кода очень мало'],
@@ -235,6 +248,28 @@ class Salary extends SGModelView {
 		'threejs': 'j',
 		'nestjs': 't',
 		'golang': 't',
+	};
+	
+	static PROMOCODES = { // %
+		AZURE3: -3,
+		YELLOW5: -5,
+		CYAN8: -8,
+		ORANGE10: -10,
+		GRAY12: -12,
+		MAROON15: -15,
+		TEAL18: -18,
+		PURPLE20: -20,
+		AQUA22: -22,
+		MAGENTA25: -25,
+		RED30: -30,
+		BROWN33: -33,
+		SIENNA35: -35,
+		GREEN40: -40,
+		NAVY50: -50,
+		SILVER60: -60,
+		GOLD75: -75,
+		INDIGO80: -80,
+		BLACK90: -90,
 	};
 	
 	async initialize() {
@@ -367,6 +402,45 @@ class Salary extends SGModelView {
 			}
 		});
 		
+		const ePromocode = document.querySelector('#promocode');
+		ePromocode.addEventListener('keydown', () => {
+			this.set('promocode_status', false);
+			this.set('promocode_success', false);
+			this.set('promocode_error', false);
+			if (ePromocode.value) {
+				ePromocode;
+			}
+		});
+		
+		this.on('promocode', (promocode) => {
+			this.set('promocode_success', false);
+			this.set('promocode_error', false);
+			if (promocode) {
+				setTimeout(() => {
+					const bExists = !!Salary.PROMOCODES[promocode];
+					if (bExists) {
+						this.set('promocode_per', Salary.PROMOCODES[promocode]);
+					}
+					this.set('promocode_success', bExists);
+					this.set('promocode_error', !bExists);
+				}, 500);
+			}
+		});
+		
+		/*this.on('promocode_status', (promocode_status) => {
+			if (promocode_status) {
+				new Promise(() => {
+					setTimeout(() => {
+						if (this.get('promocode_error') || !this.get('promocode')) {
+							this.set('promocode_status', false);
+						} else {
+							this.set('promocode_per', Salary.PROMOCODES[this.get('promocode')]);
+						}
+					}, 10);
+				});
+			}
+		});*/
+		
 		// Автоматический level
 		this.on(Object.keys(Salary._fields_koef), (value, previousValue, propName) => {
 			let level_cumm = 0, q = 0;
@@ -398,26 +472,35 @@ class Salary extends SGModelView {
 		this.bindHTML("body");
 		
 		// Hash parser
-		const result = Array.from(location.hash.matchAll(/#v([\d]+)(.*)/g));
+		const result = Array.from(location.hash.matchAll(/#(v([\d]+)([^&]*))(&promocode=(.*)){0,1}/g));
 		const parts = result[0];
-		const version = parts && +parts[1] || null;
+		const version = parts && +parts[2] || null;
 		if (version) {
 			if (version < CURRENT_VERSION) {
 				alert('Ссылка не поддерживается - версия хеша ' + location.hash + ' устарела!');
-			} else if (parts[2]) {
-				let parameters = Array.from(parts[2].matchAll(/(\w)(\w)/g));
-				for (let p in parameters) {
-					var code = parameters[p][1];
-					var value = parameters[p][2];
-					var name = Salary.hashProperties[code];
-					if (name) {
-						this.set(name, value);
+			} else {
+				if (parts[3]) {
+					let parameters = Array.from(parts[3].matchAll(/(\w)(\w)/g));
+					for (let p in parameters) {
+						var code = parameters[p][1];
+						var value = parameters[p][2];
+						var name = Salary.hashProperties[code];
+						if (name) {
+							this.set(name, value);
+						}
 					}
+				}
+				if (parts[5]) {
+					this.set('promocode', parts[5]);
 				}
 			}
 		}
 		
-		this.on(Object.values(Salary.hashProperties), this.calc);
+		if (this.get('promocode') && !this.get('promocode_error')) {
+			this.set('promocode_status', true);
+		}
+		
+		this.on(Object.values(Salary.hashProperties).concat('promocode_status'), this.calc);
 		
 		// to update the DOM on first launch:
 		this.on(['usdrub', 'cnyrub', 'tonrub'], this.calc);
@@ -479,13 +562,20 @@ class Salary extends SGModelView {
 		}
 		koef *= k(perSum);
 		
+		let promocodePer;
+		if (this.get('promocode_status')) {
+			promocodePer = Salary.PROMOCODES[this.get('promocode')] || 0;
+			koef *= k(promocodePer);
+		}
+		
 		let rate = Math.max(Salary.HOUR_RATE_BASE * koef, Salary.HOUR_RATE_MIN);
-		document.querySelector('#rate_title').title = rate;
+		document.querySelector('#rate_title').title = (Math.round(rate*100)/100).toFixed(2);
 		rate = SGModel.roundTo(rate / 5, -1) * 5;
 		let salary = SGModel.roundTo(rate * hours, -3);
 		
 		this.set('rate', rate);
 		this.set('salary_month', salary);
+		this.set('salary_month_without_promocode', salary / (1 + promocodePer/100));
 		this.set('salary_year', this.get('salary_month') * (this.get('contract') === Salary.CONTRACTS.symb('labor') ? 12 : 11));
 		this.set('rate_usd', SGModel.roundTo(Salary.USDKOEF * this.get('rate') / this.get('usdrub'), 1));
 		this.set('salary_month_usd', SGModel.roundTo(Salary.USDKOEF * this.get('salary_month') / this.get('usdrub'), -1));
@@ -582,6 +672,9 @@ class Salary extends SGModelView {
 			hash.push(code + value);
 		}
 		let href = location.href.replace(/#.*/, "") + "#" + hash.join("");
+		if (this.get('promocode') && this.get('promocode_status')) {
+			href = href + '&promocode=' + this.get('promocode');
+		}
 		let link_input = document.querySelector("#link_link");
 		link_input.value = href;
 	}

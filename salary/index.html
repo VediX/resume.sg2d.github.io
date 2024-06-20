@@ -55,7 +55,7 @@
     }, 4000);
   </script>
 	<link href="salary.css" rel="stylesheet">
-	<script type="module" src="./../res/sg-model/sg-model-view.js?v=41"></script>
+	<script type="module" src="./../res/sg-model/sg-model-view.js?v=42"></script>
 	<script type="module" src="salary.js?v=59"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
@@ -338,6 +338,17 @@
 								<li class="dropdown-item" sg-option="c" sg-dropdown="england">Английский: Intermediate (B1-B2) <sup sg-property="eng_c" sg-format="formatDiscount" sg-css="cssDangerOrSuccess"></sup></li>
 							</ul>
 						</div>
+						
+						<div>
+							<div class="input-group mb-3">
+								<div class="input-group-text">
+									<input sg-property="promocode_status" id="promocode_status" class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following promocode input"/><!--&nbsp;<label for="promocode_status">Промокод</label>-->
+								</div>
+								<input sg-property="promocode" id="promocode" type="text" class="form-control" aria-label="Promocode input with checkbox" placeholder="Введите промокод..."/>
+								<span class="input-group-text text-danger" sg-css="promocode_error ? 'visible-inline': 'no-visible'">Не верный промокод</span>
+								<span class="input-group-text text-success" sg-css="promocode_success ? 'visible-inline': 'no-visible'">Промокод <span sg-property="promocode_per">5</span>% применен</span>
+							</div>
+						</div>
             
 					</form>
 
@@ -345,10 +356,17 @@
 					
 					<div class="totals">
 						<div>
-							<p class="text-center fw-bold lh-1">Итого: <span sg-property="salary_month" sg-format="getNumThinsp">0</span>&nbsp;руб.<sup>*</sup> <span class="text-nowrap">(<span id="rate_title" title="loading..." sg-property="rate" sg-format="getNumThinsp" sg-css="rate == rate_hour_min ? 'text-secondary': ''">0</span>&nbsp;руб./час)<sup class="text-secondary" sg-css="rate == rate_hour_min ? 'visible-inline': 'no-visible'">5</sup></span></p>
 							<p class="text-center fw-bold lh-1">
-								<span sg-property="hours">0</span>&nbsp;<span sg-property="hours_meas">часов</span>/месяц,
-								<span sg-property="salary_year" sg-format="getNumThinsp" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'text-danger' : ''">0</span>&nbsp;руб./год<sup sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-inline': 'no-visible'">6</sup><sup class="text-danger" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-inline' : 'no-visible'">,7</sup>
+								Итого:
+								<span sg-property="salary_month" sg-format="getNumThinsp">0</span>&nbsp;руб.
+									<sup>*</sup>
+									<sup class="text-danger" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-inline' : 'no-visible'">,7</sup>
+								<s class="text-muted" sg-css="promocode_status ? 'visible-inline': 'no-visible'"><span sg-property="salary_month_without_promocode" sg-format="getNumThinsp">0</span>&nbsp;руб.</s>
+							</p>
+							<p class="text-center fw-bold lh-1">
+								<span sg-property="hours">0</span>&nbsp;<span sg-property="hours_meas">часов</span>/месяц
+								<span class="text-nowrap">(<span id="rate_title" title="loading..." sg-property="rate" sg-format="getNumThinsp" sg-css="rate == rate_hour_min ? 'text-secondary': ''">0</span>&nbsp;руб./час)<sup class="text-secondary" sg-css="rate == rate_hour_min ? 'visible-inline': 'no-visible'">5</sup></span>
+								<!--<span sg-property="salary_year" sg-format="getNumThinsp" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'text-danger' : ''">0</span>&nbsp;руб./год<sup sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-inline': 'no-visible'">6</sup>-->
 							</p>
 						</div>
 						<div sg-css="(isFinite(usdrub) && usdrub > 0 && contract !== 'c') ? 'visible-block': 'no-visible'">
