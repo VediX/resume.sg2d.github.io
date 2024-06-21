@@ -412,34 +412,25 @@ class Salary extends SGModelView {
 			}
 		});
 		
-		this.on('promocode', (promocode) => {
-			this.set('promocode_success', false);
-			this.set('promocode_error', false);
-			if (promocode) {
-				setTimeout(() => {
-					const bExists = !!Salary.PROMOCODES[promocode];
-					if (bExists) {
-						this.set('promocode_per', Salary.PROMOCODES[promocode]);
-					}
-					this.set('promocode_success', bExists);
-					this.set('promocode_error', !bExists);
-				}, 500);
+		const checkPromocode = () => {
+			const promocode = this.get('promocode');
+			setTimeout(() => {
+				const bExists = !!Salary.PROMOCODES[promocode];
+				this.set('promocode_per', (bExists ? Salary.PROMOCODES[promocode] : 0));
+				this.set('promocode_success', bExists);
+				this.set('promocode_error', !bExists);
+			}, 500);
+		};
+		
+		this.on('promocode_status', (status) => {
+			if (status) {
+				checkPromocode();
+			} else {
+				this.set('promocode_status', false);
+				this.set('promocode_success', false);
+				this.set('promocode_error', false);
 			}
 		});
-		
-		/*this.on('promocode_status', (promocode_status) => {
-			if (promocode_status) {
-				new Promise(() => {
-					setTimeout(() => {
-						if (this.get('promocode_error') || !this.get('promocode')) {
-							this.set('promocode_status', false);
-						} else {
-							this.set('promocode_per', Salary.PROMOCODES[this.get('promocode')]);
-						}
-					}, 10);
-				});
-			}
-		});*/
 		
 		// Автоматический level
 		this.on(Object.keys(Salary._fields_koef), (value, previousValue, propName) => {

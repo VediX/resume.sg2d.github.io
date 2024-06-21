@@ -56,7 +56,7 @@
   </script>
 	<link href="salary.css" rel="stylesheet">
 	<script type="module" src="./../res/sg-model/sg-model-view.js?v=42"></script>
-	<script type="module" src="salary.js?v=59"></script>
+	<script type="module" src="salary.js?v=60"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
 
@@ -360,17 +360,16 @@
 								Итого:
 								<span sg-property="salary_month" sg-format="getNumThinsp">0</span>&nbsp;руб.
 									<sup>*</sup>
-									<sup class="text-danger" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-inline' : 'no-visible'">,7</sup>
-								<s class="text-muted" sg-css="promocode_status ? 'visible-inline': 'no-visible'"><span sg-property="salary_month_without_promocode" sg-format="getNumThinsp">0</span>&nbsp;руб.</s>
+									<sup class="text-danger" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-inline' : 'no-visible'">,6</sup>
+								<s class="text-muted" sg-css="promocode_status && promocode_success ? 'visible-inline': 'no-visible'"><span sg-property="salary_month_without_promocode" sg-format="getNumThinsp">0</span>&nbsp;руб.</s>
 							</p>
 							<p class="text-center fw-bold lh-1">
 								<span sg-property="hours">0</span>&nbsp;<span sg-property="hours_meas">часов</span>/месяц
 								<span class="text-nowrap">(<span id="rate_title" title="loading..." sg-property="rate" sg-format="getNumThinsp" sg-css="rate == rate_hour_min ? 'text-secondary': ''">0</span>&nbsp;руб./час)<sup class="text-secondary" sg-css="rate == rate_hour_min ? 'visible-inline': 'no-visible'">5</sup></span>
-								<!--<span sg-property="salary_year" sg-format="getNumThinsp" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'text-danger' : ''">0</span>&nbsp;руб./год<sup sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-inline': 'no-visible'">6</sup>-->
 							</p>
 						</div>
 						<div sg-css="(isFinite(usdrub) && usdrub > 0 && contract !== 'c') ? 'visible-block': 'no-visible'">
-							<p class="text-center fw-bold lh-1">$<span sg-property="salary_month_usd" sg-format="getNumThinsp">0</span> <span class="text-nowrap">($<span sg-property="rate_usd" sg-format="getNumThinsp2">0</span>/hour)<sup>8</sup></span></p>
+							<p class="text-center fw-bold lh-1">$<span sg-property="salary_month_usd" sg-format="getNumThinsp">0</span> <span class="text-nowrap">($<span sg-property="rate_usd" sg-format="getNumThinsp2">0</span>/hour)<sup>7</sup></span></p>
 						</div>
 						<div sg-css="(isFinite(cnyrub) && cnyrub > 0 && contract !== 'c') ? 'visible-block': 'no-visible'">
 							<p class="text-center fw-bold lh-1">总计: Ұ<span sg-property="salary_month_cny" sg-format="getNumThinsp">0</span> <span class="text-nowrap">(Ұ<span sg-property="rate_cny" sg-format="getNumThinsp">0</span>/小时)</span></p>
@@ -395,12 +394,11 @@
 						</span>
 					</p>
 					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="rate == rate_hour_min ? 'visible-block': 'no-visible'"><sup>5</sup> &mdash; минимальная почасовая ставка <span sg-property="rate_hour_min" sg-format="getNumThinsp">500</span>&nbsp;руб.</p>
-					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="contract !== this.constructor.CONTRACTS.symb('labor') ? 'visible-block': 'no-visible'"><sup>6</sup> &mdash; годовая оплата рассчитывается за 11 месяцев.</p>
 					<p class="text-danger" style="font-size: 0.8rem; text-align: justify;" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-block' : 'no-visible'">
-						<sup>7</sup> &mdash; Со дня, когда доходы контрагента-самозанятого (без статуса ИП) превысили <span sg-property="contract_self_limit" sg-format="getNumThinsp">0</span>&nbsp;руб.,
+						<sup>6</sup> &mdash; Со дня, когда доходы контрагента-самозанятого (без статуса ИП) превысили <span sg-property="contract_self_limit" sg-format="getNumThinsp">0</span>&nbsp;руб.,
 						вы обязаны удерживать НДФЛ и перечислять страховые взносы с выплат в его пользу. Переоформлять договор с ним необязательно, <a href="http://www.consultant.ru/document/cons_doc_LAW_318780/57fe9d25246fad33498a9766e465c4c35c1113b6/#dst100069" target="_blank">разъясняет ФНС</a>. <span class="text-success">Также самозанятый может зарегистрироваться как ИП.</span>
 					</p>
-					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="usdrub > 0 ? 'visible-block': 'no-visible'"><sup>8</sup> &mdash; при оплате в западных валютах +<span>25</span>%!<br/>Текущие курсы: <span sg-property="usdrub"></span> руб/$, <span sg-property="cnyrub"></span> руб/Ұ</p>
+					<p class="text-secondary" style="font-size: 0.8rem;" sg-css="usdrub > 0 ? 'visible-block': 'no-visible'"><sup>7</sup> &mdash; при оплате в западных валютах +<span>25</span>%!<br/>Текущие курсы: <span sg-property="usdrub"></span> руб/$, <span sg-property="cnyrub"></span> руб/Ұ</p>
 				</div>
 				<div class="col"></div>
 			</div>
