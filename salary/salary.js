@@ -177,8 +177,9 @@ class Salary extends SGModelView {
 	static CONTRACT_SELF_LIMIT = 2400000;
 	
 	static CONTRACTS = new OptionsMethods({
-		"s": [0, 'self'],
 		"l": [-15, 'labor'],
+		"s": [0, 'self'],
+		"g": [+10, 'gph'],
 		"i": [+15, 'ip'],
 		"c": [+50, 'crypta'],
 		"f": [+100, 'freelance'],
@@ -265,6 +266,7 @@ class Salary extends SGModelView {
 		BROWN33: -33,
 		SIENNA35: -35,
 		GREEN40: -40,
+		ROYALBLUE45: -45,
 		NAVY50: -50,
 		SILVER60: -60,
 		GOLD75: -75,
