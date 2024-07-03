@@ -239,7 +239,7 @@ class Salary extends SGModelView {
 		'esnext': 'u',
 		'nodejs': 'u',
 		'react': 't',
-		'postgresql': 'm',
+		'postgresql': 'u',
 		'vue': 't',
 		'php': 'u',
 		'cpp': 'i',

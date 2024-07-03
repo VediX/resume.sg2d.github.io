@@ -56,7 +56,7 @@
   </script>
 	<link href="salary.css" rel="stylesheet">
 	<script type="module" src="./../res/sg-model/sg-model-view.js?v=42"></script>
-	<script type="module" src="salary.js?v=61"></script>
+	<script type="module" src="salary.js?v=62"></script>
 	<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/"/>
   </head>
 
@@ -361,7 +361,7 @@
 								Итого:
 								<span sg-property="salary_month" sg-format="getNumThinsp">0</span>&nbsp;руб.
 									<sup>*</sup>
-									<sup class="text-danger" sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-inline' : 'no-visible'">,6</sup>
+									<sup sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-inline' : 'no-visible'">, <span class="text-danger">6</span></sup>
 								<s class="text-muted" sg-css="promocode_status && promocode_success ? 'visible-inline': 'no-visible'"><span sg-property="salary_month_without_promocode" sg-format="getNumThinsp">0</span>&nbsp;руб.</s>
 							</p>
 							<p class="text-center fw-bold lh-1">
