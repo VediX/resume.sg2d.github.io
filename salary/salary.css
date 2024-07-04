@@ -63,6 +63,7 @@ label,
   width: 0.5rem;
   height: 0.5rem;
   color: gray;
+  font-weight: bold;
 }
 .hourly-payment-or-deadline .label-hour {
   color: gray !important;
@@ -121,6 +122,9 @@ label,
   width: 0.5rem;
   height: 0.5rem;
   color: gray;
+}
+.lcode {
+  font-weight: bold;
 }
 .lcode-1 {
   left: 0% !important;

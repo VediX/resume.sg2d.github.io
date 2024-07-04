@@ -178,7 +178,7 @@
 							<!--<legend class="col-form-label pt-0">Поддержка кода:</legend>-->
 							<div class="container p-0">
 								<div class="row m-0">
-									<div class="col-md-12 p-0 pt-3 pe-1 position-relative" style="font-size: 10pt">
+									<div class="col-md-12 p-0 pt-3 pe-1 position-relative lcode" style="font-size: 10pt">
 										<input sg-property="code" type="range" class="form-range input-range-off" min="0" max="5" aria-describedby="code_desc" value="4">
 										<div class="position-absolute top-0 translate-middle-y label-code lcode-1 text-success cursor-pointer" sg-attributes="{ title: getCodeTitle('0') }" sg-click="supportCodeClick" data-code="0">New</div>
 										<div class="position-absolute top-0 translate-middle-y label-code lcode-2 cursor-pointer" sg-attributes="{ title: getCodeTitle('1') }" sg-click="supportCodeClick" data-code="1">Full</div>
@@ -360,8 +360,7 @@
 							<p class="text-center fw-bold lh-1">
 								Итого:
 								<span sg-property="salary_month" sg-format="getNumThinsp">0</span>&nbsp;руб.
-									<sup>*</sup>
-									<sup sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-inline' : 'no-visible'">, <span class="text-danger">6</span></sup>
+									<sup>*</sup><sup sg-css="contract === this.constructor.CONTRACTS.symb('self') && salary_year > contract_self_limit ? 'visible-inline' : 'no-visible'">, <span class="text-danger">6</span></sup>
 								<s class="text-muted" sg-css="promocode_status && promocode_success ? 'visible-inline': 'no-visible'"><span sg-property="salary_month_without_promocode" sg-format="getNumThinsp">0</span>&nbsp;руб.</s>
 							</p>
 							<p class="text-center fw-bold lh-1">

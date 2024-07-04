@@ -1,0 +1,10 @@
+{
+  "tasks": [
+    {
+      "taskLabel": "Less Compile",
+      "appliesTo": "*.less",
+      "command": "${env.COMSPEC}",
+      "args": [ "lessc ${file} ${fileDirname}\\${fileBasename}.css" ]
+    }
+  ]
+}
