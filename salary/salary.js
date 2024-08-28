@@ -1,6 +1,6 @@
 "use strict";
 
-const CURRENT_VERSION = 10;
+const CURRENT_VERSION = 11;
 
 class OptionsMethods {
 	constructor(values) {
@@ -38,6 +38,7 @@ class Salary extends SGModelView {
 		hours_in_day: 4,
 		with_combining: false,
 		hourly_payment: false,
+		wakatime: false,
 		schedule: 'b',
 		deadline: false,
 		otech: false,
@@ -78,7 +79,8 @@ class Salary extends SGModelView {
 		promocode_success: false,
 		promocode_error: false,
 		promocode_per: 0,
-		
+
+		payment_per: 0,
 		rate_hour_min: 0,
 		salary_month_without_promocode: 0,
 		salary_month: 0,
@@ -113,6 +115,7 @@ class Salary extends SGModelView {
 		hours_in_day: SGModel.TYPE_NUMBER,
 		with_combining: SGModel.TYPE_NUMBER,
 		hourly_payment: SGModel.TYPE_BOOLEAN,
+		wakatime: SGModel.TYPE_BOOLEAN,
 		deadline: SGModel.TYPE_BOOLEAN,
 		otech: SGModel.TYPE_BOOLEAN,
 		code: SGModel.TYPE_STRING,
@@ -158,7 +161,7 @@ class Salary extends SGModelView {
 		N: "nodejs",
 		O: "golang",
 		P: "php",
-		//Q: "",
+		Q: "wakatime",
 		R: "react",
 		S: "cpp",
 		T: "typescript",
@@ -214,10 +217,11 @@ class Salary extends SGModelView {
 	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -15, -10, 0, +100, +200];
 
 	static OTECH_KOEF = 11.00;
+
 	static WITH_COMBINING = -20; // %
 	static HOURLY_PAYMENT_PER = +30; // %
-	static HOURS_DEADLINE_KOEF = +30; // %
-	static DEADLINE_AND_HOURLY_PAYMENT_PER = +40; // %
+	static WAKATIME_PER = +70; // %
+	static DEADLINE_PER = +20; // %
 	
 	static USDKOEF = 1.25;
 	
@@ -326,6 +330,29 @@ class Salary extends SGModelView {
 			//document.querySelector('input#deadline').disabled = (hours == 8);
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
+		this.on(['hours_in_day', 'hourly_payment', 'with_combining', 'wakatime', 'deadline'], (hourly_payment) => {
+			let paymentPer = this.get('with_combining') * Salary.WITH_COMBINING
+				+ this.get('hourly_payment') * Salary.HOURLY_PAYMENT_PER
+				+ this.get('wakatime') * Salary.WAKATIME_PER
+				+ this.get('deadline') * Salary.DEADLINE_PER;
+			if (!this.get('hourly_payment') && !this.get('deadline')) {
+				paymentPer += Salary.HOURS_KOEF[this.get('hours_in_day')];
+			}
+			this.set('payment_per', paymentPer);
+		});
+
+		this.on('hourly_payment', (hourly_payment) => {
+			if (!hourly_payment) {
+				this.set('wakatime', false);
+			}
+		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
+
+		this.on('wakatime', (wakatime) => {
+			if (wakatime) {
+				this.set('hourly_payment', true);
+			}
+		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
+		
 		this.on('code', (code)=>{
 			this.set('code_desc', Salary.CODES[code][1]);
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
@@ -333,8 +360,9 @@ class Salary extends SGModelView {
 		this.on('hours', (hours)=>{
 			this.set('hours_meas', this.getHoursMeas(hours));
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
-		
-		this.on('deadline', () => {
+
+		// what's a crutch?
+		this.on('deadline', (deadline) => {
 			['days_in_week_1', 'days_in_week_2', 'days_in_week_3', 'days_in_week_4'].forEach((name) => {
 				this.set(name, this.get(name), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 			});
@@ -514,33 +542,12 @@ class Salary extends SGModelView {
 		koef *= k(Salary.LEVELS[this.get("level")][0]);
 		koef *= k(Salary.CODES[this.get("code")][0]);
 		koef *= k(Salary.ENGLANDS[this.get("england")][0]);
-		
-		if (this.get('with_combining')) {
-			koef *= k(Salary.WITH_COMBINING);
-		}
-		
-		if (this.get('hourly_payment') && this.get('deadline')) {
-			koef *= k(Salary.DEADLINE_AND_HOURLY_PAYMENT_PER);
-			if (this.get('days_in_week') > 5) {
-				koef *= k(Salary.DAYS_IN_WEEK_KOEF[this.get('days_in_week')]);
-			}
-		} else {
-			if (this.get('hourly_payment')) {
-				koef *= k(Salary.HOURLY_PAYMENT_PER);
-			}
-			if (this.get('deadline')) {
-				koef *= k(Salary.HOURS_DEADLINE_KOEF);
-				if (this.get('days_in_week') > 5) {
-					koef *= k(Salary.DAYS_IN_WEEK_KOEF[this.get('days_in_week')]);
-				}
-			}
-			if (!this.get('deadline')) {
-				if (!this.get('hourly_payment')) {
-					koef *= k(Salary.HOURS_KOEF[this.get('hours_in_day')]);
-				}
-				koef *= k(Salary.DAYS_IN_WEEK_KOEF[this.get('days_in_week')]);
-			}
-		}
+
+		const paymentPer = this.get('payment_per');
+		koef *= k(this.get('payment_per'));
+		koef *= k(Salary.DAYS_IN_WEEK_KOEF[
+			this.get('deadline') ? Math.max(5, this.get('days_in_week')) : this.get('days_in_week')
+		]);
 		
 		if (this.get('otech')) {
 			koef *= Salary.OTECH_KOEF;
