@@ -61,6 +61,7 @@ P.S: middle- подразумевает, что с данной технолог
 - Bootstrap
 - PixiJS (+Sound) / PhaserJS
 - SAPUI5 (Fiori Developer), SAP Cloud Platform
+- FeathersJS
 
 ##### Окружение, инструментарий:
 
