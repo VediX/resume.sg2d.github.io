@@ -198,13 +198,13 @@ class Salary extends SGModelView {
 	});
 	
 	static LEVELS = new OptionsMethods({
-		"t": [-50, 'trainee'],
-		"j": [-30, 'junior'],
-		"i": [-20, 'junior_plus'],
+		"t": [-75, 'trainee'],
+		"j": [-50, 'junior'],
+		"i": [-33, 'junior_plus'],
 		"u": [-10, 'middle_minus'],
 		"m": [0, 'middle'],
-		"n": [+20, 'middle_plus'],
-		"s": [+50, 'senior'],
+		"n": [+33, 'middle_plus'],
+		"s": [+75, 'senior'],
 		"l": [+100, 'teamlead']
 	});
   
