@@ -31,17 +31,16 @@ class Salary extends SGModelView {
 		
 		version: CURRENT_VERSION,
 		
-		contract: 'l',
+		contract: 's',
 		level: 'm',
 		days_in_week: 5,
 		england: 'a',
-		hours_in_day: 4,
+		hours_in_day: 8,
 		with_combining: false,
 		hourly_payment: false,
 		wakatime: false,
 		schedule: 'b',
 		deadline: false,
-		otech: false,
 		code: '1',
 		ecmascript: true,
 		esnext: true,
@@ -53,7 +52,7 @@ class Salary extends SGModelView {
 		php: false,
 		cpp: false,
 		typescript: false,
-		vanillajs: false,
+		vanillajs: true,
 		threejs: false,
 		nestjs: false,
 		golang: false,
@@ -117,7 +116,6 @@ class Salary extends SGModelView {
 		hourly_payment: SGModel.TYPE_BOOLEAN,
 		wakatime: SGModel.TYPE_BOOLEAN,
 		deadline: SGModel.TYPE_BOOLEAN,
-		otech: SGModel.TYPE_BOOLEAN,
 		code: SGModel.TYPE_STRING,
 		ecmascript: SGModel.TYPE_BOOLEAN,
 		esnext: SGModel.TYPE_BOOLEAN,
@@ -133,9 +131,7 @@ class Salary extends SGModelView {
 		threejs: SGModel.TYPE_BOOLEAN,
 		nestjs: SGModel.TYPE_BOOLEAN,
 		golang: SGModel.TYPE_BOOLEAN,
-		
-		otech_per: SGModel.TYPE_NUMBER,
-		
+				
 		promocode: SGModel.TYPE_STRING,
 		promocode_status: SGModel.TYPE_BOOLEAN,
 		promocode_success: SGModel.TYPE_BOOLEAN,
@@ -170,13 +166,13 @@ class Salary extends SGModelView {
 		V: "vue",
 		X: "schedule",
 		Y: "java",
-		Z: "otech",
+		//Z: "",
 		I: "esnext", // после nestjs, react и vue
 		L: "level", // level идёт последним!
 	};
 	
-	static HOUR_RATE_BASE = 3850;
-	static HOUR_RATE_MIN = 1000;
+	static HOUR_RATE_BASE = 3700;
+	static HOUR_RATE_MIN = 1500;
 	static CONTRACT_SELF_LIMIT = 2400000;
 	
 	static CONTRACTS = new OptionsMethods({
@@ -216,11 +212,9 @@ class Salary extends SGModelView {
 	
 	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -15, -10, 0, +100, +200];
 
-	static OTECH_KOEF = 11.00;
-
 	static WITH_COMBINING = -20; // %
 	static HOURLY_PAYMENT_PER = +30; // %
-	static WAKATIME_PER = +70; // %
+	static WAKATIME_PER = +50; // %
 	static DEADLINE_PER = +20; // %
 	
 	static USDKOEF = 1.25;
@@ -236,7 +230,7 @@ class Salary extends SGModelView {
 		[+50, 'Проект никто не поддерживает!'],
 	];
 	
-	static TIMEOUTS = [void 0, 0, 0, 5, 5, 10, 10, 15, 15];
+	static TIMEOUTS = [void 0, 0, 0, 4, 5, 6, 8, 10, 12];
 	
 	static _fields_koef = {
 		'ecmascript': 'n',
@@ -314,9 +308,7 @@ class Salary extends SGModelView {
 		}
 		
 		this.set('contract_self_limit', Salary.CONTRACT_SELF_LIMIT);
-		
-		this.set('otech_per', 100*(Salary.OTECH_KOEF - 1), { precision: 1 });
-		
+				
 		this.on('hours_in_day', (hours) => {
 			if (hours > 4) {
 				this.set('with_combining', false);
@@ -331,6 +323,7 @@ class Salary extends SGModelView {
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
 		this.on(['hours_in_day', 'hourly_payment', 'with_combining', 'wakatime', 'deadline'], (hourly_payment) => {
+			console.log('calc paymentPer...');
 			let paymentPer = this.get('with_combining') * Salary.WITH_COMBINING
 				+ this.get('hourly_payment') * Salary.HOURLY_PAYMENT_PER
 				+ this.get('wakatime') * Salary.WAKATIME_PER
@@ -339,7 +332,7 @@ class Salary extends SGModelView {
 				paymentPer += Salary.HOURS_KOEF[this.get('hours_in_day')];
 			}
 			this.set('payment_per', paymentPer);
-		});
+		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 
 		this.on('hourly_payment', (hourly_payment) => {
 			if (!hourly_payment) {
@@ -533,7 +526,12 @@ class Salary extends SGModelView {
 	}
 	
 	calc() {
+
+		//let dbgLine = '';
+
 		let hours = 4 * this.get('days_in_week') * this.get('hours_in_day');
+		//dbgLine += 'hours=' + hours + '; ';
+
 		this.set('hours', hours);
 		let koef = 1;
 		
@@ -543,15 +541,15 @@ class Salary extends SGModelView {
 		koef *= k(Salary.CODES[this.get("code")][0]);
 		koef *= k(Salary.ENGLANDS[this.get("england")][0]);
 
-		const paymentPer = this.get('payment_per');
+		//dbgLine += 'koef(A)=' + koef + '; ';
+
 		koef *= k(this.get('payment_per'));
+		//dbgLine += 'koef(B)=' + koef + '; ';
+
 		koef *= k(Salary.DAYS_IN_WEEK_KOEF[
 			this.get('deadline') ? Math.max(5, this.get('days_in_week')) : this.get('days_in_week')
 		]);
-		
-		if (this.get('otech')) {
-			koef *= Salary.OTECH_KOEF;
-		}
+		//dbgLine += 'koef(C)=' + koef + '; ';
 		
 		let perSum = 0;
 		for (let t in Salary._fields_koef) {
@@ -561,17 +559,22 @@ class Salary extends SGModelView {
 			}
 		}
 		koef *= k(perSum);
+		//dbgLine += 'koef(D)=' + koef + '; ';
 		
 		let promocodePer;
 		if (this.get('promocode_status')) {
 			promocodePer = Salary.PROMOCODES[this.get('promocode')] || 0;
 			koef *= k(promocodePer);
 		}
+		//dbgLine += 'koef(E)=' + koef + '; ';
 		
 		let rate = Math.max(Salary.HOUR_RATE_BASE * koef, Salary.HOUR_RATE_MIN);
 		document.querySelector('#rate_title').title = (Math.round(rate*100)/100).toFixed(2);
 		rate = SGModel.roundTo(rate / 5, -1) * 5;
 		let salary = SGModel.roundTo(rate * hours, -3);
+		//dbgLine += 'rate=' + rate + '; salary=' + salary;
+
+		//console.log('calc: ' + dbgLine);
 		
 		this.set('rate', rate);
 		this.set('salary_month', salary);
