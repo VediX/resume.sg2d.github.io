@@ -58,19 +58,19 @@ class Salary extends SGModelView {
 		golang: false,
 		
 		// скидки/наценки в %
-		ecmascript_koef: -10,
+		ecmascript_koef: -5,
 		esnext_koef: -10,
 		nodejs_koef: -10,
-		java_koef: +40,
-		vue_koef: +5,
+		java_koef: +50,
+		vue_koef: +10,
 		react_koef: +40,
 		postgresql_koef: -5,
-		php_koef: +25,
+		php_koef: +20,
 		cpp_koef: +10,
 		typescript_koef: +15,
-		vanillajs_koef: -5,
-		nestjs_koef: -10,
-		threejs_koef: -10,
+		vanillajs_koef: -10,
+		nestjs_koef: +5,
+		threejs_koef: -5,
 		golang_koef: +15,
 		
 		promocode: '',
@@ -770,6 +770,6 @@ function k(per) {
 	return 1 + per/100;
 }
 
-addEventListener("load", () => {
+addEventListener("DOMContentLoaded", () => {
 	window.salaryApp = new Salary();
 });
