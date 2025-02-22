@@ -323,7 +323,7 @@ class Salary extends SGModelView {
 		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
 		
 		this.on(['hours_in_day', 'hourly_payment', 'with_combining', 'wakatime', 'deadline'], (hourly_payment) => {
-			console.log('calc paymentPer...');
+			//console.log('calc paymentPer...');
 			let paymentPer = this.get('with_combining') * Salary.WITH_COMBINING
 				+ this.get('hourly_payment') * Salary.HOURLY_PAYMENT_PER
 				+ this.get('wakatime') * Salary.WAKATIME_PER
@@ -523,6 +523,8 @@ class Salary extends SGModelView {
 		});
 		
 		this.set("initialized", true);
+    
+    return super.initialize();
 	}
 	
 	calc() {
