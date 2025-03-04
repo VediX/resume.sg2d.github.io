@@ -516,15 +516,15 @@ class Salary extends SGModelView {
 		
 		this.on(Object.values(Salary.hashProperties).concat('promocode_status'), this.calc);
 		
-		// to update the DOM on first launch:
-		this.on(['usdrub', 'cnyrub', 'tonrub'], this.calc);
-		['contract', 'level', 'schedule', 'days_in_work', 'england'].forEach((name) => {
-			this.set(name, this.get(name), void 0, SGModel.FLAG_FORCE_CALLBACKS);
-		});
-		
 		this.set("initialized", true);
     
-    return super.initialize();
+		return super.initialize().then(() => {
+			// to update the DOM on first launch:
+			this.on(['usdrub', 'cnyrub', 'tonrub'], this.calc);
+			['contract', 'level', 'schedule', 'days_in_work', 'england'].forEach((name) => {
+				this.set(name, this.get(name), void 0, SGModel.FLAG_FORCE_CALLBACKS);
+			});
+		});
 	}
 	
 	calc() {
@@ -671,7 +671,7 @@ class Salary extends SGModelView {
 		var hash = [];
 		for (var code in Salary.hashProperties) {
 			var name = Salary.hashProperties[code];
-			var value = this.properties[name];
+			var value = this.data[name];
 			if (value === false) value = 0;
 			if (value === true) value = 1;
 			hash.push(code + value);
