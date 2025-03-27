@@ -483,8 +483,6 @@ class Salary extends SGModelView {
 		
 		this.set('rate_hour_min', Salary.HOUR_RATE_MIN);
 		
-		this.bindHTML("body");
-		
 		// Hash parser
 		const result = Array.from(location.hash.matchAll(/#(v([\d]+)([^&]*))(&promocode=(.*)){0,1}/g));
 		const parts = result[0];
@@ -516,15 +514,15 @@ class Salary extends SGModelView {
 		
 		this.on(Object.values(Salary.hashProperties).concat('promocode_status'), this.calc);
 		
-		this.set("initialized", true);
-    
-		return super.initialize().then(() => {
-			// to update the DOM on first launch:
-			this.on(['usdrub', 'cnyrub', 'tonrub'], this.calc);
-			['contract', 'level', 'schedule', 'days_in_work', 'england'].forEach((name) => {
-				this.set(name, this.get(name), void 0, SGModel.FLAG_FORCE_CALLBACKS);
-			});
+		this.bindHTML("body");
+
+		// to update the DOM on first launch:
+		this.on(['usdrub', 'cnyrub', 'tonrub'], this.calc);
+		['contract', 'days_in_week', 'level', 'schedule', 'days_in_work', 'england'].forEach((name) => {
+			this.set(name, this.get(name), void 0, SGModel.FLAG_FORCE_CALLBACKS);
 		});
+		
+		this.set("initialized", true);
 	}
 	
 	calc() {
@@ -563,7 +561,7 @@ class Salary extends SGModelView {
 		koef *= k(perSum);
 		//dbgLine += 'koef(D)=' + koef + '; ';
 		
-		let promocodePer;
+		let promocodePer = 1;
 		if (this.get('promocode_status')) {
 			promocodePer = Salary.PROMOCODES[this.get('promocode')] || 0;
 			koef *= k(promocodePer);
