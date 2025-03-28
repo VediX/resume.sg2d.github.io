@@ -320,7 +320,8 @@ class Salary extends SGModelView {
 			this.set('timeout', Salary.TIMEOUTS[hours]);
 			// TODO: переделать, когда sgAttribute будет динамическим!
 			//document.querySelector('input#deadline').disabled = (hours == 8);
-		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
+		});
+		this.trigger('hours_in_day');
 		
 		this.on(['hours_in_day', 'hourly_payment', 'with_combining', 'wakatime', 'deadline'], (hourly_payment) => {
 			//console.log('calc paymentPer...');
@@ -332,34 +333,34 @@ class Salary extends SGModelView {
 				paymentPer += Salary.HOURS_KOEF[this.get('hours_in_day')];
 			}
 			this.set('payment_per', paymentPer);
-		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
+		});
 
 		this.on('hourly_payment', (hourly_payment) => {
 			if (!hourly_payment) {
 				this.set('wakatime', false);
 			}
-		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
+		});
 
 		this.on('wakatime', (wakatime) => {
 			if (wakatime) {
 				this.set('hourly_payment', true);
 			}
-		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
+		});
 		
 		this.on('code', (code)=>{
 			this.set('code_desc', Salary.CODES[code][1]);
-		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
+		});
 		
 		this.on('hours', (hours)=>{
 			this.set('hours_meas', this.getHoursMeas(hours));
-		}, void 0, void 0, SGModel.FLAG_IMMEDIATELY);
+		});
 
-		// what's a crutch?
+		// Показать/спрятать скидки/наценки в dropdown'е с занятостью для первых 5 дней
 		this.on('deadline', (deadline) => {
-			['days_in_week_1', 'days_in_week_2', 'days_in_week_3', 'days_in_week_4'].forEach((name) => {
-				this.set(name, this.get(name), void 0, SGModel.FLAG_FORCE_CALLBACKS);
+			['days_in_week_1', 'days_in_week_2', 'days_in_week_3', 'days_in_week_4', 'days_in_week_4'].forEach((name) => {
+				this.trigger(name);
 			});
-			this.set('days_in_week', this.get('days_in_week'), void 0, SGModel.FLAG_FORCE_CALLBACKS);
+			this.trigger('days_in_week');
 		});
 		
 		const ecmaTechDependent = ['vanillajs', 'typescript', 'react', 'vue', 'nestjs', 'esnext', 'nodejs', 'threejs'];
@@ -519,7 +520,7 @@ class Salary extends SGModelView {
 		// to update the DOM on first launch:
 		this.on(['usdrub', 'cnyrub', 'tonrub'], this.calc);
 		['contract', 'days_in_week', 'level', 'schedule', 'days_in_work', 'england'].forEach((name) => {
-			this.set(name, this.get(name), void 0, SGModel.FLAG_FORCE_CALLBACKS);
+			this.trigger(name);
 		});
 		
 		this.set("initialized", true);
