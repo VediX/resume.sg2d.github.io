@@ -30,12 +30,13 @@ class Salary extends SGModelView {
 		initialized: false,
 		
 		version: CURRENT_VERSION,
+		versionCore: SGModelView.version,
 		
 		contract: 's',
 		level: 'm',
 		days_in_week: 5,
 		england: 'a',
-		hours_in_day: 8,
+		hours_in_day: 4,
 		with_combining: false,
 		hourly_payment: false,
 		wakatime: false,
@@ -56,6 +57,8 @@ class Salary extends SGModelView {
 		threejs: false,
 		nestjs: false,
 		golang: false,
+		
+		code_desc: '',
 		
 		// скидки/наценки в %
 		ecmascript_koef: -5,
@@ -516,6 +519,8 @@ class Salary extends SGModelView {
 		this.on(Object.values(Salary.hashProperties).concat('promocode_status'), this.calc);
 		
 		this.bindHTML("body");
+		
+		this.trigger('code');
 
 		// to update the DOM on first launch:
 		this.on(['usdrub', 'cnyrub', 'tonrub'], this.calc);
