@@ -313,7 +313,7 @@ class Salary extends SGModelView {
 		this.set('contract_self_limit', Salary.CONTRACT_SELF_LIMIT);
 				
 		this.on('hours_in_day', (hours) => {
-			if (hours > 4) {
+			if (hours > 6) {
 				this.set('with_combining', false);
 				document.querySelector('#with_combining').disabled = true;
 			} else {
@@ -576,7 +576,7 @@ class Salary extends SGModelView {
 		
 		let rate = Math.max(Salary.HOUR_RATE_BASE * koef, Salary.HOUR_RATE_MIN);
 		document.querySelector('#rate_title').title = (Math.round(rate*100)/100).toFixed(2);
-		rate = SGModel.roundTo(rate / 5, -1) * 5;
+		rate = SGModel.roundTo(rate, -1);
 		let salary = SGModel.roundTo(rate * hours, -3);
 		//dbgLine += 'rate=' + rate + '; salary=' + salary;
 
