@@ -317,6 +317,7 @@ class Salary extends SGModelView {
 				this.set('with_combining', false);
 				document.querySelector('#with_combining').disabled = true;
 			} else {
+				this.set('with_combining', true);
 				document.querySelector('#with_combining').disabled = false;
 			}
 			this.set('hours_in_day_desc', (hours === 8 ? 'Фуллтайм' : hours + ' ' + this.getHoursMeas(hours) + '/день')); // TODO: надписи вытащить в шаблон?
