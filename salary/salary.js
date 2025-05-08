@@ -313,7 +313,7 @@ class Salary extends SGModelView {
 		this.set('contract_self_limit', Salary.CONTRACT_SELF_LIMIT);
 				
 		this.on('hours_in_day', (hours) => {
-			if (hours > 6) {
+			if (hours > 4) {
 				this.set('with_combining', false);
 				document.querySelector('#with_combining').disabled = true;
 			} else {
