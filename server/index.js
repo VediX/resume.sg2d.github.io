@@ -6,12 +6,12 @@ const file = new static.Server('.', { cache: 0, headers: {'X-Hello':'World!'} })
 
 require('http').createServer(function (req, res) {
     req.url = '' + req.url;
-    file.serve(req, res, function (err, res) {
+    file.serve(req, res, function (err, _res) {
         if (err) {
             console.error("> Error serving " + req.url + " - " + err.message);
-            res.writeHead(err.status, err.headers).end();
+            //res1.writeHead(err.status, err.headers).end();
         } else {
-            console.log("> " + req.url + " - " + res.message);
+            console.log("> " + req.url);
         }
     });
 }).listen(port);

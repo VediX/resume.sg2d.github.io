@@ -174,7 +174,7 @@ class Salary extends SGModelView {
 		L: "level", // level идёт последним!
 	};
 	
-	static HOUR_RATE_BASE = 3700;
+	static HOUR_RATE_BASE = 3790;
 	static HOUR_RATE_MIN = 1500;
 	static CONTRACT_SELF_LIMIT = 2400000;
 	
@@ -222,7 +222,7 @@ class Salary extends SGModelView {
 	
 	static USDKOEF = 1.25;
 	
-	static HOURS_KOEF = [void 0, -12, -10, -5, 0, +5, +10, +15, +20];
+	static HOURS_KOEF = [void 0, -20, -10, -5, 0, +5, +10, +15, +20];
 	
 	static CODES = [
 		[-10, 'Проект с нуля или кода очень мало'],
