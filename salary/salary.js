@@ -1,6 +1,6 @@
 "use strict";
 
-const CURRENT_VERSION = 11;
+const CURRENT_VERSION = 12;
 
 class OptionsMethods {
 	constructor(values) {
@@ -46,7 +46,7 @@ class Salary extends SGModelView {
 		ecmascript: true,
 		esnext: true,
 		nodejs: true,
-		java: false,
+		//java: false,
 		vue: false,
 		react: false,
 		postgresql: true,
@@ -57,6 +57,7 @@ class Salary extends SGModelView {
 		threejs: false,
 		nestjs: false,
 		golang: false,
+		python: false,
 		
 		code_desc: '',
 		
@@ -64,7 +65,7 @@ class Salary extends SGModelView {
 		ecmascript_koef: -5,
 		esnext_koef: -10,
 		nodejs_koef: -10,
-		java_koef: +50,
+		//java_koef: +50,
 		vue_koef: +10,
 		react_koef: +40,
 		postgresql_koef: -5,
@@ -75,6 +76,7 @@ class Salary extends SGModelView {
 		nestjs_koef: +5,
 		threejs_koef: -5,
 		golang_koef: +15,
+		python_koef: +10,
 		
 		promocode: '',
 		promocode_status: false,
@@ -123,7 +125,7 @@ class Salary extends SGModelView {
 		ecmascript: SGModel.TYPE_BOOLEAN,
 		esnext: SGModel.TYPE_BOOLEAN,
 		nodejs: SGModel.TYPE_BOOLEAN,
-		java: SGModel.TYPE_BOOLEAN,
+		//java: SGModel.TYPE_BOOLEAN,
 		vue: SGModel.TYPE_BOOLEAN,
 		react: SGModel.TYPE_BOOLEAN,
 		postgresql: SGModel.TYPE_BOOLEAN,
@@ -168,8 +170,8 @@ class Salary extends SGModelView {
 		W: "deadline",
 		V: "vue",
 		X: "schedule",
-		Y: "java",
-		//Z: "",
+		//Y: "java",
+		Z: "python",
 		I: "esnext", // после nestjs, react и vue
 		L: "level", // level идёт последним!
 	};
@@ -246,10 +248,11 @@ class Salary extends SGModelView {
 		'cpp': 'i',
 		'typescript': 'i',
 		'vanillajs': 'u',
-		'java': 'j',
+		//'java': 'j',
 		'threejs': 'j',
 		'nestjs': 't',
 		'golang': 't',
+		'python': 'j',
 	};
 	
 	static PROMOCODES = { // %
