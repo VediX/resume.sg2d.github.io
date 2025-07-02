@@ -1,8 +1,8 @@
 {
-    "name": "SG2D Resume",
-    "version": "1.0.0",
+    "name": "resume-sg2d",
+    "version": "1.0.1",
     "description": "SG2D Resume",
-    "author": "Kalashnikov Ilya <ilyak@sg2d.ru> (http://sg2d.ru/)",
+    "author": "Kalashnikov Ilya <sg2d@yandex.ru> (https://sg2d.ru/)",
     "homepage": "https://resume.sg2d.ru",
     "keywords": [
         "sg2d",
