@@ -33,28 +33,26 @@
 
 ##### Языки программирования и разметки:
 
-- Любые из top-10
-- Javascript (ES6+): senior
-- Node.js (Express, Feathers.js): middle
-- Delphi/C++ (Embarcadero RAD Studio): junior+
-- C# (Visual Studio): junior+
-- PHP (без фреймворков): middle-
+- Javascript (ES6+)
+- Node.js (Express, Feathers.js)
+- Delphi/C++ (Embarcadero RAD Studio)
+- C# (Visual Studio)
 - HTML5, CSS3/LESS
 - Lua
 - Visual Basic
 - Shell/Bash
 - Python (нейросети)
+- Любые другие из top-10
 
 ##### СУБД и брокеры сообщений:
 
-- Любые из top-10
-- PostgreSQL, PL/pgSQL: middle
+- PostgreSQL + PL/pgSQL
 - MSSQL
 - Firebird/Interbase
 - MySQL, SQLite
 - Redis
 - RabbitMQ
-- Любые другие (AI Powered)
+- Любые другие из top-10
 
 ##### Фреймворки/библиотеки:
 
@@ -67,7 +65,7 @@
 - Lodash, Underscore.js, jQuery, VanillaJS
 - Smarty (PHP), mustache
 - SAPUI5 (Fiori Developer), SAP Cloud Platform
-- Любые другие (AI Powered)
+- Любые другие из top-10
 
 ##### Окружение, инструментарий:
 
