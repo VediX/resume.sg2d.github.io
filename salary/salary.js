@@ -176,7 +176,7 @@ class Salary extends SGModelView {
 		L: "level", // level идёт последним!
 	};
 	
-	static HOUR_RATE_BASE = 10000;
+	static HOUR_RATE_BASE = 5000;
 	static HOUR_RATE_MIN = 3000;
 	static CONTRACT_SELF_LIMIT = 2400000;
 	
@@ -229,10 +229,10 @@ class Salary extends SGModelView {
 	static CODES = [
 		[-10, 'Проект с нуля или кода очень мало'],
 		[0, 'Код поддерживается полностью текущим штатом'],
-		[+10, 'Около 25% legacy в проекте'],
-		[+20, 'Около 50% legacy в проекте'],
-		[+33, 'Около 75% legacy в проекте'],
-		[+50, 'Проект никто не поддерживает!'],
+		[+25, 'Около 25% legacy в проекте'],
+		[+50, 'Около 50% legacy в проекте'],
+		[+75, 'Около 75% legacy в проекте'],
+		[+100, 'Проект никто не поддерживает!'],
 	];
 	
 	static TIMEOUTS = [void 0, 0, 0, 4, 5, 6, 8, 10, 12];

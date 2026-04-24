@@ -193,11 +193,59 @@ a.link-contract-self:hover {
 .form-check-input {
   cursor: pointer;
 }
-span.bitcoin-wallet-link:hover {
-  background-color: #ddd;
+.wallet-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 8px 0;
+  text-align: center;
+}
+.wallet-container .wallet-link-enhanced {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
   cursor: pointer;
-  border-radius: 5px;
-  color: black;
+  outline: none;
+  text-align: center;
+  gap: 8px;
+  width: auto;
+  min-width: 180px;
+}
+.wallet-container .wallet-link-enhanced:hover {
+  border-color: #0d6efd;
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);
+  transform: translateY(-1px);
+}
+.wallet-container .wallet-text {
+  font-weight: 500;
+  white-space: nowrap;
+}
+.wallet-container .wallet-icons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.wallet-container .wallet-icons img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  filter: grayscale(20%) brightness(0.9);
+  border-radius: 50%;
+}
+.wallet-container .wallet-icons img:hover {
+  transform: scale(1.2);
+  filter: grayscale(0%) brightness(1);
 }
 footer.my-fixed {
   position: fixed;
@@ -207,4 +255,40 @@ footer.my-fixed {
 }
 footer.my-static {
   position: static;
+}
+#modalWallets .modal-body {
+  padding-left: 1px;
+  padding-right: 1px;
+}
+#modalWallets .carousel-item img {
+  max-height: 250px;
+  object-fit: contain;
+  transition: opacity 0.6s ease-in-out;
+}
+#modalWallets .wallet-address {
+  font-family: monospace;
+  font-size: 0.66em;
+  display: inline-block;
+  margin-right: 1px;
+}
+#modalWallets .copy-icon img {
+  filter: invert(0.5) brightness(0.8);
+  transition: filter 0.2s ease;
+}
+#modalWallets .copy-icon:hover img {
+  filter: invert(0) brightness(1.2);
+}
+#modalWallets small img {
+  vertical-align: text-bottom;
+}
+#modalWallets .carousel-control-next-icon,
+#modalWallets .carousel-control-prev-icon {
+  height: 15rem;
+  margin-bottom: 4rem;
+  background-color: #bbb !important;
+  border-radius: 5px;
+}
+#modalWallets .carousel-control-next-icon:active,
+#modalWallets .carousel-control-prev-icon:active {
+  background-color: #aaa !important;
 }
