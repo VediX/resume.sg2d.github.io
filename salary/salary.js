@@ -201,7 +201,7 @@ class Salary extends SGModelView {
 	static LEVELS = new OptionsMethods({
 		"t": [-75, 'trainee'],
 		"j": [-50, 'junior'],
-		"i": [-33, 'junior_plus'],
+		"i": [-25, 'junior_plus'],
 		"u": [-10, 'middle_minus'],
 		"m": [0, 'middle'],
 		"n": [+33, 'middle_plus'],
@@ -217,7 +217,7 @@ class Salary extends SGModelView {
 	
 	static DAYS_IN_WEEK_KOEF = [void 0, +10, -10, -15, -10, 0, +100, +200];
 
-	static WITH_COMBINING = -20; // %
+	static WITH_COMBINING = -50; // %
 	static HOURLY_PAYMENT_PER = +30; // %
 	static WAKATIME_PER = +50; // %
 	static DEADLINE_PER = +20; // %
